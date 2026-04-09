@@ -204,7 +204,13 @@ async function processLink(link, Category, userId) {
   if (!isUrl(resolvedUrl)) {
     data = { content: resolvedUrl, source_type: 'text', title: null, thumbnail: null };
   } else {
-    data = await extractWebpage(resolvedUrl);
+    try {
+      data = await extractWebpage(resolvedUrl);
+    } catch (e) {
+      // Scraping failed (e.g. Instagram, paywalls) — let AI categorize from URL alone
+      console.log(`Scraping failed for ${resolvedUrl}: ${e.message}. Using URL-only mode.`);
+      data = { content: `URL: ${resolvedUrl}\n(Content could not be scraped. Categorize based on the URL and domain.)`, source_type: 'url-only', title: null, thumbnail: null };
+    }
   }
 
   let content = data.content;
