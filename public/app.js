@@ -1689,6 +1689,7 @@ async function renderHome() {
     const [cats, links] = await Promise.all([fetchCategories(), fetchLinks()]);
     allLinks = links;
     renderHomeContent(cats, links);
+    startPollingIfNeeded();
   } catch (e) {
     document.getElementById('home-content').innerHTML = `<div class="empty-state"><span class="empty-state-icon">\u26a0\ufe0f</span><p class="empty-state-text">${esc(t('home.could_not_load'))}</p></div>`;
   }
@@ -1712,7 +1713,7 @@ function renderHomeContent(cats, links) {
           <span class="pending-chevron">${ICONS.chevron}</span>
         </div>
         <div class="pending-list">
-          ${pending.map(l => `<div class="pending-item"><span class="pending-url">${esc(getDomain(l.url) || l.url)}</span>${l.processing_step ? `<span class="pending-step">${esc(l.processing_step)}</span>` : ''}</div>`).join('')}
+          ${pending.map(l => `<div class="pending-item"><span class="pending-url">${esc(getDomain(l.url) || l.url)}</span><span class="pending-step">${esc(t('home.processing'))}</span></div>`).join('')}
         </div>
       </div>`;
   }
@@ -2526,6 +2527,29 @@ async function handleDeleteAccount() {
 
 // ── Init ──
 // Called by index.html after auth check passes
+// ── Auto-polling for processing links ──
+let pollTimer = null;
+
+function startPollingIfNeeded() {
+  if (pollTimer) return;
+  const hasProcessing = allLinks.some(l => l.status === 'pending' || l.status === 'processing');
+  if (hasProcessing) {
+    pollTimer = setInterval(async () => {
+      try {
+        const fresh = await fetchLinks();
+        const stillProcessing = fresh.some(l => l.status === 'pending' || l.status === 'processing');
+        if (!stillProcessing && allLinks.some(l => l.status === 'pending' || l.status === 'processing')) {
+          // Something finished — re-render
+          allLinks = fresh;
+          clearInterval(pollTimer);
+          pollTimer = null;
+          render();
+        }
+      } catch { /* ignore */ }
+    }, 5000);
+  }
+}
+
 function bootApp(supabaseClient) {
   supabase = supabaseClient;
 
