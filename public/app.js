@@ -1653,7 +1653,6 @@ async function refreshHome() {
   try {
     const [cats, links] = await Promise.all([fetchCategories(), fetchLinks()]);
     allLinks = links;
-    console.log('[debug] allLinks statuses:', links.map(l => l.status).filter((v,i,a) => a.indexOf(v) === i));
     // Only update content area, not the whole page
     const route = getRoute();
     if (route.screen === 'home') renderHomeContent(cats, links);
@@ -2540,16 +2539,13 @@ function startPollingIfNeeded() {
   const hasProcessing = allLinks.some(l => l.status === 'pending' || l.status === 'processing');
   if (!hasProcessing) return;
 
-  console.log('[poll] Starting poll — found processing links');
   pollTimer = setInterval(async () => {
     try {
-      console.log('[poll] Checking...');
       const fresh = await fetchLinks();
       const still = fresh.some(l => l.status === 'pending' || l.status === 'processing');
       allLinks = fresh;
 
       if (!still) {
-        console.log('[poll] All done — stopping poll');
         clearInterval(pollTimer);
         pollTimer = null;
         // Re-render with fresh data
@@ -2561,7 +2557,7 @@ function startPollingIfNeeded() {
           render();
         }
       }
-    } catch (e) { console.log('[poll] Error:', e); }
+    } catch { /* ignore */ }
   }, 5000);
 }
 
