@@ -31,7 +31,7 @@ module.exports = async function handler(req, res) {
       });
 
       try {
-        const updates = await processLink(link, Category, user.id, Link);
+        const updates = await processLink(link, Category, user.id, Link, link.language || 'en');
         if (updates.status === 'processing') {
           // Video URL — processing offloaded to GitHub Actions worker
           return res.json({ ...serialize(link), ...updates });

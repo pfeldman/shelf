@@ -341,6 +341,118 @@
 
         const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+        // ── i18n for login page ──
+        const SUPPORTED_LOCALES = ['en', 'es', 'fr'];
+        const loginTranslations = {
+          en: {
+            subtitle: 'Your curated links, enriched by AI',
+            sign_in: 'Sign In',
+            register: 'Register',
+            email: 'Email',
+            email_placeholder: 'you@email.com',
+            password: 'Password',
+            password_placeholder: 'Your password',
+            confirm_password: 'Confirm password',
+            confirm_placeholder: 'Repeat password',
+            or: 'or',
+            google: 'Continue with Google',
+            apple: 'Continue with Apple',
+            signing_in: 'Signing in...',
+            registering: 'Registering...',
+            passwords_no_match: 'Passwords do not match',
+            password_min: 'Password must be at least 6 characters',
+            already_registered: 'This email is already registered',
+            account_created: 'Account created. Check your email to confirm.',
+            invalid_credentials: 'Invalid email or password',
+            confirm_email: 'Please confirm your email before signing in',
+            google_error: 'Error with Google Sign-In',
+            apple_error: 'Error with Apple Sign-In',
+          },
+          es: {
+            subtitle: 'Tus links curados, enriquecidos por IA',
+            sign_in: 'Iniciar sesi\u00f3n',
+            register: 'Registrarse',
+            email: 'Email',
+            email_placeholder: 'tu@email.com',
+            password: 'Contrase\u00f1a',
+            password_placeholder: 'Tu contrase\u00f1a',
+            confirm_password: 'Confirmar contrase\u00f1a',
+            confirm_placeholder: 'Repet\u00ed la contrase\u00f1a',
+            or: 'o',
+            google: 'Continuar con Google',
+            apple: 'Continuar con Apple',
+            signing_in: 'Iniciando sesi\u00f3n...',
+            registering: 'Registrando...',
+            passwords_no_match: 'Las contrase\u00f1as no coinciden',
+            password_min: 'La contrase\u00f1a debe tener al menos 6 caracteres',
+            already_registered: 'Este email ya est\u00e1 registrado',
+            account_created: 'Cuenta creada. Revis\u00e1 tu email para confirmar.',
+            invalid_credentials: 'Email o contrase\u00f1a inv\u00e1lidos',
+            confirm_email: 'Confirm\u00e1 tu email antes de iniciar sesi\u00f3n',
+            google_error: 'Error con Google Sign-In',
+            apple_error: 'Error con Apple Sign-In',
+          },
+          fr: {
+            subtitle: 'Vos liens organis\u00e9s, enrichis par IA',
+            sign_in: 'Se connecter',
+            register: "S'inscrire",
+            email: 'Email',
+            email_placeholder: 'vous@email.com',
+            password: 'Mot de passe',
+            password_placeholder: 'Votre mot de passe',
+            confirm_password: 'Confirmer le mot de passe',
+            confirm_placeholder: 'R\u00e9p\u00e9tez le mot de passe',
+            or: 'ou',
+            google: 'Continuer avec Google',
+            apple: 'Continuer avec Apple',
+            signing_in: 'Connexion...',
+            registering: 'Inscription...',
+            passwords_no_match: 'Les mots de passe ne correspondent pas',
+            password_min: 'Le mot de passe doit contenir au moins 6 caract\u00e8res',
+            already_registered: 'Cet email est d\u00e9j\u00e0 enregistr\u00e9',
+            account_created: 'Compte cr\u00e9\u00e9. V\u00e9rifiez votre email pour confirmer.',
+            invalid_credentials: 'Email ou mot de passe invalide',
+            confirm_email: 'Veuillez confirmer votre email avant de vous connecter',
+            google_error: 'Erreur avec Google Sign-In',
+            apple_error: "Erreur avec Apple Sign-In",
+          },
+        };
+
+        function detectLoginLocale() {
+          const stored = localStorage.getItem('shelf_language');
+          if (stored && SUPPORTED_LOCALES.includes(stored)) return stored;
+          const nav = (navigator.language || 'en').split('-')[0].toLowerCase();
+          if (SUPPORTED_LOCALES.includes(nav)) return nav;
+          return 'en';
+        }
+
+        const locale = detectLoginLocale();
+        const lt = loginTranslations[locale] || loginTranslations.en;
+
+        // Apply translations to the page
+        function applyLoginTranslations() {
+          document.querySelector('.login-header p').textContent = lt.subtitle;
+          document.getElementById('mode-login').textContent = lt.sign_in;
+          document.getElementById('mode-register').textContent = lt.register;
+          document.querySelector('label[for="email"]').textContent = lt.email;
+          document.getElementById('email').placeholder = lt.email_placeholder;
+          document.querySelector('label[for="password"]').textContent = lt.password;
+          document.getElementById('password').placeholder = lt.password_placeholder;
+          document.querySelector('label[for="password-confirm"]').textContent = lt.confirm_password;
+          document.getElementById('password-confirm').placeholder = lt.confirm_placeholder;
+          document.getElementById('submit-btn').textContent = lt.sign_in;
+          document.querySelector('.divider span').textContent = lt.or;
+          // Update the text node after the SVG in oauth buttons
+          const googleBtn = document.getElementById('google-btn');
+          const appleBtn = document.getElementById('apple-btn');
+          const googleTextNode = [...googleBtn.childNodes].find(n => n.nodeType === 3 && n.textContent.trim());
+          const appleTextNode = [...appleBtn.childNodes].find(n => n.nodeType === 3 && n.textContent.trim());
+          if (googleTextNode) googleTextNode.textContent = '\n                ' + lt.google + '\n            ';
+          if (appleTextNode) appleTextNode.textContent = '\n                ' + lt.apple + '\n            ';
+        }
+
+        applyLoginTranslations();
+
         let currentMode = 'login';
 
         // Check if already logged in
@@ -356,7 +468,7 @@
             document.getElementById('mode-login').classList.toggle('active', mode === 'login');
             document.getElementById('mode-register').classList.toggle('active', mode === 'register');
             document.getElementById('register-fields').classList.toggle('visible', mode === 'register');
-            document.getElementById('submit-btn').textContent = mode === 'login' ? 'Sign In' : 'Register';
+            document.getElementById('submit-btn').textContent = mode === 'login' ? lt.sign_in : lt.register;
             document.getElementById('error-msg').textContent = '';
             document.getElementById('success-msg').textContent = '';
 
@@ -382,18 +494,18 @@
             if (currentMode === 'register') {
                 const passwordConfirm = document.getElementById('password-confirm').value;
                 if (password !== passwordConfirm) {
-                    errorEl.textContent = 'Passwords do not match';
+                    errorEl.textContent = lt.passwords_no_match;
                     return;
                 }
                 if (password.length < 6) {
-                    errorEl.textContent = 'Password must be at least 6 characters';
+                    errorEl.textContent = lt.password_min;
                     return;
                 }
             }
 
             const originalText = submitBtn.textContent;
             submitBtn.disabled = true;
-            submitBtn.innerHTML = '<span class="button-spinner"></span> ' + (currentMode === 'login' ? 'Signing in...' : 'Registering...');
+            submitBtn.innerHTML = '<span class="button-spinner"></span> ' + (currentMode === 'login' ? lt.signing_in : lt.registering);
 
             try {
                 if (currentMode === 'login') {
@@ -404,18 +516,18 @@
                     const { data, error } = await supabase.auth.signUp({ email, password });
                     if (error) throw error;
                     if (data.user && data.user.identities && data.user.identities.length === 0) {
-                        errorEl.textContent = 'This email is already registered';
+                        errorEl.textContent = lt.already_registered;
                     } else {
-                        successEl.textContent = 'Account created. Check your email to confirm.';
+                        successEl.textContent = lt.account_created;
                         document.getElementById('auth-form').reset();
                     }
                 }
             } catch (error) {
                 const msg = error.message || 'Authentication error';
                 if (msg.includes('Invalid login credentials')) {
-                    errorEl.textContent = 'Invalid email or password';
+                    errorEl.textContent = lt.invalid_credentials;
                 } else if (msg.includes('Email not confirmed')) {
-                    errorEl.textContent = 'Please confirm your email before signing in';
+                    errorEl.textContent = lt.confirm_email;
                 } else {
                     errorEl.textContent = msg;
                 }
@@ -475,7 +587,7 @@
                     });
                     await Browser.open({ url: data.url });
                 } catch (err) {
-                    document.getElementById('error-msg').textContent = err.message || 'Error with Google Sign-In';
+                    document.getElementById('error-msg').textContent = err.message || lt.google_error;
                 }
             } else {
                 const { error } = await supabase.auth.signInWithOAuth({
@@ -534,7 +646,7 @@
                     });
                     await Browser.open({ url: data.url });
                 } catch (err) {
-                    document.getElementById('error-msg').textContent = err.message || 'Error with Apple Sign-In';
+                    document.getElementById('error-msg').textContent = err.message || lt.apple_error;
                 }
             } else {
                 const { error } = await supabase.auth.signInWithOAuth({

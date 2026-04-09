@@ -46,7 +46,7 @@ module.exports = async function handler(req, res) {
 
       if (shouldReprocess) {
         try {
-          const processUpdates = await processLink(result, Category, user.id);
+          const processUpdates = await processLink(result, Category, user.id, undefined, result.language || 'en');
           await Link.updateOne({ _id: result._id }, { $set: processUpdates });
           const final = await Link.findById(id).lean();
           final._id = final._id.toString();

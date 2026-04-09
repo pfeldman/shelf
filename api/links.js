@@ -30,8 +30,10 @@ module.exports = async function handler(req, res) {
     try {
       // Accept URL from query param, JSON body, or plain text
       let resolvedUrl = req.query.url;
+      let language = 'en';
       if (!resolvedUrl && req.body) {
         resolvedUrl = req.body.url || req.body.text;
+        if (req.body.language) language = req.body.language;
       }
       if (!resolvedUrl) {
         return res.status(400).json({ error: 'No URL provided' });
@@ -50,6 +52,7 @@ module.exports = async function handler(req, res) {
         summary: null,
         thumbnail: null,
         extension_data: {},
+        language: language,
       });
 
       // Return immediately to the client
@@ -58,7 +61,7 @@ module.exports = async function handler(req, res) {
       // Process inline (synchronously within this request)
       // For video URLs, processLink dispatches to GitHub Actions and returns status='processing'
       try {
-        const updates = await processLink(doc, Category, user.id, Link);
+        const updates = await processLink(doc, Category, user.id, Link, language);
         if (updates.status === 'processing') {
           // Video URL — processing offloaded to GitHub Actions worker
           Object.assign(response, updates);

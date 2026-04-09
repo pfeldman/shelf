@@ -7,6 +7,441 @@ let categories = [];
 let linksCache = {};
 let allLinks = [];
 
+// ── i18n ──
+const SUPPORTED_LOCALES = ['en', 'es', 'fr'];
+
+const translations = {
+  en: {
+    // Home
+    'home.subtitle': 'Your curated links',
+    'home.collections': 'Collections',
+    'home.processing': '{n} link{s} processing\u2026',
+    'home.no_links': 'No links yet. Share something!',
+    'home.could_not_load': 'Could not load data',
+    'home.could_not_refresh': 'Could not refresh',
+    // History
+    'history.subtitle': 'Timeline',
+    'history.title': 'Recent Activity',
+    'history.no_links': 'No links saved yet',
+    'history.could_not_load': 'Could not load history',
+    'history.links_saved': '{n} link{s} saved',
+    // Category
+    'category.subtitle': 'Collection',
+    'category.no_links': 'No links in this collection yet',
+    'category.no_matches': 'No matches',
+    'category.could_not_load': 'Could not load links',
+    'category.search_placeholder': 'Search {name}\u2026',
+    'category.search_movie': 'Search by title, actor, director\u2026',
+    'category.search_recipe': 'Search by title or ingredient\u2026',
+    'category.all': 'All',
+    'category.link_count': '{n} link{s}',
+    // Link detail
+    'link.not_found': 'Link not found',
+    'link.details': 'Details',
+    'link.open_original': 'Open original',
+    'link.recategorize': 'Recategorize',
+    'link.delete_link': 'Delete link',
+    'link.tv_show': 'TV Show',
+    'link.movie': 'Movie',
+    'link.watched': 'Watched',
+    'link.not_watched': 'Not watched',
+    'link.director': 'Director',
+    'link.directors': 'Directors',
+    'link.cast': 'Cast',
+    'link.where_to_watch': 'Where to watch',
+    'link.ingredients': 'Ingredients',
+    'link.instructions': 'Instructions',
+    'link.add_ingredients_cart': 'Add ingredients to cart',
+    'link.pages': '{n} pages',
+    'link.filmography': 'Filmography',
+    'link.prep': 'Prep',
+    'link.cook': 'Cook',
+    'link.servings': 'Servings',
+    // Cart
+    'cart.subtitle': 'Grocery',
+    'cart.title': 'Cart',
+    'cart.add_placeholder': 'Add an item...',
+    'cart.empty': 'Your cart is empty',
+    'cart.could_not_load': 'Could not load cart',
+    'cart.completed': 'Completed',
+    'cart.clear_completed': 'Clear {n} completed',
+    'cart.failed_add': 'Failed to add item',
+    'cart.failed_update': 'Failed to update item',
+    'cart.failed_delete': 'Failed to delete item',
+    'cart.failed_clear': 'Failed to clear items',
+    'cart.cleared': 'Cleared {n} item{s}',
+    'cart.ingredients_added': '{n} ingredient{s} added to cart',
+    // Voice
+    'voice.subtitle': 'Grocery',
+    'voice.title': 'Voice',
+    'voice.tap_start': 'Tap to start listening',
+    'voice.tap_again': 'Tap to listen again',
+    'voice.listening_hint': 'Separate items with "y" or pause between them',
+    'voice.add_to_cart': 'Add to cart',
+    'voice.add_n_to_cart': 'Add {n} item{s} to cart',
+    'voice.added': '{n} item{s} added to cart',
+    'voice.failed_add': 'Failed to add items',
+    'voice.not_supported': 'Speech recognition not supported',
+    'voice.could_not_start': 'Could not start microphone',
+    'voice.mic_error': 'Mic error: {err}',
+    // Add link
+    'add.title': 'Add to Shelf',
+    'add.description': 'Paste a URL, type a movie name, a recipe, or anything you want to save.',
+    'add.placeholder': 'e.g. Parasite 2019, https://example.com, or paste a full recipe\u2026',
+    'add.cancel': 'Cancel',
+    'add.submit': 'Submit',
+    'add.submitting': 'Submitting\u2026',
+    'add.success': 'Added! Processing\u2026',
+    'add.failed': 'Failed to add',
+    // Recategorize
+    'recat.title': 'Recategorize as...',
+    'recat.hint_placeholder': 'Optional: add details to help AI (e.g. "it\'s a Korean movie from 2019")',
+    'recat.movie': 'Movie',
+    'recat.tv': 'TV Show',
+    'recat.short': 'Short Film',
+    'recat.recipe': 'Recipe',
+    'recat.documentary': 'Documentary',
+    'recat.book': 'Book',
+    'recat.director': 'Director',
+    'recat.generic': 'Generic',
+    'recat.retry': 'Retry (auto-detect)',
+    'recat.processing': 'Processing...',
+    'recat.success': 'Reprocessing...',
+    'recat.failed': 'Failed to recategorize',
+    // Delete
+    'delete.title': 'Delete this link?',
+    'delete.confirm': 'This action cannot be undone.',
+    'delete.cancel': 'Cancel',
+    'delete.delete': 'Delete',
+    'delete.success': 'Link deleted',
+    'delete.failed': 'Failed to delete',
+    // Watch
+    'watch.marked_watched': 'Marked as watched',
+    'watch.marked_unwatched': 'Marked as not watched',
+    'watch.failed': 'Failed to update',
+    // Settings
+    'settings.title': 'Settings',
+    'settings.sign_out': 'Sign Out',
+    'settings.delete_account': 'Delete Account',
+    'settings.close': 'Close',
+    'settings.language': 'Language',
+    'settings.confirm_logout': 'Sign out?',
+    'settings.confirm_delete_1': 'Are you sure you want to delete your account? All your data will be permanently erased.',
+    'settings.confirm_delete_2': 'This action cannot be undone. Are you completely sure?',
+    'settings.delete_error': 'Error deleting account',
+    // Update banner
+    'update.available': 'Update available',
+    'update.refresh': 'Refresh',
+    // Time
+    'time.just_now': 'just now',
+    'time.minutes_ago': '{n}m ago',
+    'time.hours_ago': '{n}h ago',
+    'time.yesterday': 'yesterday',
+    'time.days_ago': '{n}d ago',
+    'time.weeks_ago': '{n}w ago',
+    'time.months_ago': '{n}mo ago',
+    // Misc
+    'uncategorized': 'Uncategorized',
+  },
+  es: {
+    // Home
+    'home.subtitle': 'Tus links curados',
+    'home.collections': 'Colecciones',
+    'home.processing': '{n} link{s} procesando\u2026',
+    'home.no_links': 'No hay links todav\u00eda. \u00a1Compart\u00ed algo!',
+    'home.could_not_load': 'No se pudieron cargar los datos',
+    'home.could_not_refresh': 'No se pudo actualizar',
+    // History
+    'history.subtitle': 'Cronolog\u00eda',
+    'history.title': 'Actividad reciente',
+    'history.no_links': 'No hay links guardados a\u00fan',
+    'history.could_not_load': 'No se pudo cargar el historial',
+    'history.links_saved': '{n} link{s} guardado{s}',
+    // Category
+    'category.subtitle': 'Colecci\u00f3n',
+    'category.no_links': 'No hay links en esta colecci\u00f3n todav\u00eda',
+    'category.no_matches': 'Sin resultados',
+    'category.could_not_load': 'No se pudieron cargar los links',
+    'category.search_placeholder': 'Buscar en {name}\u2026',
+    'category.search_movie': 'Buscar por t\u00edtulo, actor, director\u2026',
+    'category.search_recipe': 'Buscar por t\u00edtulo o ingrediente\u2026',
+    'category.all': 'Todos',
+    'category.link_count': '{n} link{s}',
+    // Link detail
+    'link.not_found': 'Link no encontrado',
+    'link.details': 'Detalles',
+    'link.open_original': 'Abrir original',
+    'link.recategorize': 'Recategorizar',
+    'link.delete_link': 'Eliminar link',
+    'link.tv_show': 'Serie',
+    'link.movie': 'Pel\u00edcula',
+    'link.watched': 'Vista',
+    'link.not_watched': 'No vista',
+    'link.director': 'Director',
+    'link.directors': 'Directores',
+    'link.cast': 'Elenco',
+    'link.where_to_watch': 'D\u00f3nde ver',
+    'link.ingredients': 'Ingredientes',
+    'link.instructions': 'Instrucciones',
+    'link.add_ingredients_cart': 'Agregar ingredientes al carrito',
+    'link.pages': '{n} p\u00e1ginas',
+    'link.filmography': 'Filmograf\u00eda',
+    'link.prep': 'Prep',
+    'link.cook': 'Cocci\u00f3n',
+    'link.servings': 'Porciones',
+    // Cart
+    'cart.subtitle': 'Compras',
+    'cart.title': 'Carrito',
+    'cart.add_placeholder': 'Agregar un \u00edtem...',
+    'cart.empty': 'Tu carrito est\u00e1 vac\u00edo',
+    'cart.could_not_load': 'No se pudo cargar el carrito',
+    'cart.completed': 'Completados',
+    'cart.clear_completed': 'Limpiar {n} completado{s}',
+    'cart.failed_add': 'No se pudo agregar el \u00edtem',
+    'cart.failed_update': 'No se pudo actualizar el \u00edtem',
+    'cart.failed_delete': 'No se pudo eliminar el \u00edtem',
+    'cart.failed_clear': 'No se pudieron limpiar los \u00edtems',
+    'cart.cleared': '{n} \u00edtem{s} limpiado{s}',
+    'cart.ingredients_added': '{n} ingrediente{s} agregado{s} al carrito',
+    // Voice
+    'voice.subtitle': 'Compras',
+    'voice.title': 'Voz',
+    'voice.tap_start': 'Toc\u00e1 para empezar a escuchar',
+    'voice.tap_again': 'Toc\u00e1 para escuchar de nuevo',
+    'voice.listening_hint': 'Separ\u00e1 los \u00edtems con "y" o hac\u00e9 una pausa entre ellos',
+    'voice.add_to_cart': 'Agregar al carrito',
+    'voice.add_n_to_cart': 'Agregar {n} \u00edtem{s} al carrito',
+    'voice.added': '{n} \u00edtem{s} agregado{s} al carrito',
+    'voice.failed_add': 'No se pudieron agregar los \u00edtems',
+    'voice.not_supported': 'Reconocimiento de voz no disponible',
+    'voice.could_not_start': 'No se pudo iniciar el micr\u00f3fono',
+    'voice.mic_error': 'Error de micr\u00f3fono: {err}',
+    // Add link
+    'add.title': 'Agregar a Shelf',
+    'add.description': 'Peg\u00e1 una URL, escrib\u00ed un nombre de pel\u00edcula, una receta, o lo que quieras guardar.',
+    'add.placeholder': 'Ej: Parasite 2019, https://ejemplo.com, o peg\u00e1 una receta\u2026',
+    'add.cancel': 'Cancelar',
+    'add.submit': 'Enviar',
+    'add.submitting': 'Enviando\u2026',
+    'add.success': '\u00a1Agregado! Procesando\u2026',
+    'add.failed': 'No se pudo agregar',
+    // Recategorize
+    'recat.title': 'Recategorizar como...',
+    'recat.hint_placeholder': 'Opcional: agreg\u00e1 detalles para ayudar a la IA (ej: "es una pel\u00edcula coreana de 2019")',
+    'recat.movie': 'Pel\u00edcula',
+    'recat.tv': 'Serie',
+    'recat.short': 'Cortometraje',
+    'recat.recipe': 'Receta',
+    'recat.documentary': 'Documental',
+    'recat.book': 'Libro',
+    'recat.director': 'Director',
+    'recat.generic': 'Gen\u00e9rico',
+    'recat.retry': 'Reintentar (auto-detectar)',
+    'recat.processing': 'Procesando...',
+    'recat.success': 'Reprocesando...',
+    'recat.failed': 'No se pudo recategorizar',
+    // Delete
+    'delete.title': '\u00bfEliminar este link?',
+    'delete.confirm': 'Esta acci\u00f3n no se puede deshacer.',
+    'delete.cancel': 'Cancelar',
+    'delete.delete': 'Eliminar',
+    'delete.success': 'Link eliminado',
+    'delete.failed': 'No se pudo eliminar',
+    // Watch
+    'watch.marked_watched': 'Marcada como vista',
+    'watch.marked_unwatched': 'Marcada como no vista',
+    'watch.failed': 'No se pudo actualizar',
+    // Settings
+    'settings.title': 'Ajustes',
+    'settings.sign_out': 'Cerrar sesi\u00f3n',
+    'settings.delete_account': 'Eliminar cuenta',
+    'settings.close': 'Cerrar',
+    'settings.language': 'Idioma',
+    'settings.confirm_logout': '\u00bfCerrar sesi\u00f3n?',
+    'settings.confirm_delete_1': '\u00bfEst\u00e1s seguro de que quer\u00e9s eliminar tu cuenta? Todos tus datos se borrar\u00e1n permanentemente.',
+    'settings.confirm_delete_2': 'Esta acci\u00f3n no se puede deshacer. \u00bfEst\u00e1s completamente seguro?',
+    'settings.delete_error': 'Error al eliminar la cuenta',
+    // Update banner
+    'update.available': 'Actualizaci\u00f3n disponible',
+    'update.refresh': 'Actualizar',
+    // Time
+    'time.just_now': 'reci\u00e9n',
+    'time.minutes_ago': 'hace {n}m',
+    'time.hours_ago': 'hace {n}h',
+    'time.yesterday': 'ayer',
+    'time.days_ago': 'hace {n}d',
+    'time.weeks_ago': 'hace {n}sem',
+    'time.months_ago': 'hace {n}m',
+    // Misc
+    'uncategorized': 'Sin categor\u00eda',
+  },
+  fr: {
+    // Home
+    'home.subtitle': 'Vos liens organis\u00e9s',
+    'home.collections': 'Collections',
+    'home.processing': '{n} lien{s} en cours\u2026',
+    'home.no_links': "Pas encore de liens. Partagez quelque chose\u00a0!",
+    'home.could_not_load': 'Impossible de charger les donn\u00e9es',
+    'home.could_not_refresh': 'Impossible de rafra\u00eechir',
+    // History
+    'history.subtitle': 'Chronologie',
+    'history.title': 'Activit\u00e9 r\u00e9cente',
+    'history.no_links': 'Aucun lien enregistr\u00e9',
+    'history.could_not_load': "Impossible de charger l'historique",
+    'history.links_saved': '{n} lien{s} enregistr\u00e9{s}',
+    // Category
+    'category.subtitle': 'Collection',
+    'category.no_links': 'Pas encore de liens dans cette collection',
+    'category.no_matches': 'Aucun r\u00e9sultat',
+    'category.could_not_load': 'Impossible de charger les liens',
+    'category.search_placeholder': 'Rechercher dans {name}\u2026',
+    'category.search_movie': 'Rechercher par titre, acteur, r\u00e9alisateur\u2026',
+    'category.search_recipe': 'Rechercher par titre ou ingr\u00e9dient\u2026',
+    'category.all': 'Tout',
+    'category.link_count': '{n} lien{s}',
+    // Link detail
+    'link.not_found': 'Lien introuvable',
+    'link.details': 'D\u00e9tails',
+    'link.open_original': "Ouvrir l'original",
+    'link.recategorize': 'Recat\u00e9goriser',
+    'link.delete_link': 'Supprimer le lien',
+    'link.tv_show': 'S\u00e9rie',
+    'link.movie': 'Film',
+    'link.watched': 'Vu',
+    'link.not_watched': 'Non vu',
+    'link.director': 'R\u00e9alisateur',
+    'link.directors': 'R\u00e9alisateurs',
+    'link.cast': 'Distribution',
+    'link.where_to_watch': 'O\u00f9 regarder',
+    'link.ingredients': 'Ingr\u00e9dients',
+    'link.instructions': 'Instructions',
+    'link.add_ingredients_cart': 'Ajouter les ingr\u00e9dients au panier',
+    'link.pages': '{n} pages',
+    'link.filmography': 'Filmographie',
+    'link.prep': 'Pr\u00e9p',
+    'link.cook': 'Cuisson',
+    'link.servings': 'Portions',
+    // Cart
+    'cart.subtitle': 'Courses',
+    'cart.title': 'Panier',
+    'cart.add_placeholder': 'Ajouter un article...',
+    'cart.empty': 'Votre panier est vide',
+    'cart.could_not_load': 'Impossible de charger le panier',
+    'cart.completed': 'Termin\u00e9s',
+    'cart.clear_completed': 'Effacer {n} termin\u00e9{s}',
+    'cart.failed_add': "Impossible d'ajouter l'article",
+    'cart.failed_update': "Impossible de mettre \u00e0 jour l'article",
+    'cart.failed_delete': "Impossible de supprimer l'article",
+    'cart.failed_clear': 'Impossible de supprimer les articles',
+    'cart.cleared': '{n} article{s} effac\u00e9{s}',
+    'cart.ingredients_added': '{n} ingr\u00e9dient{s} ajout\u00e9{s} au panier',
+    // Voice
+    'voice.subtitle': 'Courses',
+    'voice.title': 'Voix',
+    'voice.tap_start': 'Appuyez pour commencer',
+    'voice.tap_again': 'Appuyez pour r\u00e9\u00e9couter',
+    'voice.listening_hint': 'S\u00e9parez les articles avec "et" ou faites une pause',
+    'voice.add_to_cart': 'Ajouter au panier',
+    'voice.add_n_to_cart': 'Ajouter {n} article{s} au panier',
+    'voice.added': '{n} article{s} ajout\u00e9{s} au panier',
+    'voice.failed_add': "Impossible d'ajouter les articles",
+    'voice.not_supported': 'Reconnaissance vocale non disponible',
+    'voice.could_not_start': 'Impossible de d\u00e9marrer le microphone',
+    'voice.mic_error': 'Erreur micro\u00a0: {err}',
+    // Add link
+    'add.title': 'Ajouter \u00e0 Shelf',
+    'add.description': 'Collez une URL, tapez un nom de film, une recette, ou ce que vous voulez sauvegarder.',
+    'add.placeholder': 'Ex\u00a0: Parasite 2019, https://exemple.com, ou collez une recette\u2026',
+    'add.cancel': 'Annuler',
+    'add.submit': 'Envoyer',
+    'add.submitting': 'Envoi en cours\u2026',
+    'add.success': 'Ajout\u00e9\u00a0! Traitement\u2026',
+    'add.failed': "Impossible d'ajouter",
+    // Recategorize
+    'recat.title': 'Recat\u00e9goriser en...',
+    'recat.hint_placeholder': 'Optionnel\u00a0: ajoutez des d\u00e9tails pour aider l\'IA (ex\u00a0: "c\'est un film cor\u00e9en de 2019")',
+    'recat.movie': 'Film',
+    'recat.tv': 'S\u00e9rie',
+    'recat.short': 'Court m\u00e9trage',
+    'recat.recipe': 'Recette',
+    'recat.documentary': 'Documentaire',
+    'recat.book': 'Livre',
+    'recat.director': 'R\u00e9alisateur',
+    'recat.generic': 'G\u00e9n\u00e9rique',
+    'recat.retry': 'R\u00e9essayer (auto-d\u00e9tection)',
+    'recat.processing': 'Traitement...',
+    'recat.success': 'Retraitement...',
+    'recat.failed': 'Impossible de recat\u00e9goriser',
+    // Delete
+    'delete.title': 'Supprimer ce lien\u00a0?',
+    'delete.confirm': 'Cette action est irr\u00e9versible.',
+    'delete.cancel': 'Annuler',
+    'delete.delete': 'Supprimer',
+    'delete.success': 'Lien supprim\u00e9',
+    'delete.failed': 'Impossible de supprimer',
+    // Watch
+    'watch.marked_watched': 'Marqu\u00e9 comme vu',
+    'watch.marked_unwatched': 'Marqu\u00e9 comme non vu',
+    'watch.failed': 'Impossible de mettre \u00e0 jour',
+    // Settings
+    'settings.title': 'Param\u00e8tres',
+    'settings.sign_out': 'D\u00e9connexion',
+    'settings.delete_account': 'Supprimer le compte',
+    'settings.close': 'Fermer',
+    'settings.language': 'Langue',
+    'settings.confirm_logout': 'Se d\u00e9connecter\u00a0?',
+    'settings.confirm_delete_1': '\u00cates-vous s\u00fbr de vouloir supprimer votre compte\u00a0? Toutes vos donn\u00e9es seront d\u00e9finitivement effac\u00e9es.',
+    'settings.confirm_delete_2': 'Cette action est irr\u00e9versible. \u00cates-vous absolument s\u00fbr\u00a0?',
+    'settings.delete_error': 'Erreur lors de la suppression du compte',
+    // Update banner
+    'update.available': 'Mise \u00e0 jour disponible',
+    'update.refresh': 'Rafra\u00eechir',
+    // Time
+    'time.just_now': "\u00e0 l'instant",
+    'time.minutes_ago': 'il y a {n}m',
+    'time.hours_ago': 'il y a {n}h',
+    'time.yesterday': 'hier',
+    'time.days_ago': 'il y a {n}j',
+    'time.weeks_ago': 'il y a {n}sem',
+    'time.months_ago': 'il y a {n}m',
+    // Misc
+    'uncategorized': 'Non class\u00e9',
+  },
+};
+
+function detectLocale() {
+  const stored = localStorage.getItem('shelf_language');
+  if (stored && SUPPORTED_LOCALES.includes(stored)) return stored;
+  const nav = (navigator.language || 'en').split('-')[0].toLowerCase();
+  if (SUPPORTED_LOCALES.includes(nav)) return nav;
+  return 'en';
+}
+
+let currentLocale = detectLocale();
+
+function setLocale(locale) {
+  if (!SUPPORTED_LOCALES.includes(locale)) return;
+  currentLocale = locale;
+  localStorage.setItem('shelf_language', locale);
+}
+
+function t(key, params) {
+  const str = (translations[currentLocale] && translations[currentLocale][key])
+    || (translations.en && translations.en[key])
+    || key;
+  if (!params) return str;
+  return str.replace(/\{(\w+)\}/g, (_, k) => {
+    if (k === 's' && params.n !== undefined) return params.n !== 1 ? 's' : '';
+    return params[k] !== undefined ? params[k] : '';
+  });
+}
+
+function getLocale() {
+  return currentLocale;
+}
+
+const VOICE_LANG_MAP = { en: 'en-US', es: 'es-ES', fr: 'fr-FR' };
+
 // Authenticated fetch helper - adds Authorization header to all API calls
 async function authFetch(url, options = {}) {
   const { data: { session } } = await supabase.auth.getSession();
@@ -190,7 +625,7 @@ async function refreshHome() {
     const route = getRoute();
     if (route.screen === 'home') renderHomeContent(cats, links);
   } catch {
-    showToast('Could not refresh');
+    showToast(t('home.could_not_refresh'));
   }
   if (btn) btn.classList.remove('spinning');
 }
@@ -200,7 +635,7 @@ async function renderHome() {
   app.innerHTML = `
     <div class="screen">
       <div class="home-header">
-        <div class="home-brand"><h1>Shelf</h1><p>Your curated links</p></div>
+        <div class="home-brand"><h1>Shelf</h1><p>${esc(t('home.subtitle'))}</p></div>
         <div class="home-header-actions">
           <button class="refresh-btn" id="refresh-btn" onclick="refreshHome()">${ICONS.refresh}</button>
           <button class="add-link-btn" onclick="showAddLink()">${ICONS.plus}</button>
@@ -208,7 +643,7 @@ async function renderHome() {
         </div>
       </div>
       <div id="home-content">
-        <p class="section-label">Collections</p>
+        <p class="section-label">${esc(t('home.collections'))}</p>
         <div class="category-grid">
           <div class="skeleton skeleton-card"></div>
           <div class="skeleton skeleton-card"></div>
@@ -223,7 +658,7 @@ async function renderHome() {
     allLinks = links;
     renderHomeContent(cats, links);
   } catch (e) {
-    document.getElementById('home-content').innerHTML = '<div class="empty-state"><span class="empty-state-icon">⚠️</span><p class="empty-state-text">Could not load data</p></div>';
+    document.getElementById('home-content').innerHTML = `<div class="empty-state"><span class="empty-state-icon">\u26a0\ufe0f</span><p class="empty-state-text">${esc(t('home.could_not_load'))}</p></div>`;
   }
 }
 
@@ -241,7 +676,7 @@ function renderHomeContent(cats, links) {
       <div class="pending-banner" onclick="this.querySelector('.pending-list').classList.toggle('expanded')">
         <div class="pending-header">
           <div class="pending-spinner"></div>
-          <span class="pending-text">${pending.length} link${pending.length > 1 ? 's' : ''} processing…</span>
+          <span class="pending-text">${esc(t('home.processing', { n: pending.length }))}</span>
           <span class="pending-chevron">${ICONS.chevron}</span>
         </div>
         <div class="pending-list">
@@ -253,20 +688,20 @@ function renderHomeContent(cats, links) {
   if (cats.length === 0 && pending.length === 0) {
     html += `
       <div class="empty-state">
-        <span class="empty-state-icon">📭</span>
-        <p class="empty-state-text">No links yet. Share something!</p>
+        <span class="empty-state-icon">\ud83d\udced</span>
+        <p class="empty-state-text">${esc(t('home.no_links'))}</p>
       </div>`;
   } else if (cats.length > 0) {
     const nonEmpty = cats.filter(cat => countByCategory[cat._id] > 0);
     if (nonEmpty.length > 0) {
-      html += '<p class="section-label">Collections</p><div class="category-grid stagger">';
+      html += `<p class="section-label">${esc(t('home.collections'))}</p><div class="category-grid stagger">`;
       nonEmpty.forEach(cat => {
         const count = countByCategory[cat._id];
         html += `
           <div class="category-card" onclick="navigate('#/category/${cat._id}')">
             <span class="category-icon">${getCategoryIcon(cat.slug, cat)}</span>
             <div class="category-name">${esc(cat.name)}</div>
-            <div class="category-count">${count} link${count !== 1 ? 's' : ''}</div>
+            <div class="category-count">${esc(t('category.link_count', { n: count }))}</div>
           </div>`;
       });
       html += '</div>';
@@ -279,8 +714,8 @@ function renderHomeContent(cats, links) {
         <div class="history-link" onclick="navigate('#/history')">
           <span class="history-link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
           <div class="history-link-text">
-            <div class="history-link-title">Recent Activity</div>
-            <div class="history-link-subtitle">${doneLinks.length} link${doneLinks.length !== 1 ? 's' : ''} saved</div>
+            <div class="history-link-title">${esc(t('history.title'))}</div>
+            <div class="history-link-subtitle">${esc(t('history.links_saved', { n: doneLinks.length }))}</div>
           </div>
           <span class="history-link-chevron">${ICONS.chevron}</span>
         </div>`;
@@ -331,8 +766,8 @@ function renderCategoryLinks(done, extType, query) {
 
   if (filtered.length === 0) {
     listEl.innerHTML = query
-      ? '<div class="empty-state"><span class="empty-state-icon">🔍</span><p class="empty-state-text">No matches</p></div>'
-      : '<div class="empty-state"><span class="empty-state-icon">📂</span><p class="empty-state-text">No links in this collection yet</p></div>';
+      ? `<div class="empty-state"><span class="empty-state-icon">\ud83d\udd0d</span><p class="empty-state-text">${esc(t('category.no_matches'))}</p></div>`
+      : `<div class="empty-state"><span class="empty-state-icon">\ud83d\udcc2</span><p class="empty-state-text">${esc(t('category.no_links'))}</p></div>`;
     listEl.className = 'poster-grid';
     return;
   }
@@ -374,7 +809,7 @@ function filterByGenre(genre) {
   categoryActiveGenre = genre;
   // Update chip active states
   document.querySelectorAll('.genre-chip').forEach(btn => {
-    const isAll = btn.textContent === 'All';
+    const isAll = btn.textContent === t('category.all');
     btn.classList.toggle('active', genre === null ? isAll : btn.textContent === genre);
   });
   const query = (document.getElementById('category-search') || {}).value || '';
@@ -399,12 +834,12 @@ async function renderCategory(categoryId) {
       <div class="header">
         <button class="back-btn" onclick="navigate('#/')">${ICONS.back}</button>
         <div>
-          <div class="header-subtitle">Collection</div>
+          <div class="header-subtitle">${esc(t('category.subtitle'))}</div>
           <div class="header-title">${esc(catName)}</div>
         </div>
       </div>
       <div class="category-search-wrap" id="category-search-wrap" style="display:none">
-        <input type="text" id="category-search" class="category-search" placeholder="Search ${esc(catName).toLowerCase()}…" autocomplete="off" oninput="handleCategoryFilter(event)">
+        <input type="text" id="category-search" class="category-search" placeholder="${esc(t('category.search_placeholder', { name: catName.toLowerCase() }))}" autocomplete="off" oninput="handleCategoryFilter(event)">
         <button class="category-search-clear" id="category-search-clear" onclick="clearCategoryFilter()">${ICONS.close}</button>
       </div>
       <div class="genre-filter-wrap" id="genre-filter-wrap" style="display:none"></div>
@@ -424,7 +859,7 @@ async function renderCategory(categoryId) {
     const done = links.filter(l => l.status === 'done');
 
     if (done.length === 0) {
-      document.getElementById('links-list').innerHTML = '<div class="empty-state"><span class="empty-state-icon">📂</span><p class="empty-state-text">No links in this collection yet</p></div>';
+      document.getElementById('links-list').innerHTML = `<div class="empty-state"><span class="empty-state-icon">\ud83d\udcc2</span><p class="empty-state-text">${esc(t('category.no_links'))}</p></div>`;
       return;
     }
 
@@ -455,20 +890,20 @@ async function renderCategory(categoryId) {
       if (genres.length) {
         const wrap = document.getElementById('genre-filter-wrap');
         wrap.style.display = '';
-        wrap.innerHTML = `<button class="genre-chip active" onclick="filterByGenre(null)">All</button>` +
+        wrap.innerHTML = `<button class="genre-chip active" onclick="filterByGenre(null)">${esc(t('category.all'))}</button>` +
           genres.map(g => `<button class="genre-chip" onclick="filterByGenre('${esc(g)}')">${esc(g)}</button>`).join('');
       }
       // Update placeholder to hint about people search
       const searchInput = document.getElementById('category-search');
-      if (searchInput) searchInput.placeholder = `Search by title, actor, director…`;
+      if (searchInput) searchInput.placeholder = t('category.search_movie');
     } else if (categoryExtType === 'recipe') {
       const searchInput = document.getElementById('category-search');
-      if (searchInput) searchInput.placeholder = `Search by title or ingredient…`;
+      if (searchInput) searchInput.placeholder = t('category.search_recipe');
     }
 
     renderCategoryLinks(done, categoryExtType, '');
   } catch (e) {
-    document.getElementById('links-list').innerHTML = '<div class="empty-state"><span class="empty-state-icon">⚠️</span><p class="empty-state-text">Could not load links</p></div>';
+    document.getElementById('links-list').innerHTML = `<div class="empty-state"><span class="empty-state-icon">\u26a0\ufe0f</span><p class="empty-state-text">${esc(t('category.could_not_load'))}</p></div>`;
   }
 }
 
@@ -480,7 +915,7 @@ async function renderLink(linkId) {
     link = all.find(l => l._id === linkId);
   }
   if (!link) {
-    app.innerHTML = '<div class="screen"><div class="empty-state"><span class="empty-state-icon">🔍</span><p class="empty-state-text">Link not found</p></div></div>';
+    app.innerHTML = `<div class="screen"><div class="empty-state"><span class="empty-state-icon">\ud83d\udd0d</span><p class="empty-state-text">${esc(t('link.not_found'))}</p></div></div>`;
     return;
   }
 
@@ -488,7 +923,7 @@ async function renderLink(linkId) {
   const ext = link.extension_data || {};
   const extType = cat ? cat.extension_type : 'generic';
 
-  let html = `<div class="screen"><div class="header"><button class="back-btn" onclick="navigate('#/category/${link.category_id}')">${ICONS.back}</button><div><div class="header-subtitle">${esc(cat ? cat.name : 'Link')}</div><div class="header-title">Details</div></div></div>`;
+  let html = `<div class="screen"><div class="header"><button class="back-btn" onclick="navigate('#/category/${link.category_id}')">${ICONS.back}</button><div><div class="header-subtitle">${esc(cat ? cat.name : 'Link')}</div><div class="header-title">${esc(t('link.details'))}</div></div></div>`;
 
   if (extType === 'movie') {
     html += renderMovieDetail(link, ext);
@@ -504,9 +939,9 @@ async function renderLink(linkId) {
 
   html += `
     <div class="actions">
-      <a href="${esc(link.url)}" target="_blank" rel="noopener" class="btn btn-primary">${ICONS.external} Open original</a>
-      <button class="btn btn-secondary" onclick="showRecategorize('${link._id}')">${ICONS.refresh} Recategorize</button>
-      <button class="btn btn-danger" onclick="confirmDelete('${link._id}')">${ICONS.trash} Delete link</button>
+      <a href="${esc(link.url)}" target="_blank" rel="noopener" class="btn btn-primary">${ICONS.external} ${esc(t('link.open_original'))}</a>
+      <button class="btn btn-secondary" onclick="showRecategorize('${link._id}')">${ICONS.refresh} ${esc(t('link.recategorize'))}</button>
+      <button class="btn btn-danger" onclick="confirmDelete('${link._id}')">${ICONS.trash} ${esc(t('link.delete_link'))}</button>
     </div>
   </div>`;
 
@@ -523,7 +958,7 @@ function renderMovieDetail(link, ext) {
   html += `<h2 class="detail-title">${esc(link.title || '')}</h2>`;
   html += '<div class="detail-meta">';
   if (ext.year) html += `<span class="detail-tag">${esc(String(ext.year))}</span>`;
-  if (ext.media_type) html += `<span class="detail-tag accent">${ext.media_type === 'tv' ? 'TV Show' : 'Movie'}</span>`;
+  if (ext.media_type) html += `<span class="detail-tag accent">${ext.media_type === 'tv' ? esc(t('link.tv_show')) : esc(t('link.movie'))}</span>`;
   if (ext.genre_names && ext.genre_names.length) {
     ext.genre_names.forEach(g => html += `<span class="detail-tag">${esc(g)}</span>`);
   }
@@ -536,14 +971,14 @@ function renderMovieDetail(link, ext) {
   html += `
     <button class="watch-toggle ${watched ? 'watched' : ''}" onclick="toggleWatched('${link._id}', ${!watched})">
       <span class="watch-icon">${watched ? ICONS.eyeOpen : ICONS.eyeClosed}</span>
-      <span>${watched ? 'Watched' : 'Not watched'}</span>
+      <span>${watched ? esc(t('link.watched')) : esc(t('link.not_watched'))}</span>
     </button>`;
   const summary = ext.overview || link.summary || '';
   if (summary) html += `<p class="detail-summary">${esc(summary)}</p>`;
 
   // Directors
   if (ext.directors && ext.directors.length) {
-    html += `<h3 class="detail-section-title">${ext.directors.length === 1 ? 'Director' : 'Directors'}</h3>`;
+    html += `<h3 class="detail-section-title">${ext.directors.length === 1 ? esc(t('link.director')) : esc(t('link.directors'))}</h3>`;
     html += '<div class="people-row">';
     ext.directors.forEach(d => {
       const photo = d.photo_url
@@ -556,7 +991,7 @@ function renderMovieDetail(link, ext) {
 
   // Cast
   if (ext.cast && ext.cast.length) {
-    html += '<h3 class="detail-section-title">Cast</h3>';
+    html += `<h3 class="detail-section-title">${esc(t('link.cast'))}</h3>`;
     html += '<div class="people-row">';
     ext.cast.forEach(a => {
       const photo = a.photo_url
@@ -569,7 +1004,7 @@ function renderMovieDetail(link, ext) {
 
   // Streaming providers
   if (ext.watch_providers && ext.watch_providers.length) {
-    html += '<h3 class="detail-section-title">Where to watch</h3>';
+    html += `<h3 class="detail-section-title">${esc(t('link.where_to_watch'))}</h3>`;
     html += '<div class="providers-grid">';
     ext.watch_providers.forEach((p, i) => {
       const logo = p.logo_url
@@ -600,7 +1035,7 @@ function countryFlag(code) {
   return String.fromCodePoint(...[...code.toUpperCase()].map(c => 0x1F1E6 + c.charCodeAt(0) - 65));
 }
 
-const countryNames = new Intl.DisplayNames(['en'], { type: 'region' });
+let countryNames = new Intl.DisplayNames([currentLocale], { type: 'region' });
 
 function showCountryName(code, el) {
   // Remove any existing tooltip
@@ -623,23 +1058,23 @@ function renderRecipeDetail(link, ext) {
 
   if (ext.prep_time || ext.cook_time || ext.servings) {
     html += '<div class="recipe-stats">';
-    if (ext.prep_time) html += `<div class="recipe-stat"><span class="recipe-stat-value">${esc(ext.prep_time)}</span><span class="recipe-stat-label">Prep</span></div>`;
-    if (ext.cook_time) html += `<div class="recipe-stat"><span class="recipe-stat-value">${esc(ext.cook_time)}</span><span class="recipe-stat-label">Cook</span></div>`;
-    if (ext.servings) html += `<div class="recipe-stat"><span class="recipe-stat-value">${esc(ext.servings)}</span><span class="recipe-stat-label">Servings</span></div>`;
+    if (ext.prep_time) html += `<div class="recipe-stat"><span class="recipe-stat-value">${esc(ext.prep_time)}</span><span class="recipe-stat-label">${esc(t('link.prep'))}</span></div>`;
+    if (ext.cook_time) html += `<div class="recipe-stat"><span class="recipe-stat-value">${esc(ext.cook_time)}</span><span class="recipe-stat-label">${esc(t('link.cook'))}</span></div>`;
+    if (ext.servings) html += `<div class="recipe-stat"><span class="recipe-stat-value">${esc(ext.servings)}</span><span class="recipe-stat-label">${esc(t('link.servings'))}</span></div>`;
     html += '</div>';
   }
 
   if (ext.ingredients && ext.ingredients.length) {
-    html += '<h3 class="detail-section-title">Ingredients</h3><ul class="ingredient-list">';
+    html += `<h3 class="detail-section-title">${esc(t('link.ingredients'))}</h3><ul class="ingredient-list">`;
     ext.ingredients.forEach(i => html += `<li>${esc(i)}</li>`);
     html += '</ul>';
     const ingId = '_ing_' + link._id;
     window[ingId] = ext.ingredients;
-    html += `<button class="btn btn-secondary cart-ingredients-btn" onclick="addIngredientsToCart('${link._id}', window['${ingId}'])">${ICONS.cart} Add ingredients to cart</button>`;
+    html += `<button class="btn btn-secondary cart-ingredients-btn" onclick="addIngredientsToCart('${link._id}', window['${ingId}'])">${ICONS.cart} ${esc(t('link.add_ingredients_cart'))}</button>`;
   }
 
   if (ext.steps && ext.steps.length) {
-    html += '<h3 class="detail-section-title">Instructions</h3><ol class="step-list">';
+    html += `<h3 class="detail-section-title">${esc(t('link.instructions'))}</h3><ol class="step-list">`;
     ext.steps.forEach(s => html += `<li>${esc(s)}</li>`);
     html += '</ol>';
   }
@@ -659,7 +1094,7 @@ function renderBookDetail(link, ext) {
   if (ext.author) html += `<p class="book-author">${esc(ext.author)}</p>`;
   html += '<div class="detail-meta">';
   if (ext.year) html += `<span class="detail-tag">${esc(String(ext.year))}</span>`;
-  if (ext.pages) html += `<span class="detail-tag">${ext.pages} pages</span>`;
+  if (ext.pages) html += `<span class="detail-tag">${esc(t('link.pages', { n: ext.pages }))}</span>`;
   html += '</div>';
   if (ext.rating) {
     html += `<div class="detail-rating"><span class="detail-rating-value">★ ${Number(ext.rating).toFixed(1)}/5</span><span class="detail-rating-label">Open Library</span></div>`;
@@ -689,7 +1124,7 @@ function renderDirectorDetail(link, ext) {
     html += `<a href="${esc(ext.tmdb_url)}" target="_blank" rel="noopener" class="btn btn-secondary" style="margin:12px 0">${ICONS.external} TMDB profile</a>`;
   }
   if (ext.filmography && ext.filmography.length) {
-    html += '<h3 class="detail-section-title">Filmography</h3>';
+    html += `<h3 class="detail-section-title">${esc(t('link.filmography'))}</h3>`;
     html += '<div class="director-filmography">';
     ext.filmography.forEach(f => {
       const poster = f.poster_url
@@ -733,13 +1168,13 @@ function timeAgo(dateStr) {
   const weeks = Math.floor(days / 7);
   const months = Math.floor(days / 30);
 
-  if (seconds < 60) return 'just now';
-  if (minutes < 60) return `${minutes}m ago`;
-  if (hours < 24) return `${hours}h ago`;
-  if (days === 1) return 'yesterday';
-  if (days < 7) return `${days}d ago`;
-  if (weeks < 5) return `${weeks}w ago`;
-  if (months < 12) return `${months}mo ago`;
+  if (seconds < 60) return t('time.just_now');
+  if (minutes < 60) return t('time.minutes_ago', { n: minutes });
+  if (hours < 24) return t('time.hours_ago', { n: hours });
+  if (days === 1) return t('time.yesterday');
+  if (days < 7) return t('time.days_ago', { n: days });
+  if (weeks < 5) return t('time.weeks_ago', { n: weeks });
+  if (months < 12) return t('time.months_ago', { n: months });
   return new Date(dateStr).toLocaleDateString();
 }
 
@@ -750,8 +1185,8 @@ async function renderHistory() {
       <div class="header">
         <button class="back-btn" onclick="navigate('#/')">${ICONS.back}</button>
         <div>
-          <div class="header-subtitle">Timeline</div>
-          <div class="header-title">Recent Activity</div>
+          <div class="header-subtitle">${esc(t('history.subtitle'))}</div>
+          <div class="header-title">${esc(t('history.title'))}</div>
         </div>
       </div>
       <div id="history-list" class="history-list">
@@ -779,7 +1214,7 @@ async function renderHistory() {
     if (!listEl) return;
 
     if (done.length === 0) {
-      listEl.innerHTML = '<div class="empty-state"><span class="empty-state-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:40px;height:40px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span><p class="empty-state-text">No links saved yet</p></div>';
+      listEl.innerHTML = `<div class="empty-state"><span class="empty-state-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:40px;height:40px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span><p class="empty-state-text">${esc(t('history.no_links'))}</p></div>`;
       return;
     }
 
@@ -789,7 +1224,7 @@ async function renderHistory() {
 
     listEl.innerHTML = '<div class="history-feed stagger">' + done.map(link => {
       const cat = catMap[link.category_id];
-      const catName = cat ? cat.name : 'Uncategorized';
+      const catName = cat ? cat.name : t('uncategorized');
       const catIcon = cat ? getCategoryIcon(cat.slug, cat) : CAT_ICONS.default;
       const ext = link.extension_data || {};
       const thumbUrl = ext.poster_url || ext.cover_url || ext.photo_url || link.thumbnail;
@@ -818,7 +1253,7 @@ async function renderHistory() {
     }).join('') + '</div>';
   } catch (e) {
     const listEl = document.getElementById('history-list');
-    if (listEl) listEl.innerHTML = '<div class="empty-state"><span class="empty-state-icon">&#9888;&#65039;</span><p class="empty-state-text">Could not load history</p></div>';
+    if (listEl) listEl.innerHTML = `<div class="empty-state"><span class="empty-state-icon">&#9888;&#65039;</span><p class="empty-state-text">${esc(t('history.could_not_load'))}</p></div>`;
   }
 }
 
@@ -829,12 +1264,12 @@ async function renderCart() {
       <div class="header">
         <button class="back-btn" onclick="navigate('#/')">${ICONS.back}</button>
         <div>
-          <div class="header-subtitle">Grocery</div>
-          <div class="header-title">Cart</div>
+          <div class="header-subtitle">${esc(t('cart.subtitle'))}</div>
+          <div class="header-title">${esc(t('cart.title'))}</div>
         </div>
       </div>
       <form class="cart-add-form" onsubmit="handleAddCartItem(event)">
-        <input type="text" id="cart-input" class="cart-input" placeholder="Add an item..." autocomplete="off">
+        <input type="text" id="cart-input" class="cart-input" placeholder="${esc(t('cart.add_placeholder'))}" autocomplete="off">
         <button type="submit" class="cart-add-btn">${ICONS.plus}</button>
         <button type="button" class="cart-add-btn cart-mic-btn" onclick="navigate('#/voice')">${ICONS.mic}</button>
       </form>
@@ -849,7 +1284,7 @@ async function renderCart() {
     const items = await fetchCart();
     renderCartItems(items);
   } catch {
-    document.getElementById('cart-list').innerHTML = '<div class="empty-state"><span class="empty-state-icon">⚠️</span><p class="empty-state-text">Could not load cart</p></div>';
+    document.getElementById('cart-list').innerHTML = `<div class="empty-state"><span class="empty-state-icon">\u26a0\ufe0f</span><p class="empty-state-text">${esc(t('cart.could_not_load'))}</p></div>`;
   }
 }
 
@@ -858,7 +1293,7 @@ function renderCartItems(items) {
   if (!el) return;
 
   if (items.length === 0) {
-    el.innerHTML = `<div class="empty-state"><span class="empty-state-icon">${ICONS.cart}</span><p class="empty-state-text">Your cart is empty</p></div>`;
+    el.innerHTML = `<div class="empty-state"><span class="empty-state-icon">${ICONS.cart}</span><p class="empty-state-text">${esc(t('cart.empty'))}</p></div>`;
     return;
   }
 
@@ -876,7 +1311,7 @@ function renderCartItems(items) {
   });
 
   if (completed.length) {
-    html += `<div class="cart-section-label">Completed</div>`;
+    html += `<div class="cart-section-label">${esc(t('cart.completed'))}</div>`;
     completed.forEach(item => {
       html += `
         <div class="cart-item completed" data-id="${item._id}">
@@ -885,7 +1320,7 @@ function renderCartItems(items) {
           <button class="cart-delete" onclick="handleDeleteCart('${item._id}')" aria-label="Delete">${ICONS.trash}</button>
         </div>`;
     });
-    html += `<button class="btn btn-secondary cart-clear-btn" onclick="handleClearCompleted()">Clear ${completed.length} completed</button>`;
+    html += `<button class="btn btn-secondary cart-clear-btn" onclick="handleClearCompleted()">${esc(t('cart.clear_completed', { n: completed.length }))}</button>`;
   }
 
   el.innerHTML = html;
@@ -903,7 +1338,7 @@ async function handleAddCartItem(e) {
     renderCartItems(items);
     updateCartBadge();
   } catch {
-    showToast('Failed to add item');
+    showToast(t('cart.failed_add'));
   }
 }
 
@@ -914,7 +1349,7 @@ async function handleToggleCart(id) {
     renderCartItems(items);
     updateCartBadge();
   } catch {
-    showToast('Failed to update item');
+    showToast(t('cart.failed_update'));
   }
 }
 
@@ -925,7 +1360,7 @@ async function handleDeleteCart(id) {
     renderCartItems(items);
     updateCartBadge();
   } catch {
-    showToast('Failed to delete item');
+    showToast(t('cart.failed_delete'));
   }
 }
 
@@ -935,9 +1370,9 @@ async function handleClearCompleted() {
     const items = await fetchCart();
     renderCartItems(items);
     updateCartBadge();
-    showToast(`Cleared ${result.deleted} item${result.deleted !== 1 ? 's' : ''}`);
+    showToast(t('cart.cleared', { n: result.deleted }));
   } catch {
-    showToast('Failed to clear items');
+    showToast(t('cart.failed_clear'));
   }
 }
 
@@ -945,9 +1380,9 @@ async function addIngredientsToCart(linkId, ingredients) {
   try {
     const result = await addCartBatch(ingredients, linkId);
     updateCartBadge();
-    showToast(`${result.length} ingredient${result.length !== 1 ? 's' : ''} added to cart`);
+    showToast(t('cart.ingredients_added', { n: result.length }));
   } catch {
-    showToast('Failed to add ingredients');
+    showToast(t('cart.failed_add'));
   }
 }
 
@@ -990,19 +1425,19 @@ function renderVoice() {
       <div class="header">
         <button class="back-btn" onclick="navigate('#/cart')">${ICONS.back}</button>
         <div>
-          <div class="header-subtitle">Grocery</div>
-          <div class="header-title">Voice</div>
+          <div class="header-subtitle">${esc(t('voice.subtitle'))}</div>
+          <div class="header-title">${esc(t('voice.title'))}</div>
         </div>
       </div>
       <div class="voice-container">
         <button class="voice-mic-btn" id="voice-mic-btn" onclick="toggleVoice()">
           ${ICONS.mic}
         </button>
-        <p class="voice-hint" id="voice-hint">Tap to start listening</p>
+        <p class="voice-hint" id="voice-hint">${esc(t('voice.tap_start'))}</p>
         <div class="voice-transcript" id="voice-transcript"></div>
         <div class="voice-items" id="voice-items"></div>
         <button class="btn btn-primary voice-add-btn" id="voice-add-btn" style="display:none" onclick="addVoiceItems()">
-          ${ICONS.cart} Add to cart
+          ${ICONS.cart} ${esc(t('voice.add_to_cart'))}
         </button>
       </div>
     </div>`;
@@ -1022,12 +1457,12 @@ function toggleVoice() {
 function startVoice() {
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   if (!SpeechRecognition) {
-    showToast('Speech recognition not supported');
+    showToast(t('voice.not_supported'));
     return;
   }
 
   voiceRecognition = new SpeechRecognition();
-  voiceRecognition.lang = 'es-ES';
+  voiceRecognition.lang = VOICE_LANG_MAP[currentLocale] || 'en-US';
   voiceRecognition.continuous = true;
   voiceRecognition.interimResults = true;
 
@@ -1038,7 +1473,7 @@ function startVoice() {
   voiceRecognition.onstart = () => {
     voiceListening = true;
     if (btn) btn.classList.add('listening');
-    if (hint) hint.textContent = 'Separate items with "y" or pause between them';
+    if (hint) hint.textContent = t('voice.listening_hint');
   };
 
   voiceRecognition.onresult = (event) => {
@@ -1070,7 +1505,7 @@ function startVoice() {
   voiceRecognition.onerror = (event) => {
     if (event.error === 'no-speech') return;
     if (event.error === 'aborted') return;
-    showToast('Mic error: ' + event.error);
+    showToast(t('voice.mic_error', { err: event.error }));
     stopVoice();
   };
 
@@ -1084,7 +1519,7 @@ function startVoice() {
   try {
     voiceRecognition.start();
   } catch {
-    showToast('Could not start microphone');
+    showToast(t('voice.could_not_start'));
   }
 }
 
@@ -1114,7 +1549,7 @@ function stopVoice() {
   const hint = document.getElementById('voice-hint');
   const transcript = document.getElementById('voice-transcript');
   if (btn) btn.classList.remove('listening');
-  if (hint) hint.textContent = voicePendingItems.length ? 'Tap to listen again' : 'Tap to start listening';
+  if (hint) hint.textContent = voicePendingItems.length ? t('voice.tap_again') : t('voice.tap_start');
   if (transcript) { transcript.textContent = ''; transcript.style.display = 'none'; }
 }
 
@@ -1138,7 +1573,7 @@ function renderVoiceItems() {
 
   if (addBtn) {
     addBtn.style.display = '';
-    addBtn.innerHTML = `${ICONS.cart} Add ${voicePendingItems.length} item${voicePendingItems.length !== 1 ? 's' : ''} to cart`;
+    addBtn.innerHTML = `${ICONS.cart} ${esc(t('voice.add_n_to_cart', { n: voicePendingItems.length }))}`;
   }
 }
 
@@ -1154,11 +1589,11 @@ async function addVoiceItems() {
   try {
     await addCartBatch(items);
     updateCartBadge();
-    showToast(`${items.length} item${items.length !== 1 ? 's' : ''} added to cart`);
+    showToast(t('voice.added', { n: items.length }));
     voicePendingItems = [];
     navigate('#/cart');
   } catch {
-    showToast('Failed to add items');
+    showToast(t('voice.failed_add'));
   }
 }
 
@@ -1169,12 +1604,12 @@ function showAddLink() {
   overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
   overlay.innerHTML = `
     <div class="confirm-sheet">
-      <h3 class="confirm-title">Add to Shelf</h3>
-      <p class="confirm-text">Paste a URL, type a movie name, a recipe, or anything you want to save.</p>
-      <textarea class="add-link-textarea" id="add-link-input" rows="4" placeholder="e.g. Parasite 2019, https://example.com, or paste a full recipe…"></textarea>
+      <h3 class="confirm-title">${esc(t('add.title'))}</h3>
+      <p class="confirm-text">${esc(t('add.description'))}</p>
+      <textarea class="add-link-textarea" id="add-link-input" rows="4" placeholder="${esc(t('add.placeholder'))}"></textarea>
       <div class="confirm-actions">
-        <button class="btn btn-danger" onclick="this.closest('.confirm-overlay').remove()">Cancel</button>
-        <button class="btn btn-primary" id="add-link-submit" onclick="submitAddLink()">Submit</button>
+        <button class="btn btn-danger" onclick="this.closest('.confirm-overlay').remove()">${esc(t('add.cancel'))}</button>
+        <button class="btn btn-primary" id="add-link-submit" onclick="submitAddLink()">${esc(t('add.submit'))}</button>
       </div>
     </div>`;
   document.body.appendChild(overlay);
@@ -1186,16 +1621,16 @@ async function submitAddLink() {
   const btn = document.getElementById('add-link-submit');
   const text = input.value.trim();
   if (!text) return;
-  btn.textContent = 'Submitting…';
+  btn.textContent = t('add.submitting');
   btn.disabled = true;
   try {
-    await api('POST', '/api/links', { text });
+    await api('POST', '/api/links', { text, language: currentLocale });
     document.querySelector('.confirm-overlay').remove();
-    showToast('Added! Processing…');
+    showToast(t('add.success'));
     refreshHome();
   } catch {
-    showToast('Failed to add');
-    btn.textContent = 'Submit';
+    showToast(t('add.failed'));
+    btn.textContent = t('add.submit');
     btn.disabled = false;
   }
 }
@@ -1207,20 +1642,20 @@ function showRecategorize(linkId) {
   overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
   overlay.innerHTML = `
     <div class="confirm-sheet">
-      <h3 class="confirm-title">Recategorize as...</h3>
-      <input type="text" class="recat-hint-input" id="recat-hint" placeholder="Optional: add details to help AI (e.g. &quot;it's a Korean movie from 2019&quot;)">
+      <h3 class="confirm-title">${esc(t('recat.title'))}</h3>
+      <input type="text" class="recat-hint-input" id="recat-hint" placeholder="${esc(t('recat.hint_placeholder'))}">
       <div class="recat-options">
-        <button class="recat-btn" onclick="doRecategorize('${linkId}', 'movie', this)">${CAT_ICONS.peliculas} Movie</button>
-        <button class="recat-btn" onclick="doRecategorize('${linkId}', 'tv', this)">${CAT_ICONS.series} TV Show</button>
-        <button class="recat-btn" onclick="doRecategorize('${linkId}', 'short', this)">${CAT_ICONS.cortometrajes} Short Film</button>
-        <button class="recat-btn" onclick="doRecategorize('${linkId}', 'recipe', this)">${CAT_ICONS.recetas} Recipe</button>
-        <button class="recat-btn" onclick="doRecategorize('${linkId}', 'documentary', this)">${CAT_ICONS.documentales} Documentary</button>
-        <button class="recat-btn" onclick="doRecategorize('${linkId}', 'book', this)">${CAT_ICONS.libros} Book</button>
-        <button class="recat-btn" onclick="doRecategorize('${linkId}', 'director', this)">${CAT_ICONS.directores} Director</button>
-        <button class="recat-btn" onclick="doRecategorize('${linkId}', 'generic', this)">${CAT_ICONS.default} Generic</button>
+        <button class="recat-btn" onclick="doRecategorize('${linkId}', 'movie', this)">${CAT_ICONS.peliculas} ${esc(t('recat.movie'))}</button>
+        <button class="recat-btn" onclick="doRecategorize('${linkId}', 'tv', this)">${CAT_ICONS.series} ${esc(t('recat.tv'))}</button>
+        <button class="recat-btn" onclick="doRecategorize('${linkId}', 'short', this)">${CAT_ICONS.cortometrajes} ${esc(t('recat.short'))}</button>
+        <button class="recat-btn" onclick="doRecategorize('${linkId}', 'recipe', this)">${CAT_ICONS.recetas} ${esc(t('recat.recipe'))}</button>
+        <button class="recat-btn" onclick="doRecategorize('${linkId}', 'documentary', this)">${CAT_ICONS.documentales} ${esc(t('recat.documentary'))}</button>
+        <button class="recat-btn" onclick="doRecategorize('${linkId}', 'book', this)">${CAT_ICONS.libros} ${esc(t('recat.book'))}</button>
+        <button class="recat-btn" onclick="doRecategorize('${linkId}', 'director', this)">${CAT_ICONS.directores} ${esc(t('recat.director'))}</button>
+        <button class="recat-btn" onclick="doRecategorize('${linkId}', 'generic', this)">${CAT_ICONS.default} ${esc(t('recat.generic'))}</button>
       </div>
-      <button class="recat-btn recat-retry" onclick="doRecategorize('${linkId}', null, this)">${ICONS.refresh} Retry (auto-detect)</button>
-      <button class="btn btn-danger" style="width:100%;margin-top:10px" onclick="this.closest('.confirm-overlay').remove()">Cancel</button>
+      <button class="recat-btn recat-retry" onclick="doRecategorize('${linkId}', null, this)">${ICONS.refresh} ${esc(t('recat.retry'))}</button>
+      <button class="btn btn-danger" style="width:100%;margin-top:10px" onclick="this.closest('.confirm-overlay').remove()">${esc(t('add.cancel'))}</button>
     </div>`;
   document.body.appendChild(overlay);
 }
@@ -1228,7 +1663,7 @@ function showRecategorize(linkId) {
 async function doRecategorize(linkId, type, btn) {
   const overlay = btn.closest('.confirm-overlay');
   const hint = document.getElementById('recat-hint')?.value?.trim() || '';
-  btn.textContent = 'Processing...';
+  btn.textContent = t('recat.processing');
   btn.disabled = true;
   try {
     const extData = {};
@@ -1239,10 +1674,10 @@ async function doRecategorize(linkId, type, btn) {
       extension_data: extData,
     });
     overlay.remove();
-    showToast('Reprocessing...');
+    showToast(t('recat.success'));
     navigate('#/');
   } catch {
-    showToast('Failed to recategorize');
+    showToast(t('recat.failed'));
     overlay.remove();
   }
 }
@@ -1254,11 +1689,11 @@ function confirmDelete(linkId) {
   overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
   overlay.innerHTML = `
     <div class="confirm-sheet">
-      <h3 class="confirm-title">Delete this link?</h3>
-      <p class="confirm-text">This action cannot be undone.</p>
+      <h3 class="confirm-title">${esc(t('delete.title'))}</h3>
+      <p class="confirm-text">${esc(t('delete.confirm'))}</p>
       <div class="confirm-actions">
-        <button class="btn btn-danger" onclick="this.closest('.confirm-overlay').remove()">Cancel</button>
-        <button class="btn btn-primary" id="confirm-delete-btn">Delete</button>
+        <button class="btn btn-danger" onclick="this.closest('.confirm-overlay').remove()">${esc(t('delete.cancel'))}</button>
+        <button class="btn btn-primary" id="confirm-delete-btn">${esc(t('delete.delete'))}</button>
       </div>
     </div>`;
   document.body.appendChild(overlay);
@@ -1266,10 +1701,10 @@ function confirmDelete(linkId) {
     overlay.remove();
     try {
       await deleteLink(linkId);
-      showToast('Link deleted');
+      showToast(t('delete.success'));
       navigate('#/');
     } catch {
-      showToast('Failed to delete');
+      showToast(t('delete.failed'));
     }
   };
 }
@@ -1284,9 +1719,9 @@ async function toggleWatched(linkId, watched) {
     link.extension_data = ext;
     linksCache[linkId] = link;
     renderLink(linkId);
-    showToast(watched ? 'Marked as watched' : 'Marked as not watched');
+    showToast(watched ? t('watch.marked_watched') : t('watch.marked_unwatched'));
   } catch {
-    showToast('Failed to update');
+    showToast(t('watch.failed'));
   }
 }
 
@@ -1307,10 +1742,10 @@ async function toggleWatchedFromList(linkId, watched) {
       btn.setAttribute('onclick', `event.stopPropagation(); toggleWatchedFromList('${linkId}', ${!watched})`);
       btn.classList.remove('updating');
     }
-    showToast(watched ? 'Marked as watched' : 'Marked as not watched');
+    showToast(watched ? t('watch.marked_watched') : t('watch.marked_unwatched'));
   } catch {
     if (btn) btn.classList.remove('updating');
-    showToast('Failed to update');
+    showToast(t('watch.failed'));
   }
 }
 
@@ -1339,22 +1774,39 @@ function showSettings() {
   const overlay = document.createElement('div');
   overlay.className = 'confirm-overlay';
   overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
+  const langLabels = { en: 'English', es: 'Espa\u00f1ol', fr: 'Fran\u00e7ais' };
   overlay.innerHTML = `
     <div class="confirm-sheet">
-      <h3 class="confirm-title">Settings</h3>
+      <h3 class="confirm-title">${esc(t('settings.title'))}</h3>
       <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px">
+        <div class="settings-lang-section">
+          <label class="settings-lang-label">${esc(t('settings.language'))}</label>
+          <div class="settings-lang-pills" id="lang-pills">
+            ${SUPPORTED_LOCALES.map(loc => `<button class="lang-pill ${loc === currentLocale ? 'active' : ''}" data-lang="${loc}">${langLabels[loc]}</button>`).join('')}
+          </div>
+        </div>
         <button class="btn btn-secondary" id="settings-logout-btn">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-          Sign Out
+          ${esc(t('settings.sign_out'))}
         </button>
         <button class="btn btn-danger" id="settings-delete-btn">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2M10 11v6M14 11v6"/></svg>
-          Delete Account
+          ${esc(t('settings.delete_account'))}
         </button>
       </div>
-      <button class="btn btn-secondary" id="settings-close-btn" style="width:100%;margin-top:10px">Close</button>
+      <button class="btn btn-secondary" id="settings-close-btn" style="width:100%;margin-top:10px">${esc(t('settings.close'))}</button>
     </div>`;
   document.body.appendChild(overlay);
+  document.getElementById('lang-pills').addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-lang]');
+    if (!btn) return;
+    const lang = btn.dataset.lang;
+    if (lang === currentLocale) return;
+    setLocale(lang);
+    overlay.remove();
+    countryNames = new Intl.DisplayNames([currentLocale], { type: 'region' });
+    render();
+  });
   document.getElementById('settings-logout-btn').addEventListener('click', () => { overlay.remove(); handleLogout(); });
   document.getElementById('settings-delete-btn').addEventListener('click', () => { overlay.remove(); handleDeleteAccount(); });
   document.getElementById('settings-close-btn').addEventListener('click', () => overlay.remove());
@@ -1362,24 +1814,24 @@ function showSettings() {
 
 // ── Logout / Delete Account ──
 async function handleLogout() {
-  if (!confirm('Sign out?')) return;
+  if (!confirm(t('settings.confirm_logout'))) return;
   await supabase.auth.signOut();
   window.location.href = '/login.html';
 }
 
 async function handleDeleteAccount() {
-  if (!confirm('Are you sure you want to delete your account? All your data will be permanently erased.')) return;
-  if (!confirm('This action cannot be undone. Are you completely sure?')) return;
+  if (!confirm(t('settings.confirm_delete_1'))) return;
+  if (!confirm(t('settings.confirm_delete_2'))) return;
   try {
     const res = await authFetch('/api/delete-account', { method: 'DELETE' });
     if (res && res.ok) {
       await supabase.auth.signOut();
       window.location.href = '/login.html';
     } else {
-      showToast('Error deleting account');
+      showToast(t('settings.delete_error'));
     }
   } catch {
-    showToast('Error deleting account');
+    showToast(t('settings.delete_error'));
   }
 }
 
@@ -1422,7 +1874,7 @@ function bootApp(supabaseClient) {
 function showUpdateBanner() {
   const banner = document.createElement('div');
   banner.className = 'update-banner';
-  banner.innerHTML = '<span>Update available</span><button onclick="applyUpdate()">Refresh</button>';
+  banner.innerHTML = `<span>${esc(t('update.available'))}</span><button onclick="applyUpdate()">${esc(t('update.refresh'))}</button>`;
   document.body.appendChild(banner);
 }
 
@@ -1463,3 +1915,6 @@ window.handleLogout = handleLogout;
 window.handleDeleteAccount = handleDeleteAccount;
 window.showSettings = showSettings;
 window.renderHistory = renderHistory;
+window.t = t;
+window.getLocale = getLocale;
+window.setLocale = setLocale;

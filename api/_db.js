@@ -33,6 +33,7 @@ const linkSchema = new mongoose.Schema({
   summary: { type: String, default: null },
   thumbnail: { type: String, default: null },
   extension_data: { type: mongoose.Schema.Types.Mixed, default: {} },
+  language: { type: String, default: 'en' },
 }, { collection: 'links', versionKey: false });
 
 const categorySchema = new mongoose.Schema({

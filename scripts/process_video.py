@@ -90,7 +90,9 @@ RECAT_HINTS = {
 }
 
 
-def categorize_content(content: str, url: str, categories: list, recat_hint: str | None, user_hint: str | None) -> dict:
+LANGUAGE_NAMES = {"en": "English", "es": "Spanish", "fr": "French"}
+
+def categorize_content(content: str, url: str, categories: list, recat_hint: str | None, user_hint: str | None, language: str = "en") -> dict:
     """Call OpenAI to categorize content. Returns parsed JSON dict."""
     if categories:
         cats_desc = "\n".join(
@@ -106,9 +108,14 @@ def categorize_content(content: str, url: str, categories: list, recat_hint: str
     if user_hint:
         hint_block += f"\nADDITIONAL CONTEXT FROM USER: {user_hint}\n"
 
+    lang_name = LANGUAGE_NAMES.get(language, "English")
+    lang_instruction = ""
+    if language and language != "en":
+        lang_instruction = f'\n\nLANGUAGE: Create all category names, titles, and summaries in {lang_name}. For example, use "Pel\u00edculas" not "Movies" for Spanish, "Films" not "Movies" for French. All user-facing text in the response must be in {lang_name}.\n'
+
     system_prompt = "You are a link categorizer and content extractor. Respond with ONLY valid JSON (no markdown fences, no explanation)."
 
-    user_prompt = f"""Analyze the following content from this URL: {url}{hint_block}
+    user_prompt = f"""Analyze the following content from this URL: {url}{hint_block}{lang_instruction}
 
 Existing categories:
 {cats_desc}
@@ -207,6 +214,7 @@ def process_video(link_id: str):
 
     url = link["url"].strip()
     user_id = link.get("user_id")
+    language = link.get("language", "en")
 
     print(f"Processing video link: {url}")
 
@@ -249,7 +257,7 @@ def process_video(link_id: str):
     ext_data = link.get("extension_data") or {}
     recat_hint = ext_data.get("recategorize_as")
     user_hint = ext_data.get("user_hint")
-    ai_result = categorize_content(content, url, cat_list, recat_hint, user_hint)
+    ai_result = categorize_content(content, url, cat_list, recat_hint, user_hint, language)
 
     # 6. Find or create category
     cat_info = ai_result["category"]

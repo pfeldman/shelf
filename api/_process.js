@@ -133,7 +133,9 @@ const RECAT_HINTS = {
   director: 'OVERRIDE: The user says this is a DIRECTOR. You MUST categorize it with extension_type "director". Use the Directores category (slug: "directores").',
 };
 
-async function categorizeAndExtract(content, url, categories, recatHint, userHint) {
+const LANGUAGE_NAMES = { en: 'English', es: 'Spanish', fr: 'French' };
+
+async function categorizeAndExtract(content, url, categories, recatHint, userHint, language) {
   const catsDesc = categories.length
     ? categories.map(c => `- "${c.name}" (slug: ${c.slug}, type: ${c.extension_type})`).join('\n')
     : '(no categories exist yet)';
@@ -148,7 +150,12 @@ async function categorizeAndExtract(content, url, categories, recatHint, userHin
 
   const systemPrompt = 'You are a link categorizer and content extractor. Respond with ONLY valid JSON (no markdown fences, no explanation).';
 
-  const userPrompt = `Analyze the following content from this URL: ${url}${hintBlock}
+  const langName = LANGUAGE_NAMES[language] || 'English';
+  const langInstruction = language && language !== 'en'
+    ? `\n\nLANGUAGE: Create all category names, titles, and summaries in ${langName}. For example, use "Pel\u00edculas" not "Movies" for Spanish, "Films" not "Movies" for French. All user-facing text in the response must be in ${langName}.\n`
+    : '';
+
+  const userPrompt = `Analyze the following content from this URL: ${url}${hintBlock}${langInstruction}
 
 Existing categories:
 ${catsDesc}
@@ -230,7 +237,7 @@ ${content}
 
 // ── Main processing function ──
 
-async function processLink(link, Category, userId, Link) {
+async function processLink(link, Category, userId, Link, language) {
   const url = link.url.trim();
 
   // 1. Extract content
@@ -289,7 +296,8 @@ async function processLink(link, Category, userId, Link) {
   const extData = link.extension_data || {};
   const recatHint = extData.recategorize_as || null;
   const userHint = extData.user_hint || sharedText || null;
-  const aiResult = await categorizeAndExtract(content, resolvedUrl, catList, recatHint, userHint);
+  const linkLang = language || link.language || 'en';
+  const aiResult = await categorizeAndExtract(content, resolvedUrl, catList, recatHint, userHint, linkLang);
 
   // 4. Ensure category exists (scoped to user if userId provided)
   const catInfo = aiResult.category;
