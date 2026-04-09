@@ -4,6 +4,51 @@ const OpenAI = require('openai');
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 const OPENAI_MODEL = process.env.OPENAI_MODEL || 'gpt-4o-mini';
 
+// ── Video URL detection ──
+
+const VIDEO_URL_PATTERNS = [
+  /youtube\.com\/watch/i,
+  /youtube\.com\/shorts/i,
+  /youtu\.be\//i,
+  /vimeo\.com\//i,
+  /tiktok\.com\//i,
+  /instagram\.com\/(reel|p|tv)\//i,
+  /twitter\.com\/.+\/status/i,
+  /x\.com\/.+\/status/i,
+];
+
+function isVideoUrl(url) {
+  return VIDEO_URL_PATTERNS.some(pattern => pattern.test(url));
+}
+
+async function triggerVideoProcessing(linkId) {
+  const token = process.env.GITHUB_TOKEN;
+  if (!token) {
+    throw new Error('GITHUB_TOKEN not configured — cannot dispatch video processing workflow');
+  }
+
+  const resp = await fetch(
+    'https://api.github.com/repos/pfeldman/shelf/actions/workflows/process-video.yml/dispatches',
+    {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        ref: 'main',
+        inputs: { link_id: linkId },
+      }),
+    }
+  );
+
+  if (!resp.ok) {
+    const body = await resp.text();
+    throw new Error(`GitHub Actions dispatch failed (${resp.status}): ${body}`);
+  }
+}
+
 // ── URL detection ──
 
 const URL_RE = /https?:\/\/[^\s]+/;
@@ -185,7 +230,7 @@ ${content}
 
 // ── Main processing function ──
 
-async function processLink(link, Category, userId) {
+async function processLink(link, Category, userId, Link) {
   const url = link.url.trim();
 
   // 1. Extract content
@@ -198,6 +243,18 @@ async function processLink(link, Category, userId) {
       resolvedUrl = extracted.url;
       sharedText = extracted.text;
     }
+  }
+
+  // Check if this is a video URL — offload to GitHub Actions worker
+  if (isUrl(resolvedUrl) && isVideoUrl(resolvedUrl)) {
+    console.log(`Video URL detected: ${resolvedUrl} — dispatching to GitHub Actions`);
+    if (Link) {
+      await Link.updateOne({ _id: link._id }, {
+        $set: { status: 'processing', processing_started_at: new Date(), processing_step: 'Video processing (GitHub Actions)' }
+      });
+    }
+    await triggerVideoProcessing(link._id.toString());
+    return { status: 'processing', processing_started_at: new Date(), processing_step: 'Video processing (GitHub Actions)' };
   }
 
   let data;
@@ -277,4 +334,4 @@ async function processLink(link, Category, userId) {
   };
 }
 
-module.exports = { processLink, categorizeAndExtract, extractWebpage, isUrl, extractUrlAndText };
+module.exports = { processLink, categorizeAndExtract, extractWebpage, isUrl, extractUrlAndText, isVideoUrl, triggerVideoProcessing };

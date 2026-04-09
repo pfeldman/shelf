@@ -1,0 +1,32 @@
+name: Process Video Link
+
+on:
+  workflow_dispatch:
+    inputs:
+      link_id:
+        description: 'MongoDB Link document ID to process'
+        required: true
+        type: string
+
+jobs:
+  process:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install yt-dlp pymongo dnspython openai
+
+      - name: Process video
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: python scripts/process_video.py "${{ inputs.link_id }}"

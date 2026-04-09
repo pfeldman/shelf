@@ -56,8 +56,14 @@ module.exports = async function handler(req, res) {
       const response = serialize(doc);
 
       // Process inline (synchronously within this request)
+      // For video URLs, processLink dispatches to GitHub Actions and returns status='processing'
       try {
-        const updates = await processLink(doc, Category, user.id);
+        const updates = await processLink(doc, Category, user.id, Link);
+        if (updates.status === 'processing') {
+          // Video URL — processing offloaded to GitHub Actions worker
+          Object.assign(response, updates);
+          return res.json(response);
+        }
         await Link.updateOne({ _id: doc._id }, { $set: updates });
         Object.assign(response, updates);
         if (response.category_id) response.category_id = response.category_id.toString();
