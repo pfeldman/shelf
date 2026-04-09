@@ -42,6 +42,10 @@ const categorySchema = new mongoose.Schema({
   slug: { type: String, required: true },
   extension_type: { type: String, default: 'generic' },
   icon_svg: { type: String },
+  shared_with: [{
+    user_id: { type: String, required: true },
+    email: { type: String, required: true },
+  }],
   created_at: { type: Date, default: Date.now },
 }, { collection: 'categories', versionKey: false });
 

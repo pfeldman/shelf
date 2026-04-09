@@ -112,6 +112,20 @@ const translations = {
     'time.days_ago': '{n}d ago',
     'time.weeks_ago': '{n}w ago',
     'time.months_ago': '{n}mo ago',
+    // Share
+    'share.title': 'Share Collection',
+    'share.invite': 'Invite',
+    'share.email_placeholder': 'Enter email address',
+    'share.members': 'Members',
+    'share.remove': 'Remove',
+    'share.leave': 'Leave',
+    'share.shared_with_you': 'Shared with you',
+    'share.invite_sent': 'Invitation sent',
+    'share.error': 'Could not share',
+    'share.user_not_found': 'User not found',
+    'share.removed': 'Member removed',
+    'share.left': 'Left collection',
+    'share.owner': 'Owner',
     // Misc
     'uncategorized': 'Uncategorized',
   },
@@ -216,6 +230,20 @@ const translations = {
     'time.days_ago': 'hace {n}d',
     'time.weeks_ago': 'hace {n}sem',
     'time.months_ago': 'hace {n}m',
+    // Share
+    'share.title': 'Compartir colecci\u00f3n',
+    'share.invite': 'Invitar',
+    'share.email_placeholder': 'Ingres\u00e1 un email',
+    'share.members': 'Miembros',
+    'share.remove': 'Quitar',
+    'share.leave': 'Salir',
+    'share.shared_with_you': 'Compartida con vos',
+    'share.invite_sent': 'Invitaci\u00f3n enviada',
+    'share.error': 'No se pudo compartir',
+    'share.user_not_found': 'Usuario no encontrado',
+    'share.removed': 'Miembro eliminado',
+    'share.left': 'Saliste de la colecci\u00f3n',
+    'share.owner': 'Due\u00f1o',
     // Misc
     'uncategorized': 'Sin categor\u00eda',
   },
@@ -320,6 +348,20 @@ const translations = {
     'time.days_ago': 'il y a {n}j',
     'time.weeks_ago': 'il y a {n}sem',
     'time.months_ago': 'il y a {n}m',
+    // Share
+    'share.title': 'Partager la collection',
+    'share.invite': 'Inviter',
+    'share.email_placeholder': 'Entrez une adresse email',
+    'share.members': 'Membres',
+    'share.remove': 'Retirer',
+    'share.leave': 'Quitter',
+    'share.shared_with_you': 'Partag\u00e9e avec vous',
+    'share.invite_sent': 'Invitation envoy\u00e9e',
+    'share.error': 'Impossible de partager',
+    'share.user_not_found': 'Utilisateur introuvable',
+    'share.removed': 'Membre retir\u00e9',
+    'share.left': 'Vous avez quitt\u00e9 la collection',
+    'share.owner': 'Propri\u00e9taire',
     // Misc
     'uncategorized': 'Non class\u00e9',
   },
@@ -424,6 +466,20 @@ const translations = {
     'time.days_ago': 'h\u00e1 {n}d',
     'time.weeks_ago': 'h\u00e1 {n}sem',
     'time.months_ago': 'h\u00e1 {n}m',
+    // Share
+    'share.title': 'Compartilhar cole\u00e7\u00e3o',
+    'share.invite': 'Convidar',
+    'share.email_placeholder': 'Digite o email',
+    'share.members': 'Membros',
+    'share.remove': 'Remover',
+    'share.leave': 'Sair',
+    'share.shared_with_you': 'Compartilhada com voc\u00ea',
+    'share.invite_sent': 'Convite enviado',
+    'share.error': 'N\u00e3o foi poss\u00edvel compartilhar',
+    'share.user_not_found': 'Usu\u00e1rio n\u00e3o encontrado',
+    'share.removed': 'Membro removido',
+    'share.left': 'Voc\u00ea saiu da cole\u00e7\u00e3o',
+    'share.owner': 'Dono',
     // Misc
     'uncategorized': 'Sem categoria',
   },
@@ -528,6 +584,20 @@ const translations = {
     'time.days_ago': 'vor {n}T',
     'time.weeks_ago': 'vor {n}W',
     'time.months_ago': 'vor {n}Mo',
+    // Share
+    'share.title': 'Sammlung teilen',
+    'share.invite': 'Einladen',
+    'share.email_placeholder': 'E-Mail-Adresse eingeben',
+    'share.members': 'Mitglieder',
+    'share.remove': 'Entfernen',
+    'share.leave': 'Verlassen',
+    'share.shared_with_you': 'Mit dir geteilt',
+    'share.invite_sent': 'Einladung gesendet',
+    'share.error': 'Teilen fehlgeschlagen',
+    'share.user_not_found': 'Benutzer nicht gefunden',
+    'share.removed': 'Mitglied entfernt',
+    'share.left': 'Sammlung verlassen',
+    'share.owner': 'Besitzer',
     // Misc
     'uncategorized': 'Ohne Kategorie',
   },
@@ -632,6 +702,20 @@ const translations = {
     'time.days_ago': '{n}g fa',
     'time.weeks_ago': '{n}sett fa',
     'time.months_ago': '{n}m fa',
+    // Share
+    'share.title': 'Condividi collezione',
+    'share.invite': 'Invita',
+    'share.email_placeholder': 'Inserisci email',
+    'share.members': 'Membri',
+    'share.remove': 'Rimuovi',
+    'share.leave': 'Esci',
+    'share.shared_with_you': 'Condivisa con te',
+    'share.invite_sent': 'Invito inviato',
+    'share.error': 'Impossibile condividere',
+    'share.user_not_found': 'Utente non trovato',
+    'share.removed': 'Membro rimosso',
+    'share.left': 'Hai lasciato la collezione',
+    'share.owner': 'Proprietario',
     // Misc
     'uncategorized': 'Senza categoria',
   },
@@ -736,6 +820,20 @@ const translations = {
     'time.days_ago': '{n}\u65e5\u524d',
     'time.weeks_ago': '{n}\u9031\u9593\u524d',
     'time.months_ago': '{n}\u30f6\u6708\u524d',
+    // Share
+    'share.title': '\u30b3\u30ec\u30af\u30b7\u30e7\u30f3\u3092\u5171\u6709',
+    'share.invite': '\u62db\u5f85',
+    'share.email_placeholder': '\u30e1\u30fc\u30eb\u30a2\u30c9\u30ec\u30b9\u3092\u5165\u529b',
+    'share.members': '\u30e1\u30f3\u30d0\u30fc',
+    'share.remove': '\u524a\u9664',
+    'share.leave': '\u9000\u51fa',
+    'share.shared_with_you': '\u5171\u6709\u3055\u308c\u3066\u3044\u307e\u3059',
+    'share.invite_sent': '\u62db\u5f85\u3092\u9001\u4fe1\u3057\u307e\u3057\u305f',
+    'share.error': '\u5171\u6709\u3067\u304d\u307e\u305b\u3093\u3067\u3057\u305f',
+    'share.user_not_found': '\u30e6\u30fc\u30b6\u30fc\u304c\u898b\u3064\u304b\u308a\u307e\u305b\u3093',
+    'share.removed': '\u30e1\u30f3\u30d0\u30fc\u3092\u524a\u9664\u3057\u307e\u3057\u305f',
+    'share.left': '\u30b3\u30ec\u30af\u30b7\u30e7\u30f3\u304b\u3089\u9000\u51fa\u3057\u307e\u3057\u305f',
+    'share.owner': '\u30aa\u30fc\u30ca\u30fc',
     // Misc
     'uncategorized': '\u672a\u5206\u985e',
   },
@@ -840,6 +938,20 @@ const translations = {
     'time.days_ago': '{n}\uc77c \uc804',
     'time.weeks_ago': '{n}\uc8fc \uc804',
     'time.months_ago': '{n}\uac1c\uc6d4 \uc804',
+    // Share
+    'share.title': '\ucee8\ub809\uc158 \uacf5\uc720',
+    'share.invite': '\ucd08\ub300',
+    'share.email_placeholder': '\uc774\uba54\uc77c \uc8fc\uc18c \uc785\ub825',
+    'share.members': '\uba64\ubc84',
+    'share.remove': '\uc81c\uac70',
+    'share.leave': '\ub098\uac00\uae30',
+    'share.shared_with_you': '\uacf5\uc720\ub428',
+    'share.invite_sent': '\ucd08\ub300 \uc644\ub8cc',
+    'share.error': '\uacf5\uc720\ud560 \uc218 \uc5c6\uc2b5\ub2c8\ub2e4',
+    'share.user_not_found': '\uc0ac\uc6a9\uc790\ub97c \ucc3e\uc744 \uc218 \uc5c6\uc2b5\ub2c8\ub2e4',
+    'share.removed': '\uba64\ubc84 \uc81c\uac70\ub428',
+    'share.left': '\ucee8\ub809\uc158\uc5d0\uc11c \ub098\uac14\uc2b5\ub2c8\ub2e4',
+    'share.owner': '\uc18c\uc720\uc790',
     // Misc
     'uncategorized': '\ubbf8\ubd84\ub958',
   },
@@ -944,6 +1056,20 @@ const translations = {
     'time.days_ago': '{n}\u5929\u524d',
     'time.weeks_ago': '{n}\u5468\u524d',
     'time.months_ago': '{n}\u4e2a\u6708\u524d',
+    // Share
+    'share.title': '\u5171\u4eab\u5408\u96c6',
+    'share.invite': '\u9080\u8bf7',
+    'share.email_placeholder': '\u8f93\u5165\u90ae\u7bb1\u5730\u5740',
+    'share.members': '\u6210\u5458',
+    'share.remove': '\u79fb\u9664',
+    'share.leave': '\u9000\u51fa',
+    'share.shared_with_you': '\u4e0e\u4f60\u5171\u4eab',
+    'share.invite_sent': '\u9080\u8bf7\u5df2\u53d1\u9001',
+    'share.error': '\u65e0\u6cd5\u5171\u4eab',
+    'share.user_not_found': '\u672a\u627e\u5230\u7528\u6237',
+    'share.removed': '\u6210\u5458\u5df2\u79fb\u9664',
+    'share.left': '\u5df2\u9000\u51fa\u5408\u96c6',
+    'share.owner': '\u6240\u6709\u8005',
     // Misc
     'uncategorized': '\u672a\u5206\u7c7b',
   },
@@ -1048,6 +1174,20 @@ const translations = {
     'time.days_ago': '{n}d geleden',
     'time.weeks_ago': '{n}w geleden',
     'time.months_ago': '{n}mnd geleden',
+    // Share
+    'share.title': 'Collectie delen',
+    'share.invite': 'Uitnodigen',
+    'share.email_placeholder': 'Voer e-mailadres in',
+    'share.members': 'Leden',
+    'share.remove': 'Verwijderen',
+    'share.leave': 'Verlaten',
+    'share.shared_with_you': 'Met jou gedeeld',
+    'share.invite_sent': 'Uitnodiging verzonden',
+    'share.error': 'Kan niet delen',
+    'share.user_not_found': 'Gebruiker niet gevonden',
+    'share.removed': 'Lid verwijderd',
+    'share.left': 'Collectie verlaten',
+    'share.owner': 'Eigenaar',
     // Misc
     'uncategorized': 'Ongecategoriseerd',
   },
@@ -1152,6 +1292,20 @@ const translations = {
     'time.days_ago': '{n}\u0434 \u043d\u0430\u0437\u0430\u0434',
     'time.weeks_ago': '{n}\u043d\u0435\u0434 \u043d\u0430\u0437\u0430\u0434',
     'time.months_ago': '{n}\u043c\u0435\u0441 \u043d\u0430\u0437\u0430\u0434',
+    // Share
+    'share.title': '\u041f\u043e\u0434\u0435\u043b\u0438\u0442\u044c\u0441\u044f \u043a\u043e\u043b\u043b\u0435\u043a\u0446\u0438\u0435\u0439',
+    'share.invite': '\u041f\u0440\u0438\u0433\u043b\u0430\u0441\u0438\u0442\u044c',
+    'share.email_placeholder': '\u0412\u0432\u0435\u0434\u0438\u0442\u0435 email',
+    'share.members': '\u0423\u0447\u0430\u0441\u0442\u043d\u0438\u043a\u0438',
+    'share.remove': '\u0423\u0434\u0430\u043b\u0438\u0442\u044c',
+    'share.leave': '\u0412\u044b\u0439\u0442\u0438',
+    'share.shared_with_you': '\u041f\u043e\u0434\u0435\u043b\u0435\u043d\u043e \u0441 \u0432\u0430\u043c\u0438',
+    'share.invite_sent': '\u041f\u0440\u0438\u0433\u043b\u0430\u0448\u0435\u043d\u0438\u0435 \u043e\u0442\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u043e',
+    'share.error': '\u041d\u0435 \u0443\u0434\u0430\u043b\u043e\u0441\u044c \u043f\u043e\u0434\u0435\u043b\u0438\u0442\u044c\u0441\u044f',
+    'share.user_not_found': '\u041f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d',
+    'share.removed': '\u0423\u0447\u0430\u0441\u0442\u043d\u0438\u043a \u0443\u0434\u0430\u043b\u0451\u043d',
+    'share.left': '\u0412\u044b \u043f\u043e\u043a\u0438\u043d\u0443\u043b\u0438 \u043a\u043e\u043b\u043b\u0435\u043a\u0446\u0438\u044e',
+    'share.owner': '\u0412\u043b\u0430\u0434\u0435\u043b\u0435\u0446',
     // Misc
     'uncategorized': '\u0411\u0435\u0437 \u043a\u0430\u0442\u0435\u0433\u043e\u0440\u0438\u0438',
   },
@@ -1256,6 +1410,20 @@ const translations = {
     'time.days_ago': '\u0645\u0646\u0630 {n}\u064a',
     'time.weeks_ago': '\u0645\u0646\u0630 {n}\u0623\u0633\u0628\u0648\u0639',
     'time.months_ago': '\u0645\u0646\u0630 {n}\u0634\u0647\u0631',
+    // Share
+    'share.title': '\u0645\u0634\u0627\u0631\u0643\u0629 \u0627\u0644\u0645\u062c\u0645\u0648\u0639\u0629',
+    'share.invite': '\u062f\u0639\u0648\u0629',
+    'share.email_placeholder': '\u0623\u062f\u062e\u0644 \u0627\u0644\u0628\u0631\u064a\u062f \u0627\u0644\u0625\u0644\u0643\u062a\u0631\u0648\u0646\u064a',
+    'share.members': '\u0627\u0644\u0623\u0639\u0636\u0627\u0621',
+    'share.remove': '\u0625\u0632\u0627\u0644\u0629',
+    'share.leave': '\u0645\u063a\u0627\u062f\u0631\u0629',
+    'share.shared_with_you': '\u0645\u0634\u0627\u0631\u0643 \u0645\u0639\u0643',
+    'share.invite_sent': '\u062a\u0645 \u0625\u0631\u0633\u0627\u0644 \u0627\u0644\u062f\u0639\u0648\u0629',
+    'share.error': '\u062a\u0639\u0630\u0651\u0631\u062a \u0627\u0644\u0645\u0634\u0627\u0631\u0643\u0629',
+    'share.user_not_found': '\u0627\u0644\u0645\u0633\u062a\u062e\u062f\u0645 \u063a\u064a\u0631 \u0645\u0648\u062c\u0648\u062f',
+    'share.removed': '\u062a\u0645 \u0625\u0632\u0627\u0644\u0629 \u0627\u0644\u0639\u0636\u0648',
+    'share.left': '\u063a\u0627\u062f\u0631\u062a \u0627\u0644\u0645\u062c\u0645\u0648\u0639\u0629',
+    'share.owner': '\u0627\u0644\u0645\u0627\u0644\u0643',
     // Misc
     'uncategorized': '\u063a\u064a\u0631 \u0645\u0635\u0646\u0641',
   },
@@ -1360,6 +1528,20 @@ const translations = {
     'time.days_ago': '{n}\u0926\u093f\u0928 \u092a\u0939\u0932\u0947',
     'time.weeks_ago': '{n}\u0939\u092b\u094d\u0924\u0947 \u092a\u0939\u0932\u0947',
     'time.months_ago': '{n}\u092e\u0939\u0940\u0928\u0947 \u092a\u0939\u0932\u0947',
+    // Share
+    'share.title': '\u0938\u0902\u0917\u094d\u0930\u0939 \u0938\u093e\u091d\u093e \u0915\u0930\u0947\u0902',
+    'share.invite': '\u0906\u092e\u0902\u0924\u094d\u0930\u093f\u0924 \u0915\u0930\u0947\u0902',
+    'share.email_placeholder': '\u0908\u092e\u0947\u0932 \u0926\u0930\u094d\u091c \u0915\u0930\u0947\u0902',
+    'share.members': '\u0938\u0926\u0938\u094d\u092f',
+    'share.remove': '\u0939\u091f\u093e\u090f\u0902',
+    'share.leave': '\u091b\u094b\u0921\u093c\u0947\u0902',
+    'share.shared_with_you': '\u0906\u092a\u0915\u0947 \u0938\u093e\u0925 \u0938\u093e\u091d\u093e',
+    'share.invite_sent': '\u0928\u093f\u092e\u0902\u0924\u094d\u0930\u0923 \u092d\u0947\u091c\u093e \u0917\u092f\u093e',
+    'share.error': '\u0938\u093e\u091d\u093e \u0928\u0939\u0940\u0902 \u0939\u094b \u0938\u0915\u093e',
+    'share.user_not_found': '\u0909\u092a\u092f\u094b\u0917\u0915\u0930\u094d\u0924\u093e \u0928\u0939\u0940\u0902 \u092e\u093f\u0932\u093e',
+    'share.removed': '\u0938\u0926\u0938\u094d\u092f \u0939\u091f\u093e\u092f\u093e \u0917\u092f\u093e',
+    'share.left': '\u0938\u0902\u0917\u094d\u0930\u0939 \u091b\u094b\u0921\u093c \u0926\u093f\u092f\u093e',
+    'share.owner': '\u092e\u093e\u0932\u093f\u0915',
     // Misc
     'uncategorized': '\u0936\u094d\u0930\u0947\u0923\u0940\u0930\u0939\u093f\u0924',
   },
@@ -1464,6 +1646,20 @@ const translations = {
     'time.days_ago': '{n}g \u00f6nce',
     'time.weeks_ago': '{n}hf \u00f6nce',
     'time.months_ago': '{n}ay \u00f6nce',
+    // Share
+    'share.title': 'Koleksiyonu payla\u015f',
+    'share.invite': 'Davet et',
+    'share.email_placeholder': 'E-posta adresi girin',
+    'share.members': '\u00dcyeler',
+    'share.remove': 'Kald\u0131r',
+    'share.leave': 'Ayr\u0131l',
+    'share.shared_with_you': 'Seninle payla\u015f\u0131ld\u0131',
+    'share.invite_sent': 'Davet g\u00f6nderildi',
+    'share.error': 'Payla\u015f\u0131lamad\u0131',
+    'share.user_not_found': 'Kullan\u0131c\u0131 bulunamad\u0131',
+    'share.removed': '\u00dcye kald\u0131r\u0131ld\u0131',
+    'share.left': 'Koleksiyondan ayr\u0131ld\u0131n\u0131z',
+    'share.owner': 'Sahip',
     // Misc
     'uncategorized': 'Kategorisiz',
   },
@@ -1725,16 +1921,25 @@ function renderHomeContent(cats, links) {
         <p class="empty-state-text">${esc(t('home.no_links'))}</p>
       </div>`;
   } else if (cats.length > 0) {
-    const nonEmpty = cats.filter(cat => countByCategory[cat._id] > 0);
+    // Show categories with own links OR shared categories (even if 0 own links)
+    const nonEmpty = cats.filter(cat => countByCategory[cat._id] > 0 || (cat.isShared && !cat.isOwner));
     if (nonEmpty.length > 0) {
       html += `<p class="section-label">${esc(t('home.collections'))}</p><div class="category-grid stagger">`;
       nonEmpty.forEach(cat => {
-        const count = countByCategory[cat._id];
+        const count = countByCategory[cat._id] || 0;
+        const sharedBadge = cat.isShared
+          ? `<span class="category-shared-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>${(cat.shared_with || []).length + 1}</span>`
+          : '';
+        // For shared non-owned categories, show "shared with you" instead of count
+        const countText = (cat.isOwner === false)
+          ? esc(t('share.shared_with_you'))
+          : esc(t('category.link_count', { n: count }));
         html += `
           <div class="category-card" onclick="navigate('#/category/${cat._id}')">
+            ${sharedBadge}
             <span class="category-icon">${getCategoryIcon(cat.slug, cat)}</span>
             <div class="category-name">${esc(cat.name)}</div>
-            <div class="category-count">${esc(t('category.link_count', { n: count }))}</div>
+            <div class="category-count">${countText}</div>
           </div>`;
       });
       html += '</div>';
@@ -1861,15 +2066,25 @@ function clearCategoryFilter() {
 async function renderCategory(categoryId) {
   const cat = categories.find(c => c._id === categoryId);
   const catName = cat ? cat.name : 'Links';
+  const isOwner = cat ? cat.isOwner !== false : true;
+  const isShared = cat ? !!cat.isShared : false;
+
+  // Share button for owner, or leave button indicator for shared member
+  const shareBtn = (isOwner || isShared)
+    ? `<button class="category-share-btn" onclick="showShareCategory('${categoryId}')" aria-label="Share"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></button>`
+    : '';
+
+  const subtitleText = !isOwner ? t('share.shared_with_you') : t('category.subtitle');
 
   app.innerHTML = `
     <div class="screen">
       <div class="header">
         <button class="back-btn" onclick="navigate('#/')">${ICONS.back}</button>
         <div>
-          <div class="header-subtitle">${esc(t('category.subtitle'))}</div>
+          <div class="header-subtitle">${esc(subtitleText)}</div>
           <div class="header-title">${esc(catName)}</div>
         </div>
+        ${shareBtn}
       </div>
       <div class="category-search-wrap" id="category-search-wrap" style="display:none">
         <input type="text" id="category-search" class="category-search" placeholder="${esc(t('category.search_placeholder', { name: catName.toLowerCase() }))}" autocomplete="off" oninput="handleCategoryFilter(event)">
@@ -2564,6 +2779,7 @@ function bootApp(supabaseClient) {
   supabase = supabaseClient;
 
   window.addEventListener('hashchange', render);
+  initPullToRefresh();
 
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').then(reg => {
@@ -2603,6 +2819,242 @@ function applyUpdate() {
   });
 }
 
+// ── Pull-to-refresh ──
+let ptrStartY = 0;
+let ptrDelta = 0;
+let ptrActive = false;
+let ptrRefreshing = false;
+const PTR_THRESHOLD = 70;
+
+function initPullToRefresh() {
+  const indicator = document.createElement('div');
+  indicator.className = 'ptr-indicator';
+  indicator.id = 'ptr-indicator';
+  indicator.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 13 12 18 17 13"/><polyline points="7 6 12 11 17 6"/></svg>';
+  document.body.appendChild(indicator);
+
+  document.addEventListener('touchstart', (e) => {
+    if (ptrRefreshing) return;
+    if (window.scrollY > 5) return;
+    // Only on home screen
+    const route = getRoute();
+    if (route.screen !== 'home') return;
+    ptrStartY = e.touches[0].clientY;
+    ptrActive = true;
+    ptrDelta = 0;
+  }, { passive: true });
+
+  document.addEventListener('touchmove', (e) => {
+    if (!ptrActive || ptrRefreshing) return;
+    const y = e.touches[0].clientY;
+    ptrDelta = Math.max(0, y - ptrStartY);
+    if (ptrDelta <= 0) return;
+
+    const progress = Math.min(ptrDelta / PTR_THRESHOLD, 1);
+    const el = document.getElementById('ptr-indicator');
+    if (!el) return;
+
+    const translateY = Math.min(ptrDelta * 0.5, 60) - 10;
+    el.style.transform = `translateX(-50%) translateY(${translateY}px)`;
+    el.classList.add('visible');
+    el.classList.toggle('ready', ptrDelta >= PTR_THRESHOLD);
+  }, { passive: true });
+
+  document.addEventListener('touchend', async () => {
+    if (!ptrActive) return;
+    ptrActive = false;
+
+    const el = document.getElementById('ptr-indicator');
+    if (!el) return;
+
+    if (ptrDelta >= PTR_THRESHOLD && !ptrRefreshing) {
+      ptrRefreshing = true;
+      el.classList.remove('ready');
+      el.classList.add('refreshing');
+      // Replace arrow with spinner icon
+      el.innerHTML = ICONS.refresh;
+      el.style.transform = 'translateX(-50%) translateY(30px)';
+
+      await refreshHome();
+
+      ptrRefreshing = false;
+      el.classList.remove('refreshing', 'visible');
+      el.style.transform = 'translateX(-50%) translateY(-50px)';
+      // Restore arrow icon
+      el.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 13 12 18 17 13"/><polyline points="7 6 12 11 17 6"/></svg>';
+    } else {
+      el.classList.remove('visible', 'ready');
+      el.style.transform = 'translateX(-50%) translateY(-50px)';
+    }
+    ptrDelta = 0;
+  }, { passive: true });
+}
+
+// ── Share category ──
+function showShareCategory(categoryId) {
+  const cat = categories.find(c => c._id === categoryId);
+  if (!cat) return;
+
+  const isOwner = cat.isOwner !== false; // Default to true for backward compat
+  const members = cat.shared_with || [];
+
+  const overlay = document.createElement('div');
+  overlay.className = 'confirm-overlay';
+  overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
+
+  let html = `<div class="confirm-sheet">
+    <h3 class="confirm-title">${esc(t('share.title'))}</h3>`;
+
+  if (isOwner) {
+    html += `
+      <div class="share-input-row">
+        <input type="email" class="share-email-input" id="share-email" placeholder="${esc(t('share.email_placeholder'))}" autocomplete="email">
+        <button class="share-invite-btn" id="share-invite-btn" onclick="submitShareInvite('${categoryId}')">${esc(t('share.invite'))}</button>
+      </div>`;
+  }
+
+  html += `<div id="share-members-container">`;
+  html += renderShareMembers(cat, isOwner);
+  html += `</div>`;
+
+  if (!isOwner) {
+    html += `<button class="btn btn-danger" style="width:100%;margin-top:12px" onclick="leaveSharedCategory('${categoryId}', '${cat.user_id}')">${esc(t('share.leave'))}</button>`;
+  }
+
+  html += `<button class="btn btn-secondary" style="width:100%;margin-top:10px" onclick="this.closest('.confirm-overlay').remove()">${esc(t('settings.close'))}</button>`;
+  html += `</div>`;
+
+  overlay.innerHTML = html;
+  document.body.appendChild(overlay);
+
+  const emailInput = document.getElementById('share-email');
+  if (emailInput) {
+    emailInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') submitShareInvite(categoryId);
+    });
+    emailInput.focus();
+  }
+}
+
+function renderShareMembers(cat, isOwner) {
+  const members = cat.shared_with || [];
+  if (members.length === 0 && !isOwner) return '';
+
+  let html = '';
+  if (members.length > 0 || isOwner) {
+    html += `<p class="share-section-label">${esc(t('share.members'))}</p>`;
+    html += '<div class="share-members-list">';
+
+    // Show owner marker (when viewing as owner)
+    if (isOwner) {
+      html += `<div class="share-member">
+        <span class="share-member-email" style="font-weight:600">You</span>
+        <span class="share-member-owner">${esc(t('share.owner'))}</span>
+      </div>`;
+    }
+
+    members.forEach(m => {
+      html += `<div class="share-member" id="share-member-${m.user_id}">
+        <span class="share-member-email">${esc(m.email)}</span>`;
+      if (isOwner) {
+        html += `<button class="share-member-remove" onclick="removeShareMember('${cat._id}', '${m.user_id}')">${esc(t('share.remove'))}</button>`;
+      }
+      html += `</div>`;
+    });
+
+    html += '</div>';
+  }
+  return html;
+}
+
+async function submitShareInvite(categoryId) {
+  const input = document.getElementById('share-email');
+  const btn = document.getElementById('share-invite-btn');
+  const email = input.value.trim();
+  if (!email) return;
+
+  btn.disabled = true;
+  btn.textContent = '...';
+
+  try {
+    const res = await authFetch(`${API_BASE}/api/categories/share`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ categoryId, email }),
+    });
+    const result = await res.json();
+    if (!res.ok) {
+      if (res.status === 404) {
+        showToast(t('share.user_not_found'));
+      } else {
+        showToast(result.error || t('share.error'));
+      }
+    } else {
+      showToast(t('share.invite_sent'));
+      input.value = '';
+      // Update local category data
+      const cat = categories.find(c => c._id === categoryId);
+      if (cat && result) {
+        cat.shared_with = result.shared_with || [];
+        cat.isShared = true;
+        const container = document.getElementById('share-members-container');
+        if (container) container.innerHTML = renderShareMembers(cat, true);
+      }
+    }
+  } catch (err) {
+    showToast(t('share.error'));
+  }
+
+  btn.disabled = false;
+  btn.textContent = t('share.invite');
+}
+
+async function removeShareMember(categoryId, userId) {
+  try {
+    const res = await authFetch(`${API_BASE}/api/categories/share`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ categoryId, userId }),
+    });
+    if (res && res.ok) {
+      const result = await res.json();
+      showToast(t('share.removed'));
+      const cat = categories.find(c => c._id === categoryId);
+      if (cat && result) {
+        cat.shared_with = result.shared_with || [];
+        cat.isShared = (cat.shared_with.length > 0);
+        const container = document.getElementById('share-members-container');
+        if (container) container.innerHTML = renderShareMembers(cat, true);
+      }
+    } else {
+      showToast(t('share.error'));
+    }
+  } catch {
+    showToast(t('share.error'));
+  }
+}
+
+async function leaveSharedCategory(categoryId, ownerId) {
+  try {
+    const res = await authFetch(`${API_BASE}/api/categories/share`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ categoryId, ownerId }),
+    });
+    if (res && res.ok) {
+      showToast(t('share.left'));
+      document.querySelector('.confirm-overlay')?.remove();
+      // Remove from local categories and go home
+      categories = categories.filter(c => c._id !== categoryId);
+      navigate('#/');
+    } else {
+      showToast(t('share.error'));
+    }
+  } catch {
+    showToast(t('share.error'));
+  }
+}
+
 // Expose for inline onclick handlers
 window.navigate = navigate;
 window.confirmDelete = confirmDelete;
@@ -2624,6 +3076,10 @@ window.handleLogout = handleLogout;
 window.handleDeleteAccount = handleDeleteAccount;
 window.showSettings = showSettings;
 window.renderHistory = renderHistory;
+window.showShareCategory = showShareCategory;
+window.submitShareInvite = submitShareInvite;
+window.removeShareMember = removeShareMember;
+window.leaveSharedCategory = leaveSharedCategory;
 window.t = t;
 window.getLocale = getLocale;
 window.setLocale = setLocale;

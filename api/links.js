@@ -12,6 +12,31 @@ module.exports = async function handler(req, res) {
   if (req.method === 'GET') {
     try {
       const { category_id } = req.query;
+
+      // If filtering by category, check if shared
+      if (category_id) {
+        const category = await Category.findById(category_id);
+        if (category) {
+          const isOwner = category.user_id === user.id;
+          const isMember = (category.shared_with || []).some(sw => sw.user_id === user.id);
+
+          if (isOwner || isMember) {
+            // For shared categories, return links from ALL members (owner + shared users)
+            const memberIds = [category.user_id, ...(category.shared_with || []).map(sw => sw.user_id)];
+            const links = await Link.find({
+              category_id,
+              user_id: { $in: memberIds }
+            }).sort({ submitted_at: -1 }).lean();
+            return res.json(links.map(doc => {
+              doc._id = doc._id.toString();
+              if (doc.category_id) doc.category_id = doc.category_id.toString();
+              return doc;
+            }));
+          }
+        }
+        // Not shared / not found — fall through to own links only
+      }
+
       const query = { user_id: user.id };
       if (category_id) query.category_id = category_id;
       const links = await Link.find(query).sort({ submitted_at: -1 }).lean();

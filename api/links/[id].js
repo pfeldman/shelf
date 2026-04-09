@@ -2,6 +2,20 @@ const { connectDB, Link, Category, serialize } = require('../_db');
 const { processLink } = require('../_process');
 const { verifyAuth } = require('../_auth');
 
+// Helper: check if user can access a link (own link or in a shared category)
+async function canAccessLink(link, userId) {
+  if (link.user_id === userId) return true;
+  if (link.category_id) {
+    const category = await Category.findById(link.category_id);
+    if (category) {
+      const isOwner = category.user_id === userId;
+      const isMember = (category.shared_with || []).some(sw => sw.user_id === userId);
+      return isOwner || isMember;
+    }
+  }
+  return false;
+}
+
 module.exports = async function handler(req, res) {
   const user = await verifyAuth(req);
   if (!user) return res.status(401).json({ error: 'Unauthorized' });
@@ -13,11 +27,13 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ error: 'Missing link ID' });
   }
 
-  // GET /api/links/:id — get a single link
+  // GET /api/links/:id — get a single link (own or in shared category)
   if (req.method === 'GET') {
     try {
-      const link = await Link.findOne({ _id: id, user_id: user.id }).lean();
+      const link = await Link.findById(id).lean();
       if (!link) return res.status(404).json({ error: 'Link not found' });
+      const hasAccess = await canAccessLink(link, user.id);
+      if (!hasAccess) return res.status(404).json({ error: 'Link not found' });
       link._id = link._id.toString();
       if (link.category_id) link.category_id = link.category_id.toString();
       return res.json(link);

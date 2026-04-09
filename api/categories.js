@@ -7,11 +7,30 @@ module.exports = async function handler(req, res) {
 
   await connectDB();
 
-  // GET /api/categories — list all categories
+  // GET /api/categories — list own + shared categories
   if (req.method === 'GET') {
     try {
-      const categories = await Category.find({ user_id: user.id }).sort({ name: 1 });
-      return res.json(categories.map(serialize));
+      // Own categories
+      const ownCategories = await Category.find({ user_id: user.id }).sort({ name: 1 });
+      const ownSerialized = ownCategories.map(c => {
+        const s = serialize(c);
+        s.isOwner = true;
+        s.isShared = !!(s.shared_with && s.shared_with.length > 0);
+        return s;
+      });
+
+      // Categories shared with this user
+      const sharedCategories = await Category.find({
+        'shared_with.user_id': user.id
+      }).sort({ name: 1 });
+      const sharedSerialized = sharedCategories.map(c => {
+        const s = serialize(c);
+        s.isOwner = false;
+        s.isShared = true;
+        return s;
+      });
+
+      return res.json([...ownSerialized, ...sharedSerialized]);
     } catch (err) {
       return res.status(500).json({ error: err.message });
     }

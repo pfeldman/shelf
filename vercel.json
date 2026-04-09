@@ -8,6 +8,7 @@
   },
   "rewrites": [
     { "source": "/api/delete-account", "destination": "/api/delete-account" },
-    { "source": "/api/share", "destination": "/api/share" }
+    { "source": "/api/share", "destination": "/api/share" },
+    { "source": "/api/categories/share", "destination": "/api/categories/share" }
   ]
 }
