@@ -1,4 +1,5 @@
 const { connectDB, CartItem, serialize } = require('./_db');
+const { verifyAuth } = require('./_auth');
 
 function capitalizeItem(text) {
   if (!text) return text;
@@ -6,12 +7,15 @@ function capitalizeItem(text) {
 }
 
 module.exports = async function handler(req, res) {
+  const user = await verifyAuth(req);
+  if (!user) return res.status(401).json({ error: 'Unauthorized' });
+
   await connectDB();
 
   // GET /api/cart — list cart items
   if (req.method === 'GET') {
     try {
-      const items = await CartItem.find().sort({ completed: 1, added_at: 1 });
+      const items = await CartItem.find({ user_id: user.id }).sort({ completed: 1, added_at: 1 });
       return res.json(items.map(serialize));
     } catch (err) {
       return res.status(500).json({ error: err.message });
@@ -26,6 +30,7 @@ module.exports = async function handler(req, res) {
       // Single item
       if (body.text) {
         const doc = await CartItem.create({
+          user_id: user.id,
           text: capitalizeItem(body.text.trim()),
           completed: false,
           from_link_id: null,
@@ -41,6 +46,7 @@ module.exports = async function handler(req, res) {
         const docs = body.items
           .filter(item => item && item.trim())
           .map(item => ({
+            user_id: user.id,
             text: capitalizeItem(item.trim()),
             completed: false,
             from_link_id: fromLinkId,
@@ -64,7 +70,7 @@ module.exports = async function handler(req, res) {
   // DELETE /api/cart — clear completed items
   if (req.method === 'DELETE') {
     try {
-      const result = await CartItem.deleteMany({ completed: true });
+      const result = await CartItem.deleteMany({ user_id: user.id, completed: true });
       return res.json({ deleted: result.deletedCount });
     } catch (err) {
       return res.status(500).json({ error: err.message });

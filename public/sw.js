@@ -1,7 +1,9 @@
-const CACHE_NAME = 'shelf-v31';
+const CACHE_NAME = 'shelf-v32';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
+  '/login.html',
+  '/auth-callback.html',
   '/style.css',
   '/app.js',
   '/manifest.json',

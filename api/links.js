@@ -1,14 +1,18 @@
 const { connectDB, Link, Category, serialize } = require('./_db');
 const { processLink } = require('./_process');
+const { verifyAuth } = require('./_auth');
 
 module.exports = async function handler(req, res) {
+  const user = await verifyAuth(req);
+  if (!user) return res.status(401).json({ error: 'Unauthorized' });
+
   await connectDB();
 
   // GET /api/links — list links, optionally filter by category_id
   if (req.method === 'GET') {
     try {
       const { category_id } = req.query;
-      const query = {};
+      const query = { user_id: user.id };
       if (category_id) query.category_id = category_id;
       const links = await Link.find(query).sort({ submitted_at: -1 }).lean();
       return res.json(links.map(doc => {
@@ -34,6 +38,7 @@ module.exports = async function handler(req, res) {
       }
 
       const doc = await Link.create({
+        user_id: user.id,
         url: resolvedUrl.trim(),
         status: 'pending',
         error_message: null,
@@ -52,7 +57,7 @@ module.exports = async function handler(req, res) {
 
       // Process inline (synchronously within this request)
       try {
-        const updates = await processLink(doc, Category);
+        const updates = await processLink(doc, Category, user.id);
         await Link.updateOne({ _id: doc._id }, { $set: updates });
         Object.assign(response, updates);
         if (response.category_id) response.category_id = response.category_id.toString();

@@ -1,7 +1,11 @@
 const { connectDB, Link, Category, serialize } = require('./_db');
 const { processLink } = require('./_process');
+const { verifyAuth } = require('./_auth');
 
 module.exports = async function handler(req, res) {
+  const user = await verifyAuth(req);
+  if (!user) return res.status(401).json({ error: 'Unauthorized' });
+
   await connectDB();
 
   // POST /api/process — reprocess a link by ID
@@ -12,7 +16,7 @@ module.exports = async function handler(req, res) {
         return res.status(400).json({ error: 'Missing link ID' });
       }
 
-      const link = await Link.findById(id);
+      const link = await Link.findOne({ _id: id, user_id: user.id });
       if (!link) {
         return res.status(404).json({ error: 'Link not found' });
       }
@@ -27,7 +31,7 @@ module.exports = async function handler(req, res) {
       });
 
       try {
-        const updates = await processLink(link, Category);
+        const updates = await processLink(link, Category, user.id);
         await Link.updateOne({ _id: link._id }, { $set: updates });
         const final = await Link.findById(id).lean();
         final._id = final._id.toString();

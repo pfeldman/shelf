@@ -1,4 +1,5 @@
 const { connectDB, CartItem, serialize } = require('../_db');
+const { verifyAuth } = require('../_auth');
 
 function capitalizeItem(text) {
   if (!text) return text;
@@ -6,6 +7,9 @@ function capitalizeItem(text) {
 }
 
 module.exports = async function handler(req, res) {
+  const user = await verifyAuth(req);
+  if (!user) return res.status(401).json({ error: 'Unauthorized' });
+
   await connectDB();
 
   // POST /api/cart/batch — add multiple items at once
@@ -23,6 +27,7 @@ module.exports = async function handler(req, res) {
       const docs = items
         .filter(item => item && item.trim())
         .map(item => ({
+          user_id: user.id,
           text: capitalizeItem(item.trim()),
           completed: false,
           from_link_id: fromLinkId,

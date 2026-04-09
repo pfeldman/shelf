@@ -182,7 +182,7 @@ ${content}
 
 // ── Main processing function ──
 
-async function processLink(link, Category) {
+async function processLink(link, Category, userId) {
   const url = link.url.trim();
 
   // 1. Extract content
@@ -209,8 +209,9 @@ async function processLink(link, Category) {
     content += `\n\n--- USER NOTE (shared alongside the link) ---\n${sharedText}`;
   }
 
-  // 2. Fetch categories
-  const categories = await Category.find().sort({ name: 1 }).lean();
+  // 2. Fetch categories (scoped to user if userId provided)
+  const catQuery = userId ? { user_id: userId } : {};
+  const categories = await Category.find(catQuery).sort({ name: 1 }).lean();
   const catList = categories.map(c => ({
     _id: c._id.toString(),
     name: c.name,
@@ -224,16 +225,20 @@ async function processLink(link, Category) {
   const userHint = extData.user_hint || sharedText || null;
   const aiResult = await categorizeAndExtract(content, resolvedUrl, catList, recatHint, userHint);
 
-  // 4. Ensure category exists
+  // 4. Ensure category exists (scoped to user if userId provided)
   const catInfo = aiResult.category;
-  let category = await Category.findOne({ slug: catInfo.slug });
+  const catFindQuery = { slug: catInfo.slug };
+  if (userId) catFindQuery.user_id = userId;
+  let category = await Category.findOne(catFindQuery);
   if (!category) {
-    category = await Category.create({
+    const catCreate = {
       name: catInfo.name,
       slug: catInfo.slug,
       extension_type: catInfo.extension_type,
       created_at: new Date(),
-    });
+    };
+    if (userId) catCreate.user_id = userId;
+    category = await Category.create(catCreate);
   }
 
   const finalTitle = aiResult.title || data.title;

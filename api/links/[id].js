@@ -1,7 +1,11 @@
 const { connectDB, Link, Category, serialize } = require('../_db');
 const { processLink } = require('../_process');
+const { verifyAuth } = require('../_auth');
 
 module.exports = async function handler(req, res) {
+  const user = await verifyAuth(req);
+  if (!user) return res.status(401).json({ error: 'Unauthorized' });
+
   await connectDB();
   const { id } = req.query;
 
@@ -12,7 +16,7 @@ module.exports = async function handler(req, res) {
   // GET /api/links/:id — get a single link
   if (req.method === 'GET') {
     try {
-      const link = await Link.findById(id).lean();
+      const link = await Link.findOne({ _id: id, user_id: user.id }).lean();
       if (!link) return res.status(404).json({ error: 'Link not found' });
       link._id = link._id.toString();
       if (link.category_id) link.category_id = link.category_id.toString();
@@ -33,12 +37,16 @@ module.exports = async function handler(req, res) {
       // If status is set back to 'pending', trigger reprocessing
       const shouldReprocess = updates.status === 'pending';
 
-      const result = await Link.findByIdAndUpdate(id, { $set: updates }, { new: true });
+      const result = await Link.findOneAndUpdate(
+        { _id: id, user_id: user.id },
+        { $set: updates },
+        { new: true }
+      );
       if (!result) return res.status(404).json({ error: 'Link not found' });
 
       if (shouldReprocess) {
         try {
-          const processUpdates = await processLink(result, Category);
+          const processUpdates = await processLink(result, Category, user.id);
           await Link.updateOne({ _id: result._id }, { $set: processUpdates });
           const final = await Link.findById(id).lean();
           final._id = final._id.toString();
@@ -65,7 +73,11 @@ module.exports = async function handler(req, res) {
   if (req.method === 'PUT') {
     try {
       const updates = req.body || {};
-      const result = await Link.findByIdAndUpdate(id, { $set: updates }, { new: true });
+      const result = await Link.findOneAndUpdate(
+        { _id: id, user_id: user.id },
+        { $set: updates },
+        { new: true }
+      );
       if (!result) return res.status(404).json({ error: 'Link not found' });
       return res.json(serialize(result));
     } catch (err) {
@@ -76,7 +88,7 @@ module.exports = async function handler(req, res) {
   // DELETE /api/links/:id — delete a link
   if (req.method === 'DELETE') {
     try {
-      const result = await Link.findByIdAndDelete(id);
+      const result = await Link.findOneAndDelete({ _id: id, user_id: user.id });
       if (!result) return res.status(404).json({ error: 'Link not found' });
       return res.json({ deleted: true });
     } catch (err) {

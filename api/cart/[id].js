@@ -1,6 +1,10 @@
 const { connectDB, CartItem, serialize } = require('../_db');
+const { verifyAuth } = require('../_auth');
 
 module.exports = async function handler(req, res) {
+  const user = await verifyAuth(req);
+  if (!user) return res.status(401).json({ error: 'Unauthorized' });
+
   await connectDB();
   const { id } = req.query;
 
@@ -11,7 +15,7 @@ module.exports = async function handler(req, res) {
   // PATCH /api/cart/:id — toggle completed status
   if (req.method === 'PATCH') {
     try {
-      const doc = await CartItem.findById(id);
+      const doc = await CartItem.findOne({ _id: id, user_id: user.id });
       if (!doc) return res.status(404).json({ error: 'Item not found' });
       doc.completed = !doc.completed;
       await doc.save();
@@ -24,7 +28,7 @@ module.exports = async function handler(req, res) {
   // DELETE /api/cart/:id — delete a cart item
   if (req.method === 'DELETE') {
     try {
-      const result = await CartItem.findByIdAndDelete(id);
+      const result = await CartItem.findOneAndDelete({ _id: id, user_id: user.id });
       if (!result) return res.status(404).json({ error: 'Item not found' });
       return res.json({ deleted: true });
     } catch (err) {

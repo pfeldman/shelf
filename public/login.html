@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Shelf - Sign In</title>
+
+    <!-- PWA Configuration -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1a1814">
+    <meta name="background-color" content="#1a1814">
+
+    <!-- iOS PWA Configuration -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Shelf">
+    <link rel="apple-touch-icon" href="icons/icon-192.svg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #1a1814;
+            --bg-card: #252220;
+            --bg-elevated: #2e2a27;
+            --text: #f0ece4;
+            --text-secondary: #a09a92;
+            --text-tertiary: #6b6560;
+            --accent: #e07a5f;
+            --accent-soft: #3d2a22;
+            --border: #36322e;
+            --red: #ef4444;
+            --font-display: 'DM Serif Display', Georgia, serif;
+            --font-body: 'Instrument Sans', -apple-system, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px 16px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .login-header .logo-icon {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 16px;
+            display: block;
+        }
+
+        .login-header h1 {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            color: var(--text);
+            letter-spacing: -0.02em;
+        }
+
+        .login-header p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            margin-top: 6px;
+        }
+
+        .login-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid var(--border);
+        }
+
+        .mode-toggle {
+            display: flex;
+            background: var(--bg);
+            border-radius: 10px;
+            padding: 3px;
+            margin-bottom: 20px;
+        }
+
+        .mode-toggle button {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            background: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-tertiary);
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: var(--font-body);
+        }
+
+        .mode-toggle button.active {
+            background: var(--bg-elevated);
+            color: var(--text);
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            font-size: 16px;
+            background: var(--bg);
+            color: var(--text);
+            transition: border-color 0.2s;
+            font-family: var(--font-body);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .form-group input::placeholder {
+            color: var(--text-tertiary);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            margin-top: 16px;
+            letter-spacing: -0.2px;
+            font-family: var(--font-body);
+        }
+
+        .submit-btn:active:not(:disabled) {
+            opacity: 0.8;
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            gap: 12px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .divider span {
+            font-size: 13px;
+            color: var(--text-tertiary);
+            font-weight: 500;
+        }
+
+        .oauth-btn {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1.5px solid var(--border);
+            border-radius: 14px;
+            background: var(--bg-elevated);
+            color: var(--text);
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: background 0.2s, border-color 0.2s;
+            font-family: var(--font-body);
+        }
+
+        .oauth-btn:active {
+            background: var(--bg);
+            border-color: var(--text-tertiary);
+        }
+
+        .oauth-btn + .oauth-btn {
+            margin-top: 10px;
+        }
+
+        .oauth-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .error-msg {
+            color: var(--red);
+            font-size: 14px;
+            font-weight: 500;
+            text-align: center;
+            margin-top: 12px;
+            min-height: 20px;
+        }
+
+        .success-msg {
+            color: #34d399;
+            font-size: 14px;
+            font-weight: 500;
+            text-align: center;
+            margin-top: 12px;
+            min-height: 20px;
+        }
+
+        .button-spinner {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        #register-fields {
+            display: none;
+        }
+
+        #register-fields.visible {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <img src="icons/icon-192.svg" alt="Shelf" class="logo-icon">
+            <h1>Shelf</h1>
+            <p>Your curated links, enriched by AI</p>
+        </div>
+
+        <div class="login-card">
+            <div class="mode-toggle">
+                <button id="mode-login" class="active">Sign In</button>
+                <button id="mode-register">Register</button>
+            </div>
+
+            <form id="auth-form">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="you@email.com" required autocomplete="email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Your password" required autocomplete="current-password" minlength="6">
+                </div>
+                <div id="register-fields">
+                    <div class="form-group">
+                        <label for="password-confirm">Confirm password</label>
+                        <input type="password" id="password-confirm" placeholder="Repeat password" autocomplete="new-password" minlength="6">
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submit-btn">Sign In</button>
+            </form>
+
+            <div id="error-msg" class="error-msg"></div>
+            <div id="success-msg" class="success-msg"></div>
+
+            <div class="divider">
+                <span>or</span>
+            </div>
+
+            <button class="oauth-btn" id="google-btn">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
+                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                </svg>
+                Continue with Google
+            </button>
+
+            <button class="oauth-btn" id="apple-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+                </svg>
+                Continue with Apple
+            </button>
+        </div>
+    </div>
+
+    <script type="module">
+        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+        const SUPABASE_URL = 'https://fqelzbjdseukdujnxeqg.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZxZWx6Ympkc2V1a2R1am54ZXFnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI0NzgxMjgsImV4cCI6MjA4ODA1NDEyOH0.ZMa1JDS8OM3VUhEedRIMsoU2iHbbWuzF_yNVQjjON5Q';
+
+        const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        let currentMode = 'login';
+
+        // Check if already logged in
+        (async () => {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (session) {
+                window.location.href = '/index.html';
+            }
+        })();
+
+        function setMode(mode) {
+            currentMode = mode;
+            document.getElementById('mode-login').classList.toggle('active', mode === 'login');
+            document.getElementById('mode-register').classList.toggle('active', mode === 'register');
+            document.getElementById('register-fields').classList.toggle('visible', mode === 'register');
+            document.getElementById('submit-btn').textContent = mode === 'login' ? 'Sign In' : 'Register';
+            document.getElementById('error-msg').textContent = '';
+            document.getElementById('success-msg').textContent = '';
+
+            const passwordInput = document.getElementById('password');
+            if (mode === 'register') {
+                passwordInput.autocomplete = 'new-password';
+            } else {
+                passwordInput.autocomplete = 'current-password';
+            }
+        }
+
+        async function handleAuth(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const errorEl = document.getElementById('error-msg');
+            const successEl = document.getElementById('success-msg');
+            const submitBtn = document.getElementById('submit-btn');
+
+            errorEl.textContent = '';
+            successEl.textContent = '';
+
+            if (currentMode === 'register') {
+                const passwordConfirm = document.getElementById('password-confirm').value;
+                if (password !== passwordConfirm) {
+                    errorEl.textContent = 'Passwords do not match';
+                    return;
+                }
+                if (password.length < 6) {
+                    errorEl.textContent = 'Password must be at least 6 characters';
+                    return;
+                }
+            }
+
+            const originalText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="button-spinner"></span> ' + (currentMode === 'login' ? 'Signing in...' : 'Registering...');
+
+            try {
+                if (currentMode === 'login') {
+                    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+                    if (error) throw error;
+                    window.location.href = '/index.html';
+                } else {
+                    const { data, error } = await supabase.auth.signUp({ email, password });
+                    if (error) throw error;
+                    if (data.user && data.user.identities && data.user.identities.length === 0) {
+                        errorEl.textContent = 'This email is already registered';
+                    } else {
+                        successEl.textContent = 'Account created. Check your email to confirm.';
+                        document.getElementById('auth-form').reset();
+                    }
+                }
+            } catch (error) {
+                const msg = error.message || 'Authentication error';
+                if (msg.includes('Invalid login credentials')) {
+                    errorEl.textContent = 'Invalid email or password';
+                } else if (msg.includes('Email not confirmed')) {
+                    errorEl.textContent = 'Please confirm your email before signing in';
+                } else {
+                    errorEl.textContent = msg;
+                }
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            }
+        }
+
+        function isNative() {
+            if (typeof window === 'undefined') return false;
+            const cap = window.Capacitor;
+            return !!cap?.isNativePlatform?.();
+        }
+
+        async function signInWithGoogle() {
+            if (isNative()) {
+                try {
+                    const { Browser } = await import('https://cdn.jsdelivr.net/npm/@capacitor/browser@8/+esm');
+                    const { App: CapApp } = await import('https://cdn.jsdelivr.net/npm/@capacitor/app@8/+esm');
+
+                    const { data, error } = await supabase.auth.signInWithOAuth({
+                        provider: 'google',
+                        options: {
+                            skipBrowserRedirect: true,
+                            redirectTo: 'com.pieve.shelf://login-callback',
+                        },
+                    });
+                    if (error || !data?.url) throw error || new Error('No OAuth URL');
+
+                    const listener = await CapApp.addListener('appUrlOpen', async ({ url }) => {
+                        if (url.includes('login-callback')) {
+                            await Browser.close();
+                            listener.remove();
+                            const hashPart = url.split('#')[1];
+                            if (hashPart) {
+                                const params = new URLSearchParams(hashPart);
+                                const access_token = params.get('access_token');
+                                const refresh_token = params.get('refresh_token');
+                                if (access_token && refresh_token) {
+                                    await supabase.auth.setSession({ access_token, refresh_token });
+                                    window.location.href = '/index.html';
+                                    return;
+                                }
+                            }
+                            const queryPart = url.split('?')[1]?.split('#')[0];
+                            if (queryPart) {
+                                const params = new URLSearchParams(queryPart);
+                                const code = params.get('code');
+                                if (code) {
+                                    await supabase.auth.exchangeCodeForSession(code);
+                                    window.location.href = '/index.html';
+                                    return;
+                                }
+                            }
+                        }
+                    });
+                    await Browser.open({ url: data.url });
+                } catch (err) {
+                    document.getElementById('error-msg').textContent = err.message || 'Error with Google Sign-In';
+                }
+            } else {
+                const { error } = await supabase.auth.signInWithOAuth({
+                    provider: 'google',
+                    options: {
+                        redirectTo: window.location.origin + '/auth-callback.html'
+                    }
+                });
+                if (error) {
+                    document.getElementById('error-msg').textContent = error.message;
+                }
+            }
+        }
+
+        async function signInWithApple() {
+            if (isNative()) {
+                try {
+                    const { Browser } = await import('https://cdn.jsdelivr.net/npm/@capacitor/browser@8/+esm');
+                    const { App: CapApp } = await import('https://cdn.jsdelivr.net/npm/@capacitor/app@8/+esm');
+
+                    const { data, error } = await supabase.auth.signInWithOAuth({
+                        provider: 'apple',
+                        options: {
+                            skipBrowserRedirect: true,
+                            redirectTo: 'com.pieve.shelf://login-callback',
+                        },
+                    });
+                    if (error || !data?.url) throw error || new Error('No OAuth URL');
+
+                    const listener = await CapApp.addListener('appUrlOpen', async ({ url }) => {
+                        if (url.includes('login-callback')) {
+                            await Browser.close();
+                            listener.remove();
+                            const hashPart = url.split('#')[1];
+                            if (hashPart) {
+                                const params = new URLSearchParams(hashPart);
+                                const access_token = params.get('access_token');
+                                const refresh_token = params.get('refresh_token');
+                                if (access_token && refresh_token) {
+                                    await supabase.auth.setSession({ access_token, refresh_token });
+                                    window.location.href = '/index.html';
+                                    return;
+                                }
+                            }
+                            const queryPart = url.split('?')[1]?.split('#')[0];
+                            if (queryPart) {
+                                const params = new URLSearchParams(queryPart);
+                                const code = params.get('code');
+                                if (code) {
+                                    await supabase.auth.exchangeCodeForSession(code);
+                                    window.location.href = '/index.html';
+                                    return;
+                                }
+                            }
+                        }
+                    });
+                    await Browser.open({ url: data.url });
+                } catch (err) {
+                    document.getElementById('error-msg').textContent = err.message || 'Error with Apple Sign-In';
+                }
+            } else {
+                const { error } = await supabase.auth.signInWithOAuth({
+                    provider: 'apple',
+                    options: {
+                        redirectTo: window.location.origin + '/auth-callback.html'
+                    }
+                });
+                if (error) {
+                    document.getElementById('error-msg').textContent = error.message;
+                }
+            }
+        }
+
+        // Bind event listeners
+        document.getElementById('mode-login').addEventListener('click', () => setMode('login'));
+        document.getElementById('mode-register').addEventListener('click', () => setMode('register'));
+        document.getElementById('auth-form').addEventListener('submit', handleAuth);
+        document.getElementById('google-btn').addEventListener('click', signInWithGoogle);
+        document.getElementById('apple-btn').addEventListener('click', signInWithApple);
+    </script>
+</body>
+</html>

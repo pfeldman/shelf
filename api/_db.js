@@ -19,6 +19,7 @@ async function connectDB() {
 // ── Schemas ──
 
 const linkSchema = new mongoose.Schema({
+  user_id: { type: String },
   url: { type: String, required: true },
   status: { type: String, default: 'pending' },
   error_message: { type: String, default: null },
@@ -35,13 +36,15 @@ const linkSchema = new mongoose.Schema({
 }, { collection: 'links', versionKey: false });
 
 const categorySchema = new mongoose.Schema({
+  user_id: { type: String },
   name: { type: String, required: true },
-  slug: { type: String, required: true, unique: true },
+  slug: { type: String, required: true },
   extension_type: { type: String, default: 'generic' },
   created_at: { type: Date, default: Date.now },
 }, { collection: 'categories', versionKey: false });
 
 const cartItemSchema = new mongoose.Schema({
+  user_id: { type: String },
   text: { type: String, required: true },
   completed: { type: Boolean, default: false },
   from_link_id: { type: mongoose.Schema.Types.ObjectId, default: null },

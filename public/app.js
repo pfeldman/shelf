@@ -1,10 +1,25 @@
 // ── Configuration ──
 const API_BASE = "";
+let supabase = null;
 
 // ── State ──
 let categories = [];
 let linksCache = {};
 let allLinks = [];
+
+// Authenticated fetch helper - adds Authorization header to all API calls
+async function authFetch(url, options = {}) {
+  const { data: { session } } = await supabase.auth.getSession();
+  if (!session) {
+    window.location.href = '/login.html';
+    return;
+  }
+  const headers = {
+    ...options.headers,
+    'Authorization': `Bearer ${session.access_token}`
+  };
+  return fetch(url, { ...options, headers });
+}
 
 // ── Icons ──
 const ICONS = {
@@ -58,7 +73,12 @@ async function api(method, path, body) {
     headers: { 'Content-Type': 'application/json' },
   };
   if (body) opts.body = JSON.stringify(body);
-  const res = await fetch(`${API_BASE}${path}`, opts);
+  const res = await authFetch(`${API_BASE}${path}`, opts);
+  if (!res) return null; // redirected to login
+  if (res.status === 401) {
+    window.location.href = '/login.html';
+    return null;
+  }
   if (!res.ok && res.status !== 404) throw new Error(`API ${res.status}`);
   if (res.status === 404) return null;
   return res.json();
@@ -169,6 +189,7 @@ async function renderHome() {
         <div class="home-header-actions">
           <button class="refresh-btn" id="refresh-btn" onclick="refreshHome()">${ICONS.refresh}</button>
           <button class="add-link-btn" onclick="showAddLink()">${ICONS.plus}</button>
+          <button class="refresh-btn" onclick="showSettings()" aria-label="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg></button>
         </div>
       </div>
       <div id="home-content">
@@ -1183,9 +1204,68 @@ function showToast(msg) {
   setTimeout(() => el.classList.remove('visible'), 2500);
 }
 
+// ── Settings ──
+function showSettings() {
+  const overlay = document.createElement('div');
+  overlay.className = 'confirm-overlay';
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
+  overlay.innerHTML = `
+    <div class="confirm-sheet">
+      <h3 class="confirm-title">Settings</h3>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px">
+        <button class="btn btn-secondary" id="settings-logout-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          Sign Out
+        </button>
+        <button class="btn btn-danger" id="settings-delete-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2M10 11v6M14 11v6"/></svg>
+          Delete Account
+        </button>
+      </div>
+      <button class="btn btn-secondary" id="settings-close-btn" style="width:100%;margin-top:10px">Close</button>
+    </div>`;
+  document.body.appendChild(overlay);
+  document.getElementById('settings-logout-btn').addEventListener('click', () => { overlay.remove(); handleLogout(); });
+  document.getElementById('settings-delete-btn').addEventListener('click', () => { overlay.remove(); handleDeleteAccount(); });
+  document.getElementById('settings-close-btn').addEventListener('click', () => overlay.remove());
+}
+
+// ── Logout / Delete Account ──
+async function handleLogout() {
+  if (!confirm('Sign out?')) return;
+  await supabase.auth.signOut();
+  window.location.href = '/login.html';
+}
+
+async function handleDeleteAccount() {
+  if (!confirm('Are you sure you want to delete your account? All your data will be permanently erased.')) return;
+  if (!confirm('This action cannot be undone. Are you completely sure?')) return;
+  try {
+    const res = await authFetch('/api/delete-account', { method: 'DELETE' });
+    if (res && res.ok) {
+      await supabase.auth.signOut();
+      window.location.href = '/login.html';
+    } else {
+      showToast('Error deleting account');
+    }
+  } catch {
+    showToast('Error deleting account');
+  }
+}
+
 // ── Init ──
-window.addEventListener('hashchange', render);
-window.addEventListener('load', () => {
+// Called by index.html after auth check passes
+function bootApp(supabaseClient) {
+  supabase = supabaseClient;
+
+  // Bind cart-fab click
+  const cartFab = document.getElementById('cart-fab');
+  if (cartFab) {
+    cartFab.addEventListener('click', () => navigate('#/cart'));
+  }
+
+  window.addEventListener('hashchange', render);
+
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').then(reg => {
       // Check for updates every 60 seconds
@@ -1207,7 +1287,7 @@ window.addEventListener('load', () => {
     });
   }
   render();
-});
+}
 
 function showUpdateBanner() {
   const banner = document.createElement('div');
@@ -1248,3 +1328,7 @@ window.filterByGenre = filterByGenre;
 window.toggleVoice = toggleVoice;
 window.addVoiceItems = addVoiceItems;
 window.removeVoiceItem = removeVoiceItem;
+window.bootApp = bootApp;
+window.handleLogout = handleLogout;
+window.handleDeleteAccount = handleDeleteAccount;
+window.showSettings = showSettings;

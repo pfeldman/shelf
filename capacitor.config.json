@@ -1,0 +1,10 @@
+{
+  "appId": "com.pieve.shelf",
+  "appName": "Shelf",
+  "webDir": "public",
+  "server": {
+    "url": "https://shelf-wheat.vercel.app",
+    "cleartext": false,
+    "allowNavigation": ["*"]
+  }
+}
