@@ -169,34 +169,10 @@ class ShareViewController: UIViewController {
             return
         }
 
-        let task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
-            DispatchQueue.main.async {
-                if let error = error {
-                    self?.showError("Network error")
-                    print("Share extension error: \(error.localizedDescription)")
-                    return
-                }
-
-                guard let httpResponse = response as? HTTPURLResponse else {
-                    self?.showError("Invalid response")
-                    return
-                }
-
-                if httpResponse.statusCode == 200 || httpResponse.statusCode == 201 {
-                    self?.showSuccess()
-                } else {
-                    // Try to read error message from response
-                    var errorMsg = "Error (\(httpResponse.statusCode))"
-                    if let data = data,
-                       let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-                       let msg = json["error"] as? String {
-                        errorMsg = msg
-                    }
-                    self?.showError(errorMsg)
-                }
-            }
-        }
+        // Fire and forget — show success immediately, don't wait for processing
+        let task = URLSession.shared.dataTask(with: request) { _, _, _ in }
         task.resume()
+        showSuccess()
     }
 
     // MARK: - Status Updates
