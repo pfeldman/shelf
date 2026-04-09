@@ -115,13 +115,16 @@ Respond with ONLY valid JSON in this exact schema:
   "category": {
     "name": "Category Name",
     "slug": "category-slug",
-    "extension_type": "movie | recipe | book | director | generic"
+    "extension_type": "movie | recipe | book | director | generic",
+    "is_new": false,
+    "icon_svg": null
   },
   "extension_data": {}
 }
 
 Rules:
 - Use an EXISTING category if one fits. Only create a new one if nothing matches.
+- DYNAMIC CATEGORY CREATION: If no existing category fits, create a NEW one. Set "is_new": true and provide "icon_svg" with SVG inner content (just the paths/shapes, NO outer <svg> tag). The icon must follow this style: viewBox assumes 0 0 24 24, fill="none", stroke="currentColor", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round". Example icon_svg: "<circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"M12 6v6l4 2\"/>". Keep it simple (2-4 elements max). For existing categories, set "is_new": false and "icon_svg": null.
 - extension_type must be "movie" for movies AND TV shows/series, "recipe" for cooking recipes, "book" for books, "director" for film/TV directors, "generic" for everything else.
 - IMPORTANT: Movies and TV shows must be in SEPARATE categories. Use a category like "Peliculas" (slug: "peliculas") for movies and a different category like "Series" (slug: "series") for TV shows/series. Never mix them.
 - DOCUMENTARIES: If the content is a documentary (series or film), categorize it as "Documentales" (slug: "documentales") with extension_type "movie". Use media_type "tv" for documentary series, "movie" for standalone documentary films.
@@ -238,6 +241,18 @@ async function processLink(link, Category, userId) {
       created_at: new Date(),
     };
     if (userId) catCreate.user_id = userId;
+    // Store AI-generated icon SVG for dynamically created categories
+    if (catInfo.is_new && catInfo.icon_svg) {
+      try {
+        // Basic validation: must contain at least one SVG element
+        const svg = catInfo.icon_svg;
+        if (svg && typeof svg === 'string' && /<(path|circle|rect|line|polyline|polygon|ellipse)\b/.test(svg)) {
+          catCreate.icon_svg = svg;
+        }
+      } catch {
+        // Skip invalid SVG, will fall back to default icon
+      }
+    }
     category = await Category.create(catCreate);
   }
 

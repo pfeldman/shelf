@@ -62,7 +62,20 @@ const CAT_ICONS = {
   'default': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>',
 };
 
-function getCategoryIcon(slug) {
+function getCategoryIcon(slug, categoryObj) {
+  // 1. Check for AI-generated custom icon_svg on the category object
+  if (categoryObj && categoryObj.icon_svg) {
+    try {
+      const svg = categoryObj.icon_svg;
+      // Basic validation: must contain at least one SVG element
+      if (/<(path|circle|rect|line|polyline|polygon|ellipse)\b/.test(svg)) {
+        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${svg}</svg>`;
+      }
+    } catch {
+      // Fall through to hardcoded icons
+    }
+  }
+  // 2. Fall back to hardcoded icons map
   return CAT_ICONS[slug] || CAT_ICONS.default;
 }
 
@@ -136,6 +149,7 @@ function getRoute() {
   if (hash === '#/') return { screen: 'home' };
   if (hash === '#/cart') return { screen: 'cart' };
   if (hash === '#/voice') return { screen: 'voice' };
+  if (hash === '#/history') return { screen: 'history' };
   const catMatch = hash.match(/^#\/category\/(.+)$/);
   if (catMatch) return { screen: 'category', id: catMatch[1] };
   const linkMatch = hash.match(/^#\/link\/(.+)$/);
@@ -160,6 +174,7 @@ function render() {
     case 'link': renderLink(route.id); break;
     case 'cart': renderCart(); break;
     case 'voice': renderVoice(); break;
+    case 'history': renderHistory(); break;
     default: renderHome();
   }
   updateCartBadge();
@@ -249,12 +264,26 @@ function renderHomeContent(cats, links) {
         const count = countByCategory[cat._id];
         html += `
           <div class="category-card" onclick="navigate('#/category/${cat._id}')">
-            <span class="category-icon">${getCategoryIcon(cat.slug)}</span>
+            <span class="category-icon">${getCategoryIcon(cat.slug, cat)}</span>
             <div class="category-name">${esc(cat.name)}</div>
             <div class="category-count">${count} link${count !== 1 ? 's' : ''}</div>
           </div>`;
       });
       html += '</div>';
+    }
+
+    // History feed link
+    const doneLinks = links.filter(l => l.status === 'done');
+    if (doneLinks.length > 0) {
+      html += `
+        <div class="history-link" onclick="navigate('#/history')">
+          <span class="history-link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+          <div class="history-link-text">
+            <div class="history-link-title">Recent Activity</div>
+            <div class="history-link-subtitle">${doneLinks.length} link${doneLinks.length !== 1 ? 's' : ''} saved</div>
+          </div>
+          <span class="history-link-chevron">${ICONS.chevron}</span>
+        </div>`;
     }
   }
 
@@ -690,6 +719,105 @@ function renderGenericDetail(link) {
   html += `<h2 class="detail-title">${esc(link.title || '')}</h2>`;
   if (link.summary) html += `<p class="detail-summary">${esc(link.summary)}</p>`;
   return html;
+}
+
+// ── Relative time helper ──
+function timeAgo(dateStr) {
+  const now = Date.now();
+  const then = new Date(dateStr).getTime();
+  const diff = now - then;
+  const seconds = Math.floor(diff / 1000);
+  const minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+  const weeks = Math.floor(days / 7);
+  const months = Math.floor(days / 30);
+
+  if (seconds < 60) return 'just now';
+  if (minutes < 60) return `${minutes}m ago`;
+  if (hours < 24) return `${hours}h ago`;
+  if (days === 1) return 'yesterday';
+  if (days < 7) return `${days}d ago`;
+  if (weeks < 5) return `${weeks}w ago`;
+  if (months < 12) return `${months}mo ago`;
+  return new Date(dateStr).toLocaleDateString();
+}
+
+// ── History screen ──
+async function renderHistory() {
+  app.innerHTML = `
+    <div class="screen">
+      <div class="header">
+        <button class="back-btn" onclick="navigate('#/')">${ICONS.back}</button>
+        <div>
+          <div class="header-subtitle">Timeline</div>
+          <div class="header-title">Recent Activity</div>
+        </div>
+      </div>
+      <div id="history-list" class="history-list">
+        <div class="skeleton skeleton-link" style="height:72px;margin-bottom:10px"></div>
+        <div class="skeleton skeleton-link" style="height:72px;margin-bottom:10px"></div>
+        <div class="skeleton skeleton-link" style="height:72px;margin-bottom:10px"></div>
+        <div class="skeleton skeleton-link" style="height:72px;margin-bottom:10px"></div>
+        <div class="skeleton skeleton-link" style="height:72px;margin-bottom:10px"></div>
+      </div>
+    </div>`;
+
+  try {
+    // Ensure categories are loaded
+    if (categories.length === 0) await fetchCategories();
+    const links = await fetchLinks();
+    allLinks = links;
+    const done = links.filter(l => l.status === 'done').sort((a, b) => {
+      const dateA = a.processed_at || a.submitted_at;
+      const dateB = b.processed_at || b.submitted_at;
+      return new Date(dateB) - new Date(dateA);
+    });
+
+    const listEl = document.getElementById('history-list');
+    if (!listEl) return;
+
+    if (done.length === 0) {
+      listEl.innerHTML = '<div class="empty-state"><span class="empty-state-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:40px;height:40px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span><p class="empty-state-text">No links saved yet</p></div>';
+      return;
+    }
+
+    // Build a category lookup map
+    const catMap = {};
+    categories.forEach(c => catMap[c._id] = c);
+
+    listEl.innerHTML = '<div class="history-feed stagger">' + done.map(link => {
+      const cat = catMap[link.category_id];
+      const catName = cat ? cat.name : 'Uncategorized';
+      const catIcon = cat ? getCategoryIcon(cat.slug, cat) : CAT_ICONS.default;
+      const ext = link.extension_data || {};
+      const thumbUrl = ext.poster_url || ext.cover_url || ext.photo_url || link.thumbnail;
+      const domain = getDomain(link.url);
+      const date = link.processed_at || link.submitted_at;
+      const ago = date ? timeAgo(date) : '';
+
+      return `
+        <div class="history-item" onclick="navigate('#/link/${link._id}')">
+          <div class="history-thumb-wrap">
+            ${thumbUrl
+              ? `<img class="history-thumb" src="${esc(thumbUrl)}" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+              : ''}
+            <div class="history-thumb-fallback" ${thumbUrl ? 'style="display:none"' : ''}>${catIcon}</div>
+          </div>
+          <div class="history-content">
+            <div class="history-title">${esc(link.title || link.url)}</div>
+            <div class="history-meta">
+              <span class="history-cat-badge"><span class="history-cat-icon">${catIcon}</span>${esc(catName)}</span>
+              ${domain ? `<span class="history-domain">${esc(domain)}</span>` : ''}
+            </div>
+            <div class="history-time">${esc(ago)}</div>
+          </div>
+        </div>`;
+    }).join('') + '</div>';
+  } catch (e) {
+    const listEl = document.getElementById('history-list');
+    if (listEl) listEl.innerHTML = '<div class="empty-state"><span class="empty-state-icon">&#9888;&#65039;</span><p class="empty-state-text">Could not load history</p></div>';
+  }
 }
 
 // ── Cart screen ──
@@ -1332,3 +1460,4 @@ window.bootApp = bootApp;
 window.handleLogout = handleLogout;
 window.handleDeleteAccount = handleDeleteAccount;
 window.showSettings = showSettings;
+window.renderHistory = renderHistory;

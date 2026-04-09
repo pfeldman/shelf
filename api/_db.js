@@ -40,6 +40,7 @@ const categorySchema = new mongoose.Schema({
   name: { type: String, required: true },
   slug: { type: String, required: true },
   extension_type: { type: String, default: 'generic' },
+  icon_svg: { type: String },
   created_at: { type: Date, default: Date.now },
 }, { collection: 'categories', versionKey: false });
 
