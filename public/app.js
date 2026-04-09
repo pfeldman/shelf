@@ -51,39 +51,11 @@ const translations = {
     'link.where_to_watch': 'Where to watch',
     'link.ingredients': 'Ingredients',
     'link.instructions': 'Instructions',
-    'link.add_ingredients_cart': 'Add ingredients to cart',
     'link.pages': '{n} pages',
     'link.filmography': 'Filmography',
     'link.prep': 'Prep',
     'link.cook': 'Cook',
     'link.servings': 'Servings',
-    // Cart
-    'cart.subtitle': 'Grocery',
-    'cart.title': 'Cart',
-    'cart.add_placeholder': 'Add an item...',
-    'cart.empty': 'Your cart is empty',
-    'cart.could_not_load': 'Could not load cart',
-    'cart.completed': 'Completed',
-    'cart.clear_completed': 'Clear {n} completed',
-    'cart.failed_add': 'Failed to add item',
-    'cart.failed_update': 'Failed to update item',
-    'cart.failed_delete': 'Failed to delete item',
-    'cart.failed_clear': 'Failed to clear items',
-    'cart.cleared': 'Cleared {n} item{s}',
-    'cart.ingredients_added': '{n} ingredient{s} added to cart',
-    // Voice
-    'voice.subtitle': 'Grocery',
-    'voice.title': 'Voice',
-    'voice.tap_start': 'Tap to start listening',
-    'voice.tap_again': 'Tap to listen again',
-    'voice.listening_hint': 'Separate items with "y" or pause between them',
-    'voice.add_to_cart': 'Add to cart',
-    'voice.add_n_to_cart': 'Add {n} item{s} to cart',
-    'voice.added': '{n} item{s} added to cart',
-    'voice.failed_add': 'Failed to add items',
-    'voice.not_supported': 'Speech recognition not supported',
-    'voice.could_not_start': 'Could not start microphone',
-    'voice.mic_error': 'Mic error: {err}',
     // Add link
     'add.title': 'Add to Shelf',
     'add.description': 'Paste a URL, type a movie name, a recipe, or anything you want to save.',
@@ -183,39 +155,11 @@ const translations = {
     'link.where_to_watch': 'D\u00f3nde ver',
     'link.ingredients': 'Ingredientes',
     'link.instructions': 'Instrucciones',
-    'link.add_ingredients_cart': 'Agregar ingredientes al carrito',
     'link.pages': '{n} p\u00e1ginas',
     'link.filmography': 'Filmograf\u00eda',
     'link.prep': 'Prep',
     'link.cook': 'Cocci\u00f3n',
     'link.servings': 'Porciones',
-    // Cart
-    'cart.subtitle': 'Compras',
-    'cart.title': 'Carrito',
-    'cart.add_placeholder': 'Agregar un \u00edtem...',
-    'cart.empty': 'Tu carrito est\u00e1 vac\u00edo',
-    'cart.could_not_load': 'No se pudo cargar el carrito',
-    'cart.completed': 'Completados',
-    'cart.clear_completed': 'Limpiar {n} completado{s}',
-    'cart.failed_add': 'No se pudo agregar el \u00edtem',
-    'cart.failed_update': 'No se pudo actualizar el \u00edtem',
-    'cart.failed_delete': 'No se pudo eliminar el \u00edtem',
-    'cart.failed_clear': 'No se pudieron limpiar los \u00edtems',
-    'cart.cleared': '{n} \u00edtem{s} limpiado{s}',
-    'cart.ingredients_added': '{n} ingrediente{s} agregado{s} al carrito',
-    // Voice
-    'voice.subtitle': 'Compras',
-    'voice.title': 'Voz',
-    'voice.tap_start': 'Toc\u00e1 para empezar a escuchar',
-    'voice.tap_again': 'Toc\u00e1 para escuchar de nuevo',
-    'voice.listening_hint': 'Separ\u00e1 los \u00edtems con "y" o hac\u00e9 una pausa entre ellos',
-    'voice.add_to_cart': 'Agregar al carrito',
-    'voice.add_n_to_cart': 'Agregar {n} \u00edtem{s} al carrito',
-    'voice.added': '{n} \u00edtem{s} agregado{s} al carrito',
-    'voice.failed_add': 'No se pudieron agregar los \u00edtems',
-    'voice.not_supported': 'Reconocimiento de voz no disponible',
-    'voice.could_not_start': 'No se pudo iniciar el micr\u00f3fono',
-    'voice.mic_error': 'Error de micr\u00f3fono: {err}',
     // Add link
     'add.title': 'Agregar a Shelf',
     'add.description': 'Peg\u00e1 una URL, escrib\u00ed un nombre de pel\u00edcula, una receta, o lo que quieras guardar.',
@@ -315,39 +259,11 @@ const translations = {
     'link.where_to_watch': 'O\u00f9 regarder',
     'link.ingredients': 'Ingr\u00e9dients',
     'link.instructions': 'Instructions',
-    'link.add_ingredients_cart': 'Ajouter les ingr\u00e9dients au panier',
     'link.pages': '{n} pages',
     'link.filmography': 'Filmographie',
     'link.prep': 'Pr\u00e9p',
     'link.cook': 'Cuisson',
     'link.servings': 'Portions',
-    // Cart
-    'cart.subtitle': 'Courses',
-    'cart.title': 'Panier',
-    'cart.add_placeholder': 'Ajouter un article...',
-    'cart.empty': 'Votre panier est vide',
-    'cart.could_not_load': 'Impossible de charger le panier',
-    'cart.completed': 'Termin\u00e9s',
-    'cart.clear_completed': 'Effacer {n} termin\u00e9{s}',
-    'cart.failed_add': "Impossible d'ajouter l'article",
-    'cart.failed_update': "Impossible de mettre \u00e0 jour l'article",
-    'cart.failed_delete': "Impossible de supprimer l'article",
-    'cart.failed_clear': 'Impossible de supprimer les articles',
-    'cart.cleared': '{n} article{s} effac\u00e9{s}',
-    'cart.ingredients_added': '{n} ingr\u00e9dient{s} ajout\u00e9{s} au panier',
-    // Voice
-    'voice.subtitle': 'Courses',
-    'voice.title': 'Voix',
-    'voice.tap_start': 'Appuyez pour commencer',
-    'voice.tap_again': 'Appuyez pour r\u00e9\u00e9couter',
-    'voice.listening_hint': 'S\u00e9parez les articles avec "et" ou faites une pause',
-    'voice.add_to_cart': 'Ajouter au panier',
-    'voice.add_n_to_cart': 'Ajouter {n} article{s} au panier',
-    'voice.added': '{n} article{s} ajout\u00e9{s} au panier',
-    'voice.failed_add': "Impossible d'ajouter les articles",
-    'voice.not_supported': 'Reconnaissance vocale non disponible',
-    'voice.could_not_start': 'Impossible de d\u00e9marrer le microphone',
-    'voice.mic_error': 'Erreur micro\u00a0: {err}',
     // Add link
     'add.title': 'Ajouter \u00e0 Shelf',
     'add.description': 'Collez une URL, tapez un nom de film, une recette, ou ce que vous voulez sauvegarder.',
@@ -447,39 +363,11 @@ const translations = {
     'link.where_to_watch': 'Onde assistir',
     'link.ingredients': 'Ingredientes',
     'link.instructions': 'Instru\u00e7\u00f5es',
-    'link.add_ingredients_cart': 'Adicionar ingredientes ao carrinho',
     'link.pages': '{n} p\u00e1ginas',
     'link.filmography': 'Filmografia',
     'link.prep': 'Preparo',
     'link.cook': 'Cozimento',
     'link.servings': 'Por\u00e7\u00f5es',
-    // Cart
-    'cart.subtitle': 'Compras',
-    'cart.title': 'Carrinho',
-    'cart.add_placeholder': 'Adicionar um item...',
-    'cart.empty': 'Seu carrinho est\u00e1 vazio',
-    'cart.could_not_load': 'N\u00e3o foi poss\u00edvel carregar o carrinho',
-    'cart.completed': 'Conclu\u00eddos',
-    'cart.clear_completed': 'Limpar {n} conclu\u00eddo{s}',
-    'cart.failed_add': 'N\u00e3o foi poss\u00edvel adicionar o item',
-    'cart.failed_update': 'N\u00e3o foi poss\u00edvel atualizar o item',
-    'cart.failed_delete': 'N\u00e3o foi poss\u00edvel excluir o item',
-    'cart.failed_clear': 'N\u00e3o foi poss\u00edvel limpar os itens',
-    'cart.cleared': '{n} iten{s} limpo{s}',
-    'cart.ingredients_added': '{n} ingrediente{s} adicionado{s} ao carrinho',
-    // Voice
-    'voice.subtitle': 'Compras',
-    'voice.title': 'Voz',
-    'voice.tap_start': 'Toque para come\u00e7ar a ouvir',
-    'voice.tap_again': 'Toque para ouvir novamente',
-    'voice.listening_hint': 'Separe os itens com "e" ou fa\u00e7a uma pausa entre eles',
-    'voice.add_to_cart': 'Adicionar ao carrinho',
-    'voice.add_n_to_cart': 'Adicionar {n} iten{s} ao carrinho',
-    'voice.added': '{n} iten{s} adicionado{s} ao carrinho',
-    'voice.failed_add': 'N\u00e3o foi poss\u00edvel adicionar os itens',
-    'voice.not_supported': 'Reconhecimento de voz n\u00e3o dispon\u00edvel',
-    'voice.could_not_start': 'N\u00e3o foi poss\u00edvel iniciar o microfone',
-    'voice.mic_error': 'Erro de microfone: {err}',
     // Add link
     'add.title': 'Adicionar ao Shelf',
     'add.description': 'Cole uma URL, digite o nome de um filme, uma receita ou qualquer coisa que queira salvar.',
@@ -579,39 +467,11 @@ const translations = {
     'link.where_to_watch': 'Wo ansehen',
     'link.ingredients': 'Zutaten',
     'link.instructions': 'Zubereitung',
-    'link.add_ingredients_cart': 'Zutaten zum Einkaufswagen hinzuf\u00fcgen',
     'link.pages': '{n} Seiten',
     'link.filmography': 'Filmografie',
     'link.prep': 'Vorbereitung',
     'link.cook': 'Kochzeit',
     'link.servings': 'Portionen',
-    // Cart
-    'cart.subtitle': 'Einkauf',
-    'cart.title': 'Einkaufswagen',
-    'cart.add_placeholder': 'Artikel hinzuf\u00fcgen...',
-    'cart.empty': 'Dein Einkaufswagen ist leer',
-    'cart.could_not_load': 'Einkaufswagen konnte nicht geladen werden',
-    'cart.completed': 'Erledigt',
-    'cart.clear_completed': '{n} erledigte{s} entfernen',
-    'cart.failed_add': 'Artikel konnte nicht hinzugef\u00fcgt werden',
-    'cart.failed_update': 'Artikel konnte nicht aktualisiert werden',
-    'cart.failed_delete': 'Artikel konnte nicht gel\u00f6scht werden',
-    'cart.failed_clear': 'Artikel konnten nicht entfernt werden',
-    'cart.cleared': '{n} Artikel entfernt',
-    'cart.ingredients_added': '{n} Zutat(en) zum Einkaufswagen hinzugef\u00fcgt',
-    // Voice
-    'voice.subtitle': 'Einkauf',
-    'voice.title': 'Sprache',
-    'voice.tap_start': 'Tippen zum Zuh\u00f6ren',
-    'voice.tap_again': 'Tippen f\u00fcr erneutes Zuh\u00f6ren',
-    'voice.listening_hint': 'Trenne Artikel mit "und" oder mache eine Pause dazwischen',
-    'voice.add_to_cart': 'Zum Einkaufswagen',
-    'voice.add_n_to_cart': '{n} Artikel zum Einkaufswagen',
-    'voice.added': '{n} Artikel hinzugef\u00fcgt',
-    'voice.failed_add': 'Artikel konnten nicht hinzugef\u00fcgt werden',
-    'voice.not_supported': 'Spracherkennung nicht verf\u00fcgbar',
-    'voice.could_not_start': 'Mikrofon konnte nicht gestartet werden',
-    'voice.mic_error': 'Mikrofonfehler: {err}',
     // Add link
     'add.title': 'Zu Shelf hinzuf\u00fcgen',
     'add.description': 'F\u00fcge eine URL ein, tippe einen Filmnamen, ein Rezept oder was du speichern m\u00f6chtest.',
@@ -711,39 +571,11 @@ const translations = {
     'link.where_to_watch': 'Dove guardare',
     'link.ingredients': 'Ingredienti',
     'link.instructions': 'Istruzioni',
-    'link.add_ingredients_cart': 'Aggiungi ingredienti al carrello',
     'link.pages': '{n} pagine',
     'link.filmography': 'Filmografia',
     'link.prep': 'Preparazione',
     'link.cook': 'Cottura',
     'link.servings': 'Porzioni',
-    // Cart
-    'cart.subtitle': 'Spesa',
-    'cart.title': 'Carrello',
-    'cart.add_placeholder': 'Aggiungi un articolo...',
-    'cart.empty': 'Il tuo carrello \u00e8 vuoto',
-    'cart.could_not_load': 'Impossibile caricare il carrello',
-    'cart.completed': 'Completati',
-    'cart.clear_completed': 'Rimuovi {n} completat{s}',
-    'cart.failed_add': "Impossibile aggiungere l'articolo",
-    'cart.failed_update': "Impossibile aggiornare l'articolo",
-    'cart.failed_delete': "Impossibile eliminare l'articolo",
-    'cart.failed_clear': 'Impossibile rimuovere gli articoli',
-    'cart.cleared': '{n} articol{s} rimoss{s}',
-    'cart.ingredients_added': '{n} ingredient{s} aggiunt{s} al carrello',
-    // Voice
-    'voice.subtitle': 'Spesa',
-    'voice.title': 'Voce',
-    'voice.tap_start': 'Tocca per iniziare ad ascoltare',
-    'voice.tap_again': 'Tocca per ascoltare di nuovo',
-    'voice.listening_hint': 'Separa gli articoli con "e" o fai una pausa tra uno e l\'altro',
-    'voice.add_to_cart': 'Aggiungi al carrello',
-    'voice.add_n_to_cart': 'Aggiungi {n} articol{s} al carrello',
-    'voice.added': '{n} articol{s} aggiunt{s} al carrello',
-    'voice.failed_add': 'Impossibile aggiungere gli articoli',
-    'voice.not_supported': 'Riconoscimento vocale non disponibile',
-    'voice.could_not_start': 'Impossibile avviare il microfono',
-    'voice.mic_error': 'Errore microfono: {err}',
     // Add link
     'add.title': 'Aggiungi a Shelf',
     'add.description': 'Incolla un URL, scrivi il nome di un film, una ricetta o qualsiasi cosa tu voglia salvare.',
@@ -843,39 +675,11 @@ const translations = {
     'link.where_to_watch': '\u8996\u8074\u65b9\u6cd5',
     'link.ingredients': '\u6750\u6599',
     'link.instructions': '\u4f5c\u308a\u65b9',
-    'link.add_ingredients_cart': '\u6750\u6599\u3092\u30ab\u30fc\u30c8\u306b\u8ffd\u52a0',
     'link.pages': '{n}\u30da\u30fc\u30b8',
     'link.filmography': '\u30d5\u30a3\u30eb\u30e2\u30b0\u30e9\u30d5\u30a3\u30fc',
     'link.prep': '\u4e0b\u6e96\u5099',
     'link.cook': '\u8abf\u7406',
     'link.servings': '\u4eba\u5206',
-    // Cart
-    'cart.subtitle': '\u8cb7\u3044\u7269',
-    'cart.title': '\u30ab\u30fc\u30c8',
-    'cart.add_placeholder': '\u30a2\u30a4\u30c6\u30e0\u3092\u8ffd\u52a0...',
-    'cart.empty': '\u30ab\u30fc\u30c8\u306f\u7a7a\u3067\u3059',
-    'cart.could_not_load': '\u30ab\u30fc\u30c8\u3092\u8aad\u307f\u8fbc\u3081\u307e\u305b\u3093\u3067\u3057\u305f',
-    'cart.completed': '\u5b8c\u4e86',
-    'cart.clear_completed': '\u5b8c\u4e86\u3057\u305f{n}\u4ef6\u3092\u30af\u30ea\u30a2',
-    'cart.failed_add': '\u30a2\u30a4\u30c6\u30e0\u3092\u8ffd\u52a0\u3067\u304d\u307e\u305b\u3093\u3067\u3057\u305f',
-    'cart.failed_update': '\u30a2\u30a4\u30c6\u30e0\u3092\u66f4\u65b0\u3067\u304d\u307e\u305b\u3093\u3067\u3057\u305f',
-    'cart.failed_delete': '\u30a2\u30a4\u30c6\u30e0\u3092\u524a\u9664\u3067\u304d\u307e\u305b\u3093\u3067\u3057\u305f',
-    'cart.failed_clear': '\u30a2\u30a4\u30c6\u30e0\u3092\u30af\u30ea\u30a2\u3067\u304d\u307e\u305b\u3093\u3067\u3057\u305f',
-    'cart.cleared': '{n}\u4ef6\u3092\u30af\u30ea\u30a2\u3057\u307e\u3057\u305f',
-    'cart.ingredients_added': '{n}\u4ef6\u306e\u6750\u6599\u3092\u30ab\u30fc\u30c8\u306b\u8ffd\u52a0\u3057\u307e\u3057\u305f',
-    // Voice
-    'voice.subtitle': '\u8cb7\u3044\u7269',
-    'voice.title': '\u97f3\u58f0',
-    'voice.tap_start': '\u30bf\u30c3\u30d7\u3057\u3066\u8074\u304d\u53d6\u308a\u958b\u59cb',
-    'voice.tap_again': '\u3082\u3046\u4e00\u5ea6\u30bf\u30c3\u30d7\u3057\u3066\u304f\u3060\u3055\u3044',
-    'voice.listening_hint': '\u300c\u3068\u300d\u3067\u533a\u5207\u308b\u304b\u3001\u9593\u3092\u7f6e\u3044\u3066\u304f\u3060\u3055\u3044',
-    'voice.add_to_cart': '\u30ab\u30fc\u30c8\u306b\u8ffd\u52a0',
-    'voice.add_n_to_cart': '{n}\u4ef6\u3092\u30ab\u30fc\u30c8\u306b\u8ffd\u52a0',
-    'voice.added': '{n}\u4ef6\u3092\u30ab\u30fc\u30c8\u306b\u8ffd\u52a0\u3057\u307e\u3057\u305f',
-    'voice.failed_add': '\u30a2\u30a4\u30c6\u30e0\u3092\u8ffd\u52a0\u3067\u304d\u307e\u305b\u3093\u3067\u3057\u305f',
-    'voice.not_supported': '\u97f3\u58f0\u8a8d\u8b58\u306f\u5229\u7528\u3067\u304d\u307e\u305b\u3093',
-    'voice.could_not_start': '\u30de\u30a4\u30af\u3092\u958b\u59cb\u3067\u304d\u307e\u305b\u3093\u3067\u3057\u305f',
-    'voice.mic_error': '\u30de\u30a4\u30af\u30a8\u30e9\u30fc: {err}',
     // Add link
     'add.title': 'Shelf\u306b\u8ffd\u52a0',
     'add.description': 'URL\u3092\u8cbc\u308a\u4ed8\u3051\u308b\u304b\u3001\u6620\u753b\u540d\u3001\u30ec\u30b7\u30d4\u306a\u3069\u4fdd\u5b58\u3057\u305f\u3044\u3082\u306e\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044\u3002',
@@ -975,39 +779,11 @@ const translations = {
     'link.where_to_watch': '\uc2dc\uccad \ubc29\ubc95',
     'link.ingredients': '\uc7ac\ub8cc',
     'link.instructions': '\ub9cc\ub4dc\ub294 \ubc95',
-    'link.add_ingredients_cart': '\uc7ac\ub8cc\ub97c \uc7a5\ubc14\uad6c\ub2c8\uc5d0 \ucd94\uac00',
     'link.pages': '{n}\ud398\uc774\uc9c0',
     'link.filmography': '\ud544\ubaa8\uadf8\ub798\ud53c',
     'link.prep': '\uc900\ube44',
     'link.cook': '\uc870\ub9ac',
     'link.servings': '\uc778\ubd84',
-    // Cart
-    'cart.subtitle': '\uc7a5\ubcf4\uae30',
-    'cart.title': '\uc7a5\ubc14\uad6c\ub2c8',
-    'cart.add_placeholder': '\ud56d\ubaa9 \ucd94\uac00...',
-    'cart.empty': '\uc7a5\ubc14\uad6c\ub2c8\uac00 \ube44\uc5b4 \uc788\uc2b5\ub2c8\ub2e4',
-    'cart.could_not_load': '\uc7a5\ubc14\uad6c\ub2c8\ub97c \ubd88\ub7ec\uc62c \uc218 \uc5c6\uc2b5\ub2c8\ub2e4',
-    'cart.completed': '\uc644\ub8cc',
-    'cart.clear_completed': '\uc644\ub8cc\ub41c {n}\uac1c \uc0ad\uc81c',
-    'cart.failed_add': '\ud56d\ubaa9\uc744 \ucd94\uac00\ud560 \uc218 \uc5c6\uc2b5\ub2c8\ub2e4',
-    'cart.failed_update': '\ud56d\ubaa9\uc744 \uc5c5\ub370\uc774\ud2b8\ud560 \uc218 \uc5c6\uc2b5\ub2c8\ub2e4',
-    'cart.failed_delete': '\ud56d\ubaa9\uc744 \uc0ad\uc81c\ud560 \uc218 \uc5c6\uc2b5\ub2c8\ub2e4',
-    'cart.failed_clear': '\ud56d\ubaa9\uc744 \uc0ad\uc81c\ud560 \uc218 \uc5c6\uc2b5\ub2c8\ub2e4',
-    'cart.cleared': '{n}\uac1c \ud56d\ubaa9 \uc0ad\uc81c \uc644\ub8cc',
-    'cart.ingredients_added': '{n}\uac1c \uc7ac\ub8cc\ub97c \uc7a5\ubc14\uad6c\ub2c8\uc5d0 \ucd94\uac00\ud588\uc2b5\ub2c8\ub2e4',
-    // Voice
-    'voice.subtitle': '\uc7a5\ubcf4\uae30',
-    'voice.title': '\uc74c\uc131',
-    'voice.tap_start': '\ud0ed\ud558\uc5ec \uc74c\uc131 \uc778\uc2dd \uc2dc\uc791',
-    'voice.tap_again': '\ub2e4\uc2dc \ud0ed\ud558\uc5ec \ub4e4\uc73c\uc138\uc694',
-    'voice.listening_hint': '"\uadf8\ub9ac\uace0"\ub85c \uad6c\ubd84\ud558\uac70\ub098 \uc7a0\uc2dc \uba48\ucdb0 \uc8fc\uc138\uc694',
-    'voice.add_to_cart': '\uc7a5\ubc14\uad6c\ub2c8\uc5d0 \ucd94\uac00',
-    'voice.add_n_to_cart': '{n}\uac1c\ub97c \uc7a5\ubc14\uad6c\ub2c8\uc5d0 \ucd94\uac00',
-    'voice.added': '{n}\uac1c\ub97c \uc7a5\ubc14\uad6c\ub2c8\uc5d0 \ucd94\uac00\ud588\uc2b5\ub2c8\ub2e4',
-    'voice.failed_add': '\ud56d\ubaa9\uc744 \ucd94\uac00\ud560 \uc218 \uc5c6\uc2b5\ub2c8\ub2e4',
-    'voice.not_supported': '\uc74c\uc131 \uc778\uc2dd\uc744 \uc0ac\uc6a9\ud560 \uc218 \uc5c6\uc2b5\ub2c8\ub2e4',
-    'voice.could_not_start': '\ub9c8\uc774\ud06c\ub97c \uc2dc\uc791\ud560 \uc218 \uc5c6\uc2b5\ub2c8\ub2e4',
-    'voice.mic_error': '\ub9c8\uc774\ud06c \uc624\ub958: {err}',
     // Add link
     'add.title': 'Shelf\uc5d0 \ucd94\uac00',
     'add.description': 'URL\uc744 \ubd99\uc5ec\ub123\uac70\ub098 \uc601\ud654 \uc81c\ubaa9, \ub808\uc2dc\ud53c \ub4f1 \uc800\uc7a5\ud558\uace0 \uc2f6\uc740 \uac83\uc744 \uc785\ub825\ud558\uc138\uc694.',
@@ -1107,39 +883,11 @@ const translations = {
     'link.where_to_watch': '\u5728\u54ea\u89c2\u770b',
     'link.ingredients': '\u98df\u6750',
     'link.instructions': '\u505a\u6cd5',
-    'link.add_ingredients_cart': '\u5c06\u98df\u6750\u52a0\u5165\u8d2d\u7269\u8f66',
     'link.pages': '{n}\u9875',
     'link.filmography': '\u4f5c\u54c1\u5217\u8868',
     'link.prep': '\u51c6\u5907',
     'link.cook': '\u70f9\u996a',
     'link.servings': '\u4efd',
-    // Cart
-    'cart.subtitle': '\u8d2d\u7269',
-    'cart.title': '\u8d2d\u7269\u8f66',
-    'cart.add_placeholder': '\u6dfb\u52a0\u7269\u54c1...',
-    'cart.empty': '\u8d2d\u7269\u8f66\u662f\u7a7a\u7684',
-    'cart.could_not_load': '\u65e0\u6cd5\u52a0\u8f7d\u8d2d\u7269\u8f66',
-    'cart.completed': '\u5df2\u5b8c\u6210',
-    'cart.clear_completed': '\u6e05\u9664{n}\u4e2a\u5df2\u5b8c\u6210',
-    'cart.failed_add': '\u65e0\u6cd5\u6dfb\u52a0\u7269\u54c1',
-    'cart.failed_update': '\u65e0\u6cd5\u66f4\u65b0\u7269\u54c1',
-    'cart.failed_delete': '\u65e0\u6cd5\u5220\u9664\u7269\u54c1',
-    'cart.failed_clear': '\u65e0\u6cd5\u6e05\u9664\u7269\u54c1',
-    'cart.cleared': '\u5df2\u6e05\u9664{n}\u4e2a\u7269\u54c1',
-    'cart.ingredients_added': '\u5df2\u5c06{n}\u79cd\u98df\u6750\u52a0\u5165\u8d2d\u7269\u8f66',
-    // Voice
-    'voice.subtitle': '\u8d2d\u7269',
-    'voice.title': '\u8bed\u97f3',
-    'voice.tap_start': '\u70b9\u51fb\u5f00\u59cb\u8bed\u97f3\u8f93\u5165',
-    'voice.tap_again': '\u518d\u6b21\u70b9\u51fb\u8fdb\u884c\u8bed\u97f3\u8f93\u5165',
-    'voice.listening_hint': '\u7528\u201c\u548c\u201d\u5206\u9694\u7269\u54c1\uff0c\u6216\u5728\u5b83\u4eec\u4e4b\u95f4\u505c\u987f',
-    'voice.add_to_cart': '\u52a0\u5165\u8d2d\u7269\u8f66',
-    'voice.add_n_to_cart': '\u5c06{n}\u4e2a\u7269\u54c1\u52a0\u5165\u8d2d\u7269\u8f66',
-    'voice.added': '\u5df2\u5c06{n}\u4e2a\u7269\u54c1\u52a0\u5165\u8d2d\u7269\u8f66',
-    'voice.failed_add': '\u65e0\u6cd5\u6dfb\u52a0\u7269\u54c1',
-    'voice.not_supported': '\u8bed\u97f3\u8bc6\u522b\u4e0d\u53ef\u7528',
-    'voice.could_not_start': '\u65e0\u6cd5\u542f\u52a8\u9ea6\u514b\u98ce',
-    'voice.mic_error': '\u9ea6\u514b\u98ce\u9519\u8bef: {err}',
     // Add link
     'add.title': '\u6dfb\u52a0\u5230 Shelf',
     'add.description': '\u7c98\u8d34URL\uff0c\u8f93\u5165\u7535\u5f71\u540d\u79f0\u3001\u98df\u8c31\u6216\u4efb\u4f55\u4f60\u60f3\u4fdd\u5b58\u7684\u5185\u5bb9\u3002',
@@ -1239,39 +987,11 @@ const translations = {
     'link.where_to_watch': 'Waar te kijken',
     'link.ingredients': 'Ingredi\u00ebnten',
     'link.instructions': 'Bereiding',
-    'link.add_ingredients_cart': 'Ingredi\u00ebnten aan winkelwagen toevoegen',
     'link.pages': "{n} pagina's",
     'link.filmography': 'Filmografie',
     'link.prep': 'Voorbereiden',
     'link.cook': 'Koken',
     'link.servings': 'Porties',
-    // Cart
-    'cart.subtitle': 'Boodschappen',
-    'cart.title': 'Winkelwagen',
-    'cart.add_placeholder': 'Item toevoegen...',
-    'cart.empty': 'Je winkelwagen is leeg',
-    'cart.could_not_load': 'Kan winkelwagen niet laden',
-    'cart.completed': 'Voltooid',
-    'cart.clear_completed': '{n} voltooide verwijderen',
-    'cart.failed_add': 'Kan item niet toevoegen',
-    'cart.failed_update': 'Kan item niet bijwerken',
-    'cart.failed_delete': 'Kan item niet verwijderen',
-    'cart.failed_clear': 'Kan items niet wissen',
-    'cart.cleared': '{n} item{s} verwijderd',
-    'cart.ingredients_added': '{n} ingredi\u00ebnt(en) aan winkelwagen toegevoegd',
-    // Voice
-    'voice.subtitle': 'Boodschappen',
-    'voice.title': 'Spraak',
-    'voice.tap_start': 'Tik om te beginnen met luisteren',
-    'voice.tap_again': 'Tik om opnieuw te luisteren',
-    'voice.listening_hint': 'Scheid items met "en" of pauzeer ertussen',
-    'voice.add_to_cart': 'Aan winkelwagen toevoegen',
-    'voice.add_n_to_cart': '{n} item{s} aan winkelwagen toevoegen',
-    'voice.added': '{n} item{s} aan winkelwagen toegevoegd',
-    'voice.failed_add': 'Kan items niet toevoegen',
-    'voice.not_supported': 'Spraakherkenning niet beschikbaar',
-    'voice.could_not_start': 'Kan microfoon niet starten',
-    'voice.mic_error': 'Microfoonfout: {err}',
     // Add link
     'add.title': 'Toevoegen aan Shelf',
     'add.description': 'Plak een URL, typ een filmnaam, een recept, of wat je wilt opslaan.',
@@ -1371,39 +1091,11 @@ const translations = {
     'link.where_to_watch': '\u0413\u0434\u0435 \u0441\u043c\u043e\u0442\u0440\u0435\u0442\u044c',
     'link.ingredients': '\u0418\u043d\u0433\u0440\u0435\u0434\u0438\u0435\u043d\u0442\u044b',
     'link.instructions': '\u0418\u043d\u0441\u0442\u0440\u0443\u043a\u0446\u0438\u044f',
-    'link.add_ingredients_cart': '\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u0438\u043d\u0433\u0440\u0435\u0434\u0438\u0435\u043d\u0442\u044b \u0432 \u043a\u043e\u0440\u0437\u0438\u043d\u0443',
     'link.pages': '{n} \u0441\u0442\u0440.',
     'link.filmography': '\u0424\u0438\u043b\u044c\u043c\u043e\u0433\u0440\u0430\u0444\u0438\u044f',
     'link.prep': '\u041f\u043e\u0434\u0433\u043e\u0442\u043e\u0432\u043a\u0430',
     'link.cook': '\u0413\u043e\u0442\u043e\u0432\u043a\u0430',
     'link.servings': '\u041f\u043e\u0440\u0446\u0438\u0439',
-    // Cart
-    'cart.subtitle': '\u041f\u043e\u043a\u0443\u043f\u043a\u0438',
-    'cart.title': '\u041a\u043e\u0440\u0437\u0438\u043d\u0430',
-    'cart.add_placeholder': '\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u0442\u043e\u0432\u0430\u0440...',
-    'cart.empty': '\u041a\u043e\u0440\u0437\u0438\u043d\u0430 \u043f\u0443\u0441\u0442\u0430',
-    'cart.could_not_load': '\u041d\u0435 \u0443\u0434\u0430\u043b\u043e\u0441\u044c \u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044c \u043a\u043e\u0440\u0437\u0438\u043d\u0443',
-    'cart.completed': '\u0417\u0430\u0432\u0435\u0440\u0448\u0435\u043d\u043e',
-    'cart.clear_completed': '\u041e\u0447\u0438\u0441\u0442\u0438\u0442\u044c {n} \u0437\u0430\u0432\u0435\u0440\u0448\u0451\u043d\u043d\u044b\u0445',
-    'cart.failed_add': '\u041d\u0435 \u0443\u0434\u0430\u043b\u043e\u0441\u044c \u0434\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u0442\u043e\u0432\u0430\u0440',
-    'cart.failed_update': '\u041d\u0435 \u0443\u0434\u0430\u043b\u043e\u0441\u044c \u043e\u0431\u043d\u043e\u0432\u0438\u0442\u044c \u0442\u043e\u0432\u0430\u0440',
-    'cart.failed_delete': '\u041d\u0435 \u0443\u0434\u0430\u043b\u043e\u0441\u044c \u0443\u0434\u0430\u043b\u0438\u0442\u044c \u0442\u043e\u0432\u0430\u0440',
-    'cart.failed_clear': '\u041d\u0435 \u0443\u0434\u0430\u043b\u043e\u0441\u044c \u043e\u0447\u0438\u0441\u0442\u0438\u0442\u044c \u0442\u043e\u0432\u0430\u0440\u044b',
-    'cart.cleared': '{n} \u0442\u043e\u0432\u0430\u0440\u043e\u0432 \u043e\u0447\u0438\u0449\u0435\u043d\u043e',
-    'cart.ingredients_added': '{n} \u0438\u043d\u0433\u0440\u0435\u0434\u0438\u0435\u043d\u0442\u043e\u0432 \u0434\u043e\u0431\u0430\u0432\u043b\u0435\u043d\u043e \u0432 \u043a\u043e\u0440\u0437\u0438\u043d\u0443',
-    // Voice
-    'voice.subtitle': '\u041f\u043e\u043a\u0443\u043f\u043a\u0438',
-    'voice.title': '\u0413\u043e\u043b\u043e\u0441',
-    'voice.tap_start': '\u041d\u0430\u0436\u043c\u0438\u0442\u0435, \u0447\u0442\u043e\u0431\u044b \u043d\u0430\u0447\u0430\u0442\u044c \u0437\u0430\u043f\u0438\u0441\u044c',
-    'voice.tap_again': '\u041d\u0430\u0436\u043c\u0438\u0442\u0435 \u0441\u043d\u043e\u0432\u0430',
-    'voice.listening_hint': '\u0420\u0430\u0437\u0434\u0435\u043b\u044f\u0439\u0442\u0435 \u0442\u043e\u0432\u0430\u0440\u044b \u0441\u043b\u043e\u0432\u043e\u043c \u00ab\u0438\u00bb \u0438\u043b\u0438 \u043f\u0430\u0443\u0437\u043e\u0439',
-    'voice.add_to_cart': '\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u0432 \u043a\u043e\u0440\u0437\u0438\u043d\u0443',
-    'voice.add_n_to_cart': '\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c {n} \u0442\u043e\u0432\u0430\u0440\u043e\u0432 \u0432 \u043a\u043e\u0440\u0437\u0438\u043d\u0443',
-    'voice.added': '{n} \u0442\u043e\u0432\u0430\u0440\u043e\u0432 \u0434\u043e\u0431\u0430\u0432\u043b\u0435\u043d\u043e \u0432 \u043a\u043e\u0440\u0437\u0438\u043d\u0443',
-    'voice.failed_add': '\u041d\u0435 \u0443\u0434\u0430\u043b\u043e\u0441\u044c \u0434\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u0442\u043e\u0432\u0430\u0440\u044b',
-    'voice.not_supported': '\u0420\u0430\u0441\u043f\u043e\u0437\u043d\u0430\u0432\u0430\u043d\u0438\u0435 \u0440\u0435\u0447\u0438 \u043d\u0435\u0434\u043e\u0441\u0442\u0443\u043f\u043d\u043e',
-    'voice.could_not_start': '\u041d\u0435 \u0443\u0434\u0430\u043b\u043e\u0441\u044c \u0437\u0430\u043f\u0443\u0441\u0442\u0438\u0442\u044c \u043c\u0438\u043a\u0440\u043e\u0444\u043e\u043d',
-    'voice.mic_error': '\u041e\u0448\u0438\u0431\u043a\u0430 \u043c\u0438\u043a\u0440\u043e\u0444\u043e\u043d\u0430: {err}',
     // Add link
     'add.title': '\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u0432 Shelf',
     'add.description': '\u0412\u0441\u0442\u0430\u0432\u044c\u0442\u0435 URL, \u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u043d\u0430\u0437\u0432\u0430\u043d\u0438\u0435 \u0444\u0438\u043b\u044c\u043c\u0430, \u0440\u0435\u0446\u0435\u043f\u0442 \u0438\u043b\u0438 \u0447\u0442\u043e \u0445\u043e\u0442\u0438\u0442\u0435 \u0441\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c.',
@@ -1503,39 +1195,11 @@ const translations = {
     'link.where_to_watch': '\u0623\u064a\u0646 \u062a\u0634\u0627\u0647\u062f',
     'link.ingredients': '\u0627\u0644\u0645\u0643\u0648\u0651\u0646\u0627\u062a',
     'link.instructions': '\u0637\u0631\u064a\u0642\u0629 \u0627\u0644\u062a\u062d\u0636\u064a\u0631',
-    'link.add_ingredients_cart': '\u0625\u0636\u0627\u0641\u0629 \u0627\u0644\u0645\u0643\u0648\u0651\u0646\u0627\u062a \u0625\u0644\u0649 \u0627\u0644\u0633\u0644\u0629',
     'link.pages': '{n} \u0635\u0641\u062d\u0629',
     'link.filmography': '\u0627\u0644\u0623\u0639\u0645\u0627\u0644 \u0627\u0644\u0633\u064a\u0646\u0645\u0627\u0626\u064a\u0629',
     'link.prep': '\u0627\u0644\u062a\u062d\u0636\u064a\u0631',
     'link.cook': '\u0627\u0644\u0637\u0647\u064a',
     'link.servings': '\u0627\u0644\u062d\u0635\u0635',
-    // Cart
-    'cart.subtitle': '\u0627\u0644\u0645\u0634\u062a\u0631\u064a\u0627\u062a',
-    'cart.title': '\u0627\u0644\u0633\u0644\u0629',
-    'cart.add_placeholder': '\u0625\u0636\u0627\u0641\u0629 \u0639\u0646\u0635\u0631...',
-    'cart.empty': '\u0627\u0644\u0633\u0644\u0629 \u0641\u0627\u0631\u063a\u0629',
-    'cart.could_not_load': '\u062a\u0639\u0630\u0651\u0631 \u062a\u062d\u0645\u064a\u0644 \u0627\u0644\u0633\u0644\u0629',
-    'cart.completed': '\u0645\u0643\u062a\u0645\u0644',
-    'cart.clear_completed': '\u0645\u0633\u062d {n} \u0645\u0643\u062a\u0645\u0644',
-    'cart.failed_add': '\u062a\u0639\u0630\u0651\u0631 \u0625\u0636\u0627\u0641\u0629 \u0627\u0644\u0639\u0646\u0635\u0631',
-    'cart.failed_update': '\u062a\u0639\u0630\u0651\u0631 \u062a\u062d\u062f\u064a\u062b \u0627\u0644\u0639\u0646\u0635\u0631',
-    'cart.failed_delete': '\u062a\u0639\u0630\u0651\u0631 \u062d\u0630\u0641 \u0627\u0644\u0639\u0646\u0635\u0631',
-    'cart.failed_clear': '\u062a\u0639\u0630\u0651\u0631 \u0645\u0633\u062d \u0627\u0644\u0639\u0646\u0627\u0635\u0631',
-    'cart.cleared': '\u062a\u0645 \u0645\u0633\u062d {n} \u0639\u0646\u0635\u0631',
-    'cart.ingredients_added': '\u062a\u0645 \u0625\u0636\u0627\u0641\u0629 {n} \u0645\u0643\u0648\u0651\u0646 \u0625\u0644\u0649 \u0627\u0644\u0633\u0644\u0629',
-    // Voice
-    'voice.subtitle': '\u0627\u0644\u0645\u0634\u062a\u0631\u064a\u0627\u062a',
-    'voice.title': '\u0635\u0648\u062a',
-    'voice.tap_start': '\u0627\u0646\u0642\u0631 \u0644\u0628\u062f\u0621 \u0627\u0644\u0627\u0633\u062a\u0645\u0627\u0639',
-    'voice.tap_again': '\u0627\u0646\u0642\u0631 \u0644\u0644\u0627\u0633\u062a\u0645\u0627\u0639 \u0645\u062c\u062f\u062f\u0627\u064b',
-    'voice.listening_hint': '\u0627\u0641\u0635\u0644 \u0627\u0644\u0639\u0646\u0627\u0635\u0631 \u0628\u0640\u00ab\u0648\u00bb \u0623\u0648 \u062a\u0648\u0642\u0641 \u0628\u064a\u0646\u0647\u0627',
-    'voice.add_to_cart': '\u0625\u0636\u0627\u0641\u0629 \u0625\u0644\u0649 \u0627\u0644\u0633\u0644\u0629',
-    'voice.add_n_to_cart': '\u0625\u0636\u0627\u0641\u0629 {n} \u0639\u0646\u0635\u0631 \u0625\u0644\u0649 \u0627\u0644\u0633\u0644\u0629',
-    'voice.added': '\u062a\u0645 \u0625\u0636\u0627\u0641\u0629 {n} \u0639\u0646\u0635\u0631 \u0625\u0644\u0649 \u0627\u0644\u0633\u0644\u0629',
-    'voice.failed_add': '\u062a\u0639\u0630\u0651\u0631 \u0625\u0636\u0627\u0641\u0629 \u0627\u0644\u0639\u0646\u0627\u0635\u0631',
-    'voice.not_supported': '\u0627\u0644\u062a\u0639\u0631\u0641 \u0639\u0644\u0649 \u0627\u0644\u0643\u0644\u0627\u0645 \u063a\u064a\u0631 \u0645\u062a\u0627\u062d',
-    'voice.could_not_start': '\u062a\u0639\u0630\u0651\u0631 \u062a\u0634\u063a\u064a\u0644 \u0627\u0644\u0645\u064a\u0643\u0631\u0648\u0641\u0648\u0646',
-    'voice.mic_error': '\u062e\u0637\u0623 \u0641\u064a \u0627\u0644\u0645\u064a\u0643\u0631\u0648\u0641\u0648\u0646: {err}',
     // Add link
     'add.title': '\u0625\u0636\u0627\u0641\u0629 \u0625\u0644\u0649 Shelf',
     'add.description': '\u0627\u0644\u0635\u0642 \u0631\u0627\u0628\u0637\u0627\u064b\u060c \u0627\u0643\u062a\u0628 \u0627\u0633\u0645 \u0641\u064a\u0644\u0645\u060c \u0648\u0635\u0641\u0629\u060c \u0623\u0648 \u0623\u064a \u0634\u064a\u0621 \u062a\u0631\u064a\u062f \u062d\u0641\u0638\u0647.',
@@ -1635,39 +1299,11 @@ const translations = {
     'link.where_to_watch': '\u0915\u0939\u093e\u0901 \u0926\u0947\u0916\u0947\u0902',
     'link.ingredients': '\u0938\u093e\u092e\u0917\u094d\u0930\u0940',
     'link.instructions': '\u0935\u093f\u0927\u093f',
-    'link.add_ingredients_cart': '\u0938\u093e\u092e\u0917\u094d\u0930\u0940 \u0915\u093e\u0930\u094d\u091f \u092e\u0947\u0902 \u091c\u094b\u0921\u093c\u0947\u0902',
     'link.pages': '{n} \u092a\u0943\u0937\u094d\u0920',
     'link.filmography': '\u092b\u093f\u0932\u094d\u092e\u094b\u0917\u094d\u0930\u093e\u092b\u0940',
     'link.prep': '\u0924\u0948\u092f\u093e\u0930\u0940',
     'link.cook': '\u092a\u0915\u093e\u0928\u093e',
     'link.servings': '\u0938\u0930\u094d\u0935\u093f\u0902\u0917',
-    // Cart
-    'cart.subtitle': '\u0916\u0930\u0940\u0926\u093e\u0930\u0940',
-    'cart.title': '\u0915\u093e\u0930\u094d\u091f',
-    'cart.add_placeholder': '\u0906\u0907\u091f\u092e \u091c\u094b\u0921\u093c\u0947\u0902...',
-    'cart.empty': '\u0915\u093e\u0930\u094d\u091f \u0916\u093e\u0932\u0940 \u0939\u0948',
-    'cart.could_not_load': '\u0915\u093e\u0930\u094d\u091f \u0932\u094b\u0921 \u0928\u0939\u0940\u0902 \u0939\u094b \u0938\u0915\u093e',
-    'cart.completed': '\u092a\u0942\u0930\u094d\u0923',
-    'cart.clear_completed': '{n} \u092a\u0942\u0930\u094d\u0923 \u0939\u091f\u093e\u090f\u0902',
-    'cart.failed_add': '\u0906\u0907\u091f\u092e \u091c\u094b\u0921\u093c\u0928\u0947 \u092e\u0947\u0902 \u0935\u093f\u092b\u0932',
-    'cart.failed_update': '\u0906\u0907\u091f\u092e \u0905\u092a\u0921\u0947\u091f \u0915\u0930\u0928\u0947 \u092e\u0947\u0902 \u0935\u093f\u092b\u0932',
-    'cart.failed_delete': '\u0906\u0907\u091f\u092e \u0939\u091f\u093e\u0928\u0947 \u092e\u0947\u0902 \u0935\u093f\u092b\u0932',
-    'cart.failed_clear': '\u0906\u0907\u091f\u092e \u0938\u093e\u092b\u093c \u0915\u0930\u0928\u0947 \u092e\u0947\u0902 \u0935\u093f\u092b\u0932',
-    'cart.cleared': '{n} \u0906\u0907\u091f\u092e \u0938\u093e\u092b\u093c \u0915\u093f\u090f',
-    'cart.ingredients_added': '{n} \u0938\u093e\u092e\u0917\u094d\u0930\u0940 \u0915\u093e\u0930\u094d\u091f \u092e\u0947\u0902 \u091c\u094b\u0921\u093c\u0940 \u0917\u0908',
-    // Voice
-    'voice.subtitle': '\u0916\u0930\u0940\u0926\u093e\u0930\u0940',
-    'voice.title': '\u0906\u0935\u093e\u091c\u093c',
-    'voice.tap_start': '\u0938\u0941\u0928\u0928\u093e \u0936\u0941\u0930\u0942 \u0915\u0930\u0928\u0947 \u0915\u0947 \u0932\u093f\u090f \u091f\u0948\u092a \u0915\u0930\u0947\u0902',
-    'voice.tap_again': '\u092b\u093f\u0930 \u0938\u0947 \u0938\u0941\u0928\u0928\u0947 \u0915\u0947 \u0932\u093f\u090f \u091f\u0948\u092a \u0915\u0930\u0947\u0902',
-    'voice.listening_hint': '\u0906\u0907\u091f\u092e \u0915\u094b "\u0914\u0930" \u0938\u0947 \u0905\u0932\u0917 \u0915\u0930\u0947\u0902 \u092f\u093e \u092c\u0940\u091a \u092e\u0947\u0902 \u0930\u0941\u0915\u0947\u0902',
-    'voice.add_to_cart': '\u0915\u093e\u0930\u094d\u091f \u092e\u0947\u0902 \u091c\u094b\u0921\u093c\u0947\u0902',
-    'voice.add_n_to_cart': '{n} \u0906\u0907\u091f\u092e \u0915\u093e\u0930\u094d\u091f \u092e\u0947\u0902 \u091c\u094b\u0921\u093c\u0947\u0902',
-    'voice.added': '{n} \u0906\u0907\u091f\u092e \u0915\u093e\u0930\u094d\u091f \u092e\u0947\u0902 \u091c\u094b\u0921\u093c\u0947 \u0917\u090f',
-    'voice.failed_add': '\u0906\u0907\u091f\u092e \u091c\u094b\u0921\u093c\u0928\u0947 \u092e\u0947\u0902 \u0935\u093f\u092b\u0932',
-    'voice.not_supported': '\u0935\u093e\u0915\u094d \u092a\u0939\u091a\u093e\u0928 \u0909\u092a\u0932\u092c\u094d\u0927 \u0928\u0939\u0940\u0902',
-    'voice.could_not_start': '\u092e\u093e\u0907\u0915\u094d\u0930\u094b\u092b\u094b\u0928 \u0936\u0941\u0930\u0942 \u0928\u0939\u0940\u0902 \u0939\u094b \u0938\u0915\u093e',
-    'voice.mic_error': '\u092e\u093e\u0907\u0915 \u0924\u094d\u0930\u0941\u091f\u093f: {err}',
     // Add link
     'add.title': 'Shelf \u092e\u0947\u0902 \u091c\u094b\u0921\u093c\u0947\u0902',
     'add.description': 'URL \u092a\u0947\u0938\u094d\u091f \u0915\u0930\u0947\u0902, \u092b\u093f\u0932\u094d\u092e \u0915\u093e \u0928\u093e\u092e, \u0930\u0947\u0938\u093f\u092a\u0940, \u092f\u093e \u091c\u094b \u092d\u0940 \u0938\u0939\u0947\u091c\u0928\u093e \u091a\u093e\u0939\u0947\u0902 \u0932\u093f\u0916\u0947\u0902\u0964',
@@ -1767,39 +1403,11 @@ const translations = {
     'link.where_to_watch': 'Nerede izlenir',
     'link.ingredients': 'Malzemeler',
     'link.instructions': 'Tarif',
-    'link.add_ingredients_cart': 'Malzemeleri sepete ekle',
     'link.pages': '{n} sayfa',
     'link.filmography': 'Filmografi',
     'link.prep': 'Haz\u0131rl\u0131k',
     'link.cook': 'Pi\u015firme',
     'link.servings': 'Ki\u015fi',
-    // Cart
-    'cart.subtitle': 'Al\u0131\u015fveri\u015f',
-    'cart.title': 'Sepet',
-    'cart.add_placeholder': '\u00d6\u011fe ekle...',
-    'cart.empty': 'Sepetiniz bo\u015f',
-    'cart.could_not_load': 'Sepet y\u00fcklenemedi',
-    'cart.completed': 'Tamamland\u0131',
-    'cart.clear_completed': '{n} tamamlanan\u0131 temizle',
-    'cart.failed_add': '\u00d6\u011fe eklenemedi',
-    'cart.failed_update': '\u00d6\u011fe g\u00fcncellenemedi',
-    'cart.failed_delete': '\u00d6\u011fe silinemedi',
-    'cart.failed_clear': '\u00d6\u011feler temizlenemedi',
-    'cart.cleared': '{n} \u00f6\u011fe temizlendi',
-    'cart.ingredients_added': '{n} malzeme sepete eklendi',
-    // Voice
-    'voice.subtitle': 'Al\u0131\u015fveri\u015f',
-    'voice.title': 'Ses',
-    'voice.tap_start': 'Dinlemeye ba\u015flamak i\u00e7in dokun',
-    'voice.tap_again': 'Tekrar dinlemek i\u00e7in dokun',
-    'voice.listening_hint': '\u00d6\u011feleri "ve" ile ay\u0131r\u0131n veya aralar\u0131nda duraklat\u0131n',
-    'voice.add_to_cart': 'Sepete ekle',
-    'voice.add_n_to_cart': '{n} \u00f6\u011feyi sepete ekle',
-    'voice.added': '{n} \u00f6\u011fe sepete eklendi',
-    'voice.failed_add': '\u00d6\u011feler eklenemedi',
-    'voice.not_supported': 'Ses tan\u0131ma kullan\u0131lam\u0131yor',
-    'voice.could_not_start': 'Mikrofon ba\u015flat\u0131lamad\u0131',
-    'voice.mic_error': 'Mikrofon hatas\u0131: {err}',
     // Add link
     'add.title': "Shelf'e ekle",
     'add.description': 'URL yap\u0131\u015ft\u0131r\u0131n, film ad\u0131, tarif veya kaydetmek istedi\u011finiz her\u015feyi yaz\u0131n.',
@@ -1902,7 +1510,6 @@ function getLocale() {
   return currentLocale;
 }
 
-const VOICE_LANG_MAP = { en: 'en-US', es: 'es-ES', fr: 'fr-FR', pt: 'pt-BR', de: 'de-DE', it: 'it-IT', ja: 'ja-JP', ko: 'ko-KR', zh: 'zh-CN', nl: 'nl-NL', ru: 'ru-RU', ar: 'ar-SA', hi: 'hi-IN', tr: 'tr-TR' };
 
 // Authenticated fetch helper - adds Authorization header to all API calls
 async function authFetch(url, options = {}) {
@@ -1927,10 +1534,7 @@ const ICONS = {
   refresh: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>',
   eyeOpen: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>',
   eyeClosed: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>',
-  cart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>',
   plus: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>',
-  check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
-  mic: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>',
   close: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>',
 };
 
@@ -2013,39 +1617,10 @@ async function patchLink(id, updates) {
   return await api('PATCH', `/api/links/${id}`, updates);
 }
 
-// ── Cart API ──
-async function fetchCart() {
-  return await api('GET', '/api/cart') || [];
-}
-
-async function addCartItem(text) {
-  return await api('POST', '/api/cart', { text });
-}
-
-async function addCartBatch(items, fromLinkId) {
-  const body = { items };
-  if (fromLinkId) body.from_link_id = fromLinkId;
-  return await api('POST', '/api/cart/batch', body);
-}
-
-async function toggleCartItem(id) {
-  return await api('PATCH', `/api/cart/${id}`);
-}
-
-async function deleteCartItem(id) {
-  return await api('DELETE', `/api/cart/${id}`);
-}
-
-async function clearCompletedCart() {
-  return await api('DELETE', '/api/cart');
-}
-
 // ── Routing ──
 function getRoute() {
   const hash = location.hash || '#/';
   if (hash === '#/') return { screen: 'home' };
-  if (hash === '#/cart') return { screen: 'cart' };
-  if (hash === '#/voice') return { screen: 'voice' };
   if (hash === '#/history') return { screen: 'history' };
   const catMatch = hash.match(/^#\/category\/(.+)$/);
   if (catMatch) return { screen: 'category', id: catMatch[1] };
@@ -2063,18 +1638,13 @@ const app = document.getElementById('app');
 
 function render() {
   const route = getRoute();
-  const fab = document.getElementById('cart-fab');
-  if (fab) fab.style.display = (route.screen === 'cart' || route.screen === 'voice') ? 'none' : '';
   switch (route.screen) {
     case 'home': renderHome(); break;
     case 'category': renderCategory(route.id); break;
     case 'link': renderLink(route.id); break;
-    case 'cart': renderCart(); break;
-    case 'voice': renderVoice(); break;
     case 'history': renderHistory(); break;
     default: renderHome();
   }
-  updateCartBadge();
 }
 
 async function refreshHome() {
@@ -2530,9 +2100,6 @@ function renderRecipeDetail(link, ext) {
     html += `<h3 class="detail-section-title">${esc(t('link.ingredients'))}</h3><ul class="ingredient-list">`;
     ext.ingredients.forEach(i => html += `<li>${esc(i)}</li>`);
     html += '</ul>';
-    const ingId = '_ing_' + link._id;
-    window[ingId] = ext.ingredients;
-    html += `<button class="btn btn-secondary cart-ingredients-btn" onclick="addIngredientsToCart('${link._id}', window['${ingId}'])">${ICONS.cart} ${esc(t('link.add_ingredients_cart'))}</button>`;
   }
 
   if (ext.steps && ext.steps.length) {
@@ -2716,346 +2283,6 @@ async function renderHistory() {
   } catch (e) {
     const listEl = document.getElementById('history-list');
     if (listEl) listEl.innerHTML = `<div class="empty-state"><span class="empty-state-icon">&#9888;&#65039;</span><p class="empty-state-text">${esc(t('history.could_not_load'))}</p></div>`;
-  }
-}
-
-// ── Cart screen ──
-async function renderCart() {
-  app.innerHTML = `
-    <div class="screen">
-      <div class="header">
-        <button class="back-btn" onclick="navigate('#/')">${ICONS.back}</button>
-        <div>
-          <div class="header-subtitle">${esc(t('cart.subtitle'))}</div>
-          <div class="header-title">${esc(t('cart.title'))}</div>
-        </div>
-      </div>
-      <form class="cart-add-form" onsubmit="handleAddCartItem(event)">
-        <input type="text" id="cart-input" class="cart-input" placeholder="${esc(t('cart.add_placeholder'))}" autocomplete="off">
-        <button type="submit" class="cart-add-btn">${ICONS.plus}</button>
-        <button type="button" class="cart-add-btn cart-mic-btn" onclick="navigate('#/voice')">${ICONS.mic}</button>
-      </form>
-      <div id="cart-list" class="cart-list">
-        <div class="skeleton skeleton-link" style="height:48px;margin-bottom:8px"></div>
-        <div class="skeleton skeleton-link" style="height:48px;margin-bottom:8px"></div>
-        <div class="skeleton skeleton-link" style="height:48px"></div>
-      </div>
-    </div>`;
-
-  try {
-    const items = await fetchCart();
-    renderCartItems(items);
-  } catch {
-    document.getElementById('cart-list').innerHTML = `<div class="empty-state"><span class="empty-state-icon">\u26a0\ufe0f</span><p class="empty-state-text">${esc(t('cart.could_not_load'))}</p></div>`;
-  }
-}
-
-function renderCartItems(items) {
-  const el = document.getElementById('cart-list');
-  if (!el) return;
-
-  if (items.length === 0) {
-    el.innerHTML = `<div class="empty-state"><span class="empty-state-icon">${ICONS.cart}</span><p class="empty-state-text">${esc(t('cart.empty'))}</p></div>`;
-    return;
-  }
-
-  const uncompleted = items.filter(i => !i.completed);
-  const completed = items.filter(i => i.completed);
-
-  let html = '';
-  uncompleted.forEach(item => {
-    html += `
-      <div class="cart-item" data-id="${item._id}">
-        <button class="cart-check" onclick="handleToggleCart('${item._id}')" aria-label="Mark complete"></button>
-        <span class="cart-text">${esc(item.text)}</span>
-        <button class="cart-delete" onclick="handleDeleteCart('${item._id}')" aria-label="Delete">${ICONS.trash}</button>
-      </div>`;
-  });
-
-  if (completed.length) {
-    html += `<div class="cart-section-label">${esc(t('cart.completed'))}</div>`;
-    completed.forEach(item => {
-      html += `
-        <div class="cart-item completed" data-id="${item._id}">
-          <button class="cart-check checked" onclick="handleToggleCart('${item._id}')" aria-label="Mark incomplete">${ICONS.check}</button>
-          <span class="cart-text">${esc(item.text)}</span>
-          <button class="cart-delete" onclick="handleDeleteCart('${item._id}')" aria-label="Delete">${ICONS.trash}</button>
-        </div>`;
-    });
-    html += `<button class="btn btn-secondary cart-clear-btn" onclick="handleClearCompleted()">${esc(t('cart.clear_completed', { n: completed.length }))}</button>`;
-  }
-
-  el.innerHTML = html;
-}
-
-async function handleAddCartItem(e) {
-  e.preventDefault();
-  const input = document.getElementById('cart-input');
-  const text = input.value.trim();
-  if (!text) return;
-  input.value = '';
-  try {
-    await addCartItem(text);
-    const items = await fetchCart();
-    renderCartItems(items);
-    updateCartBadge();
-  } catch {
-    showToast(t('cart.failed_add'));
-  }
-}
-
-async function handleToggleCart(id) {
-  try {
-    await toggleCartItem(id);
-    const items = await fetchCart();
-    renderCartItems(items);
-    updateCartBadge();
-  } catch {
-    showToast(t('cart.failed_update'));
-  }
-}
-
-async function handleDeleteCart(id) {
-  try {
-    await deleteCartItem(id);
-    const items = await fetchCart();
-    renderCartItems(items);
-    updateCartBadge();
-  } catch {
-    showToast(t('cart.failed_delete'));
-  }
-}
-
-async function handleClearCompleted() {
-  try {
-    const result = await clearCompletedCart();
-    const items = await fetchCart();
-    renderCartItems(items);
-    updateCartBadge();
-    showToast(t('cart.cleared', { n: result.deleted }));
-  } catch {
-    showToast(t('cart.failed_clear'));
-  }
-}
-
-async function addIngredientsToCart(linkId, ingredients) {
-  try {
-    const result = await addCartBatch(ingredients, linkId);
-    updateCartBadge();
-    showToast(t('cart.ingredients_added', { n: result.length }));
-  } catch {
-    showToast(t('cart.failed_add'));
-  }
-}
-
-async function updateCartBadge() {
-  const badge = document.getElementById('cart-badge');
-  if (!badge) return;
-  try {
-    const items = await fetchCart();
-    const count = items.filter(i => !i.completed).length;
-    badge.textContent = count;
-    badge.style.display = count > 0 ? '' : 'none';
-  } catch {
-    // silent
-  }
-}
-
-// ── Voice screen ──
-let voiceRecognition = null;
-let voiceListening = false;
-let voicePendingItems = [];
-let voiceSilenceTimer = null;
-
-function parseCartItems(text) {
-  return text
-    .split(/,|\by\b/)
-    .map(s => s.trim())
-    .filter(s => s.length > 0);
-}
-
-function renderVoice() {
-  voicePendingItems = [];
-  voiceListening = false;
-  if (voiceRecognition) {
-    try { voiceRecognition.stop(); } catch {}
-    voiceRecognition = null;
-  }
-
-  app.innerHTML = `
-    <div class="screen">
-      <div class="header">
-        <button class="back-btn" onclick="navigate('#/cart')">${ICONS.back}</button>
-        <div>
-          <div class="header-subtitle">${esc(t('voice.subtitle'))}</div>
-          <div class="header-title">${esc(t('voice.title'))}</div>
-        </div>
-      </div>
-      <div class="voice-container">
-        <button class="voice-mic-btn" id="voice-mic-btn" onclick="toggleVoice()">
-          ${ICONS.mic}
-        </button>
-        <p class="voice-hint" id="voice-hint">${esc(t('voice.tap_start'))}</p>
-        <div class="voice-transcript" id="voice-transcript"></div>
-        <div class="voice-items" id="voice-items"></div>
-        <button class="btn btn-primary voice-add-btn" id="voice-add-btn" style="display:none" onclick="addVoiceItems()">
-          ${ICONS.cart} ${esc(t('voice.add_to_cart'))}
-        </button>
-      </div>
-    </div>`;
-
-  // Auto-start listening
-  setTimeout(() => startVoice(), 300);
-}
-
-function toggleVoice() {
-  if (voiceListening) {
-    stopVoice();
-  } else {
-    startVoice();
-  }
-}
-
-function startVoice() {
-  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (!SpeechRecognition) {
-    showToast(t('voice.not_supported'));
-    return;
-  }
-
-  voiceRecognition = new SpeechRecognition();
-  voiceRecognition.lang = VOICE_LANG_MAP[currentLocale] || 'en-US';
-  voiceRecognition.continuous = true;
-  voiceRecognition.interimResults = true;
-
-  const btn = document.getElementById('voice-mic-btn');
-  const hint = document.getElementById('voice-hint');
-  const transcript = document.getElementById('voice-transcript');
-
-  voiceRecognition.onstart = () => {
-    voiceListening = true;
-    if (btn) btn.classList.add('listening');
-    if (hint) hint.textContent = t('voice.listening_hint');
-  };
-
-  voiceRecognition.onresult = (event) => {
-    let interim = '';
-    for (let i = event.resultIndex; i < event.results.length; i++) {
-      const text = event.results[i][0].transcript;
-      if (event.results[i].isFinal) {
-        const items = parseCartItems(text);
-        items.forEach(item => {
-          if (!voicePendingItems.includes(item.toLowerCase())) {
-            voicePendingItems.push(item.toLowerCase());
-          }
-        });
-        renderVoiceItems();
-        // Reset silence timer — auto-stop after 3s of silence
-        resetSilenceTimer();
-      } else {
-        interim = text;
-        // User is actively speaking, clear any pending stop
-        clearSilenceTimer();
-      }
-    }
-    if (transcript) {
-      transcript.textContent = interim;
-      transcript.style.display = interim ? '' : 'none';
-    }
-  };
-
-  voiceRecognition.onerror = (event) => {
-    if (event.error === 'no-speech') return;
-    if (event.error === 'aborted') return;
-    showToast(t('voice.mic_error', { err: event.error }));
-    stopVoice();
-  };
-
-  voiceRecognition.onend = () => {
-    // Auto-restart if still in listening mode (browser can stop after silence)
-    if (voiceListening) {
-      try { voiceRecognition.start(); } catch {}
-    }
-  };
-
-  try {
-    voiceRecognition.start();
-  } catch {
-    showToast(t('voice.could_not_start'));
-  }
-}
-
-function resetSilenceTimer() {
-  clearSilenceTimer();
-  voiceSilenceTimer = setTimeout(() => {
-    if (voiceListening && voicePendingItems.length > 0) {
-      addVoiceItems();
-    }
-  }, 3000);
-}
-
-function clearSilenceTimer() {
-  if (voiceSilenceTimer) {
-    clearTimeout(voiceSilenceTimer);
-    voiceSilenceTimer = null;
-  }
-}
-
-function stopVoice() {
-  voiceListening = false;
-  clearSilenceTimer();
-  if (voiceRecognition) {
-    try { voiceRecognition.stop(); } catch {}
-  }
-  const btn = document.getElementById('voice-mic-btn');
-  const hint = document.getElementById('voice-hint');
-  const transcript = document.getElementById('voice-transcript');
-  if (btn) btn.classList.remove('listening');
-  if (hint) hint.textContent = voicePendingItems.length ? t('voice.tap_again') : t('voice.tap_start');
-  if (transcript) { transcript.textContent = ''; transcript.style.display = 'none'; }
-}
-
-function renderVoiceItems() {
-  const el = document.getElementById('voice-items');
-  const addBtn = document.getElementById('voice-add-btn');
-  if (!el) return;
-
-  if (voicePendingItems.length === 0) {
-    el.innerHTML = '';
-    if (addBtn) addBtn.style.display = 'none';
-    return;
-  }
-
-  el.innerHTML = voicePendingItems.map((item, i) => `
-    <div class="voice-chip">
-      <span>${esc(item)}</span>
-      <button class="voice-chip-remove" onclick="removeVoiceItem(${i})">${ICONS.close}</button>
-    </div>
-  `).join('');
-
-  if (addBtn) {
-    addBtn.style.display = '';
-    addBtn.innerHTML = `${ICONS.cart} ${esc(t('voice.add_n_to_cart', { n: voicePendingItems.length }))}`;
-  }
-}
-
-function removeVoiceItem(index) {
-  voicePendingItems.splice(index, 1);
-  renderVoiceItems();
-}
-
-async function addVoiceItems() {
-  if (voicePendingItems.length === 0) return;
-  stopVoice();
-  const items = [...voicePendingItems];
-  try {
-    await addCartBatch(items);
-    updateCartBadge();
-    showToast(t('voice.added', { n: items.length }));
-    voicePendingItems = [];
-    navigate('#/cart');
-  } catch {
-    showToast(t('voice.failed_add'));
   }
 }
 
@@ -3302,12 +2529,6 @@ async function handleDeleteAccount() {
 function bootApp(supabaseClient) {
   supabase = supabaseClient;
 
-  // Bind cart-fab click
-  const cartFab = document.getElementById('cart-fab');
-  if (cartFab) {
-    cartFab.addEventListener('click', () => navigate('#/cart'));
-  }
-
   window.addEventListener('hashchange', render);
 
   if ('serviceWorker' in navigator) {
@@ -3359,19 +2580,11 @@ window.doRecategorize = doRecategorize;
 window.toggleProviderCountries = toggleProviderCountries;
 window.showCountryName = showCountryName;
 window.refreshHome = refreshHome;
-window.handleAddCartItem = handleAddCartItem;
-window.handleToggleCart = handleToggleCart;
-window.handleDeleteCart = handleDeleteCart;
-window.handleClearCompleted = handleClearCompleted;
-window.addIngredientsToCart = addIngredientsToCart;
 window.showAddLink = showAddLink;
 window.submitAddLink = submitAddLink;
 window.handleCategoryFilter = handleCategoryFilter;
 window.clearCategoryFilter = clearCategoryFilter;
 window.filterByGenre = filterByGenre;
-window.toggleVoice = toggleVoice;
-window.addVoiceItems = addVoiceItems;
-window.removeVoiceItem = removeVoiceItem;
 window.bootApp = bootApp;
 window.handleLogout = handleLogout;
 window.handleDeleteAccount = handleDeleteAccount;

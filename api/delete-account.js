@@ -1,4 +1,4 @@
-const { connectDB, Link, Category, CartItem } = require('./_db');
+const { connectDB, Link, Category } = require('./_db');
 const { verifyAuth } = require('./_auth');
 const { createClient } = require('@supabase/supabase-js');
 
@@ -14,7 +14,6 @@ module.exports = async function handler(req, res) {
     // Delete all user's data from MongoDB
     await Link.deleteMany({ user_id: user.id });
     await Category.deleteMany({ user_id: user.id });
-    await CartItem.deleteMany({ user_id: user.id });
 
     // Delete Supabase auth account
     const supabaseAdmin = createClient(
