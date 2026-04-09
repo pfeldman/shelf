@@ -1,0 +1,6 @@
+node_modules
+ios
+android
+.vercel
+.env
+.env.local

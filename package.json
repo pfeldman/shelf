@@ -1,0 +1,15 @@
+{
+  "name": "shelf",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Shelf - AI-powered link curator",
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel --prod"
+  },
+  "dependencies": {
+    "jsdom": "^25.0.0",
+    "mongoose": "^8.8.0",
+    "openai": "^4.73.0"
+  }
+}
