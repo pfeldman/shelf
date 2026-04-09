@@ -1656,6 +1656,7 @@ async function refreshHome() {
     // Only update content area, not the whole page
     const route = getRoute();
     if (route.screen === 'home') renderHomeContent(cats, links);
+    startPollingIfNeeded();
   } catch {
     showToast(t('home.could_not_refresh'));
   }
