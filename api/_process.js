@@ -133,7 +133,7 @@ const RECAT_HINTS = {
   director: 'OVERRIDE: The user says this is a DIRECTOR. You MUST categorize it with extension_type "director". Use the Directores category (slug: "directores").',
 };
 
-const LANGUAGE_NAMES = { en: 'English', es: 'Spanish', fr: 'French' };
+const LANGUAGE_NAMES = { en: 'English', es: 'Spanish', fr: 'French', pt: 'Portuguese', de: 'German', it: 'Italian', ja: 'Japanese', ko: 'Korean', zh: 'Chinese', nl: 'Dutch', ru: 'Russian', ar: 'Arabic', hi: 'Hindi', tr: 'Turkish' };
 
 async function categorizeAndExtract(content, url, categories, recatHint, userHint, language) {
   const catsDesc = categories.length

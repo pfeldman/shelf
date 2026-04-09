@@ -90,7 +90,7 @@ RECAT_HINTS = {
 }
 
 
-LANGUAGE_NAMES = {"en": "English", "es": "Spanish", "fr": "French"}
+LANGUAGE_NAMES = {"en": "English", "es": "Spanish", "fr": "French", "pt": "Portuguese", "de": "German", "it": "Italian", "ja": "Japanese", "ko": "Korean", "zh": "Chinese", "nl": "Dutch", "ru": "Russian", "ar": "Arabic", "hi": "Hindi", "tr": "Turkish"}
 
 def categorize_content(content: str, url: str, categories: list, recat_hint: str | None, user_hint: str | None, language: str = "en") -> dict:
     """Call OpenAI to categorize content. Returns parsed JSON dict."""
