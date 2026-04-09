@@ -1713,7 +1713,7 @@ function renderHomeContent(cats, links) {
           <span class="pending-chevron">${ICONS.chevron}</span>
         </div>
         <div class="pending-list">
-          ${pending.map(l => `<div class="pending-item"><span class="pending-url">${esc(getDomain(l.url) || l.url)}</span><span class="pending-step">${esc(t('home.processing'))}</span></div>`).join('')}
+          ${pending.map(l => `<div class="pending-item"><span class="pending-url">${esc(getDomain(l.url) || l.url)}</span></div>`).join('')}
         </div>
       </div>`;
   }
