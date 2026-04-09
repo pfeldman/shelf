@@ -768,11 +768,12 @@ async function renderHistory() {
     if (categories.length === 0) await fetchCategories();
     const links = await fetchLinks();
     allLinks = links;
-    const done = links.filter(l => l.status === 'done').sort((a, b) => {
-      const dateA = a.processed_at || a.submitted_at;
-      const dateB = b.processed_at || b.submitted_at;
+    const sorted = [...links].sort((a, b) => {
+      const dateA = a.processed_at || a.submitted_at || a.created_at;
+      const dateB = b.processed_at || b.submitted_at || b.created_at;
       return new Date(dateB) - new Date(dateA);
     });
+    const done = sorted;
 
     const listEl = document.getElementById('history-list');
     if (!listEl) return;
@@ -806,9 +807,10 @@ async function renderHistory() {
           </div>
           <div class="history-content">
             <div class="history-title">${esc(link.title || link.url)}</div>
+            ${link.url ? `<div class="history-url">${esc(link.url)}</div>` : ''}
             <div class="history-meta">
               <span class="history-cat-badge"><span class="history-cat-icon">${catIcon}</span>${esc(catName)}</span>
-              ${domain ? `<span class="history-domain">${esc(domain)}</span>` : ''}
+              ${link.status !== 'done' ? `<span class="history-status">${esc(link.status)}</span>` : ''}
             </div>
             <div class="history-time">${esc(ago)}</div>
           </div>
