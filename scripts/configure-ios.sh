@@ -28,4 +28,24 @@ if [ -f "$ICON_SRC" ] && [[ "$ICON_SRC" == *.png ]]; then
   echo "App icon set (alpha removed)"
 fi
 
+# === Share Extension ===
+# Add the Share Extension target to the Xcode project.
+# Requires: APPLE_TEAM_ID, SHARE_API_KEY env vars
+# The Ruby script copies source files, creates the target, and configures build settings.
+if [ -f "scripts/add-share-extension.rb" ]; then
+  echo "Adding Share Extension target..."
+  # Ensure xcodeproj gem is available (may already be installed)
+  gem install xcodeproj 2>/dev/null || true
+  ruby scripts/add-share-extension.rb
+  echo "Share Extension added"
+
+  # Set the share extension build number to match the main app
+  EXT_INFO_PLIST="ios/App/ShelfShareExtension/Info.plist"
+  if [ -f "$EXT_INFO_PLIST" ]; then
+    BUILD_NUMBER=${GITHUB_RUN_NUMBER:-1}
+    /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $BUILD_NUMBER" "$EXT_INFO_PLIST" 2>/dev/null || true
+    echo "Share Extension build number set to $BUILD_NUMBER"
+  fi
+fi
+
 echo "iOS configuration complete"
