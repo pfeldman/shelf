@@ -2530,46 +2530,37 @@ async function handleDeleteAccount() {
 // Called by index.html after auth check passes
 // ── Auto-polling for processing links ──
 let pollTimer = null;
-let processingIds = new Set();
 
 function startPollingIfNeeded() {
-  // Track which links are processing
-  const currentProcessing = allLinks.filter(l => l.status === 'pending' || l.status === 'processing');
-  currentProcessing.forEach(l => processingIds.add(l._id));
+  // Stop any existing poll
+  if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
 
-  if (processingIds.size === 0) {
-    if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
-    return;
-  }
+  // Check if any links are still processing
+  const hasProcessing = allLinks.some(l => l.status === 'pending' || l.status === 'processing');
+  if (!hasProcessing) return;
 
-  if (pollTimer) return; // already polling
-
+  console.log('[poll] Starting poll — found processing links');
   pollTimer = setInterval(async () => {
     try {
+      console.log('[poll] Checking...');
       const fresh = await fetchLinks();
-      const stillProcessing = fresh.filter(l => l.status === 'pending' || l.status === 'processing');
-      const finishedAny = [...processingIds].some(id => {
-        const link = fresh.find(l => l._id === id);
-        return link && link.status !== 'pending' && link.status !== 'processing';
-      });
+      const still = fresh.some(l => l.status === 'pending' || l.status === 'processing');
+      allLinks = fresh;
 
-      if (finishedAny || stillProcessing.length === 0) {
-        allLinks = fresh;
-        processingIds = new Set(stillProcessing.map(l => l._id));
-        if (processingIds.size === 0) {
-          clearInterval(pollTimer);
-          pollTimer = null;
-        }
-        // Re-render to show updated data
+      if (!still) {
+        console.log('[poll] All done — stopping poll');
+        clearInterval(pollTimer);
+        pollTimer = null;
+        // Re-render with fresh data
+        const cats = await fetchCategories();
         const route = getRoute();
         if (route.screen === 'home') {
-          const cats = await fetchCategories();
           renderHomeContent(cats, fresh);
         } else {
           render();
         }
       }
-    } catch { /* ignore */ }
+    } catch (e) { console.log('[poll] Error:', e); }
   }, 5000);
 }
 
