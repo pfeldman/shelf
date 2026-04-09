@@ -31,10 +31,19 @@
 
     const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     (async () => {
-      const { data: { session } } = await sb.auth.getSession();
+      let { data: { session } } = await sb.auth.getSession();
+
+      // Retry once after short delay (session may still be initializing)
+      if (!session) {
+        await new Promise(r => setTimeout(r, 500));
+        ({ data: { session } } = await sb.auth.getSession());
+      }
 
       if (!session) {
-        window.location.href = '/login.html';
+        // Avoid redirect loop: only redirect if not already coming from login
+        if (!document.referrer.includes('login.html')) {
+          window.location.href = '/login.html';
+        }
         return;
       }
 
