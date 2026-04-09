@@ -1653,6 +1653,7 @@ async function refreshHome() {
   try {
     const [cats, links] = await Promise.all([fetchCategories(), fetchLinks()]);
     allLinks = links;
+    console.log('[debug] allLinks statuses:', links.map(l => l.status).filter((v,i,a) => a.indexOf(v) === i));
     // Only update content area, not the whole page
     const route = getRoute();
     if (route.screen === 'home') renderHomeContent(cats, links);
