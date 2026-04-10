@@ -2,6 +2,7 @@
   "appId": "com.pieve.shelf",
   "appName": "Shelf",
   "webDir": "public",
+  "backgroundColor": "#1a1814",
   "server": {
     "url": "https://shelf-wheat.vercel.app",
     "cleartext": false,
