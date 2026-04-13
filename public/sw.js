@@ -1,4 +1,4 @@
-const CACHE_NAME = 'shelf-v32';
+const CACHE_NAME = 'shelf-v33';
 const STATIC_ASSETS = [
   '/',
   '/index.html',

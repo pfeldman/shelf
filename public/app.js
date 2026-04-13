@@ -1829,18 +1829,36 @@ function navigate(hash) {
   location.hash = hash;
 }
 
+let lastRoute = null;
+let categoryStates = {};
+
+function openLink(linkId) {
+  const route = getRoute();
+  if (route.screen === 'category') {
+    const input = document.getElementById('category-search');
+    categoryStates[route.id] = {
+      query: input ? input.value : '',
+      genre: categoryActiveGenre,
+      scrollY: window.scrollY || window.pageYOffset || 0,
+    };
+  }
+  navigate(`#/link/${linkId}`);
+}
+
 // ── Rendering ──
 const app = document.getElementById('app');
 
 function render() {
   const route = getRoute();
+  const cameFromLink = lastRoute && lastRoute.screen === 'link';
   switch (route.screen) {
     case 'home': renderHome(); break;
-    case 'category': renderCategory(route.id); break;
+    case 'category': renderCategory(route.id, cameFromLink); break;
     case 'link': renderLink(route.id); break;
     case 'history': renderHistory(); break;
     default: renderHome();
   }
+  lastRoute = route;
 }
 
 async function refreshHome() {
@@ -2026,7 +2044,7 @@ function renderCategoryLinks(done, extType, query) {
       ? `<div class="poster-rating">★ ${rating.toFixed(1)}/10</div>`
       : '';
     return `
-      <div class="poster-card ${watched ? 'is-watched' : ''}" onclick="navigate('#/link/${link._id}')">
+      <div class="poster-card ${watched ? 'is-watched' : ''}" onclick="openLink('${link._id}')">
         <div class="poster-frame">
           ${img}
           <div class="poster-fallback" ${thumbUrl ? 'style="display:none"' : ''}>${CAT_ICONS.default}</div>
@@ -2063,11 +2081,12 @@ function clearCategoryFilter() {
   }
 }
 
-async function renderCategory(categoryId) {
+async function renderCategory(categoryId, restoreState = false) {
   const cat = categories.find(c => c._id === categoryId);
   const catName = cat ? cat.name : 'Links';
   const isOwner = cat ? cat.isOwner !== false : true;
   const isShared = cat ? !!cat.isShared : false;
+  const saved = restoreState ? categoryStates[categoryId] : null;
 
   // Share button for owner, or leave button indicator for shared member
   const shareBtn = (isOwner || isShared)
@@ -2124,7 +2143,7 @@ async function renderCategory(categoryId) {
     }
 
     categoryFilteredLinks = done;
-    categoryActiveGenre = null;
+    categoryActiveGenre = saved ? (saved.genre || null) : null;
     document.getElementById('category-search-wrap').style.display = '';
 
     // Build genre filter for movie categories
@@ -2138,8 +2157,9 @@ async function renderCategory(categoryId) {
       if (genres.length) {
         const wrap = document.getElementById('genre-filter-wrap');
         wrap.style.display = '';
-        wrap.innerHTML = `<button class="genre-chip active" onclick="filterByGenre(null)">${esc(t('category.all'))}</button>` +
-          genres.map(g => `<button class="genre-chip" onclick="filterByGenre('${esc(g)}')">${esc(g)}</button>`).join('');
+        const activeGenre = categoryActiveGenre;
+        wrap.innerHTML = `<button class="genre-chip ${activeGenre ? '' : 'active'}" onclick="filterByGenre(null)">${esc(t('category.all'))}</button>` +
+          genres.map(g => `<button class="genre-chip ${activeGenre === g ? 'active' : ''}" onclick="filterByGenre('${esc(g)}')">${esc(g)}</button>`).join('');
       }
       // Update placeholder to hint about people search
       const searchInput = document.getElementById('category-search');
@@ -2149,7 +2169,20 @@ async function renderCategory(categoryId) {
       if (searchInput) searchInput.placeholder = t('category.search_recipe');
     }
 
-    renderCategoryLinks(done, categoryExtType, '');
+    const savedQuery = saved ? (saved.query || '') : '';
+    if (savedQuery) {
+      const input = document.getElementById('category-search');
+      if (input) input.value = savedQuery;
+    }
+    renderCategoryLinks(done, categoryExtType, savedQuery);
+
+    if (saved) {
+      const targetY = saved.scrollY || 0;
+      requestAnimationFrame(() => {
+        window.scrollTo(0, targetY);
+        requestAnimationFrame(() => window.scrollTo(0, targetY));
+      });
+    }
   } catch (e) {
     document.getElementById('links-list').innerHTML = `<div class="empty-state"><span class="empty-state-icon">\u26a0\ufe0f</span><p class="empty-state-text">${esc(t('category.could_not_load'))}</p></div>`;
   }
@@ -3057,6 +3090,7 @@ async function leaveSharedCategory(categoryId, ownerId) {
 
 // Expose for inline onclick handlers
 window.navigate = navigate;
+window.openLink = openLink;
 window.confirmDelete = confirmDelete;
 window.toggleWatched = toggleWatched;
 window.toggleWatchedFromList = toggleWatchedFromList;
