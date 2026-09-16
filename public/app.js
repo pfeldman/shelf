@@ -2044,7 +2044,7 @@ async function refreshHome() {
     allLinks = links;
     // Only update content area, not the whole page
     const route = getRoute();
-    if (route.screen === 'home') renderHomeContent(cats, links);
+    if (route.screen === 'home') renderHomeContent(cats, links, true);
     startPollingIfNeeded();
   } catch {
     showToast(t('home.could_not_refresh'));
@@ -2078,7 +2078,7 @@ async function renderHome() {
   try {
     const [cats, links] = await Promise.all([fetchCategories(), fetchLinks()]);
     allLinks = links;
-    renderHomeContent(cats, links);
+    renderHomeContent(cats, links, true);
     startPollingIfNeeded();
   } catch (e) {
     document.getElementById('home-content').innerHTML = `<div class="empty-state"><span class="empty-state-icon">${ICONS.warn}</span><p class="empty-state-text">${esc(t('home.could_not_load'))}</p></div>`;
@@ -2122,16 +2122,26 @@ function renderShelfItem(link, cat) {
 // One thing worth starting with. At 11pm the question is not "what did I save"
 // but "what do I watch", so the top of the home screen answers it: something
 // already in the library, not yet seen, that arrived with its own wide still.
-function pickTonight(links) {
+let tonightId = null;
+
+function pickTonight(links, reroll) {
   const pool = links.filter(l => {
     const e = l.extension_data || {};
     return l.status === 'done' && e.backdrop_url && !e.watched && Number(e.rating) >= 6.5;
   });
   if (!pool.length) return null;
-  // Steady through a session and through a day's worth of refreshes, so the
-  // home screen does not reshuffle itself under the user's thumb.
-  const day = Math.floor(Date.now() / 86400000);
-  return pool[day % pool.length];
+
+  // A new suggestion on every refresh, but held steady in between: the polling
+  // loop redraws this screen every few seconds while links are processing, and
+  // picking again there would swap the suggestion under the user's thumb.
+  const held = tonightId && pool.find(l => l._id === tonightId);
+  if (!reroll && held) return held;
+
+  // Avoid repeating the one already on screen when there is anything else.
+  const choices = held && pool.length > 1 ? pool.filter(l => l._id !== tonightId) : pool;
+  const chosen = choices[Math.floor(Math.random() * choices.length)];
+  tonightId = chosen._id;
+  return chosen;
 }
 
 function renderTonight(link) {
@@ -2152,7 +2162,7 @@ function renderTonight(link) {
     </button>`;
 }
 
-function renderHomeContent(cats, links) {
+function renderHomeContent(cats, links, rerollTonight) {
   const pending = links.filter(l => l.status === 'pending' || l.status === 'processing');
   const countByCategory = {};
   links.filter(l => l.status === 'done' && l.category_id).forEach(l => {
@@ -2201,7 +2211,7 @@ function renderHomeContent(cats, links) {
         return (hasArt ? 0 : 2) + (e.watched ? 1 : 0);
       };
 
-      html += renderTonight(pickTonight(links));
+      html += renderTonight(pickTonight(links, rerollTonight));
       html += '<div class="rails">';
       nonEmpty.forEach(cat => {
         const count = countByCategory[cat._id] || 0;
