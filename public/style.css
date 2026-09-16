@@ -1314,10 +1314,13 @@ button { cursor: pointer; text-align: start; }
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
 }
 
+/* The grip has to read as "grab me" at a glance: it was set in the faintest
+   text colour, which is right for a passive label and wrong for the only
+   control on the row. */
 .order-handle {
   display: flex;
   flex-shrink: 0;
-  color: var(--text-3);
+  color: var(--text-2);
 }
 
 .order-handle svg {

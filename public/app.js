@@ -2349,6 +2349,20 @@ function renderHomeContent(cats, links, rerollTonight) {
           </section>`;
       });
       html += '</div>';
+
+      // Reordering belongs where the order is: buried in settings, nobody
+      // finds it. Only worth offering once there is more than one shelf.
+      if (nonEmpty.length > 1) {
+        html += `
+          <button class="row-link" onclick="showReorder()">
+            <span class="row-link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h10M4 17h6"/></svg></span>
+            <span class="row-link-text">
+              <span class="row-link-title">${esc(t('order.title'))}</span>
+              <span class="row-link-subtitle">${esc(t('order.hint'))}</span>
+            </span>
+            <span class="row-link-go">${ICONS.chevron}</span>
+          </button>`;
+      }
     }
 
     // History feed link
@@ -3336,7 +3350,7 @@ function showReorder() {
       <div class="order-list" id="order-list">
         ${cats.map(c => `
           <div class="order-row" data-id="${c._id}">
-            <span class="order-handle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9h16M4 15h16"/></svg></span>
+            <span class="order-handle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="9" cy="6" r="1.6"/><circle cx="15" cy="6" r="1.6"/><circle cx="9" cy="12" r="1.6"/><circle cx="15" cy="12" r="1.6"/><circle cx="9" cy="18" r="1.6"/><circle cx="15" cy="18" r="1.6"/></svg></span>
             <span class="order-name">${esc(c.name)}</span>
             <span class="order-count">${counts[c._id] || 0}</span>
           </div>`).join('')}
