@@ -14,6 +14,7 @@ const translations = {
   en: {
     // Home
     'home.subtitle': 'Your curated links',
+    'home.saved_count': '{n} things saved',
     'home.collections': 'Collections',
     'home.processing': '{n} link{s} processing\u2026',
     'home.no_links': 'No links yet. Share something!',
@@ -142,6 +143,7 @@ const translations = {
   es: {
     // Home
     'home.subtitle': 'Tus links curados',
+    'home.saved_count': '{n} cosas guardadas',
     'home.collections': 'Colecciones',
     'home.processing': '{n} link{s} procesando\u2026',
     'home.no_links': 'No hay links todav\u00eda. \u00a1Compart\u00ed algo!',
@@ -270,6 +272,7 @@ const translations = {
   fr: {
     // Home
     'home.subtitle': 'Vos liens organis\u00e9s',
+    'home.saved_count': '{n} choses enregistrees',
     'home.collections': 'Collections',
     'home.processing': '{n} lien{s} en cours\u2026',
     'home.no_links': "Pas encore de liens. Partagez quelque chose\u00a0!",
@@ -398,6 +401,7 @@ const translations = {
   pt: {
     // Home
     'home.subtitle': 'Seus links selecionados',
+    'home.saved_count': '{n} coisas salvas',
     'home.collections': 'Cole\u00e7\u00f5es',
     'home.processing': '{n} link{s} processando\u2026',
     'home.no_links': 'Nenhum link ainda. Compartilhe algo!',
@@ -526,6 +530,7 @@ const translations = {
   de: {
     // Home
     'home.subtitle': 'Deine kuratierten Links',
+    'home.saved_count': '{n} Dinge gespeichert',
     'home.collections': 'Sammlungen',
     'home.processing': '{n} Link{s} werden verarbeitet\u2026',
     'home.no_links': 'Noch keine Links. Teile etwas!',
@@ -654,6 +659,7 @@ const translations = {
   it: {
     // Home
     'home.subtitle': 'I tuoi link selezionati',
+    'home.saved_count': '{n} cose salvate',
     'home.collections': 'Collezioni',
     'home.processing': '{n} link in elaborazione\u2026',
     'home.no_links': 'Nessun link ancora. Condividi qualcosa!',
@@ -782,6 +788,7 @@ const translations = {
   ja: {
     // Home
     'home.subtitle': '\u3042\u306a\u305f\u306e\u53ce\u96c6\u30ea\u30f3\u30af',
+    'home.saved_count': '{n}件を保存済み',
     'home.collections': '\u30b3\u30ec\u30af\u30b7\u30e7\u30f3',
     'home.processing': '{n}\u4ef6\u306e\u30ea\u30f3\u30af\u3092\u51e6\u7406\u4e2d\u2026',
     'home.no_links': '\u307e\u3060\u30ea\u30f3\u30af\u304c\u3042\u308a\u307e\u305b\u3093\u3002\u4f55\u304b\u5171\u6709\u3057\u307e\u3057\u3087\u3046\uff01',
@@ -910,6 +917,7 @@ const translations = {
   ko: {
     // Home
     'home.subtitle': '\ub098\ub9cc\uc758 \ud050\ub808\uc774\uc158 \ub9c1\ud06c',
+    'home.saved_count': '{n}개 저장됨',
     'home.collections': '\ucee8\ub809\uc158',
     'home.processing': '{n}\uac1c \ub9c1\ud06c \ucc98\ub9ac \uc911\u2026',
     'home.no_links': '\uc544\uc9c1 \ub9c1\ud06c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4. \ubb34\uc5b8\uac00 \uacf5\uc720\ud574 \ubcf4\uc138\uc694!',
@@ -1038,6 +1046,7 @@ const translations = {
   zh: {
     // Home
     'home.subtitle': '\u4f60\u7684\u7cbe\u9009\u94fe\u63a5',
+    'home.saved_count': '已保存{n}项',
     'home.collections': '\u5408\u96c6',
     'home.processing': '{n}\u4e2a\u94fe\u63a5\u5904\u7406\u4e2d\u2026',
     'home.no_links': '\u8fd8\u6ca1\u6709\u94fe\u63a5\u3002\u5206\u4eab\u4e00\u4e9b\u5427\uff01',
@@ -1166,6 +1175,7 @@ const translations = {
   nl: {
     // Home
     'home.subtitle': 'Jouw samengestelde links',
+    'home.saved_count': '{n} dingen bewaard',
     'home.collections': 'Collecties',
     'home.processing': '{n} link{s} worden verwerkt\u2026',
     'home.no_links': 'Nog geen links. Deel iets!',
@@ -1294,6 +1304,7 @@ const translations = {
   ru: {
     // Home
     'home.subtitle': '\u0412\u0430\u0448\u0438 \u0438\u0437\u0431\u0440\u0430\u043d\u043d\u044b\u0435 \u0441\u0441\u044b\u043b\u043a\u0438',
+    'home.saved_count': 'сохранено: {n}',
     'home.collections': '\u041a\u043e\u043b\u043b\u0435\u043a\u0446\u0438\u0438',
     'home.processing': '\u041e\u0431\u0440\u0430\u0431\u0430\u0442\u044b\u0432\u0430\u0435\u0442\u0441\u044f {n} \u0441\u0441\u044b\u043b\u043e\u043a\u2026',
     'home.no_links': '\u0421\u0441\u044b\u043b\u043e\u043a \u043f\u043e\u043a\u0430 \u043d\u0435\u0442. \u041f\u043e\u0434\u0435\u043b\u0438\u0442\u0435\u0441\u044c \u0447\u0435\u043c-\u043d\u0438\u0431\u0443\u0434\u044c!',
@@ -1422,6 +1433,7 @@ const translations = {
   ar: {
     // Home
     'home.subtitle': '\u0631\u0648\u0627\u0628\u0637\u0643 \u0627\u0644\u0645\u062e\u062a\u0627\u0631\u0629',
+    'home.saved_count': '{n} عنصرا محفوظا',
     'home.collections': '\u0627\u0644\u0645\u062c\u0645\u0648\u0639\u0627\u062a',
     'home.processing': '\u062c\u0627\u0631\u064a \u0645\u0639\u0627\u0644\u062c\u0629 {n} \u0631\u0627\u0628\u0637\u2026',
     'home.no_links': '\u0644\u0627 \u062a\u0648\u062c\u062f \u0631\u0648\u0627\u0628\u0637 \u0628\u0639\u062f. \u0634\u0627\u0631\u0643 \u0634\u064a\u0626\u0627\u064b!',
@@ -1550,6 +1562,7 @@ const translations = {
   hi: {
     // Home
     'home.subtitle': '\u0906\u092a\u0915\u0947 \u091a\u0941\u0928\u0947 \u0939\u0941\u090f \u0932\u093f\u0902\u0915',
+    'home.saved_count': '{n} चीजें सहेजी गईं',
     'home.collections': '\u0938\u0902\u0917\u094d\u0930\u0939',
     'home.processing': '{n} \u0932\u093f\u0902\u0915 \u092a\u094d\u0930\u094b\u0938\u0947\u0938 \u0939\u094b \u0930\u0939\u0947 \u0939\u0948\u0902\u2026',
     'home.no_links': '\u0905\u092d\u0940 \u0915\u094b\u0908 \u0932\u093f\u0902\u0915 \u0928\u0939\u0940\u0902\u0964 \u0915\u0941\u091b \u0936\u0947\u092f\u0930 \u0915\u0930\u0947\u0902!',
@@ -1678,6 +1691,7 @@ const translations = {
   tr: {
     // Home
     'home.subtitle': 'Se\u00e7ilmi\u015f ba\u011flant\u0131lar\u0131n',
+    'home.saved_count': '{n} sey kaydedildi',
     'home.collections': 'Koleksiyonlar',
     'home.processing': '{n} ba\u011flant\u0131 i\u015fleniyor\u2026',
     'home.no_links': 'Hen\u00fcz ba\u011flant\u0131 yok. Bir \u015fey payla\u015f!',
@@ -2041,19 +2055,16 @@ async function renderHome() {
   app.innerHTML = `
     <div class="screen">
       <div class="home-header">
-        <div class="home-brand"><h1>Shelf</h1><p>${esc(t('home.subtitle'))}</p></div>
+        <div class="home-brand"><h1>Shelf</h1><p id="home-count"></p></div>
         <div class="home-header-actions">
           <button class="add-link-btn" onclick="showAddLink()">${ICONS.plus}</button>
           <button class="refresh-btn" onclick="showSettings()" aria-label="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg></button>
         </div>
       </div>
       <div id="home-content">
-        <p class="section-label">${esc(t('home.collections'))}</p>
-        <div class="category-grid">
-          <div class="skeleton skeleton-card"></div>
-          <div class="skeleton skeleton-card"></div>
-          <div class="skeleton skeleton-card"></div>
-          <div class="skeleton skeleton-card"></div>
+        <div class="shelves">
+          <section class="shelf"><div class="skeleton skeleton-shelf-name"></div><div class="shelf-items"><span class="skeleton shelf-item shelf-item-poster"></span><span class="skeleton shelf-item shelf-item-poster"></span><span class="skeleton shelf-item shelf-item-poster"></span><span class="skeleton shelf-item shelf-item-poster"></span></div></section>
+          <section class="shelf"><div class="skeleton skeleton-shelf-name"></div><div class="shelf-items"><span class="skeleton shelf-item shelf-item-tile"></span><span class="skeleton shelf-item shelf-item-tile"></span><span class="skeleton shelf-item shelf-item-tile"></span><span class="skeleton shelf-item shelf-item-tile"></span></div></section>
         </div>
       </div>
     </div>`;
@@ -2066,6 +2077,21 @@ async function renderHome() {
   } catch (e) {
     document.getElementById('home-content').innerHTML = `<div class="empty-state"><span class="empty-state-icon">\u26a0\ufe0f</span><p class="empty-state-text">${esc(t('home.could_not_load'))}</p></div>`;
   }
+}
+
+// One object standing on a shelf. Posters keep their 2:3 rectangle, people are
+// circles, everything else is a square tile: the shape says what kind of thing
+// it is before you read a word. Items with no image fall back to their initial.
+function renderShelfItem(link, cat) {
+  const ext = link.extension_data || {};
+  const image = ext.poster_url || ext.profile_url || ext.photo_url || link.thumbnail;
+  const type = resolveDetailType(ext, cat ? cat.extension_type : 'generic');
+  const shape = type === 'movie' ? 'poster' : type === 'director' ? 'round' : 'tile';
+  const title = link.title || '';
+
+  return image
+    ? `<span class="shelf-item shelf-item-${shape}"><img src="${esc(image)}" alt="${esc(title)}" loading="lazy" onerror="this.parentElement.classList.add('is-bare')"><span class="shelf-item-fallback">${esc(title.slice(0, 1))}</span></span>`
+    : `<span class="shelf-item shelf-item-${shape} is-bare"><span class="shelf-item-fallback">${esc(title.slice(0, 1) || '?')}</span></span>`;
 }
 
 function renderHomeContent(cats, links) {
@@ -2101,23 +2127,30 @@ function renderHomeContent(cats, links) {
     // Show categories with own links OR shared categories (even if 0 own links)
     const nonEmpty = cats.filter(cat => countByCategory[cat._id] > 0 || (cat.isShared && !cat.isOwner));
     if (nonEmpty.length > 0) {
-      html += `<p class="section-label">${esc(t('home.collections'))}</p><div class="category-grid stagger">`;
+      // One shelf per category: what is on it, resting on the rule below.
+      // A grid of identical icon cards hid 266 posters behind a generic glyph.
+      const byCategory = {};
+      links.filter(l => l.status === 'done' && l.category_id).forEach(l => {
+        (byCategory[l.category_id] = byCategory[l.category_id] || []).push(l);
+      });
+
+      html += '<div class="shelves">';
       nonEmpty.forEach(cat => {
         const count = countByCategory[cat._id] || 0;
-        const sharedBadge = cat.isShared
-          ? `<span class="category-shared-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>${(cat.shared_with || []).length + 1}</span>`
+        const shared = cat.isShared
+          ? `<span class="shelf-shared" title="${esc(t('share.shared_with_you'))}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>${(cat.shared_with || []).length + 1}</span>`
           : '';
-        // For shared non-owned categories, show "shared with you" instead of count
-        const countText = (cat.isOwner === false)
-          ? esc(t('share.shared_with_you'))
-          : esc(t('category.link_count', { n: count }));
+        const meta = cat.isOwner === false ? esc(t('share.shared_with_you')) : String(count);
+        const items = (byCategory[cat._id] || []).slice(0, 12);
+
         html += `
-          <div class="category-card" onclick="navigate('#/category/${cat._id}')">
-            ${sharedBadge}
-            <span class="category-icon">${getCategoryIcon(cat.slug, cat)}</span>
-            <div class="category-name">${esc(cat.name)}</div>
-            <div class="category-count">${countText}</div>
-          </div>`;
+          <section class="shelf" onclick="navigate('#/category/${cat._id}')">
+            <header class="shelf-head">
+              <h2 class="shelf-name">${esc(cat.name)}</h2>
+              <span class="shelf-meta">${shared}${meta}</span>
+            </header>
+            <div class="shelf-items">${items.map(item => renderShelfItem(item, cat)).join('')}</div>
+          </section>`;
       });
       html += '</div>';
     }
@@ -2138,6 +2171,14 @@ function renderHomeContent(cats, links) {
   }
 
   document.getElementById('home-content').innerHTML = html;
+
+  // The masthead says how much is on the shelves, which is the one number that
+  // tells you whether this is a library or an empty room.
+  const countEl = document.getElementById('home-count');
+  if (countEl) {
+    const total = links.filter(l => l.status === 'done').length;
+    countEl.textContent = total ? t('home.saved_count', { n: total }) : t('home.subtitle');
+  }
 }
 
 let categoryFilteredLinks = [];

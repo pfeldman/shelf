@@ -1,38 +1,50 @@
-/* ── Shelf PWA — Editorial Curator Aesthetic ── */
+/* ── Shelf ──────────────────────────────────────────────────────────────
+   A shelf is a firm horizontal line with things resting on it, visible
+   edge-on. That is the whole system: every category is a shelf, its
+   contents lean on the rule below it, and you can see what is there
+   without opening anything.
+
+   The library is 266 posters and 2598 faces. Those carry the colour, so
+   the interface does not: deep ink green and cool paper, with brass for
+   the few things that need to be found. No card has a shadow; the rule
+   does the structural work instead.
+   ───────────────────────────────────────────────────────────────────── */
 
 :root {
-  --bg: #f6f3ee;
-  --bg-card: #fff;
-  --bg-elevated: #ede9e1;
-  --text: #1a1814;
-  --text-secondary: #6b6560;
-  --text-tertiary: #9e9790;
-  --accent: #c45d3e;
-  --accent-soft: #f0d8cf;
-  --border: #e2ded6;
-  --shadow: 0 1px 3px rgba(26, 24, 20, 0.06), 0 6px 16px rgba(26, 24, 20, 0.04);
-  --shadow-lg: 0 4px 12px rgba(26, 24, 20, 0.08), 0 16px 40px rgba(26, 24, 20, 0.06);
-  --radius: 14px;
-  --radius-sm: 10px;
-  --font-display: 'DM Serif Display', Georgia, serif;
-  --font-body: 'Instrument Sans', -apple-system, sans-serif;
+  --bg: #f7f8f4;
+  --bg-card: #ffffff;
+  --bg-elevated: #eceee7;
+  --text: #141a15;
+  --text-secondary: #5a6159;
+  --text-tertiary: #8d948b;
+  --accent: #8a6a22;
+  --accent-soft: #f0e6cd;
+  --border: #dde0d8;
+  /* The shelf itself: heavier than a divider, because it carries weight. */
+  --rule: #141a15;
+  --rule-weight: 2px;
+  --shadow: none;
+  --shadow-lg: none;
+  --radius: 3px;
+  --radius-sm: 2px;
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Karla', -apple-system, BlinkMacSystemFont, sans-serif;
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #1a1814;
-    --bg-card: #252220;
-    --bg-elevated: #2e2a27;
-    --text: #f0ece4;
-    --text-secondary: #a09a92;
-    --text-tertiary: #6b6560;
-    --accent: #e07a5f;
-    --accent-soft: #3d2a22;
-    --border: #36322e;
-    --shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 6px 16px rgba(0, 0, 0, 0.15);
-    --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.25), 0 16px 40px rgba(0, 0, 0, 0.2);
+    --bg: #0e1310;
+    --bg-card: #161d18;
+    --bg-elevated: #1e2620;
+    --text: #e9ede6;
+    --text-secondary: #99a297;
+    --text-tertiary: #6b746a;
+    --accent: #d9a441;
+    --accent-soft: #2b2416;
+    --border: #262f28;
+    --rule: #47524a;
   }
 }
 
@@ -99,6 +111,8 @@ body {
 
 .header-title {
   font-family: var(--font-display);
+  font-variation-settings: 'SOFT' 0, 'WONK' 1, 'opsz' 72;
+  font-weight: 600;
   font-size: 1.75rem;
   letter-spacing: -0.01em;
   line-height: 1.1;
@@ -108,8 +122,7 @@ body {
   font-size: 0.8rem;
   color: var(--text-tertiary);
   font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.01em;
 }
 
 .back-btn {
@@ -188,23 +201,25 @@ body {
 }
 
 .home-brand {
-  padding: 28px 0 8px;
-  text-align: center;
+  padding: 26px 0 6px;
+  text-align: left;
 }
 
 .home-brand h1 {
   font-family: var(--font-display);
-  font-size: 2.2rem;
-  letter-spacing: -0.02em;
+  font-variation-settings: 'SOFT' 0, 'WONK' 1, 'opsz' 144;
+  font-weight: 700;
+  font-size: 2.6rem;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
 }
 
+/* Sentence case, no tracked-out caps: it is a note about the library, not a
+   label stamped on it. */
 .home-brand p {
-  color: var(--text-tertiary);
-  font-size: 0.82rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-top: 4px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-top: 6px;
 }
 
 /* ── Pending banner ── */
@@ -300,77 +315,164 @@ body {
 /* ── Category grid ── */
 
 .section-label {
-  font-size: 0.72rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  font-size: 0.8rem;
+  font-weight: 500;
   color: var(--text-tertiary);
-  margin: 28px 0 14px;
+  margin: 28px 0 12px;
 }
 
-.category-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+/* ── Shelves ────────────────────────────────────────────────────────────
+   Each category is a shelf. The rule under it is the shelf itself, and the
+   items rest on it. This is the one repeated structural device in the app,
+   which is why nothing else here has a border or a shadow.
+   ───────────────────────────────────────────────────────────────────── */
+
+.shelves {
+  margin-top: 4px;
 }
 
-.category-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 20px 16px 16px;
-  cursor: pointer;
-  transition: all 0.18s ease;
-  box-shadow: var(--shadow);
+.shelf {
   position: relative;
-  overflow: hidden;
+  padding-top: 26px;
+  padding-bottom: 12px;
+  cursor: pointer;
 }
 
-.category-card::before {
+/* The board is drawn on the shelf, not on the scrolling row, so it stays a
+   solid unbroken line while the contents fade off the right edge. */
+.shelf::after {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--accent);
-  opacity: 0;
-  transition: opacity 0.18s ease;
+  left: -20px;
+  right: -20px;
+  bottom: 0;
+  height: var(--rule-weight);
+  background: var(--rule);
 }
 
-.category-card:active {
-  transform: scale(0.97);
-  box-shadow: var(--shadow-lg);
+.shelf-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 14px;
 }
 
-.category-card:active::before {
-  opacity: 1;
+.shelf-name {
+  font-family: var(--font-display);
+  font-variation-settings: 'SOFT' 0, 'WONK' 1, 'opsz' 96;
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 1;
+  letter-spacing: -0.015em;
 }
 
-.category-icon {
-  width: 32px;
-  height: 32px;
-  margin-bottom: 10px;
-  display: block;
+.shelf-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-secondary);
+}
+
+.shelf-shared {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
   color: var(--accent);
 }
 
-.category-icon svg {
+.shelf-shared svg {
+  width: 13px;
+  height: 13px;
+}
+
+/* Runs past the text margin to the screen edge, and fades there rather than
+   being chopped, so a half-visible item reads as "keep going" instead of as a
+   rendering mistake. */
+.shelf-items {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  margin: 0 -20px;
+  padding: 0 20px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  -webkit-mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 44px), transparent 100%);
+  mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 44px), transparent 100%);
+}
+
+.shelf-items::-webkit-scrollbar {
+  display: none;
+}
+
+.shelf-item {
+  position: relative;
+  flex: 0 0 auto;
+  display: block;
+  overflow: hidden;
+  background: var(--bg-elevated);
+  scroll-snap-align: start;
+}
+
+.shelf-item img {
+  display: block;
   width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 
-.category-name {
+/* Shape carries meaning: a film is a poster, a person is a face, the rest
+   is a plain tile. No uniform radius flattening those differences. */
+.shelf-item-poster {
+  width: 64px;
+  height: 96px;
+  border-radius: var(--radius);
+}
+
+.shelf-item-tile {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius);
+}
+
+.shelf-item-round {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+}
+
+.shelf-item-fallback {
+  display: none;
+  position: absolute;
+  inset: 0;
+  align-items: center;
+  justify-content: center;
   font-family: var(--font-display);
-  font-size: 1.05rem;
-  line-height: 1.25;
-  margin-bottom: 4px;
+  font-size: 1.5rem;
+  color: var(--text-tertiary);
 }
 
-.category-count {
-  font-size: 0.78rem;
-  color: var(--text-tertiary);
-  font-weight: 500;
+.shelf-item.is-bare img {
+  display: none;
+}
+
+.shelf-item.is-bare .shelf-item-fallback {
+  display: flex;
+}
+
+.shelf:active .shelf-name {
+  color: var(--accent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .shelf-name {
+    transition: color 0.15s ease;
+  }
 }
 
 /* ── Add link button ── */
@@ -499,7 +601,7 @@ body {
 .genre-chip {
   flex-shrink: 0;
   padding: 6px 14px;
-  border-radius: 20px;
+  border-radius: var(--radius);
   border: 1.5px solid var(--border);
   background: var(--bg-card);
   color: var(--text-secondary);
@@ -686,7 +788,7 @@ body {
   font-size: 0.72rem;
   font-weight: 700;
   padding: 3px 7px;
-  border-radius: 6px;
+  border-radius: var(--radius);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   z-index: 2;
@@ -723,16 +825,30 @@ body {
   background: var(--bg-elevated);
 }
 
+/* The poster is the best thing on this screen and it was rendered at 160px in
+   the middle of a column. Give it the full width and let it set the tone for
+   everything under it. */
 .detail-poster {
-  width: 160px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-lg);
-  margin: 20px auto;
   display: block;
+  width: calc(100% + 40px);
+  margin: 0 -20px 4px;
+  aspect-ratio: 2 / 3;
+  max-height: 62vh;
+  object-fit: cover;
+  object-position: center top;
+  background: var(--bg-elevated);
+}
+
+/* Over a full-bleed image the title needs its own ground to sit on. */
+.detail-poster + .detail-title,
+.detail-hero + .detail-title {
+  margin-top: 18px;
 }
 
 .detail-title {
   font-family: var(--font-display);
+  font-variation-settings: 'SOFT' 0, 'WONK' 1, 'opsz' 120;
+  font-weight: 600;
   font-size: 1.6rem;
   line-height: 1.2;
   letter-spacing: -0.01em;
@@ -749,11 +865,10 @@ body {
 .detail-tag {
   font-size: 0.75rem;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.01em;
   padding: 5px 10px;
   background: var(--bg-elevated);
-  border-radius: 6px;
+  border-radius: var(--radius);
   color: var(--text-secondary);
 }
 
@@ -771,6 +886,8 @@ body {
 
 .detail-section-title {
   font-family: var(--font-display);
+  font-variation-settings: 'SOFT' 0, 'WONK' 1, 'opsz' 48;
+  font-weight: 600;
   font-size: 1.15rem;
   margin: 24px 0 12px;
 }
@@ -818,8 +935,7 @@ body {
 
 .recipe-stat-label {
   font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.01em;
   color: var(--text-tertiary);
   font-weight: 600;
   margin-top: 2px;
@@ -983,7 +1099,7 @@ body {
   padding: 10px 12px;
   margin-bottom: 12px;
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: var(--radius);
   font-size: 13px;
   background: var(--bg);
   color: var(--text);
@@ -1111,14 +1227,14 @@ body {
 .provider-logo {
   width: 36px;
   height: 36px;
-  border-radius: 8px;
+  border-radius: var(--radius);
   object-fit: cover;
 }
 
 .provider-logo-placeholder {
   width: 36px;
   height: 36px;
-  border-radius: 8px;
+  border-radius: var(--radius);
   background: var(--border);
   display: flex;
   align-items: center;
@@ -1138,7 +1254,7 @@ body {
   color: var(--muted);
   background: var(--border);
   padding: 2px 8px;
-  border-radius: 10px;
+  border-radius: var(--radius);
 }
 
 .provider-countries {
@@ -1147,7 +1263,7 @@ body {
   gap: 5px;
   padding: 8px 12px 12px;
   background: var(--card);
-  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  border-radius: 0 0 var(--radius) var(--radius);
   margin-top: -2px;
 }
 
@@ -1171,7 +1287,7 @@ body {
   background: var(--text);
   color: var(--bg);
   padding: 4px 10px;
-  border-radius: 6px;
+  border-radius: var(--radius);
   font-size: 0.72rem;
   font-weight: 500;
   white-space: nowrap;
@@ -1206,7 +1322,7 @@ body {
 
 .confirm-sheet {
   background: var(--bg-card);
-  border-radius: 18px;
+  border-radius: var(--radius);
   padding: 24px 20px 20px;
   width: 100%;
   max-width: 400px;
@@ -1292,7 +1408,7 @@ body {
   color: #fff;
   border: none;
   padding: 6px 14px;
-  border-radius: 6px;
+  border-radius: var(--radius);
   font-family: var(--font-body);
   font-size: 0.82rem;
   font-weight: 600;
@@ -1339,7 +1455,7 @@ body {
 .film-poster {
   position: relative;
   aspect-ratio: 2/3;
-  border-radius: 8px;
+  border-radius: var(--radius);
   overflow: hidden;
   background: var(--bg-elevated);
 }
@@ -1431,7 +1547,7 @@ body {
   justify-content: center;
   width: 42px;
   height: 42px;
-  border-radius: 12px;
+  border-radius: var(--radius);
   background: var(--accent-soft);
   color: var(--accent);
   flex-shrink: 0;
@@ -1499,7 +1615,7 @@ body {
 .history-thumb-wrap {
   width: 52px;
   height: 52px;
-  border-radius: 10px;
+  border-radius: var(--radius);
   overflow: hidden;
   flex-shrink: 0;
   background: var(--bg-elevated);
@@ -1552,7 +1668,6 @@ body {
 .history-status {
   font-size: 0.68rem;
   font-weight: 600;
-  text-transform: uppercase;
   padding: 2px 6px;
   background: var(--bg-secondary);
   color: var(--text-secondary);
@@ -1573,7 +1688,6 @@ body {
   gap: 4px;
   font-size: 0.72rem;
   font-weight: 600;
-  text-transform: uppercase;
   letter-spacing: 0.04em;
   padding: 3px 8px;
   background: var(--accent-soft);
@@ -1616,8 +1730,7 @@ body {
   display: block;
   font-size: 0.78rem;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.01em;
   color: var(--text-tertiary);
   margin-bottom: 8px;
 }
@@ -1627,7 +1740,7 @@ body {
   grid-template-columns: repeat(3, 1fr);
   gap: 6px;
   background: var(--bg);
-  border-radius: 12px;
+  border-radius: var(--radius);
   padding: 6px;
   max-height: 280px;
   overflow-y: auto;
@@ -1642,7 +1755,7 @@ body {
   padding: 10px 4px;
   border: none;
   background: none;
-  border-radius: 8px;
+  border-radius: var(--radius);
   cursor: pointer;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   font-family: var(--font-body);
@@ -1653,7 +1766,7 @@ body {
   font-size: 0.7rem;
   font-weight: 700;
   color: var(--text-tertiary);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.01em;
 }
 
 .lang-pill-name {
@@ -1849,7 +1962,6 @@ body {
 .share-member-owner {
   font-size: 0.7rem;
   font-weight: 600;
-  text-transform: uppercase;
   letter-spacing: 0.04em;
   color: var(--accent);
   flex-shrink: 0;
@@ -1857,7 +1969,7 @@ body {
 
 .share-member-remove {
   padding: 4px 10px;
-  border-radius: 6px;
+  border-radius: var(--radius);
   border: 1px solid var(--border);
   background: transparent;
   color: var(--text-secondary);
@@ -1878,8 +1990,7 @@ body {
 .share-section-label {
   font-size: 0.72rem;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.01em;
   color: var(--text-tertiary);
   margin-bottom: 8px;
 }
@@ -1916,7 +2027,7 @@ body {
 .transcript {
   margin: 4px 0 24px;
   border: 1px solid var(--bg-elevated);
-  border-radius: 12px;
+  border-radius: var(--radius);
   background: var(--bg-card);
   overflow: hidden;
 }
@@ -1951,7 +2062,6 @@ body {
   padding: 0 16px;
   font-size: 0.75rem;
   color: var(--text-tertiary);
-  text-transform: uppercase;
   letter-spacing: 0.04em;
 }
 
@@ -2058,7 +2168,7 @@ body {
   width: 100%;
   aspect-ratio: 2 / 3;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: var(--radius);
   background: var(--bg-elevated);
 }
 
@@ -2075,4 +2185,25 @@ body {
 .work-meta {
   font-size: 0.72rem;
   color: var(--text-tertiary);
+}
+
+/* Loading placeholders shaped like the shelf they will become. */
+.skeleton-shelf-name {
+  width: 42%;
+  height: 24px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 14px;
+}
+
+/* Things with no image of their own stay quiet: they are placeholders for
+   content that could not be read, not a category worth looking at. */
+.shelf-item.is-bare {
+  background: transparent;
+  border: 1px solid var(--border);
+}
+
+.shelf-item.is-bare .shelf-item-fallback {
+  font-size: 1.1rem;
+  color: var(--text-tertiary);
+  opacity: 0.55;
 }
