@@ -241,7 +241,8 @@ Rules:
 - For "book" extension_type, use category "Libros" (slug: "libros"). Set extension_data to: {"search_title": "book title in original language", "author": "author name", "year": "2024"}
 - For "director" extension_type, use category "Directores" (slug: "directores"). Set extension_data to: {"search_name": "director full name"}
 - For "generic" extension_type, set extension_data to: {}
-- MULTI-ITEM: If the content lists MULTIPLE movies or TV shows (e.g. "50 movies to watch", "top 10 series"), you MUST return ALL of them as an "items" array. Each item needs search_title, media_type, and year. Only use "items" when the content clearly lists multiple distinct titles.
+- MULTI-ITEM: If the content presents SEVERAL distinct works rather than one (e.g. "50 movies to watch", "top 10 series", "libros que compre en la feria", "4 recetas con garbanzo", "autores argentinos que tenes que leer", a video recommending three different shows), you MUST return ALL of them as an "items" array. This applies to every type: movies, TV shows, books, authors, directors and recipes. Each item needs a "title", plus "search_title", "media_type" and "year" for screen works, and "author" for books. Set the link's own title to the name of the list itself, not to the first item.
+- NEVER invent placeholder items. If the content clearly lists several works but you cannot read their actual names, return an empty "items" array and describe the list in the summary instead. Values like "series title 1" or "movie name here" are always wrong.
 
 --- CONTENT START ---
 ${content}
@@ -361,7 +362,10 @@ async function processLink(link, Category, userId, Link, language) {
   const extData = link.extension_data || {};
   const recatHint = extData.recategorize_as || null;
   const userHint = extData.user_hint || sharedText || null;
-  const linkLang = language || link.language || 'en';
+  // Fall back to the user's saved preference rather than to English, so a link
+  // captured without a language still gets written in the language they read.
+  const { resolveLanguage } = require('./_db');
+  const linkLang = language || await resolveLanguage(link, userId);
   const aiResult = await categorizeAndExtract(content, resolvedUrl, catList, recatHint, userHint, linkLang);
 
   // 4. Ensure category exists (scoped to user if userId provided)

@@ -25,7 +25,7 @@ module.exports = async function handler(req, res) {
     return res.status(500).json({ error: 'Server configuration error' });
   }
 
-  const { url, api_key, language = 'en' } = req.body || {};
+  const { url, api_key, language = null } = req.body || {};
 
   if (!api_key || api_key !== expectedKey) {
     return res.status(401).json({ error: 'Invalid API key' });

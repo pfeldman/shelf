@@ -46,6 +46,7 @@ const translations = {
     'link.watched': 'Watched',
     'link.not_watched': 'Not watched',
     'link.transcript': 'What the video says',
+    'link.items_in_list': '{n} titles in this list',
     'link.transcript_captions': 'From the video own subtitles',
     'link.transcript_auto': 'Automatically transcribed from the audio',
     'link.director': 'Director',
@@ -167,6 +168,7 @@ const translations = {
     'link.watched': 'Vista',
     'link.not_watched': 'No vista',
     'link.transcript': 'Lo que dice el video',
+    'link.items_in_list': '{n} titulos en esta lista',
     'link.transcript_captions': 'De los subtitulos del propio video',
     'link.transcript_auto': 'Transcripto automaticamente del audio',
     'link.director': 'Director',
@@ -288,6 +290,7 @@ const translations = {
     'link.watched': 'Vu',
     'link.not_watched': 'Non vu',
     'link.transcript': 'Ce que dit la video',
+    'link.items_in_list': '{n} titres dans cette liste',
     'link.transcript_captions': 'Depuis les sous-titres de la video',
     'link.transcript_auto': 'Transcrit automatiquement depuis l audio',
     'link.director': 'R\u00e9alisateur',
@@ -409,6 +412,7 @@ const translations = {
     'link.watched': 'Assistido',
     'link.not_watched': 'N\u00e3o assistido',
     'link.transcript': 'O que o video diz',
+    'link.items_in_list': '{n} titulos nesta lista',
     'link.transcript_captions': 'Das legendas do proprio video',
     'link.transcript_auto': 'Transcrito automaticamente do audio',
     'link.director': 'Diretor',
@@ -530,6 +534,7 @@ const translations = {
     'link.watched': 'Gesehen',
     'link.not_watched': 'Nicht gesehen',
     'link.transcript': 'Was das Video sagt',
+    'link.items_in_list': '{n} Titel in dieser Liste',
     'link.transcript_captions': 'Aus den Untertiteln des Videos',
     'link.transcript_auto': 'Automatisch aus dem Audio transkribiert',
     'link.director': 'Regisseur',
@@ -651,6 +656,7 @@ const translations = {
     'link.watched': 'Visto',
     'link.not_watched': 'Non visto',
     'link.transcript': 'Cosa dice il video',
+    'link.items_in_list': '{n} titoli in questo elenco',
     'link.transcript_captions': 'Dai sottotitoli del video',
     'link.transcript_auto': 'Trascritto automaticamente dall audio',
     'link.director': 'Regista',
@@ -772,6 +778,7 @@ const translations = {
     'link.watched': '\u8996\u8074\u6e08\u307f',
     'link.not_watched': '\u672a\u8996\u8074',
     'link.transcript': '動画の内容',
+    'link.items_in_list': 'このリストの{n}件',
     'link.transcript_captions': '動画の字幕から',
     'link.transcript_auto': '音声から自動文字起こし',
     'link.director': '\u76e3\u7763',
@@ -893,6 +900,7 @@ const translations = {
     'link.watched': '\uc2dc\uccad \uc644\ub8cc',
     'link.not_watched': '\ubbf8\uc2dc\uccad',
     'link.transcript': '영상 내용',
+    'link.items_in_list': '이 목록의 {n}개 항목',
     'link.transcript_captions': '영상 자막에서',
     'link.transcript_auto': '오디오에서 자동 전사',
     'link.director': '\uac10\ub3c5',
@@ -1014,6 +1022,7 @@ const translations = {
     'link.watched': '\u5df2\u770b',
     'link.not_watched': '\u672a\u770b',
     'link.transcript': '视频内容',
+    'link.items_in_list': '此列表中的{n}个条目',
     'link.transcript_captions': '来自视频字幕',
     'link.transcript_auto': '根据音频自动转录',
     'link.director': '\u5bfc\u6f14',
@@ -1135,6 +1144,7 @@ const translations = {
     'link.watched': 'Gezien',
     'link.not_watched': 'Niet gezien',
     'link.transcript': 'Wat de video zegt',
+    'link.items_in_list': '{n} titels in deze lijst',
     'link.transcript_captions': 'Uit de ondertiteling van de video',
     'link.transcript_auto': 'Automatisch getranscribeerd uit de audio',
     'link.director': 'Regisseur',
@@ -1256,6 +1266,7 @@ const translations = {
     'link.watched': '\u041f\u0440\u043e\u0441\u043c\u043e\u0442\u0440\u0435\u043d\u043e',
     'link.not_watched': '\u041d\u0435 \u043f\u0440\u043e\u0441\u043c\u043e\u0442\u0440\u0435\u043d\u043e',
     'link.transcript': 'Что говорится в видео',
+    'link.items_in_list': '{n} названий в списке',
     'link.transcript_captions': 'Из субтитров видео',
     'link.transcript_auto': 'Автоматически расшифровано из аудио',
     'link.director': '\u0420\u0435\u0436\u0438\u0441\u0441\u0451\u0440',
@@ -1377,6 +1388,7 @@ const translations = {
     'link.watched': '\u062a\u0645\u062a \u0627\u0644\u0645\u0634\u0627\u0647\u062f\u0629',
     'link.not_watched': '\u0644\u0645 \u064a\u064f\u0634\u0627\u0647\u064e\u062f',
     'link.transcript': 'ما يقوله الفيديو',
+    'link.items_in_list': '{n} عناوين في هذه القائمة',
     'link.transcript_captions': 'من ترجمات الفيديو نفسه',
     'link.transcript_auto': 'منسوخ تلقائيا من الصوت',
     'link.director': '\u0627\u0644\u0645\u062e\u0631\u062c',
@@ -1498,6 +1510,7 @@ const translations = {
     'link.watched': '\u0926\u0947\u0916\u093e \u0917\u092f\u093e',
     'link.not_watched': '\u0928\u0939\u0940\u0902 \u0926\u0947\u0916\u093e',
     'link.transcript': 'वीडियो में क्या कहा गया',
+    'link.items_in_list': 'इस सूची में {n} शीर्षक',
     'link.transcript_captions': 'वीडियो के अपने उपशीर्षक से',
     'link.transcript_auto': 'ऑडियो से स्वचालित रूप से लिप्यंतरित',
     'link.director': '\u0928\u093f\u0930\u094d\u0926\u0947\u0936\u0915',
@@ -1619,6 +1632,7 @@ const translations = {
     'link.watched': '\u0130zlendi',
     'link.not_watched': '\u0130zlenmedi',
     'link.transcript': 'Videoda ne anlatiliyor',
+    'link.items_in_list': 'bu listede {n} baslik',
     'link.transcript_captions': 'Videonun kendi altyazilarindan',
     'link.transcript_auto': 'Sesten otomatik olarak yaziya dokuldu',
     'link.director': 'Y\u00f6netmen',
@@ -1731,6 +1745,22 @@ function setLocale(locale) {
   currentLocale = locale;
   localStorage.setItem('shelf_language', locale);
   applyDirection();
+  syncLanguagePreference(locale);
+}
+
+// The browser is not the only thing that writes content: the video worker runs
+// on a server that never sees this page. Persist the choice so a recipe from an
+// English video still gets written in the language the user picked here.
+async function syncLanguagePreference(locale) {
+  try {
+    await authFetch(`${API_BASE}/api/prefs`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ language: locale }),
+    });
+  } catch {
+    // Not worth interrupting the user: it retries on the next app start.
+  }
 }
 
 function t(key, params) {
@@ -2272,6 +2302,7 @@ async function renderLink(linkId) {
     html += renderGenericDetail(link);
   }
 
+  html += renderItemsList(link, ext);
   html += renderTranscript(link);
 
   html += `
@@ -2487,6 +2518,31 @@ function renderGenericDetail(link) {
   }
   html += `<h2 class="detail-title">${esc(link.title || '')}</h2>`;
   if (link.summary) html += `<p class="detail-summary">${esc(link.summary)}</p>`;
+  return html;
+}
+
+// A link can hold several works instead of one: "50 movies to watch", a video
+// recommending three series, a haul of books from a fair. Without this the
+// extracted list existed in the data and was invisible in the app.
+function renderItemsList(link, ext) {
+  const items = (ext && ext.items) || [];
+  if (!items.length) return '';
+
+  let html = `<h3 class="detail-section-title">${esc(t('link.items_in_list', { n: items.length }))}</h3>`;
+  html += '<ul class="item-list">';
+  for (const item of items) {
+    const name = item.title || item.search_title || item.name || '';
+    if (!name) continue;
+    const meta = [
+      item.year,
+      item.author,
+      item.media_type === 'tv' ? t('link.tv_show') : item.media_type === 'movie' ? t('link.movie') : null,
+    ].filter(Boolean).join(' · ');
+    html += `<li class="item-row"><span class="item-name">${esc(name)}</span>`;
+    if (meta) html += `<span class="item-meta">${esc(meta)}</span>`;
+    html += '</li>';
+  }
+  html += '</ul>';
   return html;
 }
 
@@ -2885,6 +2941,10 @@ function bootApp(supabaseClient) {
 
   window.addEventListener('hashchange', render);
   initPullToRefresh();
+
+  // Keep the server's copy in step with this device, including the very first
+  // run, where the locale was detected rather than chosen.
+  syncLanguagePreference(currentLocale);
 
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').then(reg => {

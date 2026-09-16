@@ -33,7 +33,8 @@ const linkSchema = new mongoose.Schema({
   summary: { type: String, default: null },
   thumbnail: { type: String, default: null },
   extension_data: { type: mongoose.Schema.Types.Mixed, default: {} },
-  language: { type: String, default: 'en' },
+  // null means "not specified": fall back to the user's saved preference.
+  language: { type: String, default: null },
 }, { collection: 'links', versionKey: false });
 
 const categorySchema = new mongoose.Schema({
@@ -55,9 +56,36 @@ const categorySchema = new mongoose.Schema({
 // links with E11000. Declared here so the constraint cannot silently come back.
 categorySchema.index({ user_id: 1, slug: 1 }, { unique: true });
 
+// The language a user wants their content written in. It is a property of the
+// person, not of the link: a recipe from an English video should still be
+// stored in the language the user reads. Supabase owns identity, so this is the
+// one place app-level preferences live.
+const userPrefSchema = new mongoose.Schema({
+  user_id: { type: String, required: true, unique: true },
+  language: { type: String, default: 'en' },
+  updated_at: { type: Date, default: Date.now },
+}, { collection: 'user_prefs', versionKey: false });
+
 // Use existing models if they exist (hot-reload safe)
 const Link = mongoose.models.Link || mongoose.model('Link', linkSchema);
 const Category = mongoose.models.Category || mongoose.model('Category', categorySchema);
+const UserPref = mongoose.models.UserPref || mongoose.model('UserPref', userPrefSchema);
+
+/**
+ * The language to write a link's content in.
+ * The link's own value wins when set, since it records what the client asked
+ * for at capture time; otherwise fall back to the user's saved preference.
+ */
+async function resolveLanguage(link, userId) {
+  if (link && link.language) return link.language;
+  if (!userId) return 'en';
+  try {
+    const pref = await UserPref.findOne({ user_id: userId }).lean();
+    return (pref && pref.language) || 'en';
+  } catch {
+    return 'en';
+  }
+}
 
 // ── Serialization helper ──
 function serialize(doc) {
@@ -67,4 +95,4 @@ function serialize(doc) {
   return obj;
 }
 
-module.exports = { connectDB, Link, Category, serialize };
+module.exports = { connectDB, Link, Category, UserPref, serialize, resolveLanguage };

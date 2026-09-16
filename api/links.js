@@ -55,7 +55,7 @@ module.exports = async function handler(req, res) {
     try {
       // Accept URL from query param, JSON body, or plain text
       let resolvedUrl = req.query.url;
-      let language = 'en';
+      let language = null;
       if (!resolvedUrl && req.body) {
         resolvedUrl = req.body.url || req.body.text;
         if (req.body.language) language = req.body.language;
