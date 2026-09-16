@@ -16,6 +16,7 @@
  *   node scripts/reprocess.js --limit=5 --apply                # the 5 most recent
  *   node scripts/reprocess.js --status=done --category=social-media
  *   node scripts/reprocess.js --status=done --source-type=url-only --apply
+ *   node scripts/reprocess.js --status=done --match="Carrot Cake" --apply
  *   node scripts/reprocess.js --status=any --apply             # everything, after a backup
  *
  * Requires in .env:
@@ -62,6 +63,9 @@ const limit = valueOf('limit') ? parseInt(valueOf('limit'), 10) : 0;
 const status = valueOf('status') || 'error';
 const sourceType = valueOf('source-type');
 const categorySlug = valueOf('category');
+// Matches the link's title or URL, for picking out a handful by hand.
+const matchArg = valueOf('match');
+const match = matchArg ? new RegExp(matchArg, 'i') : null;
 
 function preflight() {
   const problems = [];
@@ -111,6 +115,9 @@ async function main() {
   if (filter) {
     links = links.filter(l => filter.test(String(l.error_message || '')));
   }
+  if (match) {
+    links = links.filter(l => match.test(String(l.title || '')) || match.test(String(l.url || '')));
+  }
   if (limit > 0) links = links.slice(0, limit);
 
   const described = [
@@ -118,6 +125,7 @@ async function main() {
     sourceType ? `source_type "${sourceType}"` : null,
     categorySlug ? `category "${categorySlug}"` : null,
     filter ? `error matching /${filterArg}/i` : null,
+    match ? `title or URL matching /${matchArg}/i` : null,
   ].filter(Boolean).join(', ');
 
   if (!links.length) {
@@ -158,7 +166,9 @@ async function main() {
         $set: { status: 'processing', error_message: null, processing_started_at: new Date() },
       });
 
-      const updates = await processLink(link, Category, link.user_id, Link, link.language || 'en');
+      // No `|| 'en'` here: passing a language overrides the user's saved
+      // preference, and a link with none should inherit it.
+      const updates = await processLink(link, Category, link.user_id, Link, link.language);
 
       if (updates.status === 'processing') {
         // Video path: handed off to the GitHub Actions worker, which writes the
