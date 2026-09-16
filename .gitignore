@@ -4,3 +4,4 @@ android
 .vercel
 .env
 .env.local
+.env*

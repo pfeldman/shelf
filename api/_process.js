@@ -194,15 +194,20 @@ Rules:
 ${content}
 --- CONTENT END ---`;
 
-  const response = await openai.chat.completions.create({
-    model: OPENAI_MODEL,
-    messages: [
-      { role: 'system', content: systemPrompt },
-      { role: 'user', content: userPrompt },
-    ],
-    temperature: 0.2,
-    timeout: 120000,
-  });
+  const response = await openai.chat.completions.create(
+    {
+      model: OPENAI_MODEL,
+      messages: [
+        { role: 'system', content: systemPrompt },
+        { role: 'user', content: userPrompt },
+      ],
+      temperature: 0.2,
+    },
+    // Request options go in the SECOND argument. Anything placed in the first
+    // object is serialized into the request body, and OpenAI rejects unknown
+    // body fields with: 400 Unrecognized request argument supplied: timeout
+    { timeout: 120000 }
+  );
 
   let text = (response.choices[0].message.content || '').trim();
   if (!text) throw new Error('OpenAI returned empty output');
