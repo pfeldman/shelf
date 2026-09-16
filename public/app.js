@@ -1901,6 +1901,8 @@ const ICONS = {
   eyeOpen: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>',
   eyeClosed: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>',
   plus: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>',
+  warn: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L14.7 3.9a2 2 0 00-3.4 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
+  search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.2-4.2"/></svg>',
   close: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>',
 };
 
@@ -2054,17 +2056,21 @@ async function renderHome() {
   // Show skeleton immediately
   app.innerHTML = `
     <div class="screen">
-      <div class="home-header">
-        <div class="home-brand"><h1>Shelf</h1><p id="home-count"></p></div>
-        <div class="home-header-actions">
-          <button class="add-link-btn" onclick="showAddLink()">${ICONS.plus}</button>
-          <button class="refresh-btn" onclick="showSettings()" aria-label="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg></button>
+      <header class="masthead">
+        <div class="masthead-row">
+          <h1 class="wordmark">Shelf</h1>
+          <div class="masthead-actions">
+            <button class="icon-btn icon-btn-solid" onclick="showAddLink()" aria-label="${esc(t('add.title'))}">${ICONS.plus}</button>
+            <button class="icon-btn" onclick="showSettings()" aria-label="${esc(t('settings.title'))}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg></button>
+          </div>
         </div>
-      </div>
+        <p class="masthead-count" id="home-count"></p>
+      </header>
       <div id="home-content">
-        <div class="shelves">
-          <section class="shelf"><div class="skeleton skeleton-shelf-name"></div><div class="shelf-items"><span class="skeleton shelf-item shelf-item-poster"></span><span class="skeleton shelf-item shelf-item-poster"></span><span class="skeleton shelf-item shelf-item-poster"></span><span class="skeleton shelf-item shelf-item-poster"></span></div></section>
-          <section class="shelf"><div class="skeleton skeleton-shelf-name"></div><div class="shelf-items"><span class="skeleton shelf-item shelf-item-tile"></span><span class="skeleton shelf-item shelf-item-tile"></span><span class="skeleton shelf-item shelf-item-tile"></span><span class="skeleton shelf-item shelf-item-tile"></span></div></section>
+        <div class="skeleton skeleton-hero"></div>
+        <div class="rails">
+          <section class="rail"><div class="skeleton skeleton-rail-name"></div><div class="rail-track"><span class="skeleton thumb thumb-poster"></span><span class="skeleton thumb thumb-poster"></span><span class="skeleton thumb thumb-poster"></span><span class="skeleton thumb thumb-poster"></span></div></section>
+          <section class="rail"><div class="skeleton skeleton-rail-name"></div><div class="rail-track"><span class="skeleton thumb thumb-still"></span><span class="skeleton thumb thumb-still"></span><span class="skeleton thumb thumb-still"></span></div></section>
         </div>
       </div>
     </div>`;
@@ -2075,23 +2081,75 @@ async function renderHome() {
     renderHomeContent(cats, links);
     startPollingIfNeeded();
   } catch (e) {
-    document.getElementById('home-content').innerHTML = `<div class="empty-state"><span class="empty-state-icon">\u26a0\ufe0f</span><p class="empty-state-text">${esc(t('home.could_not_load'))}</p></div>`;
+    document.getElementById('home-content').innerHTML = `<div class="empty-state"><span class="empty-state-icon">${ICONS.warn}</span><p class="empty-state-text">${esc(t('home.could_not_load'))}</p></div>`;
   }
 }
 
-// One object standing on a shelf. Posters keep their 2:3 rectangle, people are
-// circles, everything else is a square tile: the shape says what kind of thing
-// it is before you read a word. Items with no image fall back to their initial.
+// The shape of a thing says what kind of thing it is before you read its name:
+// a film keeps its 2:3 poster, a person is a circle, a video or a plate of food
+// is a 16:9 still, a book is a tall cover. Anything with no image of its own
+// falls back to its initial on a plain ground.
+function shapeFor(type) {
+  if (type === 'movie') return 'poster';
+  if (type === 'book') return 'cover';
+  if (type === 'director') return 'round';
+  return 'still';
+}
+
 function renderShelfItem(link, cat) {
   const ext = link.extension_data || {};
-  const image = ext.poster_url || ext.profile_url || ext.photo_url || link.thumbnail;
+  const image = ext.poster_url || ext.cover_url || ext.profile_url || ext.photo_url || link.thumbnail;
   const type = resolveDetailType(ext, cat ? cat.extension_type : 'generic');
-  const shape = type === 'movie' ? 'poster' : type === 'director' ? 'round' : 'tile';
+  const shape = shapeFor(type);
   const title = link.title || '';
+  const watched = shape === 'poster' && ext.watched ? ' is-watched' : '';
 
-  return image
-    ? `<span class="shelf-item shelf-item-${shape}"><img src="${esc(image)}" alt="${esc(title)}" loading="lazy" onerror="this.parentElement.classList.add('is-bare')"><span class="shelf-item-fallback">${esc(title.slice(0, 1))}</span></span>`
-    : `<span class="shelf-item shelf-item-${shape} is-bare"><span class="shelf-item-fallback">${esc(title.slice(0, 1) || '?')}</span></span>`;
+  // A poster or a face carries its own name; a still of a pot on a stove does
+  // not, so only those get a caption.
+  const caption = (shape === 'still' || shape === 'round')
+    ? `<span class="rail-item-title">${esc(title)}</span>`
+    : '';
+
+  const art = image
+    ? `<img src="${esc(image)}" alt="" loading="lazy" onerror="this.parentElement.classList.add('is-bare')"><span class="thumb-fallback">${esc(title.slice(0, 1))}</span>`
+    : `<span class="thumb-fallback">${esc(title.slice(0, 1) || '?')}</span>`;
+
+  return `<button class="rail-item rail-item-${shape}${watched}" onclick="openLink('${link._id}')">
+    <span class="thumb thumb-${shape}${image ? '' : ' is-bare'}">${art}</span>${caption}
+  </button>`;
+}
+
+// One thing worth starting with. At 11pm the question is not "what did I save"
+// but "what do I watch", so the top of the home screen answers it: something
+// already in the library, not yet seen, that arrived with its own wide still.
+function pickTonight(links) {
+  const pool = links.filter(l => {
+    const e = l.extension_data || {};
+    return l.status === 'done' && e.backdrop_url && !e.watched && Number(e.rating) >= 6.5;
+  });
+  if (!pool.length) return null;
+  // Steady through a session and through a day's worth of refreshes, so the
+  // home screen does not reshuffle itself under the user's thumb.
+  const day = Math.floor(Date.now() / 86400000);
+  return pool[day % pool.length];
+}
+
+function renderTonight(link) {
+  if (!link) return '';
+  const ext = link.extension_data || {};
+  const facts = [];
+  if (ext.year) facts.push(`<span>${esc(String(ext.year))}</span>`);
+  if (ext.genre_names && ext.genre_names.length) facts.push(`<span>${esc(ext.genre_names[0])}</span>`);
+  if (ext.rating) facts.push(`<span class="rating-inline"><span class="star">★</span>${Number(ext.rating).toFixed(1)}</span>`);
+
+  return `
+    <button class="tonight" onclick="openLink('${link._id}')">
+      <img class="tonight-art" src="${esc(ext.backdrop_url)}" alt="">
+      <span class="tonight-body">
+        <span class="tonight-title">${esc(link.title || '')}</span>
+        <span class="tonight-facts">${facts.join('')}</span>
+      </span>
+    </button>`;
 }
 
 function renderHomeContent(cats, links) {
@@ -2120,36 +2178,50 @@ function renderHomeContent(cats, links) {
   if (cats.length === 0 && pending.length === 0) {
     html += `
       <div class="empty-state">
-        <span class="empty-state-icon">\ud83d\udced</span>
+        <span class="empty-state-icon">${CAT_ICONS.default}</span>
         <p class="empty-state-text">${esc(t('home.no_links'))}</p>
       </div>`;
   } else if (cats.length > 0) {
     // Show categories with own links OR shared categories (even if 0 own links)
     const nonEmpty = cats.filter(cat => countByCategory[cat._id] > 0 || (cat.isShared && !cat.isOwner));
     if (nonEmpty.length > 0) {
-      // One shelf per category: what is on it, resting on the rule below.
-      // A grid of identical icon cards hid 266 posters behind a generic glyph.
+      // One rail per category, running off the right edge of the screen. A grid
+      // of identical icon cards hid 266 posters behind a generic glyph.
       const byCategory = {};
       links.filter(l => l.status === 'done' && l.category_id).forEach(l => {
         (byCategory[l.category_id] = byCategory[l.category_id] || []).push(l);
       });
 
-      html += '<div class="shelves">';
+      // A rail is a window onto a category, so show the part worth looking at:
+      // things that arrived with artwork first, and among those the ones still
+      // ahead of you rather than the ones already crossed off.
+      const rank = link => {
+        const e = link.extension_data || {};
+        const hasArt = e.poster_url || e.cover_url || e.profile_url || e.photo_url || link.thumbnail;
+        return (hasArt ? 0 : 2) + (e.watched ? 1 : 0);
+      };
+
+      html += renderTonight(pickTonight(links));
+      html += '<div class="rails">';
       nonEmpty.forEach(cat => {
         const count = countByCategory[cat._id] || 0;
         const shared = cat.isShared
-          ? `<span class="shelf-shared" title="${esc(t('share.shared_with_you'))}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>${(cat.shared_with || []).length + 1}</span>`
+          ? `<span class="rail-shared" title="${esc(t('share.shared_with_you'))}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>${(cat.shared_with || []).length + 1}</span>`
           : '';
         const meta = cat.isOwner === false ? esc(t('share.shared_with_you')) : String(count);
-        const items = (byCategory[cat._id] || []).slice(0, 12);
+        const items = (byCategory[cat._id] || [])
+          .slice()
+          .sort((a, b) => rank(a) - rank(b))
+          .slice(0, 12);
 
         html += `
-          <section class="shelf" onclick="navigate('#/category/${cat._id}')">
-            <header class="shelf-head">
-              <h2 class="shelf-name">${esc(cat.name)}</h2>
-              <span class="shelf-meta">${shared}${meta}</span>
-            </header>
-            <div class="shelf-items">${items.map(item => renderShelfItem(item, cat)).join('')}</div>
+          <section class="rail">
+            <button class="rail-head" onclick="navigate('#/category/${cat._id}')">
+              <h2 class="rail-name">${esc(cat.name)}</h2>
+              <span class="rail-count">${shared}${meta}</span>
+              <span class="rail-go">${ICONS.chevron}</span>
+            </button>
+            <div class="rail-track">${items.map(item => renderShelfItem(item, cat)).join('')}</div>
           </section>`;
       });
       html += '</div>';
@@ -2159,14 +2231,14 @@ function renderHomeContent(cats, links) {
     const doneLinks = links.filter(l => l.status === 'done');
     if (doneLinks.length > 0) {
       html += `
-        <div class="history-link" onclick="navigate('#/history')">
-          <span class="history-link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
-          <div class="history-link-text">
-            <div class="history-link-title">${esc(t('history.title'))}</div>
-            <div class="history-link-subtitle">${esc(t('history.links_saved', { n: doneLinks.length }))}</div>
-          </div>
-          <span class="history-link-chevron">${ICONS.chevron}</span>
-        </div>`;
+        <button class="row-link" onclick="navigate('#/history')">
+          <span class="row-link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+          <span class="row-link-text">
+            <span class="row-link-title">${esc(t('history.title'))}</span>
+            <span class="row-link-subtitle">${esc(t('history.links_saved', { n: doneLinks.length }))}</span>
+          </span>
+          <span class="row-link-go">${ICONS.chevron}</span>
+        </button>`;
     }
   }
 
@@ -2222,39 +2294,49 @@ function renderCategoryLinks(done, extType, query) {
 
   if (filtered.length === 0) {
     listEl.innerHTML = query
-      ? `<div class="empty-state"><span class="empty-state-icon">\ud83d\udd0d</span><p class="empty-state-text">${esc(t('category.no_matches'))}</p></div>`
-      : `<div class="empty-state"><span class="empty-state-icon">\ud83d\udcc2</span><p class="empty-state-text">${esc(t('category.no_links'))}</p></div>`;
-    listEl.className = 'poster-grid';
+      ? `<div class="empty-state"><span class="empty-state-icon">${ICONS.search}</span><p class="empty-state-text">${esc(t('category.no_matches'))}</p></div>`
+      : `<div class="empty-state"><span class="empty-state-icon">${CAT_ICONS.default}</span><p class="empty-state-text">${esc(t('category.no_links'))}</p></div>`;
+    listEl.className = 'grid grid-empty';
     return;
   }
+
+  // The tile takes the shape of the kind of thing, not of the screen: films
+  // keep a 2:3 poster, books a taller cover, people a circle, and anything
+  // saved as a video keeps the 16:9 still it came with.
+  const shape = shapeFor(extType);
 
   listEl.innerHTML = filtered.map(link => {
     const ext = link.extension_data || {};
     const hasCover = extType === 'movie' || extType === 'book' || extType === 'director';
     const thumbUrl = hasCover ? (ext.poster_url || ext.cover_url || ext.photo_url) : (ext.poster_url || ext.cover_url || ext.photo_url || link.thumbnail);
     const img = thumbUrl
-      ? `<img class="poster-img" src="${esc(thumbUrl)}" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+      ? `<img src="${esc(thumbUrl)}" alt="" loading="lazy" onerror="this.parentElement.classList.add('is-bare')">`
       : '';
     const watched = ext.watched || false;
+    // The watch toggle is a sibling of the tile, not a child of it: a button
+    // inside a button is invalid HTML and the parser silently tears the tile
+    // apart, scattering its title and rating into neighbouring grid cells.
     const watchBadge = extType === 'movie'
-      ? `<button class="poster-watch-btn ${watched ? 'watched' : ''}" onclick="event.stopPropagation(); toggleWatchedFromList('${link._id}', ${!watched})">${watched ? ICONS.eyeOpen : ICONS.eyeClosed}</button>`
+      ? `<button class="tile-watch ${watched ? 'watched' : ''}" aria-label="${esc(watched ? t('link.watched') : t('link.not_watched'))}" onclick="event.stopPropagation(); toggleWatchedFromList('${link._id}', ${!watched})">${watched ? ICONS.eyeOpen : ICONS.eyeClosed}</button>`
       : '';
     const rating = ext.rating ? Number(ext.rating) : null;
-    const ratingBadge = rating
-      ? `<div class="poster-rating">★ ${rating.toFixed(1)}/10</div>`
+    const ratingLine = rating
+      ? `<span class="tile-rating"><span class="star">★</span>${rating.toFixed(1)}</span>`
       : '';
     return `
-      <div class="poster-card ${watched ? 'is-watched' : ''}" onclick="openLink('${link._id}')">
-        <div class="poster-frame">
-          ${img}
-          <div class="poster-fallback" ${thumbUrl ? 'style="display:none"' : ''}>${CAT_ICONS.default}</div>
-          ${watchBadge}
-          ${ratingBadge}
-        </div>
-        <div class="poster-title">${esc(link.title || link.url)}</div>
+      <div class="tile-wrap">
+        <button class="tile ${watched ? 'is-watched' : ''}" onclick="openLink('${link._id}')">
+          <span class="thumb thumb-${shape}${thumbUrl ? '' : ' is-bare'}">
+            ${img}
+            <span class="thumb-fallback">${CAT_ICONS.default}</span>
+          </span>
+          <span class="tile-title">${esc(link.title || link.url)}</span>
+          ${ratingLine}
+        </button>
+        ${watchBadge}
       </div>`;
   }).join('');
-  listEl.className = query ? 'poster-grid' : 'poster-grid stagger';
+  listEl.className = query ? `grid grid-${shape}` : `grid grid-${shape} stagger`;
 }
 
 function handleCategoryFilter(e) {
@@ -2264,7 +2346,7 @@ function handleCategoryFilter(e) {
 function filterByGenre(genre) {
   categoryActiveGenre = genre;
   // Update chip active states
-  document.querySelectorAll('.genre-chip').forEach(btn => {
+  document.querySelectorAll('#genre-filter-wrap .chip').forEach(btn => {
     const isAll = btn.textContent === t('category.all');
     btn.classList.toggle('active', genre === null ? isAll : btn.textContent === genre);
   });
@@ -2282,6 +2364,12 @@ function clearCategoryFilter() {
 }
 
 async function renderCategory(categoryId, restoreState = false) {
+  // Opening this URL cold (a reload, a shared link, a return from the share
+  // sheet) means nothing is in memory yet. Without the categories the screen
+  // does not know its own name or what shape its contents are.
+  if (!categories.length) {
+    try { await fetchCategories(); } catch { /* fall through to the generic view */ }
+  }
   const cat = categories.find(c => c._id === categoryId);
   const catName = cat ? cat.name : 'Links';
   const isOwner = cat ? cat.isOwner !== false : true;
@@ -2290,31 +2378,38 @@ async function renderCategory(categoryId, restoreState = false) {
 
   // Share button for owner, or leave button indicator for shared member
   const shareBtn = (isOwner || isShared)
-    ? `<button class="category-share-btn" onclick="showShareCategory('${categoryId}')" aria-label="Share"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></button>`
+    ? `<button class="icon-btn" onclick="showShareCategory('${categoryId}')" aria-label="${esc(t('share.title'))}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></button>`
     : '';
 
-  const subtitleText = !isOwner ? t('share.shared_with_you') : t('category.subtitle');
+  // Only say something when there is something to say. "Collection" above every
+  // collection name is a label, not information; "shared with you" is.
+  const subtitle = !isOwner
+    ? `<div class="topbar-sub">${esc(t('share.shared_with_you'))}</div>`
+    : '';
 
   app.innerHTML = `
     <div class="screen">
-      <div class="header">
-        <button class="back-btn" onclick="navigate('#/')">${ICONS.back}</button>
-        <div>
-          <div class="header-subtitle">${esc(subtitleText)}</div>
-          <div class="header-title">${esc(catName)}</div>
+      <header class="topbar">
+        <button class="icon-btn icon-btn-back" onclick="navigate('#/')" aria-label="Shelf">${ICONS.back}</button>
+        <div class="topbar-text">
+          <h1 class="topbar-title">${esc(catName)}</h1>
+          ${subtitle}
         </div>
         ${shareBtn}
+      </header>
+      <div class="search" id="category-search-wrap" style="display:none">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.2-4.2"/></svg>
+        <input type="text" id="category-search" class="search-input" placeholder="${esc(t('category.search_placeholder', { name: catName.toLowerCase() }))}" autocomplete="off" oninput="handleCategoryFilter(event)">
+        <button class="search-clear" id="category-search-clear" onclick="clearCategoryFilter()" aria-label="${esc(t('add.cancel'))}">${ICONS.close}</button>
       </div>
-      <div class="category-search-wrap" id="category-search-wrap" style="display:none">
-        <input type="text" id="category-search" class="category-search" placeholder="${esc(t('category.search_placeholder', { name: catName.toLowerCase() }))}" autocomplete="off" oninput="handleCategoryFilter(event)">
-        <button class="category-search-clear" id="category-search-clear" onclick="clearCategoryFilter()">${ICONS.close}</button>
-      </div>
-      <div class="genre-filter-wrap" id="genre-filter-wrap" style="display:none"></div>
-      <div class="poster-grid stagger" id="links-list">
-        <div class="skeleton skeleton-poster"></div>
-        <div class="skeleton skeleton-poster"></div>
-        <div class="skeleton skeleton-poster"></div>
-        <div class="skeleton skeleton-poster"></div>
+      <div class="chips" id="genre-filter-wrap" style="display:none"></div>
+      <div class="grid grid-poster stagger" id="links-list">
+        <div class="skeleton skeleton-tile"></div>
+        <div class="skeleton skeleton-tile"></div>
+        <div class="skeleton skeleton-tile"></div>
+        <div class="skeleton skeleton-tile"></div>
+        <div class="skeleton skeleton-tile"></div>
+        <div class="skeleton skeleton-tile"></div>
       </div>
     </div>`;
 
@@ -2326,7 +2421,7 @@ async function renderCategory(categoryId, restoreState = false) {
     const done = links.filter(l => l.status === 'done');
 
     if (done.length === 0) {
-      document.getElementById('links-list').innerHTML = `<div class="empty-state"><span class="empty-state-icon">\ud83d\udcc2</span><p class="empty-state-text">${esc(t('category.no_links'))}</p></div>`;
+      document.getElementById('links-list').innerHTML = `<div class="empty-state"><span class="empty-state-icon">${CAT_ICONS.default}</span><p class="empty-state-text">${esc(t('category.no_links'))}</p></div>`;
       return;
     }
 
@@ -2358,8 +2453,8 @@ async function renderCategory(categoryId, restoreState = false) {
         const wrap = document.getElementById('genre-filter-wrap');
         wrap.style.display = '';
         const activeGenre = categoryActiveGenre;
-        wrap.innerHTML = `<button class="genre-chip ${activeGenre ? '' : 'active'}" onclick="filterByGenre(null)">${esc(t('category.all'))}</button>` +
-          genres.map(g => `<button class="genre-chip ${activeGenre === g ? 'active' : ''}" onclick="filterByGenre('${esc(g)}')">${esc(g)}</button>`).join('');
+        wrap.innerHTML = `<button class="chip ${activeGenre ? '' : 'active'}" onclick="filterByGenre(null)">${esc(t('category.all'))}</button>` +
+          genres.map(g => `<button class="chip ${activeGenre === g ? 'active' : ''}" onclick="filterByGenre('${esc(g)}')">${esc(g)}</button>`).join('');
       }
       // Update placeholder to hint about people search
       const searchInput = document.getElementById('category-search');
@@ -2384,7 +2479,7 @@ async function renderCategory(categoryId, restoreState = false) {
       });
     }
   } catch (e) {
-    document.getElementById('links-list').innerHTML = `<div class="empty-state"><span class="empty-state-icon">\u26a0\ufe0f</span><p class="empty-state-text">${esc(t('category.could_not_load'))}</p></div>`;
+    document.getElementById('links-list').innerHTML = `<div class="empty-state"><span class="empty-state-icon">${ICONS.warn}</span><p class="empty-state-text">${esc(t('category.could_not_load'))}</p></div>`;
   }
 }
 
@@ -2401,6 +2496,9 @@ function resolveDetailType(ext, categoryType) {
 }
 
 async function renderLink(linkId) {
+  if (!categories.length) {
+    try { await fetchCategories(); } catch { /* the screen still works unnamed */ }
+  }
   let link = linksCache[linkId];
   if (!link) {
     // Fetch all links to find this one
@@ -2408,7 +2506,7 @@ async function renderLink(linkId) {
     link = all.find(l => l._id === linkId);
   }
   if (!link) {
-    app.innerHTML = `<div class="screen"><div class="empty-state"><span class="empty-state-icon">\ud83d\udd0d</span><p class="empty-state-text">${esc(t('link.not_found'))}</p></div></div>`;
+    app.innerHTML = `<div class="screen"><div class="empty-state"><span class="empty-state-icon">${ICONS.search}</span><p class="empty-state-text">${esc(t('link.not_found'))}</p></div></div>`;
     return;
   }
 
@@ -2416,52 +2514,88 @@ async function renderLink(linkId) {
   const ext = link.extension_data || {};
   const extType = resolveDetailType(ext, cat ? cat.extension_type : 'generic');
 
-  let html = `<div class="screen"><div class="header"><button class="back-btn" onclick="navigate('#/category/${link.category_id}')">${ICONS.back}</button><div><div class="header-subtitle">${esc(cat ? cat.name : 'Link')}</div><div class="header-title">${esc(t('link.details'))}</div></div></div>`;
-
+  let body = '';
   if (extType === 'movie') {
-    html += renderMovieDetail(link, ext);
+    body = renderMovieDetail(link, ext);
   } else if (extType === 'recipe') {
-    html += renderRecipeDetail(link, ext);
+    body = renderRecipeDetail(link, ext);
   } else if (extType === 'book') {
-    html += renderBookDetail(link, ext);
+    body = renderBookDetail(link, ext);
   } else if (extType === 'director') {
-    html += renderDirectorDetail(link, ext);
+    body = renderDirectorDetail(link, ext);
   } else {
-    html += renderGenericDetail(link);
+    body = renderGenericDetail(link);
   }
+
+  // The title of this screen is the thing itself, and it lives in the artwork
+  // a few pixels below. The bar only has to say where you came from, and it
+  // needs to know whether it is floating over a photograph or over the page.
+  const heroClass = body.indexOf('class="hero') === 0 || body.indexOf('<div class="hero') === 0 ? ' has-hero' : '';
+  let html = `<div class="screen screen-detail${heroClass}">
+    <header class="topbar topbar-quiet">
+      <button class="icon-btn icon-btn-back" onclick="navigate('#/category/${link.category_id}')" aria-label="${esc(cat ? cat.name : t('link.details'))}">${ICONS.back}</button>
+      <div class="topbar-text"><div class="topbar-crumb">${esc(cat ? cat.name : t('link.details'))}</div></div>
+    </header>${body}`;
 
   html += renderItemsList(link, ext);
   html += renderTranscript(link);
 
   html += `
     <div class="actions">
-      <a href="${esc(link.url)}" target="_blank" rel="noopener" class="btn btn-primary">${ICONS.external} ${esc(t('link.open_original'))}</a>
-      <button class="btn btn-secondary" onclick="showRecategorize('${link._id}')">${ICONS.refresh} ${esc(t('link.recategorize'))}</button>
-      <button class="btn btn-danger" onclick="confirmDelete('${link._id}')">${ICONS.trash} ${esc(t('link.delete_link'))}</button>
+      <a href="${esc(link.url)}" target="_blank" rel="noopener" class="btn btn-primary">${ICONS.external}${esc(t('link.open_original'))}</a>
+      <button class="btn btn-secondary" onclick="showRecategorize('${link._id}')">${ICONS.refresh}${esc(t('link.recategorize'))}</button>
+      <button class="btn btn-quiet btn-danger" onclick="confirmDelete('${link._id}')">${ICONS.trash}${esc(t('link.delete_link'))}</button>
     </div>
   </div>`;
 
   app.innerHTML = html;
 }
 
+// The film brings its own colour. Its backdrop runs behind the top of the
+// screen and fades into the page, so no two detail screens look alike and the
+// interface never has to invent an accent of its own.
+// Two ways for a screen to wear its own artwork. If the thing has a portrait
+// of its own to show below (a poster, a cover, a face), the header blurs the
+// image into a wash of that thing's colour and the portrait carries the
+// detail. If it has nothing but one wide still, that still is shown as it is
+// and the title sits under it.
+function renderHeroArt(src, mode) {
+  if (!src) return '';
+  const cls = mode === 'still' ? 'hero hero-still' : mode === 'wash' ? 'hero hero-wash' : 'hero';
+  return `<div class="${cls}"><img class="hero-art" src="${esc(src)}" alt="" aria-hidden="true"><div class="hero-fade"></div></div>`;
+}
+
+// Which image a detail screen wears, and how. A wide still made for the
+// purpose is shown as it is. A portrait standing in for one is blurred into a
+// wash, so the screen still takes its colour from the thing without printing
+// the same picture twice.
+function heroFor(backdrop, portrait, fallback) {
+  if (backdrop) return renderHeroArt(backdrop, 'art');
+  if (portrait) return renderHeroArt(portrait, 'wash');
+  return renderHeroArt(fallback, 'still');
+}
+
 function renderMovieDetail(link, ext) {
-  let html = '';
-  if (ext.poster_url) {
-    html += `<img class="detail-poster" src="${esc(ext.poster_url)}" alt="${esc(link.title)}">`;
-  } else if (link.thumbnail) {
-    html += `<img class="detail-hero" src="${esc(link.thumbnail)}" alt="">`;
+  const poster = ext.poster_url || '';
+  let html = heroFor(ext.backdrop_url, poster, link.thumbnail);
+
+  const facts = [];
+  if (ext.year) facts.push(esc(String(ext.year)));
+  if (ext.media_type) facts.push(ext.media_type === 'tv' ? esc(t('link.tv_show')) : esc(t('link.movie')));
+  if (ext.runtime) facts.push(esc(ext.runtime + ' min'));
+
+  html += `<div class="masthead-detail${poster ? '' : ' masthead-detail-wide'}">`;
+  if (poster) {
+    html += `<span class="thumb thumb-poster masthead-poster"><img src="${esc(poster)}" alt="" onerror="this.parentElement.classList.add('is-bare')"><span class="thumb-fallback">${esc((link.title || '?').slice(0, 1))}</span></span>`;
   }
-  html += `<h2 class="detail-title">${esc(link.title || '')}</h2>`;
-  html += '<div class="detail-meta">';
-  if (ext.year) html += `<span class="detail-tag">${esc(String(ext.year))}</span>`;
-  if (ext.media_type) html += `<span class="detail-tag accent">${ext.media_type === 'tv' ? esc(t('link.tv_show')) : esc(t('link.movie'))}</span>`;
-  if (ext.genre_names && ext.genre_names.length) {
-    ext.genre_names.forEach(g => html += `<span class="detail-tag">${esc(g)}</span>`);
-  }
-  html += '</div>';
+  html += '<div class="masthead-detail-text">';
+  html += `<h1 class="detail-title">${esc(link.title || '')}</h1>`;
+  if (facts.length) html += `<div class="facts">${facts.map(f => `<span>${f}</span>`).join('')}</div>`;
   if (ext.rating) {
-    html += `<div class="detail-rating"><span class="detail-rating-value">★ ${Number(ext.rating).toFixed(1)}/10</span><span class="detail-rating-label">TMDB</span></div>`;
+    html += `<div class="rating"><span class="star">★</span><span class="rating-value">${Number(ext.rating).toFixed(1)}</span><span class="rating-scale">/10 TMDB</span></div>`;
   }
+  html += '</div></div>';
+
   // Watch status toggle
   const watched = ext.watched || false;
   html += `
@@ -2469,8 +2603,13 @@ function renderMovieDetail(link, ext) {
       <span class="watch-icon">${watched ? ICONS.eyeOpen : ICONS.eyeClosed}</span>
       <span>${watched ? esc(t('link.watched')) : esc(t('link.not_watched'))}</span>
     </button>`;
+
+  if (ext.genre_names && ext.genre_names.length) {
+    html += `<div class="chips chips-static">${ext.genre_names.map(g => `<span class="chip chip-plain">${esc(g)}</span>`).join('')}</div>`;
+  }
+
   const summary = ext.overview || link.summary || '';
-  if (summary) html += `<p class="detail-summary">${esc(summary)}</p>`;
+  if (summary) html += `<p class="prose">${esc(summary)}</p>`;
 
   html += renderPeopleRow(
     ext.directors && ext.directors.length === 1 ? t('link.director') : t('link.directors'),
@@ -2480,20 +2619,22 @@ function renderMovieDetail(link, ext) {
 
   // Streaming providers
   if (ext.watch_providers && ext.watch_providers.length) {
-    html += `<h3 class="detail-section-title">${esc(t('link.where_to_watch'))}</h3>`;
-    html += '<div class="providers-grid">';
+    html += `<h2 class="section-title">${esc(t('link.where_to_watch'))}</h2>`;
+    html += '<div class="providers">';
     ext.watch_providers.forEach((p, i) => {
       const logo = p.logo_url
-        ? `<img class="provider-logo" src="${esc(p.logo_url)}" alt="${esc(p.name)}">`
-        : `<span class="provider-logo-placeholder">${esc(p.name[0])}</span>`;
+        ? `<img class="provider-logo" src="${esc(p.logo_url)}" alt="">`
+        : `<span class="provider-logo provider-logo-placeholder">${esc(p.name[0])}</span>`;
       html += `
-        <div class="provider-chip" onclick="toggleProviderCountries(${i})">
-          ${logo}
-          <span class="provider-name">${esc(p.name)}</span>
-          <span class="provider-count">${p.countries.length}</span>
-        </div>
-        <div class="provider-countries" id="provider-countries-${i}">
-          ${p.countries.map(c => `<span class="country-flag" onclick="event.stopPropagation(); showCountryName('${esc(c)}', this)">${countryFlag(c)}</span>`).join('')}
+        <div class="provider">
+          <button class="provider-row" onclick="toggleProviderCountries(${i})">
+            ${logo}
+            <span class="provider-name">${esc(p.name)}</span>
+            <span class="provider-count">${p.countries.length}</span>
+          </button>
+          <div class="provider-countries" id="provider-countries-${i}">
+            ${p.countries.map(c => `<span class="country-flag" onclick="event.stopPropagation(); showCountryName('${esc(c)}', this)">${countryFlag(c)}</span>`).join('')}
+          </div>
         </div>`;
     });
     html += '</div>';
@@ -2526,92 +2667,100 @@ function showCountryName(code, el) {
 }
 
 function renderRecipeDetail(link, ext) {
-  let html = '';
-  if (link.thumbnail) {
-    html += `<img class="detail-hero" src="${esc(link.thumbnail)}" alt="">`;
-  }
-  html += `<h2 class="detail-title">${esc(link.title || '')}</h2>`;
+  // A plate of food is its own best argument, so it runs the full width of the
+  // screen before anything else is said about it.
+  let html = renderHeroArt(link.thumbnail, 'still');
+
+  html += `<div class="masthead-detail masthead-detail-wide"><div class="masthead-detail-text"><h1 class="detail-title">${esc(link.title || '')}</h1></div></div>`;
 
   if (ext.prep_time || ext.cook_time || ext.servings) {
-    html += '<div class="recipe-stats">';
-    if (ext.prep_time) html += `<div class="recipe-stat"><span class="recipe-stat-value">${esc(ext.prep_time)}</span><span class="recipe-stat-label">${esc(t('link.prep'))}</span></div>`;
-    if (ext.cook_time) html += `<div class="recipe-stat"><span class="recipe-stat-value">${esc(ext.cook_time)}</span><span class="recipe-stat-label">${esc(t('link.cook'))}</span></div>`;
-    if (ext.servings) html += `<div class="recipe-stat"><span class="recipe-stat-value">${esc(ext.servings)}</span><span class="recipe-stat-label">${esc(t('link.servings'))}</span></div>`;
+    html += '<div class="stats">';
+    if (ext.prep_time) html += `<div class="stat"><span class="stat-value">${esc(ext.prep_time)}</span><span class="stat-label">${esc(t('link.prep'))}</span></div>`;
+    if (ext.cook_time) html += `<div class="stat"><span class="stat-value">${esc(ext.cook_time)}</span><span class="stat-label">${esc(t('link.cook'))}</span></div>`;
+    if (ext.servings) html += `<div class="stat"><span class="stat-value">${esc(ext.servings)}</span><span class="stat-label">${esc(t('link.servings'))}</span></div>`;
     html += '</div>';
   }
 
   if (ext.ingredients && ext.ingredients.length) {
-    html += `<h3 class="detail-section-title">${esc(t('link.ingredients'))}</h3><ul class="ingredient-list">`;
+    html += `<h2 class="section-title">${esc(t('link.ingredients'))}</h2><ul class="ingredients">`;
     ext.ingredients.forEach(i => html += `<li>${esc(i)}</li>`);
     html += '</ul>';
   }
 
   if (ext.steps && ext.steps.length) {
-    html += `<h3 class="detail-section-title">${esc(t('link.instructions'))}</h3><ol class="step-list">`;
-    ext.steps.forEach(s => html += `<li>${esc(s)}</li>`);
+    html += `<h2 class="section-title">${esc(t('link.instructions'))}</h2><ol class="steps">`;
+    ext.steps.forEach(s => html += `<li><span class="step-body">${esc(s)}</span></li>`);
     html += '</ol>';
   }
 
-  if (link.summary) html += `<p class="detail-summary">${esc(link.summary)}</p>`;
+  if (link.summary) html += `<p class="prose">${esc(link.summary)}</p>`;
   return html;
 }
 
 function renderBookDetail(link, ext) {
-  let html = '';
-  if (ext.cover_url) {
-    html += `<img class="detail-poster" src="${esc(ext.cover_url)}" alt="${esc(link.title)}">`;
-  } else if (link.thumbnail) {
-    html += `<img class="detail-hero" src="${esc(link.thumbnail)}" alt="">`;
+  const cover = ext.cover_url || '';
+  let html = heroFor(null, cover, link.thumbnail);
+
+  const facts = [];
+  if (ext.year) facts.push(esc(String(ext.year)));
+  if (ext.pages) facts.push(esc(t('link.pages', { n: ext.pages })));
+
+  html += `<div class="masthead-detail${cover ? '' : ' masthead-detail-wide'}">`;
+  if (cover) {
+    html += `<span class="thumb thumb-cover masthead-poster"><img src="${esc(cover)}" alt="" onerror="this.parentElement.classList.add('is-bare')"><span class="thumb-fallback">${esc((link.title || '?').slice(0, 1))}</span></span>`;
   }
-  html += `<h2 class="detail-title">${esc(ext.ol_title || link.title || '')}</h2>`;
-  if (ext.author) html += `<p class="book-author">${esc(ext.author)}</p>`;
-  html += '<div class="detail-meta">';
-  if (ext.year) html += `<span class="detail-tag">${esc(String(ext.year))}</span>`;
-  if (ext.pages) html += `<span class="detail-tag">${esc(t('link.pages', { n: ext.pages }))}</span>`;
-  html += '</div>';
+  html += '<div class="masthead-detail-text">';
+  html += `<h1 class="detail-title">${esc(ext.ol_title || link.title || '')}</h1>`;
+  if (ext.author) html += `<p class="byline">${esc(ext.author)}</p>`;
+  if (facts.length) html += `<div class="facts">${facts.map(f => `<span>${f}</span>`).join('')}</div>`;
   if (ext.rating) {
-    html += `<div class="detail-rating"><span class="detail-rating-value">★ ${Number(ext.rating).toFixed(1)}/5</span><span class="detail-rating-label">Open Library</span></div>`;
+    html += `<div class="rating"><span class="star">★</span><span class="rating-value">${Number(ext.rating).toFixed(1)}</span><span class="rating-scale">/5 Open Library</span></div>`;
   }
+  html += '</div></div>';
+
   if (ext.subjects && ext.subjects.length) {
-    html += '<div class="book-subjects">';
-    ext.subjects.forEach(s => html += `<span class="detail-tag">${esc(s)}</span>`);
-    html += '</div>';
+    html += `<div class="chips chips-static">${ext.subjects.map(s => `<span class="chip chip-plain">${esc(s)}</span>`).join('')}</div>`;
   }
   const summary = link.summary || '';
-  if (summary) html += `<p class="detail-summary">${esc(summary)}</p>`;
+  if (summary) html += `<p class="prose">${esc(summary)}</p>`;
   return html;
 }
 
 function renderDirectorDetail(link, ext) {
-  let html = '';
+  let html = heroFor(null, ext.photo_url, null);
+
+  html += `<div class="masthead-detail${ext.photo_url ? '' : ' masthead-detail-wide'}">`;
   if (ext.photo_url) {
-    html += `<img class="detail-poster" src="${esc(ext.photo_url)}" alt="${esc(link.title)}">`;
+    html += `<span class="thumb thumb-round masthead-face"><img src="${esc(ext.photo_url)}" alt="" onerror="this.parentElement.classList.add('is-bare')"><span class="thumb-fallback">${esc((link.title || '?').slice(0, 1))}</span></span>`;
   }
-  html += `<h2 class="detail-title">${esc(ext.tmdb_name || link.title || '')}</h2>`;
-  html += '<div class="detail-meta">';
-  if (ext.birthday) html += `<span class="detail-tag">${esc(ext.birthday)}</span>`;
-  if (ext.place_of_birth) html += `<span class="detail-tag">${esc(ext.place_of_birth)}</span>`;
-  html += '</div>';
-  if (ext.biography) html += `<p class="detail-summary">${esc(ext.biography)}</p>`;
+  html += '<div class="masthead-detail-text">';
+  html += `<h1 class="detail-title">${esc(ext.tmdb_name || link.title || '')}</h1>`;
+  const facts = [];
+  if (ext.birthday) facts.push(esc(ext.birthday));
+  if (ext.place_of_birth) facts.push(esc(ext.place_of_birth));
+  if (facts.length) html += `<div class="facts facts-stack">${facts.map(f => `<span>${f}</span>`).join('')}</div>`;
+  html += '</div></div>';
+
+  if (ext.biography) html += `<p class="prose">${esc(ext.biography)}</p>`;
   if (ext.tmdb_url) {
-    html += `<a href="${esc(ext.tmdb_url)}" target="_blank" rel="noopener" class="btn btn-secondary" style="margin:12px 0">${ICONS.external} TMDB profile</a>`;
+    html += `<div class="actions actions-inline"><a href="${esc(ext.tmdb_url)}" target="_blank" rel="noopener" class="btn btn-secondary">${ICONS.external}TMDB</a></div>`;
   }
   if (ext.filmography && ext.filmography.length) {
-    html += `<h3 class="detail-section-title">${esc(t('link.filmography'))}</h3>`;
-    html += '<div class="director-filmography">';
+    html += `<h2 class="section-title">${esc(t('link.filmography'))}</h2>`;
+    html += '<div class="grid grid-poster">';
     ext.filmography.forEach(f => {
       const poster = f.poster_url
-        ? `<img src="${esc(f.poster_url)}" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+        ? `<img src="${esc(f.poster_url)}" alt="" loading="lazy" onerror="this.parentElement.classList.add('is-bare')">`
         : '';
-      const ratingStr = f.rating ? `★ ${Number(f.rating).toFixed(1)}` : '';
+      const ratingStr = f.rating ? `<span class="tile-rating"><span class="star">★</span>${Number(f.rating).toFixed(1)}</span>` : '';
       html += `
-        <div class="film-card">
-          <div class="film-poster">
+        <div class="tile">
+          <span class="thumb thumb-poster${f.poster_url ? '' : ' is-bare'}">
             ${poster}
-            <div class="poster-fallback" ${f.poster_url ? 'style="display:none"' : ''}>${CAT_ICONS.peliculas}</div>
-          </div>
-          <div class="film-title">${esc(f.title || '')}</div>
-          <div class="film-meta">${esc(f.year || '')} ${ratingStr}</div>
+            <span class="thumb-fallback">${CAT_ICONS.peliculas}</span>
+          </span>
+          <span class="tile-title">${esc(f.title || '')}</span>
+          <span class="tile-meta">${esc(f.year || '')}${ratingStr}</span>
         </div>`;
     });
     html += '</div>';
@@ -2620,12 +2769,12 @@ function renderDirectorDetail(link, ext) {
 }
 
 function renderGenericDetail(link) {
-  let html = '';
-  if (link.thumbnail) {
-    html += `<img class="detail-hero" src="${esc(link.thumbnail)}" alt="">`;
-  }
-  html += `<h2 class="detail-title">${esc(link.title || '')}</h2>`;
-  if (link.summary) html += `<p class="detail-summary">${esc(link.summary)}</p>`;
+  let html = renderHeroArt(link.thumbnail, 'still');
+  html += `<div class="masthead-detail masthead-detail-wide"><div class="masthead-detail-text"><h1 class="detail-title">${esc(link.title || '')}</h1>`;
+  const domain = getDomain(link.url);
+  if (domain) html += `<p class="byline">${esc(domain)}</p>`;
+  html += '</div></div>';
+  if (link.summary) html += `<p class="prose">${esc(link.summary)}</p>`;
   return html;
 }
 
@@ -2635,24 +2784,24 @@ function renderGenericDetail(link) {
 // the point: a cast list you cannot follow is just decoration.
 function renderPeopleRow(heading, people) {
   if (!people || !people.length) return '';
-  let html = `<h3 class="detail-section-title">${esc(heading)}</h3>`;
-  html += '<div class="people-row">';
+  let html = `<h2 class="section-title">${esc(heading)}</h2>`;
+  html += '<div class="faces">';
   for (const person of people) {
     if (!person || !person.name) continue;
     // Older records used photo_url; TMDB enrichment writes profile_url.
     const photoUrl = person.profile_url || person.photo_url;
     const photo = photoUrl
-      ? `<img class="person-photo" src="${esc(photoUrl)}" alt="${esc(person.name)}" loading="lazy">`
-      : `<div class="person-photo person-photo-placeholder">${esc(person.name[0])}</div>`;
+      ? `<span class="thumb thumb-round"><img src="${esc(photoUrl)}" alt="" loading="lazy" onerror="this.parentElement.classList.add('is-bare')"><span class="thumb-fallback">${esc(person.name[0])}</span></span>`
+      : `<span class="thumb thumb-round is-bare"><span class="thumb-fallback">${esc(person.name[0])}</span></span>`;
     const role = person.character || person.job || '';
-    const inner = `${photo}<div class="person-info"><span class="person-name">${esc(person.name)}</span>${role ? `<span class="person-role">${esc(role)}</span>` : ''}</div>`;
+    const inner = `${photo}<span class="face-name">${esc(person.name)}</span>${role ? `<span class="face-role">${esc(role)}</span>` : ''}`;
 
     // Only people TMDB resolved have a profile to open. The rest still render,
     // they just are not links to a dead end.
     const id = person.id || person.tmdb_id;
     html += id
-      ? `<button class="person-chip person-chip-link" onclick="navigate('#/person/${id}')">${inner}</button>`
-      : `<div class="person-chip">${inner}</div>`;
+      ? `<button class="face face-link" onclick="navigate('#/person/${id}')">${inner}</button>`
+      : `<div class="face">${inner}</div>`;
   }
   html += '</div>';
   return html;
@@ -2669,57 +2818,59 @@ async function renderPerson(personId) {
   } catch (err) {
     app.innerHTML = `
       <div class="screen">
-        <div class="header"><button class="back-btn" onclick="history.back()">${ICONS.back}</button>
-        <div><div class="header-title">${esc(t('person.title'))}</div></div></div>
+        <header class="topbar"><button class="icon-btn icon-btn-back" onclick="history.back()" aria-label="${esc(t('person.title'))}">${ICONS.back}</button>
+        <div class="topbar-text"><h1 class="topbar-title">${esc(t('person.title'))}</h1></div></header>
         <div class="empty-state"><p class="empty-state-text">${esc(t('person.failed'))}</p></div>
       </div>`;
     return;
   }
 
-  let html = `<div class="screen">
-    <div class="header">
-      <button class="back-btn" onclick="history.back()">${ICONS.back}</button>
-      <div><div class="header-subtitle">${esc(person.known_for || t('person.title'))}</div>
-      <div class="header-title">${esc(person.name || '')}</div></div>
-    </div>`;
+  let html = `<div class="screen screen-detail${person.profile_url ? ' has-hero' : ''}">
+    <header class="topbar topbar-quiet">
+      <button class="icon-btn icon-btn-back" onclick="history.back()" aria-label="${esc(t('person.title'))}">${ICONS.back}</button>
+      <div class="topbar-text"><div class="topbar-crumb">${esc(person.known_for || t('person.title'))}</div></div>
+    </header>`;
 
-  html += '<div class="person-hero">';
+  html += heroFor(null, person.profile_url, null);
+
+  html += `<div class="masthead-detail${person.profile_url ? '' : ' masthead-detail-wide'}">`;
   if (person.profile_url) {
-    html += `<img class="person-hero-photo" src="${esc(person.profile_url)}" alt="">`;
+    html += `<span class="thumb thumb-round masthead-face"><img src="${esc(person.profile_url)}" alt="" onerror="this.parentElement.classList.add('is-bare')"><span class="thumb-fallback">${esc((person.name || '?').slice(0, 1))}</span></span>`;
   }
+  html += '<div class="masthead-detail-text">';
+  html += `<h1 class="detail-title">${esc(person.name || '')}</h1>`;
   const facts = [
     person.birthday ? `${t('person.born')} ${person.birthday}` : null,
     person.deathday ? `${t('person.died')} ${person.deathday}` : null,
     person.place_of_birth,
   ].filter(Boolean);
   if (facts.length) {
-    html += '<div class="person-facts">';
-    for (const fact of facts) html += `<span class="detail-tag">${esc(fact)}</span>`;
-    html += '</div>';
+    html += `<div class="facts facts-stack">${facts.map(f => `<span>${esc(f)}</span>`).join('')}</div>`;
   }
-  html += '</div>';
+  html += '</div></div>';
 
   if (person.biography) {
-    html += `<p class="detail-summary">${esc(person.biography)}</p>`;
+    html += `<p class="prose">${esc(person.biography)}</p>`;
   }
 
   if (person.works && person.works.length) {
-    html += `<h3 class="detail-section-title">${esc(t('person.known_for_works'))}</h3>`;
-    html += '<div class="work-grid">';
+    html += `<h2 class="section-title">${esc(t('person.known_for_works'))}</h2>`;
+    html += '<div class="grid grid-poster">';
     for (const work of person.works) {
-      html += `<div class="work-card">
-        ${work.poster_url
-          ? `<img class="work-poster" src="${esc(work.poster_url)}" alt="" loading="lazy">`
-          : '<span class="work-poster work-poster-empty"></span>'}
-        <span class="work-title">${esc(work.title)}</span>
-        <span class="work-meta">${esc([work.year, work.role].filter(Boolean).join(' · '))}</span>
+      html += `<div class="tile">
+        <span class="thumb thumb-poster${work.poster_url ? '' : ' is-bare'}">
+          ${work.poster_url ? `<img src="${esc(work.poster_url)}" alt="" loading="lazy" onerror="this.parentElement.classList.add('is-bare')">` : ''}
+          <span class="thumb-fallback">${CAT_ICONS.peliculas}</span>
+        </span>
+        <span class="tile-title">${esc(work.title)}</span>
+        <span class="tile-meta">${work.year ? `<span class="tile-year">${esc(work.year)}</span>` : ''}${esc(work.role || '')}</span>
       </div>`;
     }
     html += '</div>';
   }
 
   if (person.tmdb_url) {
-    html += `<div class="actions"><a href="${esc(person.tmdb_url)}" target="_blank" rel="noopener" class="btn btn-secondary">${ICONS.external} TMDB</a></div>`;
+    html += `<div class="actions"><a href="${esc(person.tmdb_url)}" target="_blank" rel="noopener" class="btn btn-secondary">${ICONS.external}TMDB</a></div>`;
   }
 
   html += '</div>';
@@ -2733,8 +2884,8 @@ function renderItemsList(link, ext) {
   const items = (ext && ext.items) || [];
   if (!items.length) return '';
 
-  let html = `<h3 class="detail-section-title">${esc(t('link.items_in_list', { n: items.length }))}</h3>`;
-  html += '<ul class="item-list">';
+  let html = `<h2 class="section-title">${esc(t('link.items_in_list', { n: items.length }))}</h2>`;
+  html += '<ul class="listing">';
   for (const item of items) {
     const name = item.title || item.search_title || item.name || '';
     if (!name) continue;
@@ -2742,9 +2893,9 @@ function renderItemsList(link, ext) {
       item.year,
       item.author,
       item.media_type === 'tv' ? t('link.tv_show') : item.media_type === 'movie' ? t('link.movie') : null,
-    ].filter(Boolean).join(' · ');
-    html += `<li class="item-row"><span class="item-name">${esc(name)}</span>`;
-    if (meta) html += `<span class="item-meta">${esc(meta)}</span>`;
+    ].filter(Boolean);
+    html += `<li class="listing-row"><span class="listing-name">${esc(name)}</span>`;
+    if (meta.length) html += `<span class="listing-meta">${meta.map(m => `<span>${esc(m)}</span>`).join('')}</span>`;
     html += '</li>';
   }
   html += '</ul>';
@@ -2761,7 +2912,7 @@ function renderTranscript(link) {
     : t('link.transcript_auto');
   return `
     <details class="transcript">
-      <summary class="transcript-toggle">${esc(t('link.transcript'))}</summary>
+      <summary class="transcript-toggle"><span>${esc(t('link.transcript'))}</span>${ICONS.chevron}</summary>
       <p class="transcript-note">${esc(label)}</p>
       <p class="transcript-body">${esc(ext.transcript)}</p>
     </details>`;
@@ -2793,19 +2944,16 @@ function timeAgo(dateStr) {
 async function renderHistory() {
   app.innerHTML = `
     <div class="screen">
-      <div class="header">
-        <button class="back-btn" onclick="navigate('#/')">${ICONS.back}</button>
-        <div>
-          <div class="header-subtitle">${esc(t('history.subtitle'))}</div>
-          <div class="header-title">${esc(t('history.title'))}</div>
-        </div>
-      </div>
-      <div id="history-list" class="history-list">
-        <div class="skeleton skeleton-link" style="height:72px;margin-bottom:10px"></div>
-        <div class="skeleton skeleton-link" style="height:72px;margin-bottom:10px"></div>
-        <div class="skeleton skeleton-link" style="height:72px;margin-bottom:10px"></div>
-        <div class="skeleton skeleton-link" style="height:72px;margin-bottom:10px"></div>
-        <div class="skeleton skeleton-link" style="height:72px;margin-bottom:10px"></div>
+      <header class="topbar">
+        <button class="icon-btn icon-btn-back" onclick="navigate('#/')" aria-label="Shelf">${ICONS.back}</button>
+        <div class="topbar-text"><h1 class="topbar-title">${esc(t('history.title'))}</h1></div>
+      </header>
+      <div id="history-list">
+        <div class="skeleton skeleton-row"></div>
+        <div class="skeleton skeleton-row"></div>
+        <div class="skeleton skeleton-row"></div>
+        <div class="skeleton skeleton-row"></div>
+        <div class="skeleton skeleton-row"></div>
       </div>
     </div>`;
 
@@ -2825,7 +2973,7 @@ async function renderHistory() {
     if (!listEl) return;
 
     if (done.length === 0) {
-      listEl.innerHTML = `<div class="empty-state"><span class="empty-state-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:40px;height:40px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span><p class="empty-state-text">${esc(t('history.no_links'))}</p></div>`;
+      listEl.innerHTML = `<div class="empty-state"><span class="empty-state-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span><p class="empty-state-text">${esc(t('history.no_links'))}</p></div>`;
       return;
     }
 
@@ -2833,38 +2981,34 @@ async function renderHistory() {
     const catMap = {};
     categories.forEach(c => catMap[c._id] = c);
 
-    listEl.innerHTML = '<div class="history-feed stagger">' + done.map(link => {
+    listEl.innerHTML = '<div class="feed stagger">' + done.map(link => {
       const cat = catMap[link.category_id];
       const catName = cat ? cat.name : t('uncategorized');
       const catIcon = cat ? getCategoryIcon(cat.slug, cat) : CAT_ICONS.default;
       const ext = link.extension_data || {};
       const thumbUrl = ext.poster_url || ext.cover_url || ext.photo_url || link.thumbnail;
-      const domain = getDomain(link.url);
       const date = link.processed_at || link.submitted_at;
       const ago = date ? timeAgo(date) : '';
 
       return `
-        <div class="history-item" onclick="navigate('#/link/${link._id}')">
-          <div class="history-thumb-wrap">
-            ${thumbUrl
-              ? `<img class="history-thumb" src="${esc(thumbUrl)}" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
-              : ''}
-            <div class="history-thumb-fallback" ${thumbUrl ? 'style="display:none"' : ''}>${catIcon}</div>
-          </div>
-          <div class="history-content">
-            <div class="history-title">${esc(link.title || link.url)}</div>
-            ${link.url ? `<div class="history-url">${esc(link.url)}</div>` : ''}
-            <div class="history-meta">
-              <span class="history-cat-badge"><span class="history-cat-icon">${catIcon}</span>${esc(catName)}</span>
-              ${link.status !== 'done' ? `<span class="history-status">${esc(link.status)}</span>` : ''}
-            </div>
-            <div class="history-time">${esc(ago)}</div>
-          </div>
-        </div>`;
+        <button class="feed-row" onclick="navigate('#/link/${link._id}')">
+          <span class="thumb thumb-small${thumbUrl ? '' : ' is-bare'}">
+            ${thumbUrl ? `<img src="${esc(thumbUrl)}" alt="" loading="lazy" onerror="this.parentElement.classList.add('is-bare')">` : ''}
+            <span class="thumb-fallback">${catIcon}</span>
+          </span>
+          <span class="feed-text">
+            <span class="feed-title">${esc(link.title || link.url)}</span>
+            <span class="feed-meta">
+              <span class="feed-cat">${esc(catName)}</span>
+              ${link.status !== 'done' ? `<span class="feed-status" aria-label="${esc(t('home.processing', { n: 1 }))}"></span>` : ''}
+            </span>
+          </span>
+          <span class="feed-time">${esc(ago)}</span>
+        </button>`;
     }).join('') + '</div>';
   } catch (e) {
     const listEl = document.getElementById('history-list');
-    if (listEl) listEl.innerHTML = `<div class="empty-state"><span class="empty-state-icon">&#9888;&#65039;</span><p class="empty-state-text">${esc(t('history.could_not_load'))}</p></div>`;
+    if (listEl) listEl.innerHTML = `<div class="empty-state"><span class="empty-state-icon">${ICONS.warn}</span><p class="empty-state-text">${esc(t('history.could_not_load'))}</p></div>`;
   }
 }
 
@@ -2875,11 +3019,12 @@ function showAddLink() {
   overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
   overlay.innerHTML = `
     <div class="confirm-sheet">
-      <h3 class="confirm-title">${esc(t('add.title'))}</h3>
-      <p class="confirm-text">${esc(t('add.description'))}</p>
-      <textarea class="add-link-textarea" id="add-link-input" rows="4" placeholder="${esc(t('add.placeholder'))}"></textarea>
-      <div class="confirm-actions">
-        <button class="btn btn-danger" onclick="this.closest('.confirm-overlay').remove()">${esc(t('add.cancel'))}</button>
+      <div class="sheet-grip"></div>
+      <h2 class="sheet-title">${esc(t('add.title'))}</h2>
+      <p class="sheet-text">${esc(t('add.description'))}</p>
+      <textarea class="field field-area" id="add-link-input" rows="4" placeholder="${esc(t('add.placeholder'))}"></textarea>
+      <div class="sheet-actions">
+        <button class="btn btn-secondary" onclick="this.closest('.confirm-overlay').remove()">${esc(t('add.cancel'))}</button>
         <button class="btn btn-primary" id="add-link-submit" onclick="submitAddLink()">${esc(t('add.submit'))}</button>
       </div>
     </div>`;
@@ -2913,20 +3058,23 @@ function showRecategorize(linkId) {
   overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
   overlay.innerHTML = `
     <div class="confirm-sheet">
-      <h3 class="confirm-title">${esc(t('recat.title'))}</h3>
-      <input type="text" class="recat-hint-input" id="recat-hint" placeholder="${esc(t('recat.hint_placeholder'))}">
-      <div class="recat-options">
-        <button class="recat-btn" onclick="doRecategorize('${linkId}', 'movie', this)">${CAT_ICONS.peliculas} ${esc(t('recat.movie'))}</button>
-        <button class="recat-btn" onclick="doRecategorize('${linkId}', 'tv', this)">${CAT_ICONS.series} ${esc(t('recat.tv'))}</button>
-        <button class="recat-btn" onclick="doRecategorize('${linkId}', 'short', this)">${CAT_ICONS.cortometrajes} ${esc(t('recat.short'))}</button>
-        <button class="recat-btn" onclick="doRecategorize('${linkId}', 'recipe', this)">${CAT_ICONS.recetas} ${esc(t('recat.recipe'))}</button>
-        <button class="recat-btn" onclick="doRecategorize('${linkId}', 'documentary', this)">${CAT_ICONS.documentales} ${esc(t('recat.documentary'))}</button>
-        <button class="recat-btn" onclick="doRecategorize('${linkId}', 'book', this)">${CAT_ICONS.libros} ${esc(t('recat.book'))}</button>
-        <button class="recat-btn" onclick="doRecategorize('${linkId}', 'director', this)">${CAT_ICONS.directores} ${esc(t('recat.director'))}</button>
-        <button class="recat-btn" onclick="doRecategorize('${linkId}', 'generic', this)">${CAT_ICONS.default} ${esc(t('recat.generic'))}</button>
+      <div class="sheet-grip"></div>
+      <h2 class="sheet-title">${esc(t('recat.title'))}</h2>
+      <input type="text" class="field" id="recat-hint" placeholder="${esc(t('recat.hint_placeholder'))}">
+      <div class="kind-grid">
+        <button class="kind" onclick="doRecategorize('${linkId}', 'movie', this)">${CAT_ICONS.peliculas}<span>${esc(t('recat.movie'))}</span></button>
+        <button class="kind" onclick="doRecategorize('${linkId}', 'tv', this)">${CAT_ICONS.series}<span>${esc(t('recat.tv'))}</span></button>
+        <button class="kind" onclick="doRecategorize('${linkId}', 'short', this)">${CAT_ICONS.cortometrajes}<span>${esc(t('recat.short'))}</span></button>
+        <button class="kind" onclick="doRecategorize('${linkId}', 'recipe', this)">${CAT_ICONS.recetas}<span>${esc(t('recat.recipe'))}</span></button>
+        <button class="kind" onclick="doRecategorize('${linkId}', 'documentary', this)">${CAT_ICONS.documentales}<span>${esc(t('recat.documentary'))}</span></button>
+        <button class="kind" onclick="doRecategorize('${linkId}', 'book', this)">${CAT_ICONS.libros}<span>${esc(t('recat.book'))}</span></button>
+        <button class="kind" onclick="doRecategorize('${linkId}', 'director', this)">${CAT_ICONS.directores}<span>${esc(t('recat.director'))}</span></button>
+        <button class="kind" onclick="doRecategorize('${linkId}', 'generic', this)">${CAT_ICONS.default}<span>${esc(t('recat.generic'))}</span></button>
       </div>
-      <button class="recat-btn recat-retry" onclick="doRecategorize('${linkId}', null, this)">${ICONS.refresh} ${esc(t('recat.retry'))}</button>
-      <button class="btn btn-danger" style="width:100%;margin-top:10px" onclick="this.closest('.confirm-overlay').remove()">${esc(t('add.cancel'))}</button>
+      <div class="sheet-actions sheet-actions-stack">
+        <button class="btn btn-secondary" onclick="doRecategorize('${linkId}', null, this)">${ICONS.refresh}${esc(t('recat.retry'))}</button>
+        <button class="btn btn-quiet" onclick="this.closest('.confirm-overlay').remove()">${esc(t('add.cancel'))}</button>
+      </div>
     </div>`;
   document.body.appendChild(overlay);
 }
@@ -2960,11 +3108,12 @@ function confirmDelete(linkId) {
   overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
   overlay.innerHTML = `
     <div class="confirm-sheet">
-      <h3 class="confirm-title">${esc(t('delete.title'))}</h3>
-      <p class="confirm-text">${esc(t('delete.confirm'))}</p>
-      <div class="confirm-actions">
-        <button class="btn btn-danger" onclick="this.closest('.confirm-overlay').remove()">${esc(t('delete.cancel'))}</button>
-        <button class="btn btn-primary" id="confirm-delete-btn">${esc(t('delete.delete'))}</button>
+      <div class="sheet-grip"></div>
+      <h2 class="sheet-title">${esc(t('delete.title'))}</h2>
+      <p class="sheet-text">${esc(t('delete.confirm'))}</p>
+      <div class="sheet-actions">
+        <button class="btn btn-secondary" onclick="this.closest('.confirm-overlay').remove()">${esc(t('delete.cancel'))}</button>
+        <button class="btn btn-destructive" id="confirm-delete-btn">${esc(t('delete.delete'))}</button>
       </div>
     </div>`;
   document.body.appendChild(overlay);
@@ -2997,7 +3146,7 @@ async function toggleWatched(linkId, watched) {
 }
 
 async function toggleWatchedFromList(linkId, watched) {
-  const btn = document.querySelector(`.poster-card [onclick*="${linkId}"]`);
+  const btn = document.querySelector(`.tile-watch[onclick*="${linkId}"]`);
   if (btn) btn.classList.add('updating');
   try {
     const link = linksCache[linkId] || allLinks.find(l => l._id === linkId);
@@ -3047,25 +3196,24 @@ function showSettings() {
   overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
   const langLabels = { en: 'English', es: 'Espa\u00f1ol', fr: 'Fran\u00e7ais', pt: 'Portugu\u00eas', de: 'Deutsch', it: 'Italiano', ja: '\u65e5\u672c\u8a9e', ko: '\ud55c\uad6d\uc5b4', zh: '\u4e2d\u6587', nl: 'Nederlands', ru: '\u0420\u0443\u0441\u0441\u043a\u0438\u0439', ar: '\u0627\u0644\u0639\u0631\u0628\u064a\u0629', hi: '\u0939\u093f\u0928\u094d\u0926\u0940', tr: 'T\u00fcrk\u00e7e' };
   overlay.innerHTML = `
-    <div class="confirm-sheet">
-      <h3 class="confirm-title">${esc(t('settings.title'))}</h3>
-      <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px">
-        <div class="settings-lang-section">
-          <label class="settings-lang-label">${esc(t('settings.language'))}</label>
-          <div class="settings-lang-grid" id="lang-pills">
-            ${SUPPORTED_LOCALES.map(loc => `<button class="lang-pill ${loc === currentLocale ? 'active' : ''}" data-lang="${loc}"><span class="lang-pill-code">${loc.toUpperCase()}</span><span class="lang-pill-name">${langLabels[loc]}</span></button>`).join('')}
-          </div>
-        </div>
+    <div class="confirm-sheet confirm-sheet-tall">
+      <div class="sheet-grip"></div>
+      <h2 class="sheet-title">${esc(t('settings.title'))}</h2>
+      <h3 class="sheet-group">${esc(t('settings.language'))}</h3>
+      <div class="lang-list" id="lang-pills">
+        ${SUPPORTED_LOCALES.map(loc => `<button class="lang-row ${loc === currentLocale ? 'active' : ''}" data-lang="${loc}"><span class="lang-name">${langLabels[loc]}</span><span class="lang-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></button>`).join('')}
+      </div>
+      <div class="sheet-actions sheet-actions-stack">
         <button class="btn btn-secondary" id="settings-logout-btn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
           ${esc(t('settings.sign_out'))}
         </button>
-        <button class="btn btn-danger" id="settings-delete-btn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2M10 11v6M14 11v6"/></svg>
+        <button class="btn btn-quiet btn-danger" id="settings-delete-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2M10 11v6M14 11v6"/></svg>
           ${esc(t('settings.delete_account'))}
         </button>
+        <button class="btn btn-quiet" id="settings-close-btn">${esc(t('settings.close'))}</button>
       </div>
-      <button class="btn btn-secondary" id="settings-close-btn" style="width:100%;margin-top:10px">${esc(t('settings.close'))}</button>
     </div>`;
   document.body.appendChild(overlay);
   document.getElementById('lang-pills').addEventListener('click', (e) => {
@@ -3273,13 +3421,14 @@ function showShareCategory(categoryId) {
   overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
 
   let html = `<div class="confirm-sheet">
-    <h3 class="confirm-title">${esc(t('share.title'))}</h3>`;
+    <div class="sheet-grip"></div>
+    <h2 class="sheet-title">${esc(t('share.title'))}</h2>`;
 
   if (isOwner) {
     html += `
-      <div class="share-input-row">
-        <input type="email" class="share-email-input" id="share-email" placeholder="${esc(t('share.email_placeholder'))}" autocomplete="email">
-        <button class="share-invite-btn" id="share-invite-btn" onclick="submitShareInvite('${categoryId}')">${esc(t('share.invite'))}</button>
+      <div class="field-row">
+        <input type="email" class="field" id="share-email" placeholder="${esc(t('share.email_placeholder'))}" autocomplete="email">
+        <button class="btn btn-primary" id="share-invite-btn" onclick="submitShareInvite('${categoryId}')">${esc(t('share.invite'))}</button>
       </div>`;
   }
 
@@ -3287,12 +3436,12 @@ function showShareCategory(categoryId) {
   html += renderShareMembers(cat, isOwner);
   html += `</div>`;
 
+  html += '<div class="sheet-actions sheet-actions-stack">';
   if (!isOwner) {
-    html += `<button class="btn btn-danger" style="width:100%;margin-top:12px" onclick="leaveSharedCategory('${categoryId}', '${cat.user_id}')">${esc(t('share.leave'))}</button>`;
+    html += `<button class="btn btn-quiet btn-danger" onclick="leaveSharedCategory('${categoryId}', '${cat.user_id}')">${esc(t('share.leave'))}</button>`;
   }
-
-  html += `<button class="btn btn-secondary" style="width:100%;margin-top:10px" onclick="this.closest('.confirm-overlay').remove()">${esc(t('settings.close'))}</button>`;
-  html += `</div>`;
+  html += `<button class="btn btn-quiet" onclick="this.closest('.confirm-overlay').remove()">${esc(t('settings.close'))}</button>`;
+  html += `</div></div>`;
 
   overlay.innerHTML = html;
   document.body.appendChild(overlay);
@@ -3312,22 +3461,22 @@ function renderShareMembers(cat, isOwner) {
 
   let html = '';
   if (members.length > 0 || isOwner) {
-    html += `<p class="share-section-label">${esc(t('share.members'))}</p>`;
-    html += '<div class="share-members-list">';
+    html += `<h3 class="sheet-group">${esc(t('share.members'))}</h3>`;
+    html += '<div class="member-list">';
 
     // Show owner marker (when viewing as owner)
     if (isOwner) {
-      html += `<div class="share-member">
-        <span class="share-member-email" style="font-weight:600">You</span>
-        <span class="share-member-owner">${esc(t('share.owner'))}</span>
+      html += `<div class="member">
+        <span class="member-email">You</span>
+        <span class="member-tag">${esc(t('share.owner'))}</span>
       </div>`;
     }
 
     members.forEach(m => {
-      html += `<div class="share-member" id="share-member-${m.user_id}">
-        <span class="share-member-email">${esc(m.email)}</span>`;
+      html += `<div class="member" id="share-member-${m.user_id}">
+        <span class="member-email">${esc(m.email)}</span>`;
       if (isOwner) {
-        html += `<button class="share-member-remove" onclick="removeShareMember('${cat._id}', '${m.user_id}')">${esc(t('share.remove'))}</button>`;
+        html += `<button class="member-remove" onclick="removeShareMember('${cat._id}', '${m.user_id}')">${esc(t('share.remove'))}</button>`;
       }
       html += `</div>`;
     });
