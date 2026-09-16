@@ -45,6 +45,9 @@ const translations = {
     'link.movie': 'Movie',
     'link.watched': 'Watched',
     'link.not_watched': 'Not watched',
+    'link.transcript': 'What the video says',
+    'link.transcript_captions': 'From the video own subtitles',
+    'link.transcript_auto': 'Automatically transcribed from the audio',
     'link.director': 'Director',
     'link.directors': 'Directors',
     'link.cast': 'Cast',
@@ -163,6 +166,9 @@ const translations = {
     'link.movie': 'Pel\u00edcula',
     'link.watched': 'Vista',
     'link.not_watched': 'No vista',
+    'link.transcript': 'Lo que dice el video',
+    'link.transcript_captions': 'De los subtitulos del propio video',
+    'link.transcript_auto': 'Transcripto automaticamente del audio',
     'link.director': 'Director',
     'link.directors': 'Directores',
     'link.cast': 'Elenco',
@@ -281,6 +287,9 @@ const translations = {
     'link.movie': 'Film',
     'link.watched': 'Vu',
     'link.not_watched': 'Non vu',
+    'link.transcript': 'Ce que dit la video',
+    'link.transcript_captions': 'Depuis les sous-titres de la video',
+    'link.transcript_auto': 'Transcrit automatiquement depuis l audio',
     'link.director': 'R\u00e9alisateur',
     'link.directors': 'R\u00e9alisateurs',
     'link.cast': 'Distribution',
@@ -399,6 +408,9 @@ const translations = {
     'link.movie': 'Filme',
     'link.watched': 'Assistido',
     'link.not_watched': 'N\u00e3o assistido',
+    'link.transcript': 'O que o video diz',
+    'link.transcript_captions': 'Das legendas do proprio video',
+    'link.transcript_auto': 'Transcrito automaticamente do audio',
     'link.director': 'Diretor',
     'link.directors': 'Diretores',
     'link.cast': 'Elenco',
@@ -517,6 +529,9 @@ const translations = {
     'link.movie': 'Film',
     'link.watched': 'Gesehen',
     'link.not_watched': 'Nicht gesehen',
+    'link.transcript': 'Was das Video sagt',
+    'link.transcript_captions': 'Aus den Untertiteln des Videos',
+    'link.transcript_auto': 'Automatisch aus dem Audio transkribiert',
     'link.director': 'Regisseur',
     'link.directors': 'Regisseure',
     'link.cast': 'Besetzung',
@@ -635,6 +650,9 @@ const translations = {
     'link.movie': 'Film',
     'link.watched': 'Visto',
     'link.not_watched': 'Non visto',
+    'link.transcript': 'Cosa dice il video',
+    'link.transcript_captions': 'Dai sottotitoli del video',
+    'link.transcript_auto': 'Trascritto automaticamente dall audio',
     'link.director': 'Regista',
     'link.directors': 'Registi',
     'link.cast': 'Cast',
@@ -753,6 +771,9 @@ const translations = {
     'link.movie': '\u6620\u753b',
     'link.watched': '\u8996\u8074\u6e08\u307f',
     'link.not_watched': '\u672a\u8996\u8074',
+    'link.transcript': '動画の内容',
+    'link.transcript_captions': '動画の字幕から',
+    'link.transcript_auto': '音声から自動文字起こし',
     'link.director': '\u76e3\u7763',
     'link.directors': '\u76e3\u7763',
     'link.cast': '\u30ad\u30e3\u30b9\u30c8',
@@ -871,6 +892,9 @@ const translations = {
     'link.movie': '\uc601\ud654',
     'link.watched': '\uc2dc\uccad \uc644\ub8cc',
     'link.not_watched': '\ubbf8\uc2dc\uccad',
+    'link.transcript': '영상 내용',
+    'link.transcript_captions': '영상 자막에서',
+    'link.transcript_auto': '오디오에서 자동 전사',
     'link.director': '\uac10\ub3c5',
     'link.directors': '\uac10\ub3c5',
     'link.cast': '\ucd9c\uc5f0\uc9c4',
@@ -989,6 +1013,9 @@ const translations = {
     'link.movie': '\u7535\u5f71',
     'link.watched': '\u5df2\u770b',
     'link.not_watched': '\u672a\u770b',
+    'link.transcript': '视频内容',
+    'link.transcript_captions': '来自视频字幕',
+    'link.transcript_auto': '根据音频自动转录',
     'link.director': '\u5bfc\u6f14',
     'link.directors': '\u5bfc\u6f14',
     'link.cast': '\u6f14\u5458',
@@ -1107,6 +1134,9 @@ const translations = {
     'link.movie': 'Film',
     'link.watched': 'Gezien',
     'link.not_watched': 'Niet gezien',
+    'link.transcript': 'Wat de video zegt',
+    'link.transcript_captions': 'Uit de ondertiteling van de video',
+    'link.transcript_auto': 'Automatisch getranscribeerd uit de audio',
     'link.director': 'Regisseur',
     'link.directors': 'Regisseurs',
     'link.cast': 'Cast',
@@ -1225,6 +1255,9 @@ const translations = {
     'link.movie': '\u0424\u0438\u043b\u044c\u043c',
     'link.watched': '\u041f\u0440\u043e\u0441\u043c\u043e\u0442\u0440\u0435\u043d\u043e',
     'link.not_watched': '\u041d\u0435 \u043f\u0440\u043e\u0441\u043c\u043e\u0442\u0440\u0435\u043d\u043e',
+    'link.transcript': 'Что говорится в видео',
+    'link.transcript_captions': 'Из субтитров видео',
+    'link.transcript_auto': 'Автоматически расшифровано из аудио',
     'link.director': '\u0420\u0435\u0436\u0438\u0441\u0441\u0451\u0440',
     'link.directors': '\u0420\u0435\u0436\u0438\u0441\u0441\u0451\u0440\u044b',
     'link.cast': '\u0410\u043a\u0442\u0451\u0440\u044b',
@@ -1343,6 +1376,9 @@ const translations = {
     'link.movie': '\u0641\u064a\u0644\u0645',
     'link.watched': '\u062a\u0645\u062a \u0627\u0644\u0645\u0634\u0627\u0647\u062f\u0629',
     'link.not_watched': '\u0644\u0645 \u064a\u064f\u0634\u0627\u0647\u064e\u062f',
+    'link.transcript': 'ما يقوله الفيديو',
+    'link.transcript_captions': 'من ترجمات الفيديو نفسه',
+    'link.transcript_auto': 'منسوخ تلقائيا من الصوت',
     'link.director': '\u0627\u0644\u0645\u062e\u0631\u062c',
     'link.directors': '\u0627\u0644\u0645\u062e\u0631\u062c\u0648\u0646',
     'link.cast': '\u0627\u0644\u0645\u0645\u062b\u0644\u0648\u0646',
@@ -1461,6 +1497,9 @@ const translations = {
     'link.movie': '\u092b\u093f\u0932\u094d\u092e',
     'link.watched': '\u0926\u0947\u0916\u093e \u0917\u092f\u093e',
     'link.not_watched': '\u0928\u0939\u0940\u0902 \u0926\u0947\u0916\u093e',
+    'link.transcript': 'वीडियो में क्या कहा गया',
+    'link.transcript_captions': 'वीडियो के अपने उपशीर्षक से',
+    'link.transcript_auto': 'ऑडियो से स्वचालित रूप से लिप्यंतरित',
     'link.director': '\u0928\u093f\u0930\u094d\u0926\u0947\u0936\u0915',
     'link.directors': '\u0928\u093f\u0930\u094d\u0926\u0947\u0936\u0915',
     'link.cast': '\u0915\u0932\u093e\u0915\u093e\u0930',
@@ -1579,6 +1618,9 @@ const translations = {
     'link.movie': 'Film',
     'link.watched': '\u0130zlendi',
     'link.not_watched': '\u0130zlenmedi',
+    'link.transcript': 'Videoda ne anlatiliyor',
+    'link.transcript_captions': 'Videonun kendi altyazilarindan',
+    'link.transcript_auto': 'Sesten otomatik olarak yaziya dokuldu',
     'link.director': 'Y\u00f6netmen',
     'link.directors': 'Y\u00f6netmenler',
     'link.cast': 'Oyuncular',
@@ -2188,6 +2230,18 @@ async function renderCategory(categoryId, restoreState = false) {
   }
 }
 
+// The category type is only a hint. A video whose transcript turned out to be a
+// recipe carries ingredients and steps no matter which category it landed in,
+// and that data is worth more than a generic page, so let it pick the view.
+function resolveDetailType(ext, categoryType) {
+  if (!ext) return categoryType || 'generic';
+  if ((ext.ingredients && ext.ingredients.length) || (ext.steps && ext.steps.length)) return 'recipe';
+  if (ext.media_type === 'movie' || ext.media_type === 'tv') return 'movie';
+  if (ext.author) return 'book';
+  if (ext.search_name) return 'director';
+  return categoryType || 'generic';
+}
+
 async function renderLink(linkId) {
   let link = linksCache[linkId];
   if (!link) {
@@ -2202,7 +2256,7 @@ async function renderLink(linkId) {
 
   const cat = categories.find(c => c._id === link.category_id);
   const ext = link.extension_data || {};
-  const extType = cat ? cat.extension_type : 'generic';
+  const extType = resolveDetailType(ext, cat ? cat.extension_type : 'generic');
 
   let html = `<div class="screen"><div class="header"><button class="back-btn" onclick="navigate('#/category/${link.category_id}')">${ICONS.back}</button><div><div class="header-subtitle">${esc(cat ? cat.name : 'Link')}</div><div class="header-title">${esc(t('link.details'))}</div></div></div>`;
 
@@ -2217,6 +2271,8 @@ async function renderLink(linkId) {
   } else {
     html += renderGenericDetail(link);
   }
+
+  html += renderTranscript(link);
 
   html += `
     <div class="actions">
@@ -2432,6 +2488,22 @@ function renderGenericDetail(link) {
   html += `<h2 class="detail-title">${esc(link.title || '')}</h2>`;
   if (link.summary) html += `<p class="detail-summary">${esc(link.summary)}</p>`;
   return html;
+}
+
+// What the video actually says, so a recipe or a tutorial can be read instead
+// of watched. Collapsed by default: it is long and secondary to the summary.
+function renderTranscript(link) {
+  const ext = link.extension_data || {};
+  if (!ext.transcript) return '';
+  const label = ext.transcript_source === 'captions'
+    ? t('link.transcript_captions')
+    : t('link.transcript_auto');
+  return `
+    <details class="transcript">
+      <summary class="transcript-toggle">${esc(t('link.transcript'))}</summary>
+      <p class="transcript-note">${esc(label)}</p>
+      <p class="transcript-body">${esc(ext.transcript)}</p>
+    </details>`;
 }
 
 // ── Relative time helper ──

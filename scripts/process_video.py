@@ -362,6 +362,8 @@ def process_video(link_id: str):
     #    Each source is labelled separately so the model can weigh them: the
     #    caption is authored by the poster, the spoken track may well be the
     #    lyrics of background music rather than anything about the subject.
+    spoken = None
+    spoken_origin = None
     if meta and meta.get("title"):
         parts = []
         if meta["title"]:
@@ -372,13 +374,17 @@ def process_video(link_id: str):
             parts.append(f"Caption written by the poster: {meta['description']}")
 
         spoken = fetch_captions(meta)
-        spoken_origin = "subtitles published with the video"
+        spoken_origin = "captions"
         if not spoken:
             spoken = transcribe_audio(url, meta.get("duration"))
-            spoken_origin = "automatic transcription of the audio track"
+            spoken_origin = "transcript"
         if spoken:
+            origin_label = (
+                "subtitles published with the video" if spoken_origin == "captions"
+                else "automatic transcription of the audio track"
+            )
             parts.append(
-                f"Spoken content ({spoken_origin}). This may be narration about "
+                f"Spoken content ({origin_label}). This may be narration about "
                 f"the subject, or it may just be the lyrics of background music, "
                 f"so ignore it if it does not match the caption: {spoken}"
             )
@@ -457,6 +463,12 @@ def process_video(link_id: str):
             video_meta["video_view_count"] = meta["view_count"]
         if video_meta:
             final_extension_data.update(video_meta)
+
+    # Keep the spoken text on the link so the app can show what the video says
+    # and the user can read it instead of watching it.
+    if spoken:
+        final_extension_data["transcript"] = spoken
+        final_extension_data["transcript_source"] = spoken_origin
 
     # 8. Update the link document
     updates = {
