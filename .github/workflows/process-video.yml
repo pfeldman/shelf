@@ -21,7 +21,9 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-          cache: 'pip'
+          # No pip cache here on purpose: it needs a requirements.txt, and
+          # pinning yt-dlp is worse than reinstalling it, since a stale version
+          # stops being able to read Instagram and Facebook.
 
       # Needed to extract the audio track before transcribing it. Preinstalled
       # on ubuntu-latest, so this is a cheap guard rather than a real install.
