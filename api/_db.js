@@ -63,6 +63,10 @@ categorySchema.index({ user_id: 1, slug: 1 }, { unique: true });
 const userPrefSchema = new mongoose.Schema({
   user_id: { type: String, required: true, unique: true },
   language: { type: String, default: 'en' },
+  // Category ids in the order this user wants to see them on the home screen.
+  // Kept per user rather than on the category, because a shared collection is
+  // owned by someone else and each member orders their own shelf.
+  category_order: { type: [String], default: undefined },
   updated_at: { type: Date, default: Date.now },
 }, { collection: 'user_prefs', versionKey: false });
 

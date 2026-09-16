@@ -392,6 +392,17 @@ button { cursor: pointer; text-align: start; }
   z-index: 2;
   display: block;
 }
+/* Names what the picture is, so it reads as a suggestion rather than as
+   decoration. Sits over the image, so it carries the same shadow as the title. */
+.tonight-kicker {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.82);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
+}
+
 .tonight-title {
   display: block;
   font-size: 27px;
@@ -1272,4 +1283,65 @@ button { cursor: pointer; text-align: start; }
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ── Reorder collections ── */
+.order-list {
+  margin: 4px 0 8px;
+  touch-action: none; /* the pointer drag owns vertical movement here */
+}
+
+.order-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 4px;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+  cursor: grab;
+  user-select: none;
+}
+
+.order-row:last-child {
+  border-bottom: none;
+}
+
+.order-row.is-dragging {
+  cursor: grabbing;
+  border-radius: 10px;
+  border-bottom-color: transparent;
+  background: var(--surface-2);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.order-handle {
+  display: flex;
+  flex-shrink: 0;
+  color: var(--text-3);
+}
+
+.order-handle svg {
+  width: 20px;
+  height: 20px;
+}
+
+.order-name {
+  flex: 1;
+  min-width: 0;
+  font-size: 15px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.order-count {
+  flex-shrink: 0;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .order-row.is-dragging { box-shadow: none; }
 }

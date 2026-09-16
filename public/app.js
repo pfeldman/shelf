@@ -15,6 +15,11 @@ const translations = {
     // Home
     'home.subtitle': 'Your curated links',
     'home.saved_count': '{n} things saved',
+    'home.tonight': 'For tonight',
+    'order.title': 'Reorder collections',
+    'order.hint': 'Drag to put your favourites first',
+    'order.done': 'Done',
+    'order.failed': 'Could not save the order',
     'home.collections': 'Collections',
     'home.processing': '{n} link{s} processing\u2026',
     'home.no_links': 'No links yet. Share something!',
@@ -144,6 +149,11 @@ const translations = {
     // Home
     'home.subtitle': 'Tus links curados',
     'home.saved_count': '{n} cosas guardadas',
+    'home.tonight': 'Para esta noche',
+    'order.title': 'Reordenar colecciones',
+    'order.hint': 'Arrastra para poner primero las que mas te gustan',
+    'order.done': 'Listo',
+    'order.failed': 'No se pudo guardar el orden',
     'home.collections': 'Colecciones',
     'home.processing': '{n} link{s} procesando\u2026',
     'home.no_links': 'No hay links todav\u00eda. \u00a1Compart\u00ed algo!',
@@ -273,6 +283,11 @@ const translations = {
     // Home
     'home.subtitle': 'Vos liens organis\u00e9s',
     'home.saved_count': '{n} choses enregistrees',
+    'home.tonight': 'Pour ce soir',
+    'order.title': 'Reorganiser les collections',
+    'order.hint': 'Faites glisser pour placer vos preferees en premier',
+    'order.done': 'Termine',
+    'order.failed': 'Impossible d enregistrer l ordre',
     'home.collections': 'Collections',
     'home.processing': '{n} lien{s} en cours\u2026',
     'home.no_links': "Pas encore de liens. Partagez quelque chose\u00a0!",
@@ -402,6 +417,11 @@ const translations = {
     // Home
     'home.subtitle': 'Seus links selecionados',
     'home.saved_count': '{n} coisas salvas',
+    'home.tonight': 'Para hoje a noite',
+    'order.title': 'Reordenar colecoes',
+    'order.hint': 'Arraste para colocar suas favoritas primeiro',
+    'order.done': 'Pronto',
+    'order.failed': 'Nao foi possivel salvar a ordem',
     'home.collections': 'Cole\u00e7\u00f5es',
     'home.processing': '{n} link{s} processando\u2026',
     'home.no_links': 'Nenhum link ainda. Compartilhe algo!',
@@ -531,6 +551,11 @@ const translations = {
     // Home
     'home.subtitle': 'Deine kuratierten Links',
     'home.saved_count': '{n} Dinge gespeichert',
+    'home.tonight': 'Fur heute Abend',
+    'order.title': 'Sammlungen neu ordnen',
+    'order.hint': 'Ziehen, um Favoriten nach oben zu holen',
+    'order.done': 'Fertig',
+    'order.failed': 'Reihenfolge konnte nicht gespeichert werden',
     'home.collections': 'Sammlungen',
     'home.processing': '{n} Link{s} werden verarbeitet\u2026',
     'home.no_links': 'Noch keine Links. Teile etwas!',
@@ -660,6 +685,11 @@ const translations = {
     // Home
     'home.subtitle': 'I tuoi link selezionati',
     'home.saved_count': '{n} cose salvate',
+    'home.tonight': 'Per stasera',
+    'order.title': 'Riordina le raccolte',
+    'order.hint': 'Trascina per mettere prima le preferite',
+    'order.done': 'Fatto',
+    'order.failed': 'Impossibile salvare l ordine',
     'home.collections': 'Collezioni',
     'home.processing': '{n} link in elaborazione\u2026',
     'home.no_links': 'Nessun link ancora. Condividi qualcosa!',
@@ -789,6 +819,11 @@ const translations = {
     // Home
     'home.subtitle': '\u3042\u306a\u305f\u306e\u53ce\u96c6\u30ea\u30f3\u30af',
     'home.saved_count': '{n}件を保存済み',
+    'home.tonight': '今夜のおすすめ',
+    'order.title': 'コレクションを並べ替え',
+    'order.hint': 'ドラッグしてお気に入りを上に',
+    'order.done': '完了',
+    'order.failed': '並び順を保存できませんでした',
     'home.collections': '\u30b3\u30ec\u30af\u30b7\u30e7\u30f3',
     'home.processing': '{n}\u4ef6\u306e\u30ea\u30f3\u30af\u3092\u51e6\u7406\u4e2d\u2026',
     'home.no_links': '\u307e\u3060\u30ea\u30f3\u30af\u304c\u3042\u308a\u307e\u305b\u3093\u3002\u4f55\u304b\u5171\u6709\u3057\u307e\u3057\u3087\u3046\uff01',
@@ -918,6 +953,11 @@ const translations = {
     // Home
     'home.subtitle': '\ub098\ub9cc\uc758 \ud050\ub808\uc774\uc158 \ub9c1\ud06c',
     'home.saved_count': '{n}개 저장됨',
+    'home.tonight': '오늘 밤 추천',
+    'order.title': '컬렉션 순서 변경',
+    'order.hint': '끌어서 좋아하는 것을 위로',
+    'order.done': '완료',
+    'order.failed': '순서를 저장하지 못했습니다',
     'home.collections': '\ucee8\ub809\uc158',
     'home.processing': '{n}\uac1c \ub9c1\ud06c \ucc98\ub9ac \uc911\u2026',
     'home.no_links': '\uc544\uc9c1 \ub9c1\ud06c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4. \ubb34\uc5b8\uac00 \uacf5\uc720\ud574 \ubcf4\uc138\uc694!',
@@ -1047,6 +1087,11 @@ const translations = {
     // Home
     'home.subtitle': '\u4f60\u7684\u7cbe\u9009\u94fe\u63a5',
     'home.saved_count': '已保存{n}项',
+    'home.tonight': '今晚推荐',
+    'order.title': '重新排列收藏',
+    'order.hint': '拖动将喜欢的放在前面',
+    'order.done': '完成',
+    'order.failed': '无法保存排序',
     'home.collections': '\u5408\u96c6',
     'home.processing': '{n}\u4e2a\u94fe\u63a5\u5904\u7406\u4e2d\u2026',
     'home.no_links': '\u8fd8\u6ca1\u6709\u94fe\u63a5\u3002\u5206\u4eab\u4e00\u4e9b\u5427\uff01',
@@ -1176,6 +1221,11 @@ const translations = {
     // Home
     'home.subtitle': 'Jouw samengestelde links',
     'home.saved_count': '{n} dingen bewaard',
+    'home.tonight': 'Voor vanavond',
+    'order.title': 'Collecties herschikken',
+    'order.hint': 'Sleep je favorieten naar boven',
+    'order.done': 'Klaar',
+    'order.failed': 'Volgorde kon niet worden opgeslagen',
     'home.collections': 'Collecties',
     'home.processing': '{n} link{s} worden verwerkt\u2026',
     'home.no_links': 'Nog geen links. Deel iets!',
@@ -1305,6 +1355,11 @@ const translations = {
     // Home
     'home.subtitle': '\u0412\u0430\u0448\u0438 \u0438\u0437\u0431\u0440\u0430\u043d\u043d\u044b\u0435 \u0441\u0441\u044b\u043b\u043a\u0438',
     'home.saved_count': 'сохранено: {n}',
+    'home.tonight': 'На сегодня',
+    'order.title': 'Изменить порядок коллекций',
+    'order.hint': 'Перетащите любимые наверх',
+    'order.done': 'Готово',
+    'order.failed': 'Не удалось сохранить порядок',
     'home.collections': '\u041a\u043e\u043b\u043b\u0435\u043a\u0446\u0438\u0438',
     'home.processing': '\u041e\u0431\u0440\u0430\u0431\u0430\u0442\u044b\u0432\u0430\u0435\u0442\u0441\u044f {n} \u0441\u0441\u044b\u043b\u043e\u043a\u2026',
     'home.no_links': '\u0421\u0441\u044b\u043b\u043e\u043a \u043f\u043e\u043a\u0430 \u043d\u0435\u0442. \u041f\u043e\u0434\u0435\u043b\u0438\u0442\u0435\u0441\u044c \u0447\u0435\u043c-\u043d\u0438\u0431\u0443\u0434\u044c!',
@@ -1434,6 +1489,11 @@ const translations = {
     // Home
     'home.subtitle': '\u0631\u0648\u0627\u0628\u0637\u0643 \u0627\u0644\u0645\u062e\u062a\u0627\u0631\u0629',
     'home.saved_count': '{n} عنصرا محفوظا',
+    'home.tonight': 'لهذه الليلة',
+    'order.title': 'اعادة ترتيب المجموعات',
+    'order.hint': 'اسحب لوضع المفضلة اولا',
+    'order.done': 'تم',
+    'order.failed': 'تعذر حفظ الترتيب',
     'home.collections': '\u0627\u0644\u0645\u062c\u0645\u0648\u0639\u0627\u062a',
     'home.processing': '\u062c\u0627\u0631\u064a \u0645\u0639\u0627\u0644\u062c\u0629 {n} \u0631\u0627\u0628\u0637\u2026',
     'home.no_links': '\u0644\u0627 \u062a\u0648\u062c\u062f \u0631\u0648\u0627\u0628\u0637 \u0628\u0639\u062f. \u0634\u0627\u0631\u0643 \u0634\u064a\u0626\u0627\u064b!',
@@ -1563,6 +1623,11 @@ const translations = {
     // Home
     'home.subtitle': '\u0906\u092a\u0915\u0947 \u091a\u0941\u0928\u0947 \u0939\u0941\u090f \u0932\u093f\u0902\u0915',
     'home.saved_count': '{n} चीजें सहेजी गईं',
+    'home.tonight': 'आज रात के लिए',
+    'order.title': 'संग्रह पुनः क्रमित करें',
+    'order.hint': 'पसंदीदा को ऊपर लाने के लिए खींचें',
+    'order.done': 'हो गया',
+    'order.failed': 'क्रम सहेजा नहीं जा सका',
     'home.collections': '\u0938\u0902\u0917\u094d\u0930\u0939',
     'home.processing': '{n} \u0932\u093f\u0902\u0915 \u092a\u094d\u0930\u094b\u0938\u0947\u0938 \u0939\u094b \u0930\u0939\u0947 \u0939\u0948\u0902\u2026',
     'home.no_links': '\u0905\u092d\u0940 \u0915\u094b\u0908 \u0932\u093f\u0902\u0915 \u0928\u0939\u0940\u0902\u0964 \u0915\u0941\u091b \u0936\u0947\u092f\u0930 \u0915\u0930\u0947\u0902!',
@@ -1692,6 +1757,11 @@ const translations = {
     // Home
     'home.subtitle': 'Se\u00e7ilmi\u015f ba\u011flant\u0131lar\u0131n',
     'home.saved_count': '{n} sey kaydedildi',
+    'home.tonight': 'Bu aksam icin',
+    'order.title': 'Koleksiyonlari yeniden sirala',
+    'order.hint': 'Favorilerini one almak icin surukle',
+    'order.done': 'Tamam',
+    'order.failed': 'Siralama kaydedilemedi',
     'home.collections': 'Koleksiyonlar',
     'home.processing': '{n} ba\u011flant\u0131 i\u015fleniyor\u2026',
     'home.no_links': 'Hen\u00fcz ba\u011flant\u0131 yok. Bir \u015fey payla\u015f!',
@@ -1849,6 +1919,47 @@ function setLocale(locale) {
 // The browser is not the only thing that writes content: the video worker runs
 // on a server that never sees this page. Persist the choice so a recipe from an
 // English video still gets written in the language the user picked here.
+// The order the user dragged their categories into. Loaded once per session
+// and kept in step with the server, so the shelf looks the same on the phone
+// and on the web.
+let categoryOrder = null;
+
+function applyCategoryOrder(cats) {
+  if (!categoryOrder || !categoryOrder.length) return cats;
+  const rank = new Map(categoryOrder.map((id, i) => [id, i]));
+  // Categories saved after the last reorder have no rank yet; they go to the
+  // end in their existing order rather than jumping to the front.
+  return [...cats].sort((a, b) => {
+    const ra = rank.has(a._id) ? rank.get(a._id) : Number.MAX_SAFE_INTEGER;
+    const rb = rank.has(b._id) ? rank.get(b._id) : Number.MAX_SAFE_INTEGER;
+    return ra - rb;
+  });
+}
+
+async function loadCategoryOrder() {
+  try {
+    const resp = await authFetch(`${API_BASE}/api/prefs`);
+    if (!resp || !resp.ok) return;
+    const prefs = await resp.json();
+    if (Array.isArray(prefs.category_order)) categoryOrder = prefs.category_order;
+  } catch {
+    // Without it the categories simply keep their default order.
+  }
+}
+
+async function saveCategoryOrder(ids) {
+  categoryOrder = ids;
+  try {
+    await authFetch(`${API_BASE}/api/prefs`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ category_order: ids }),
+    });
+  } catch {
+    showToast(t('order.failed'));
+  }
+}
+
 async function syncLanguagePreference(locale) {
   try {
     await authFetch(`${API_BASE}/api/prefs`, {
@@ -2156,6 +2267,7 @@ function renderTonight(link) {
     <button class="tonight" onclick="openLink('${link._id}')">
       <img class="tonight-art" src="${esc(ext.backdrop_url)}" alt="">
       <span class="tonight-body">
+        <span class="tonight-kicker">${esc(t('home.tonight'))}</span>
         <span class="tonight-title">${esc(link.title || '')}</span>
         <span class="tonight-facts">${facts.join('')}</span>
       </span>
@@ -2193,7 +2305,9 @@ function renderHomeContent(cats, links, rerollTonight) {
       </div>`;
   } else if (cats.length > 0) {
     // Show categories with own links OR shared categories (even if 0 own links)
-    const nonEmpty = cats.filter(cat => countByCategory[cat._id] > 0 || (cat.isShared && !cat.isOwner));
+    const nonEmpty = applyCategoryOrder(
+      cats.filter(cat => countByCategory[cat._id] > 0 || (cat.isShared && !cat.isOwner))
+    );
     if (nonEmpty.length > 0) {
       // One rail per category, running off the right edge of the screen. A grid
       // of identical icon cards hid 266 posters behind a generic glyph.
@@ -3200,6 +3314,87 @@ function showToast(msg) {
 }
 
 // ── Settings ──
+// Reorder the shelves by dragging. Uses pointer events rather than HTML5 drag
+// and drop, which does not fire on touch screens, and moves the row in the DOM
+// as you pass each neighbour so the list you see is already the result.
+function showReorder() {
+  const counts = {};
+  allLinks.filter(l => l.status === 'done' && l.category_id).forEach(l => {
+    counts[l.category_id] = (counts[l.category_id] || 0) + 1;
+  });
+  const cats = applyCategoryOrder(
+    categories.filter(c => counts[c._id] > 0 || (c.isShared && !c.isOwner))
+  );
+
+  const overlay = document.createElement('div');
+  overlay.className = 'confirm-overlay';
+  overlay.innerHTML = `
+    <div class="confirm-sheet confirm-sheet-tall">
+      <div class="sheet-grip"></div>
+      <h2 class="sheet-title">${esc(t('order.title'))}</h2>
+      <p class="sheet-text">${esc(t('order.hint'))}</p>
+      <div class="order-list" id="order-list">
+        ${cats.map(c => `
+          <div class="order-row" data-id="${c._id}">
+            <span class="order-handle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9h16M4 15h16"/></svg></span>
+            <span class="order-name">${esc(c.name)}</span>
+            <span class="order-count">${counts[c._id] || 0}</span>
+          </div>`).join('')}
+      </div>
+      <div class="sheet-actions sheet-actions-stack">
+        <button class="btn btn-primary" id="order-done">${esc(t('order.done'))}</button>
+      </div>
+    </div>`;
+  document.body.appendChild(overlay);
+
+  const list = overlay.querySelector('#order-list');
+  let dragged = null;
+
+  const rowUnder = (y) => {
+    for (const row of list.querySelectorAll('.order-row')) {
+      if (row === dragged) continue;
+      const box = row.getBoundingClientRect();
+      if (y >= box.top && y <= box.bottom) {
+        return { row, after: y > box.top + box.height / 2 };
+      }
+    }
+    return null;
+  };
+
+  list.addEventListener('pointerdown', (e) => {
+    const row = e.target.closest('.order-row');
+    if (!row) return;
+    dragged = row;
+    row.classList.add('is-dragging');
+    row.setPointerCapture(e.pointerId);
+  });
+
+  list.addEventListener('pointermove', (e) => {
+    if (!dragged) return;
+    e.preventDefault();
+    const hit = rowUnder(e.clientY);
+    if (!hit) return;
+    hit.row.parentNode.insertBefore(dragged, hit.after ? hit.row.nextSibling : hit.row);
+  });
+
+  const endDrag = () => {
+    if (!dragged) return;
+    dragged.classList.remove('is-dragging');
+    dragged = null;
+    saveCategoryOrder([...list.querySelectorAll('.order-row')].map(r => r.dataset.id));
+  };
+  list.addEventListener('pointerup', endDrag);
+  list.addEventListener('pointercancel', endDrag);
+
+  overlay.querySelector('#order-done').addEventListener('click', () => {
+    overlay.remove();
+    render();
+  });
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) { overlay.remove(); render(); }
+  });
+}
+
 function showSettings() {
   const overlay = document.createElement('div');
   overlay.className = 'confirm-overlay';
@@ -3214,6 +3409,10 @@ function showSettings() {
         ${SUPPORTED_LOCALES.map(loc => `<button class="lang-row ${loc === currentLocale ? 'active' : ''}" data-lang="${loc}"><span class="lang-name">${langLabels[loc]}</span><span class="lang-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></button>`).join('')}
       </div>
       <div class="sheet-actions sheet-actions-stack">
+        <button class="btn btn-secondary" id="settings-order-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h10M4 17h6"/></svg>
+          ${esc(t('order.title'))}
+        </button>
         <button class="btn btn-secondary" id="settings-logout-btn">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
           ${esc(t('settings.sign_out'))}
@@ -3236,6 +3435,7 @@ function showSettings() {
     countryNames = new Intl.DisplayNames([currentLocale], { type: 'region' });
     render();
   });
+  document.getElementById('settings-order-btn').addEventListener('click', () => { overlay.remove(); showReorder(); });
   document.getElementById('settings-logout-btn').addEventListener('click', () => { overlay.remove(); handleLogout(); });
   document.getElementById('settings-delete-btn').addEventListener('click', () => { overlay.remove(); handleDeleteAccount(); });
   document.getElementById('settings-close-btn').addEventListener('click', () => overlay.remove());
@@ -3308,6 +3508,12 @@ function bootApp(supabaseClient) {
   // Keep the server's copy in step with this device, including the very first
   // run, where the locale was detected rather than chosen.
   syncLanguagePreference(currentLocale);
+  loadCategoryOrder().then(() => {
+    // If it arrives after the first paint, redraw home so the order applies.
+    if (getRoute().screen === 'home' && categoryOrder && allLinks.length) {
+      fetchCategories().then(cats => renderHomeContent(cats, allLinks));
+    }
+  });
 
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').then(reg => {
