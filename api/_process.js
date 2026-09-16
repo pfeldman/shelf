@@ -9,13 +9,64 @@ const OPENAI_MODEL = process.env.OPENAI_MODEL || 'gpt-4o-mini';
 const VIDEO_URL_PATTERNS = [
   /youtube\.com\/watch/i,
   /youtube\.com\/shorts/i,
+  /youtube\.com\/@/i,
   /youtu\.be\//i,
   /vimeo\.com\//i,
   /tiktok\.com\//i,
-  /instagram\.com\/(reel|p|tv)\//i,
+  /instagram\.com\/(reel|reels|p|tv)\//i,
   /twitter\.com\/.+\/status/i,
   /x\.com\/.+\/status/i,
+  // Facebook used to fall through to the HTML scraper, which Facebook answers
+  // with HTTP 400. yt-dlp handles these fine, so route them to the worker.
+  /facebook\.com\/share\/(r|v|p)\//i,
+  /facebook\.com\/(reel|watch|video)/i,
+  /facebook\.com\/[^/]+\/videos\//i,
+  /fb\.watch\//i,
 ];
+
+// Shorteners hide the real destination, so neither the video check nor the
+// scraper can tell what they point at until the redirect is followed.
+const SHORTENER_PATTERNS = [
+  /^https?:\/\/vm\.tiktok\.com\//i,
+  /^https?:\/\/vt\.tiktok\.com\//i,
+  /^https?:\/\/share\.google\//i,
+  /^https?:\/\/fb\.watch\//i,
+  /^https?:\/\/youtu\.be\//i,
+  /^https?:\/\/t\.co\//i,
+  /^https?:\/\/bit\.ly\//i,
+];
+
+function isShortenedUrl(url) {
+  return SHORTENER_PATTERNS.some(pattern => pattern.test(url));
+}
+
+/**
+ * Follow redirects on a shortened URL and return where it actually lands.
+ * Returns the original URL on any failure: a resolution problem must never be
+ * the reason a link fails to process.
+ */
+async function resolveShortUrl(url) {
+  if (!isShortenedUrl(url)) return url;
+
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 10000);
+  try {
+    const resp = await fetch(url, {
+      method: 'GET',
+      headers: BROWSER_HEADERS,
+      redirect: 'follow',
+      signal: controller.signal,
+    });
+    clearTimeout(timeout);
+    const finalUrl = resp.url || url;
+    if (finalUrl !== url) console.log(`Resolved short URL ${url} -> ${finalUrl}`);
+    return finalUrl;
+  } catch (err) {
+    clearTimeout(timeout);
+    console.log(`Could not resolve short URL ${url}: ${err.message}`);
+    return url;
+  }
+}
 
 function isVideoUrl(url) {
   return VIDEO_URL_PATTERNS.some(pattern => pattern.test(url));
@@ -177,7 +228,9 @@ Respond with ONLY valid JSON in this exact schema:
 Rules:
 - NEVER use "General" or "general" as a category. Always find or create a SPECIFIC, descriptive category.
 - Use an EXISTING category if one fits. Only create a new one if nothing matches.
-- DYNAMIC CATEGORY CREATION: If no existing category fits, create a NEW one with a specific, descriptive name (e.g. "Social Media", "Podcasts", "Design", "Travel", NOT "General" or "Other"). Set "is_new": true and provide "icon_svg" with SVG inner content (just the paths/shapes, NO outer <svg> tag). The icon must follow this style: viewBox assumes 0 0 24 24, fill="none", stroke="currentColor", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round". Example icon_svg: "<circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"M12 6v6l4 2\"/>". Keep it simple (2-4 elements max). For existing categories, set "is_new": false and "icon_svg": null.
+- CATEGORIZE BY TOPIC, NEVER BY PLATFORM. The category must describe what the content is ABOUT, not where it was published. Instagram, TikTok, YouTube, Facebook, X and Reddit are sources, not categories. A sewing tutorial posted as an Instagram reel belongs in a sewing category; a book recommendation posted as a TikTok belongs in a books category. Only use a social-media category when the subject matter itself is social media, such as growth tactics or platform news.
+- If the content could not be retrieved and all you have is a bare URL, do NOT invent a topic from the domain name. Categorize it as "Sin categorizar" (slug: "sin-categorizar", extension_type "generic") so it can be retried later.
+- DYNAMIC CATEGORY CREATION: If no existing category fits, create a NEW one with a specific, descriptive name describing the SUBJECT (e.g. "Costura", "Podcasts", "Design", "Travel", NOT "General", "Other", or the name of a website). Set "is_new": true and provide "icon_svg" with SVG inner content (just the paths/shapes, NO outer <svg> tag). The icon must follow this style: viewBox assumes 0 0 24 24, fill="none", stroke="currentColor", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round". Example icon_svg: "<circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"M12 6v6l4 2\"/>". Keep it simple (2-4 elements max). For existing categories, set "is_new": false and "icon_svg": null.
 - extension_type must be "movie" for movies AND TV shows/series, "recipe" for cooking recipes, "book" for books, "director" for film/TV directors, "generic" for everything else.
 - IMPORTANT: Movies and TV shows must be in SEPARATE categories. Use a category like "Peliculas" (slug: "peliculas") for movies and a different category like "Series" (slug: "series") for TV shows/series. Never mix them.
 - DOCUMENTARIES: If the content is a documentary (series or film), categorize it as "Documentales" (slug: "documentales") with extension_type "movie". Use media_type "tv" for documentary series, "movie" for standalone documentary films.
@@ -256,6 +309,12 @@ async function processLink(link, Category, userId, Link, language) {
       resolvedUrl = extracted.url;
       sharedText = extracted.text;
     }
+  }
+
+  // Expand shorteners first. Until the redirect is followed, a vm.tiktok.com or
+  // share.google link looks like neither a video nor a scrapable page.
+  if (isUrl(resolvedUrl) && isShortenedUrl(resolvedUrl)) {
+    resolvedUrl = await resolveShortUrl(resolvedUrl);
   }
 
   // Check if this is a video URL — offload to GitHub Actions worker
@@ -348,4 +407,4 @@ async function processLink(link, Category, userId, Link, language) {
   };
 }
 
-module.exports = { processLink, categorizeAndExtract, extractWebpage, isUrl, extractUrlAndText, isVideoUrl, triggerVideoProcessing };
+module.exports = { processLink, categorizeAndExtract, extractWebpage, isUrl, extractUrlAndText, isVideoUrl, isShortenedUrl, resolveShortUrl, triggerVideoProcessing };

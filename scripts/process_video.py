@@ -37,8 +37,15 @@ def get_db():
 # yt-dlp metadata extraction
 # ---------------------------------------------------------------------------
 
+MAX_TRANSCRIBE_SECONDS = 900  # 15 minutes; past that the cost stops paying off
+
+
 def extract_video_metadata(url: str) -> dict | None:
-    """Return metadata dict or None if yt-dlp fails."""
+    """Return metadata dict or None if yt-dlp fails.
+
+    `subtitle_tracks` carries the automatic-caption URLs yt-dlp advertises, so
+    the caller can fetch the spoken content without downloading the video.
+    """
     try:
         import yt_dlp
 
@@ -48,9 +55,10 @@ def extract_video_metadata(url: str) -> dict | None:
             "skip_download": True,
             "noplaylist": True,
             "socket_timeout": 30,
-            # Don't extract comments or subtitles
             "getcomments": False,
+            # Ask for automatic captions so their URLs show up in `info`.
             "writesubtitles": False,
+            "writeautomaticsub": True,
         }
 
         with yt_dlp.YoutubeDL(opts) as ydl:
@@ -68,10 +76,135 @@ def extract_video_metadata(url: str) -> dict | None:
             "upload_date": info.get("upload_date"),
             "view_count": info.get("view_count"),
             "like_count": info.get("like_count"),
+            "subtitle_tracks": info.get("automatic_captions") or info.get("subtitles") or {},
         }
     except Exception as exc:
         print(f"yt-dlp failed for {url}: {exc}", file=sys.stderr)
         return None
+
+
+# ---------------------------------------------------------------------------
+# Spoken content: captions first, local transcription as the fallback
+# ---------------------------------------------------------------------------
+
+def _strip_caption_markup(raw: str) -> str:
+    """Turn a VTT or SRT payload into plain prose, without repeated lines."""
+    import re
+
+    lines = []
+    for line in raw.splitlines():
+        line = re.sub(r"<[^>]+>", "", line).strip()
+        if not line:
+            continue
+        if line.startswith(("WEBVTT", "Kind:", "Language:")):
+            continue
+        if "-->" in line or line.isdigit():
+            continue
+        # Rolling captions repeat each line as the next one scrolls in.
+        if lines and lines[-1] == line:
+            continue
+        lines.append(line)
+
+    deduped = []
+    for line in lines:
+        if line not in deduped[-3:]:
+            deduped.append(line)
+    return " ".join(deduped)
+
+
+def fetch_captions(meta: dict) -> str | None:
+    """Download the best available caption track and return it as plain text."""
+    tracks = (meta or {}).get("subtitle_tracks") or {}
+    if not tracks:
+        return None
+
+    # Prefer the original language, then Spanish, then English, then anything.
+    preferred = [c for c in tracks if c.endswith("-orig")]
+    preferred += [c for c in tracks if c.startswith("es")]
+    preferred += [c for c in tracks if c.startswith("en")]
+    preferred += list(tracks)
+
+    import urllib.request
+
+    seen = set()
+    for code in preferred:
+        if code in seen:
+            continue
+        seen.add(code)
+        for fmt in tracks.get(code) or []:
+            if fmt.get("ext") not in ("vtt", "srt", "srv1", "ttml"):
+                continue
+            try:
+                req = urllib.request.Request(fmt["url"], headers={"User-Agent": "Mozilla/5.0"})
+                with urllib.request.urlopen(req, timeout=30) as resp:
+                    raw = resp.read().decode("utf-8", errors="replace")
+                text = _strip_caption_markup(raw)
+                if len(text) > 40:
+                    print(f"Captions found ({code}): {len(text)} chars")
+                    return text[:6000]
+            except Exception as exc:
+                print(f"Caption fetch failed for {code}: {exc}", file=sys.stderr)
+    return None
+
+
+def transcribe_audio(url: str, duration: float | None) -> str | None:
+    """Download the audio track and transcribe it locally with faster-whisper.
+
+    Runs on the Actions runner, so it costs nothing beyond the minutes already
+    being spent and needs no transcription model enabled on the OpenAI account.
+    """
+    if duration and duration > MAX_TRANSCRIBE_SECONDS:
+        print(f"Skipping transcription: {duration:.0f}s exceeds the {MAX_TRANSCRIBE_SECONDS}s cap")
+        return None
+
+    import tempfile
+    import glob as _glob
+
+    try:
+        import yt_dlp
+        from faster_whisper import WhisperModel
+    except ImportError as exc:
+        print(f"Transcription unavailable: {exc}", file=sys.stderr)
+        return None
+
+    with tempfile.TemporaryDirectory() as tmp:
+        target = os.path.join(tmp, "audio")
+        opts = {
+            "quiet": True,
+            "no_warnings": True,
+            "format": "bestaudio/best",
+            "outtmpl": target + ".%(ext)s",
+            "socket_timeout": 30,
+            "postprocessors": [{
+                "key": "FFmpegExtractAudio",
+                "preferredcodec": "mp3",
+                "preferredquality": "9",
+            }],
+        }
+        try:
+            with yt_dlp.YoutubeDL(opts) as ydl:
+                ydl.download([url])
+        except Exception as exc:
+            print(f"Audio download failed: {exc}", file=sys.stderr)
+            return None
+
+        files = _glob.glob(target + ".mp3") or _glob.glob(target + ".*")
+        if not files:
+            print("Audio download produced no file", file=sys.stderr)
+            return None
+
+        try:
+            model = WhisperModel("base", device="cpu", compute_type="int8")
+            segments, info = model.transcribe(files[0], beam_size=1)
+            text = " ".join(s.text.strip() for s in segments).strip()
+        except Exception as exc:
+            print(f"Transcription failed: {exc}", file=sys.stderr)
+            return None
+
+    if len(text) < 40:
+        return None
+    print(f"Transcribed {info.duration:.0f}s of audio into {len(text)} chars ({info.language})")
+    return text[:6000]
 
 
 # ---------------------------------------------------------------------------
@@ -137,7 +270,10 @@ Respond with ONLY valid JSON in this exact schema:
 Rules:
 - NEVER use "General" or "general" as a category. Always find or create a SPECIFIC, descriptive category.
 - Use an EXISTING category if one fits. Only create a new one if nothing matches.
-- DYNAMIC CATEGORY CREATION: If no existing category fits, create a NEW one with a specific, descriptive name (e.g. "Social Media", "Podcasts", "Design", "Travel", NOT "General" or "Other"). Set "is_new": true and provide "icon_svg" with SVG inner content (just the paths/shapes, NO outer <svg> tag). The icon must follow this style: viewBox assumes 0 0 24 24, fill="none", stroke="currentColor", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round". Example icon_svg: "<circle cx=\\"12\\" cy=\\"12\\" r=\\"10\\"/><path d=\\"M12 6v6l4 2\\"/>". Keep it simple (2-4 elements max). For existing categories, set "is_new": false and "icon_svg": null.
+- SPOKEN CONTENT: when the input includes a spoken track, treat it as the richest source about what the video actually shows, and use it to fill in details the caption omits, such as the real ingredients and steps of a recipe. But it can also be the lyrics of background music with no relation to the video. If the spoken text reads like song lyrics and contradicts the title and caption, ignore it completely and categorize from the caption instead.
+- CATEGORIZE BY TOPIC, NEVER BY PLATFORM. The category must describe what the content is ABOUT, not where it was published. Instagram, TikTok, YouTube, Facebook, X and Reddit are sources, not categories. A sewing tutorial posted as an Instagram reel belongs in a sewing category; a book recommendation posted as a TikTok belongs in a books category. Only use a social-media category when the subject matter itself is social media, such as growth tactics or platform news.
+- If the content could not be retrieved and all you have is a bare URL, do NOT invent a topic from the domain name. Categorize it as "Sin categorizar" (slug: "sin-categorizar", extension_type "generic") so it can be retried later.
+- DYNAMIC CATEGORY CREATION: If no existing category fits, create a NEW one with a specific, descriptive name describing the SUBJECT (e.g. "Costura", "Podcasts", "Design", "Travel", NOT "General", "Other", or the name of a website). Set "is_new": true and provide "icon_svg" with SVG inner content (just the paths/shapes, NO outer <svg> tag). The icon must follow this style: viewBox assumes 0 0 24 24, fill="none", stroke="currentColor", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round". Example icon_svg: "<circle cx=\\"12\\" cy=\\"12\\" r=\\"10\\"/><path d=\\"M12 6v6l4 2\\"/>". Keep it simple (2-4 elements max). For existing categories, set "is_new": false and "icon_svg": null.
 - extension_type must be "movie" for movies AND TV shows/series, "recipe" for cooking recipes, "book" for books, "director" for film/TV directors, "generic" for everything else.
 - IMPORTANT: Movies and TV shows must be in SEPARATE categories. Use a category like "Peliculas" (slug: "peliculas") for movies and a different category like "Series" (slug: "series") for TV shows/series. Never mix them.
 - DOCUMENTARIES: If the content is a documentary (series or film), categorize it as "Documentales" (slug: "documentales") with extension_type "movie". Use media_type "tv" for documentary series, "movie" for standalone documentary films.
@@ -222,7 +358,10 @@ def process_video(link_id: str):
     # 2. Extract metadata with yt-dlp
     meta = extract_video_metadata(url)
 
-    # 3. Build content for AI categorization
+    # 3. Build content for AI categorization.
+    #    Each source is labelled separately so the model can weigh them: the
+    #    caption is authored by the poster, the spoken track may well be the
+    #    lyrics of background music rather than anything about the subject.
     if meta and meta.get("title"):
         parts = []
         if meta["title"]:
@@ -230,7 +369,20 @@ def process_video(link_id: str):
         if meta.get("uploader"):
             parts.append(f"Channel/Uploader: {meta['uploader']}")
         if meta.get("description"):
-            parts.append(f"Description: {meta['description']}")
+            parts.append(f"Caption written by the poster: {meta['description']}")
+
+        spoken = fetch_captions(meta)
+        spoken_origin = "subtitles published with the video"
+        if not spoken:
+            spoken = transcribe_audio(url, meta.get("duration"))
+            spoken_origin = "automatic transcription of the audio track"
+        if spoken:
+            parts.append(
+                f"Spoken content ({spoken_origin}). This may be narration about "
+                f"the subject, or it may just be the lyrics of background music, "
+                f"so ignore it if it does not match the caption: {spoken}"
+            )
+
         content = "\n".join(parts)
         thumbnail = meta.get("thumbnail")
         source_type = "video"

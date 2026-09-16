@@ -11,7 +11,7 @@ on:
 jobs:
   process:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 15
 
     steps:
       - name: Checkout
@@ -21,9 +21,22 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+          cache: 'pip'
+
+      # Needed to extract the audio track before transcribing it. Preinstalled
+      # on ubuntu-latest, so this is a cheap guard rather than a real install.
+      - name: Ensure ffmpeg
+        run: ffmpeg -version > /dev/null 2>&1 || sudo apt-get install -y ffmpeg
 
       - name: Install dependencies
-        run: pip install yt-dlp pymongo dnspython openai
+        run: pip install yt-dlp pymongo dnspython openai faster-whisper
+
+      # The Whisper weights are ~150MB and otherwise get pulled on every run.
+      - name: Cache Whisper model
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: whisper-base-v1
 
       - name: Process video
         env:

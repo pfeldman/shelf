@@ -49,6 +49,12 @@ const categorySchema = new mongoose.Schema({
   created_at: { type: Date, default: Date.now },
 }, { collection: 'categories', versionKey: false });
 
+// A slug is unique WITHIN one user, not globally. The collection used to carry
+// a unique index on `slug` alone, which let the first user to claim a name
+// block every other user from ever creating a category with it, failing their
+// links with E11000. Declared here so the constraint cannot silently come back.
+categorySchema.index({ user_id: 1, slug: 1 }, { unique: true });
+
 // Use existing models if they exist (hot-reload safe)
 const Link = mongoose.models.Link || mongoose.model('Link', linkSchema);
 const Category = mongoose.models.Category || mongoose.model('Category', categorySchema);

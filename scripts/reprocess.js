@@ -1,15 +1,22 @@
 #!/usr/bin/env node
 /**
- * Reprocess links stuck in `error` status.
+ * Reprocess links through the current pipeline.
  *
  * Runs the same `processLink` pipeline the API uses, straight against MongoDB.
  * Dry-run by default: it prints what it would do and touches nothing.
  *
+ * Defaults to links in `error` status, which is the safe target because they
+ * hold no good data. Pointing it at healthy links overwrites their title,
+ * summary, category and extension_data, so back up first.
+ *
  * Usage:
- *   node scripts/reprocess-failed.js                      # dry run, all errored links
- *   node scripts/reprocess-failed.js --apply              # actually reprocess
- *   node scripts/reprocess-failed.js --filter=timeout     # only errors matching /timeout/i
- *   node scripts/reprocess-failed.js --limit=5 --apply    # reprocess the 5 most recent
+ *   node scripts/reprocess.js                                  # dry run, errored links
+ *   node scripts/reprocess.js --apply                          # reprocess them
+ *   node scripts/reprocess.js --filter=timeout --apply         # only errors matching /timeout/i
+ *   node scripts/reprocess.js --limit=5 --apply                # the 5 most recent
+ *   node scripts/reprocess.js --status=done --category=social-media
+ *   node scripts/reprocess.js --status=done --source-type=url-only --apply
+ *   node scripts/reprocess.js --status=any --apply             # everything, after a backup
  *
  * Requires in .env:
  *   MONGODB_URI     always
@@ -41,10 +48,20 @@ for (const name of ENV_FILES) {
 // ── Parse flags ──
 const args = process.argv.slice(2);
 const apply = args.includes('--apply');
-const filterArg = args.find(a => a.startsWith('--filter='));
-const limitArg = args.find(a => a.startsWith('--limit='));
-const filter = filterArg ? new RegExp(filterArg.split('=')[1], 'i') : null;
-const limit = limitArg ? parseInt(limitArg.split('=')[1], 10) : 0;
+const valueOf = name => {
+  const found = args.find(a => a.startsWith(`--${name}=`));
+  return found ? found.slice(name.length + 3) : null;
+};
+
+const filterArg = valueOf('filter');
+const filter = filterArg ? new RegExp(filterArg, 'i') : null;
+const limit = valueOf('limit') ? parseInt(valueOf('limit'), 10) : 0;
+
+// Selectors. Default to the failures, which is the safe target: they have no
+// good data to lose. Anything else has to be asked for explicitly.
+const status = valueOf('status') || 'error';
+const sourceType = valueOf('source-type');
+const categorySlug = valueOf('category');
 
 function preflight() {
   const problems = [];
@@ -72,22 +89,48 @@ async function main() {
 
   await connectDB();
 
-  const query = { status: 'error' };
-  let cursor = Link.find(query).sort({ submitted_at: -1 });
-  if (limit > 0) cursor = cursor.limit(limit);
-  let links = await cursor;
+  const query = {};
+  if (status !== 'any') query.status = status;
+  if (sourceType) query.source_type = sourceType;
 
+  if (categorySlug) {
+    // Slugs are per-user, so one slug can name several categories.
+    const cats = await Category.find({ slug: categorySlug }).lean();
+    if (!cats.length) {
+      console.log(`No category with slug "${categorySlug}". Nothing to do.`);
+      await mongoose.disconnect();
+      return;
+    }
+    query.category_id = { $in: cats.map(c => c._id) };
+  }
+
+  let links = await Link.find(query).sort({ submitted_at: -1 });
+
+  // Filter before limiting. The other order silently yields nothing whenever
+  // the most recent failures do not match the filter.
   if (filter) {
     links = links.filter(l => filter.test(String(l.error_message || '')));
   }
+  if (limit > 0) links = links.slice(0, limit);
+
+  const described = [
+    status === 'any' ? 'any status' : `status "${status}"`,
+    sourceType ? `source_type "${sourceType}"` : null,
+    categorySlug ? `category "${categorySlug}"` : null,
+    filter ? `error matching /${filterArg}/i` : null,
+  ].filter(Boolean).join(', ');
 
   if (!links.length) {
-    console.log('No links in error status match the filter. Nothing to do.');
+    console.log(`No links match: ${described}. Nothing to do.`);
     await mongoose.disconnect();
     return;
   }
 
-  console.log(`Found ${links.length} link(s) in error status.`);
+  console.log(`Found ${links.length} link(s) with ${described}.`);
+  if (apply && status !== 'error') {
+    console.log('NOTE: these links already hold good data. Reprocessing overwrites');
+    console.log('title, summary, category and extension_data. Run scripts/backup-db.js first.');
+  }
   console.log(apply ? 'Mode: APPLY (will reprocess)\n' : 'Mode: DRY RUN (nothing will be written)\n');
 
   let ok = 0;
@@ -100,7 +143,11 @@ async function main() {
 
     if (!apply) {
       console.log(`[dry] ${shortUrl}`);
-      console.log(`      was: ${shortErr}`);
+      // For failures the useful context is the error; for healthy links it is
+      // the data that would be overwritten.
+      console.log(shortErr
+        ? `      error: ${shortErr}`
+        : `      now:   ${String(link.title || '(untitled)').slice(0, 60)}`);
       continue;
     }
 
@@ -127,6 +174,24 @@ async function main() {
     } catch (err) {
       failed++;
       const message = String(err.message).slice(0, 500);
+      if (link.status === 'done') {
+        // This link already held good data. A failed retry must not destroy it,
+        // so put back exactly what was there and only note the attempt.
+        await Link.updateOne({ _id: link._id }, {
+          $set: {
+            status: 'done',
+            error_message: null,
+            title: link.title,
+            summary: link.summary,
+            thumbnail: link.thumbnail,
+            category_id: link.category_id,
+            extension_data: link.extension_data,
+            source_type: link.source_type,
+          },
+        });
+        console.log(`FAILED, kept previous data: ${message.slice(0, 70)}`);
+        continue;
+      }
       await Link.updateOne({ _id: link._id }, {
         $set: { status: 'error', error_message: message },
       });
