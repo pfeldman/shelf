@@ -393,9 +393,30 @@ def process_video(link_id: str):
         thumbnail = meta.get("thumbnail")
         source_type = "video"
     else:
-        # yt-dlp failed – fall back to URL-only categorization
-        print("yt-dlp metadata extraction failed, falling back to URL-only mode")
-        content = f"URL: {url}\n(Video content — metadata could not be extracted. Categorize based on the URL and domain.)"
+        print("yt-dlp metadata extraction failed")
+
+        # Extraction fails for reasons that have nothing to do with the link:
+        # YouTube and Instagram block the runner's IP, videos get taken down.
+        # If this link was already categorized from a successful extraction,
+        # a failed retry must not replace real data with a guess from the
+        # domain name. Keep what is there and stop.
+        #
+        # `source_type == "url-only"` means the existing data was itself guessed
+        # from the domain, so there is nothing worth protecting and a retry is
+        # the whole point.
+        already_extracted = link.get("source_type") not in (None, "url-only")
+        if already_extracted and link.get("title") and link.get("category_id"):
+            print(f"Keeping existing data for this link: {link.get('title')!r}")
+            links.update_one(
+                {"_id": ObjectId(link_id)},
+                {"$set": {"status": "done", "error_message": None},
+                 "$unset": {"processing_step": "", "processing_started_at": ""}},
+            )
+            return
+
+        # Nothing to lose: let the model work from the URL alone.
+        print("Falling back to URL-only mode")
+        content = f"URL: {url}\n(Video content could not be extracted. Categorize based on the URL and domain.)"
         thumbnail = None
         source_type = "url-only"
 
