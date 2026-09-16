@@ -91,7 +91,9 @@ async function main() {
   links = links.filter(l => {
     const ext = l.extension_data || {};
     const type = catType[String(l.category_id)];
-    const isTitle = ext.search_title || ext.media_type;
+    // Only screen works and film people. Books carry a `search_title` too, and
+    // looking one up on TMDB would staple an unrelated movie onto it.
+    const isTitle = type === 'movie' && (ext.search_title || ext.media_type);
     const isPerson = type === 'director' && ext.search_name;
     if (!isTitle && !isPerson) return false;
     if (force) return true;

@@ -112,13 +112,21 @@ async function details(id, mediaType, language) {
   });
 }
 
-function pickDirectors(credits, mediaType) {
-  if (!credits) return [];
+/**
+ * Who authored this.
+ * A series has no "Director" in its credits: TMDB puts its authors in the
+ * `created_by` field of the show itself, which is why reading only the crew
+ * left series with no one credited.
+ */
+function pickDirectors(credits, mediaType, record) {
   if (mediaType === 'tv') {
-    const creators = (credits.crew || []).filter(c => c.job === 'Creator' || c.department === 'Creator');
-    if (creators.length) return creators;
+    const creators = (record && record.created_by) || [];
+    if (creators.length) return creators.map(c => ({ ...c, job: 'Creator' }));
+    const fromCrew = ((credits && credits.crew) || [])
+      .filter(c => c.job === 'Creator' || c.job === 'Executive Producer');
+    if (fromCrew.length) return fromCrew;
   }
-  return (credits.crew || []).filter(c => c.job === 'Director');
+  return ((credits && credits.crew) || []).filter(c => c.job === 'Director');
 }
 
 function personSummary(person) {
@@ -162,7 +170,7 @@ async function enrichTitle({ searchTitle, mediaType, year, language }) {
     backdrop_url: imageUrl(record.backdrop_path, 'w780'),
     runtime: record.runtime || (record.episode_run_time || [])[0] || null,
     genre_names: (record.genres || []).map(g => g.name),
-    directors: pickDirectors(credits, mediaType).slice(0, 4).map(personSummary),
+    directors: pickDirectors(credits, mediaType, record).slice(0, 4).map(personSummary),
     cast: ((credits && credits.cast) || []).slice(0, 12).map(personSummary),
     watch_providers: buildProviders(providers),
   };
@@ -204,6 +212,13 @@ async function getPerson(personId, language) {
     append_to_response: 'combined_credits',
   });
   if (!person) return null;
+
+  // TMDB translates biographies unevenly: asking in Spanish often returns an
+  // empty one. An English biography beats no biography at all.
+  if (!person.biography && tmdbLanguage(language) !== 'en-US') {
+    const fallback = await tmdbFetch(`/person/${personId}`, { language: 'en-US' });
+    if (fallback && fallback.biography) person.biography = fallback.biography;
+  }
 
   const credits = person.combined_credits || {};
   const seen = new Set();
