@@ -79,14 +79,26 @@ async function main() {
 
   let links = await Link.find(query).sort({ submitted_at: -1 });
 
+  // An earlier integration stored cast and crew as name plus photo only, with
+  // no TMDB person id. Those links look enriched but their people lead nowhere,
+  // so a link counts as done only when its people can actually be opened.
+  const peopleAreLinkable = ext => {
+    const people = [...(ext.cast || []), ...(ext.directors || [])];
+    if (!people.length) return false;
+    return people.every(p => p && (p.id || p.tmdb_id));
+  };
+
   links = links.filter(l => {
     const ext = l.extension_data || {};
     const type = catType[String(l.category_id)];
     const isTitle = ext.search_title || ext.media_type;
     const isPerson = type === 'director' && ext.search_name;
     if (!isTitle && !isPerson) return false;
-    if (!force && ext.tmdb_id) return false;
-    return true;
+    if (force) return true;
+    if (!ext.tmdb_id) return true;
+    // Person links have a filmography instead of a cast.
+    if (type === 'director') return !(ext.filmography || []).length;
+    return !peopleAreLinkable(ext);
   });
 
   if (limit > 0) links = links.slice(0, limit);
