@@ -397,6 +397,11 @@ async function processLink(link, Category, userId, Link, language) {
   }
 
   const finalTitle = aiResult.title || data.title;
+  const extensionData = await enrichWithTmdb(
+    aiResult.extension_data || {},
+    catInfo.extension_type,
+    linkLang
+  );
 
   return {
     status: 'done',
@@ -406,9 +411,68 @@ async function processLink(link, Category, userId, Link, language) {
     summary: aiResult.summary || '',
     thumbnail: data.thumbnail,
     category_id: category._id,
-    extension_data: aiResult.extension_data || {},
+    extension_data: extensionData,
     processed_at: new Date(),
   };
+}
+
+/**
+ * Replace the model's guesses about a title with TMDB's record of it, and add
+ * what the model cannot know: poster, real rating, genres, cast and crew.
+ *
+ * The AI's values survive wherever TMDB has nothing, and any failure here
+ * returns the data untouched. Enrichment must never cost a link its result.
+ */
+async function enrichWithTmdb(extensionData, extensionType, language) {
+  const tmdb = require('./_tmdb');
+  if (!tmdb.isConfigured()) return extensionData;
+
+  try {
+    if (extensionType === 'movie') {
+      // A list of titles enriches item by item; a single title enriches itself.
+      if (Array.isArray(extensionData.items) && extensionData.items.length) {
+        const enriched = [];
+        for (const item of extensionData.items.slice(0, 20)) {
+          const hit = await tmdb.enrichTitle({
+            searchTitle: item.search_title || item.title,
+            mediaType: item.media_type === 'tv' ? 'tv' : 'movie',
+            year: item.year,
+            language,
+          });
+          enriched.push(hit ? { ...item, ...hit } : item);
+        }
+        return { ...extensionData, items: enriched };
+      }
+
+      const hit = await tmdb.enrichTitle({
+        searchTitle: extensionData.search_title,
+        mediaType: extensionData.media_type === 'tv' ? 'tv' : 'movie',
+        year: extensionData.year,
+        language,
+      });
+      // TMDB wins on the facts, but never blanks a field the model did fill.
+      return hit ? { ...extensionData, ...stripEmpty(hit) } : extensionData;
+    }
+
+    if (extensionType === 'director') {
+      const person = await tmdb.enrichPerson(extensionData.search_name, language);
+      return person ? { ...extensionData, ...stripEmpty(person) } : extensionData;
+    }
+  } catch (err) {
+    console.log(`TMDB enrichment skipped: ${err.message}`);
+  }
+
+  return extensionData;
+}
+
+function stripEmpty(obj) {
+  const out = {};
+  for (const [k, v] of Object.entries(obj)) {
+    if (v === null || v === undefined) continue;
+    if (Array.isArray(v) && !v.length) continue;
+    out[k] = v;
+  }
+  return out;
 }
 
 module.exports = { processLink, categorizeAndExtract, extractWebpage, isUrl, extractUrlAndText, isVideoUrl, isShortenedUrl, resolveShortUrl, triggerVideoProcessing };

@@ -47,6 +47,12 @@ const translations = {
     'link.not_watched': 'Not watched',
     'link.transcript': 'What the video says',
     'link.items_in_list': '{n} titles in this list',
+    'person.title': 'Person',
+    'person.loading': 'Loading profile...',
+    'person.failed': 'Could not load this profile',
+    'person.born': 'Born',
+    'person.died': 'Died',
+    'person.known_for_works': 'Known for',
     'link.transcript_captions': 'From the video own subtitles',
     'link.transcript_auto': 'Automatically transcribed from the audio',
     'link.director': 'Director',
@@ -169,6 +175,12 @@ const translations = {
     'link.not_watched': 'No vista',
     'link.transcript': 'Lo que dice el video',
     'link.items_in_list': '{n} titulos en esta lista',
+    'person.title': 'Persona',
+    'person.loading': 'Cargando perfil...',
+    'person.failed': 'No se pudo cargar este perfil',
+    'person.born': 'Nacimiento',
+    'person.died': 'Fallecimiento',
+    'person.known_for_works': 'Conocido por',
     'link.transcript_captions': 'De los subtitulos del propio video',
     'link.transcript_auto': 'Transcripto automaticamente del audio',
     'link.director': 'Director',
@@ -291,6 +303,12 @@ const translations = {
     'link.not_watched': 'Non vu',
     'link.transcript': 'Ce que dit la video',
     'link.items_in_list': '{n} titres dans cette liste',
+    'person.title': 'Personne',
+    'person.loading': 'Chargement du profil...',
+    'person.failed': 'Impossible de charger ce profil',
+    'person.born': 'Naissance',
+    'person.died': 'Deces',
+    'person.known_for_works': 'Connu pour',
     'link.transcript_captions': 'Depuis les sous-titres de la video',
     'link.transcript_auto': 'Transcrit automatiquement depuis l audio',
     'link.director': 'R\u00e9alisateur',
@@ -413,6 +431,12 @@ const translations = {
     'link.not_watched': 'N\u00e3o assistido',
     'link.transcript': 'O que o video diz',
     'link.items_in_list': '{n} titulos nesta lista',
+    'person.title': 'Pessoa',
+    'person.loading': 'Carregando perfil...',
+    'person.failed': 'Nao foi possivel carregar este perfil',
+    'person.born': 'Nascimento',
+    'person.died': 'Falecimento',
+    'person.known_for_works': 'Conhecido por',
     'link.transcript_captions': 'Das legendas do proprio video',
     'link.transcript_auto': 'Transcrito automaticamente do audio',
     'link.director': 'Diretor',
@@ -535,6 +559,12 @@ const translations = {
     'link.not_watched': 'Nicht gesehen',
     'link.transcript': 'Was das Video sagt',
     'link.items_in_list': '{n} Titel in dieser Liste',
+    'person.title': 'Person',
+    'person.loading': 'Profil wird geladen...',
+    'person.failed': 'Dieses Profil konnte nicht geladen werden',
+    'person.born': 'Geboren',
+    'person.died': 'Gestorben',
+    'person.known_for_works': 'Bekannt fur',
     'link.transcript_captions': 'Aus den Untertiteln des Videos',
     'link.transcript_auto': 'Automatisch aus dem Audio transkribiert',
     'link.director': 'Regisseur',
@@ -657,6 +687,12 @@ const translations = {
     'link.not_watched': 'Non visto',
     'link.transcript': 'Cosa dice il video',
     'link.items_in_list': '{n} titoli in questo elenco',
+    'person.title': 'Persona',
+    'person.loading': 'Caricamento profilo...',
+    'person.failed': 'Impossibile caricare questo profilo',
+    'person.born': 'Nascita',
+    'person.died': 'Morte',
+    'person.known_for_works': 'Conosciuto per',
     'link.transcript_captions': 'Dai sottotitoli del video',
     'link.transcript_auto': 'Trascritto automaticamente dall audio',
     'link.director': 'Regista',
@@ -779,6 +815,12 @@ const translations = {
     'link.not_watched': '\u672a\u8996\u8074',
     'link.transcript': '動画の内容',
     'link.items_in_list': 'このリストの{n}件',
+    'person.title': '人物',
+    'person.loading': 'プロフィールを読み込み中...',
+    'person.failed': 'このプロフィールを読み込めませんでした',
+    'person.born': '生年月日',
+    'person.died': '没年月日',
+    'person.known_for_works': '代表作',
     'link.transcript_captions': '動画の字幕から',
     'link.transcript_auto': '音声から自動文字起こし',
     'link.director': '\u76e3\u7763',
@@ -901,6 +943,12 @@ const translations = {
     'link.not_watched': '\ubbf8\uc2dc\uccad',
     'link.transcript': '영상 내용',
     'link.items_in_list': '이 목록의 {n}개 항목',
+    'person.title': '인물',
+    'person.loading': '프로필 불러오는 중...',
+    'person.failed': '이 프로필을 불러올 수 없습니다',
+    'person.born': '출생',
+    'person.died': '사망',
+    'person.known_for_works': '대표작',
     'link.transcript_captions': '영상 자막에서',
     'link.transcript_auto': '오디오에서 자동 전사',
     'link.director': '\uac10\ub3c5',
@@ -1023,6 +1071,12 @@ const translations = {
     'link.not_watched': '\u672a\u770b',
     'link.transcript': '视频内容',
     'link.items_in_list': '此列表中的{n}个条目',
+    'person.title': '人物',
+    'person.loading': '正在加载资料...',
+    'person.failed': '无法加载此资料',
+    'person.born': '出生',
+    'person.died': '逝世',
+    'person.known_for_works': '代表作',
     'link.transcript_captions': '来自视频字幕',
     'link.transcript_auto': '根据音频自动转录',
     'link.director': '\u5bfc\u6f14',
@@ -1145,6 +1199,12 @@ const translations = {
     'link.not_watched': 'Niet gezien',
     'link.transcript': 'Wat de video zegt',
     'link.items_in_list': '{n} titels in deze lijst',
+    'person.title': 'Persoon',
+    'person.loading': 'Profiel laden...',
+    'person.failed': 'Kon dit profiel niet laden',
+    'person.born': 'Geboren',
+    'person.died': 'Overleden',
+    'person.known_for_works': 'Bekend van',
     'link.transcript_captions': 'Uit de ondertiteling van de video',
     'link.transcript_auto': 'Automatisch getranscribeerd uit de audio',
     'link.director': 'Regisseur',
@@ -1267,6 +1327,12 @@ const translations = {
     'link.not_watched': '\u041d\u0435 \u043f\u0440\u043e\u0441\u043c\u043e\u0442\u0440\u0435\u043d\u043e',
     'link.transcript': 'Что говорится в видео',
     'link.items_in_list': '{n} названий в списке',
+    'person.title': 'Персона',
+    'person.loading': 'Загрузка профиля...',
+    'person.failed': 'Не удалось загрузить профиль',
+    'person.born': 'Родился',
+    'person.died': 'Умер',
+    'person.known_for_works': 'Известен по',
     'link.transcript_captions': 'Из субтитров видео',
     'link.transcript_auto': 'Автоматически расшифровано из аудио',
     'link.director': '\u0420\u0435\u0436\u0438\u0441\u0441\u0451\u0440',
@@ -1389,6 +1455,12 @@ const translations = {
     'link.not_watched': '\u0644\u0645 \u064a\u064f\u0634\u0627\u0647\u064e\u062f',
     'link.transcript': 'ما يقوله الفيديو',
     'link.items_in_list': '{n} عناوين في هذه القائمة',
+    'person.title': 'شخص',
+    'person.loading': 'جار تحميل الملف الشخصي...',
+    'person.failed': 'تعذر تحميل هذا الملف الشخصي',
+    'person.born': 'الميلاد',
+    'person.died': 'الوفاة',
+    'person.known_for_works': 'اشتهر بـ',
     'link.transcript_captions': 'من ترجمات الفيديو نفسه',
     'link.transcript_auto': 'منسوخ تلقائيا من الصوت',
     'link.director': '\u0627\u0644\u0645\u062e\u0631\u062c',
@@ -1511,6 +1583,12 @@ const translations = {
     'link.not_watched': '\u0928\u0939\u0940\u0902 \u0926\u0947\u0916\u093e',
     'link.transcript': 'वीडियो में क्या कहा गया',
     'link.items_in_list': 'इस सूची में {n} शीर्षक',
+    'person.title': 'व्यक्ति',
+    'person.loading': 'प्रोफ़ाइल लोड हो रही है...',
+    'person.failed': 'यह प्रोफ़ाइल लोड नहीं हो सकी',
+    'person.born': 'जन्म',
+    'person.died': 'निधन',
+    'person.known_for_works': 'के लिए जाने जाते हैं',
     'link.transcript_captions': 'वीडियो के अपने उपशीर्षक से',
     'link.transcript_auto': 'ऑडियो से स्वचालित रूप से लिप्यंतरित',
     'link.director': '\u0928\u093f\u0930\u094d\u0926\u0947\u0936\u0915',
@@ -1633,6 +1711,12 @@ const translations = {
     'link.not_watched': '\u0130zlenmedi',
     'link.transcript': 'Videoda ne anlatiliyor',
     'link.items_in_list': 'bu listede {n} baslik',
+    'person.title': 'Kisi',
+    'person.loading': 'Profil yukleniyor...',
+    'person.failed': 'Bu profil yuklenemedi',
+    'person.born': 'Dogum',
+    'person.died': 'Olum',
+    'person.known_for_works': 'Bilinen isleri',
     'link.transcript_captions': 'Videonun kendi altyazilarindan',
     'link.transcript_auto': 'Sesten otomatik olarak yaziya dokuldu',
     'link.director': 'Y\u00f6netmen',
@@ -1894,6 +1978,8 @@ function getRoute() {
   if (catMatch) return { screen: 'category', id: catMatch[1] };
   const linkMatch = hash.match(/^#\/link\/(.+)$/);
   if (linkMatch) return { screen: 'link', id: linkMatch[1] };
+  const personMatch = hash.match(/^#\/person\/(\d+)$/);
+  if (personMatch) return { screen: 'person', id: personMatch[1] };
   return { screen: 'home' };
 }
 
@@ -1927,6 +2013,7 @@ function render() {
     case 'home': renderHome(); break;
     case 'category': renderCategory(route.id, cameFromLink); break;
     case 'link': renderLink(route.id); break;
+    case 'person': renderPerson(route.id); break;
     case 'history': renderHistory(); break;
     default: renderHome();
   }
@@ -2344,31 +2431,11 @@ function renderMovieDetail(link, ext) {
   const summary = ext.overview || link.summary || '';
   if (summary) html += `<p class="detail-summary">${esc(summary)}</p>`;
 
-  // Directors
-  if (ext.directors && ext.directors.length) {
-    html += `<h3 class="detail-section-title">${ext.directors.length === 1 ? esc(t('link.director')) : esc(t('link.directors'))}</h3>`;
-    html += '<div class="people-row">';
-    ext.directors.forEach(d => {
-      const photo = d.photo_url
-        ? `<img class="person-photo" src="${esc(d.photo_url)}" alt="${esc(d.name)}" loading="lazy">`
-        : `<div class="person-photo person-photo-placeholder">${esc(d.name[0])}</div>`;
-      html += `<div class="person-chip">${photo}<span class="person-name">${esc(d.name)}</span></div>`;
-    });
-    html += '</div>';
-  }
-
-  // Cast
-  if (ext.cast && ext.cast.length) {
-    html += `<h3 class="detail-section-title">${esc(t('link.cast'))}</h3>`;
-    html += '<div class="people-row">';
-    ext.cast.forEach(a => {
-      const photo = a.photo_url
-        ? `<img class="person-photo" src="${esc(a.photo_url)}" alt="${esc(a.name)}" loading="lazy">`
-        : `<div class="person-photo person-photo-placeholder">${esc(a.name[0])}</div>`;
-      html += `<div class="person-chip">${photo}<div class="person-info"><span class="person-name">${esc(a.name)}</span>${a.character ? `<span class="person-role">${esc(a.character)}</span>` : ''}</div></div>`;
-    });
-    html += '</div>';
-  }
+  html += renderPeopleRow(
+    ext.directors && ext.directors.length === 1 ? t('link.director') : t('link.directors'),
+    ext.directors
+  );
+  html += renderPeopleRow(t('link.cast'), ext.cast);
 
   // Streaming providers
   if (ext.watch_providers && ext.watch_providers.length) {
@@ -2519,6 +2586,103 @@ function renderGenericDetail(link) {
   html += `<h2 class="detail-title">${esc(link.title || '')}</h2>`;
   if (link.summary) html += `<p class="detail-summary">${esc(link.summary)}</p>`;
   return html;
+}
+
+// ── People: cast, crew and their profiles ──
+
+// A row of faces under a title. Each one opens that person's profile, which is
+// the point: a cast list you cannot follow is just decoration.
+function renderPeopleRow(heading, people) {
+  if (!people || !people.length) return '';
+  let html = `<h3 class="detail-section-title">${esc(heading)}</h3>`;
+  html += '<div class="people-row">';
+  for (const person of people) {
+    if (!person || !person.name) continue;
+    // Older records used photo_url; TMDB enrichment writes profile_url.
+    const photoUrl = person.profile_url || person.photo_url;
+    const photo = photoUrl
+      ? `<img class="person-photo" src="${esc(photoUrl)}" alt="${esc(person.name)}" loading="lazy">`
+      : `<div class="person-photo person-photo-placeholder">${esc(person.name[0])}</div>`;
+    const role = person.character || person.job || '';
+    const inner = `${photo}<div class="person-info"><span class="person-name">${esc(person.name)}</span>${role ? `<span class="person-role">${esc(role)}</span>` : ''}</div>`;
+
+    // Only people TMDB resolved have a profile to open. The rest still render,
+    // they just are not links to a dead end.
+    const id = person.id || person.tmdb_id;
+    html += id
+      ? `<button class="person-chip person-chip-link" onclick="navigate('#/person/${id}')">${inner}</button>`
+      : `<div class="person-chip">${inner}</div>`;
+  }
+  html += '</div>';
+  return html;
+}
+
+async function renderPerson(personId) {
+  app.innerHTML = `<div class="screen"><div class="loading-state">${esc(t('person.loading'))}</div></div>`;
+
+  let person;
+  try {
+    const resp = await authFetch(`${API_BASE}/api/person?id=${encodeURIComponent(personId)}`);
+    if (!resp || !resp.ok) throw new Error(resp ? String(resp.status) : 'no response');
+    person = await resp.json();
+  } catch (err) {
+    app.innerHTML = `
+      <div class="screen">
+        <div class="header"><button class="back-btn" onclick="history.back()">${ICONS.back}</button>
+        <div><div class="header-title">${esc(t('person.title'))}</div></div></div>
+        <div class="empty-state"><p class="empty-state-text">${esc(t('person.failed'))}</p></div>
+      </div>`;
+    return;
+  }
+
+  let html = `<div class="screen">
+    <div class="header">
+      <button class="back-btn" onclick="history.back()">${ICONS.back}</button>
+      <div><div class="header-subtitle">${esc(person.known_for || t('person.title'))}</div>
+      <div class="header-title">${esc(person.name || '')}</div></div>
+    </div>`;
+
+  html += '<div class="person-hero">';
+  if (person.profile_url) {
+    html += `<img class="person-hero-photo" src="${esc(person.profile_url)}" alt="">`;
+  }
+  const facts = [
+    person.birthday ? `${t('person.born')} ${person.birthday}` : null,
+    person.deathday ? `${t('person.died')} ${person.deathday}` : null,
+    person.place_of_birth,
+  ].filter(Boolean);
+  if (facts.length) {
+    html += '<div class="person-facts">';
+    for (const fact of facts) html += `<span class="detail-tag">${esc(fact)}</span>`;
+    html += '</div>';
+  }
+  html += '</div>';
+
+  if (person.biography) {
+    html += `<p class="detail-summary">${esc(person.biography)}</p>`;
+  }
+
+  if (person.works && person.works.length) {
+    html += `<h3 class="detail-section-title">${esc(t('person.known_for_works'))}</h3>`;
+    html += '<div class="work-grid">';
+    for (const work of person.works) {
+      html += `<div class="work-card">
+        ${work.poster_url
+          ? `<img class="work-poster" src="${esc(work.poster_url)}" alt="" loading="lazy">`
+          : '<span class="work-poster work-poster-empty"></span>'}
+        <span class="work-title">${esc(work.title)}</span>
+        <span class="work-meta">${esc([work.year, work.role].filter(Boolean).join(' · '))}</span>
+      </div>`;
+    }
+    html += '</div>';
+  }
+
+  if (person.tmdb_url) {
+    html += `<div class="actions"><a href="${esc(person.tmdb_url)}" target="_blank" rel="noopener" class="btn btn-secondary">${ICONS.external} TMDB</a></div>`;
+  }
+
+  html += '</div>';
+  app.innerHTML = html;
 }
 
 // A link can hold several works instead of one: "50 movies to watch", a video
